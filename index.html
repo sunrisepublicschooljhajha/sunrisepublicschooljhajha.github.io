@@ -49,15 +49,16 @@
     @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.07); } }
 
     /* White Top Header (Matching Reference) */
-    .topbar { position: sticky; top: 0; z-index: 200; background: #ffffff; color: var(--navy); padding: 10px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.04); }
-    .brand { display: flex; align-items: center; gap: 11px; cursor: pointer; }
-    .brand img { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--crimson); background: #fff; object-fit: cover; }
-    .brand-title { font-size: 17px; font-weight: 800; color: var(--navy); letter-spacing: 0.3px; line-height: 1.15; }
-    .estd-pill { display: inline-block; background: #fef3c7; color: #92400e; font-size: 10.5px; font-weight: 800; padding: 2px 8px; border-radius: 99px; margin-top: 2px; }
-    .brand small { font-size: 11px; color: var(--crimson); font-weight: 600; display: block; margin-top: 1px; }
-    .hdr-right { display: flex; align-items: center; gap: 8px; }
-    .menu-btn { background: var(--crimson); color: #fff; border: none; width: 42px; height: 42px; border-radius: 10px; font-size: 20px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
-
+   .topbar { position: sticky; top: 0; z-index: 200; background: #ffffff; color: var(--navy); padding: 10px 14px; border-bottom: 1.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; box-shadow: 0 2px 12px rgba(0,0,0,.04); }
+    .brand { display: flex; align-items: center; gap: 10px; cursor: pointer; min-width: 0; flex: 1; }
+    .brand img { width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%; border: 2px solid var(--crimson); background: #fff; object-fit: cover; }
+    .brand-text { min-width: 0; }
+    .brand-title { font-size: clamp(14.5px, 4.1vw, 19px); font-weight: 800; color: var(--navy); letter-spacing: 0.2px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .brand-sub-row { display: flex; align-items: center; gap: 6px; margin-top: 2px; flex-wrap: nowrap; overflow: hidden; }
+    .estd-pill { flex-shrink: 0; background: #fef3c7; color: #92400e; font-size: 10px; font-weight: 800; padding: 1px 7px; border-radius: 99px; }
+    .brand small { font-size: 11px; color: var(--crimson); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .hdr-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .menu-btn { background: var(--crimson); color: #fff; border: none; width: 40px; height: 40px; border-radius: 10px; font-size: 20px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
     /* Right Slide Drawer */
     .drawer-bg { position: fixed; inset: 0; background: rgba(15,27,45,.55); z-index: 400; display: none; }
     .drawer-bg.open { display: block; }
@@ -190,16 +191,17 @@
 <header class="topbar">
   <div class="brand" onclick="showView('public')">
     <img id="headerLogo" src="./logo.jpeg" alt="Logo" />
-    <div>
+    <div class="brand-text">
       <div class="brand-title" id="hdrSchoolName">SUNRISE PUBLIC SCHOOL</div>
-      <span class="estd-pill">Estd. 2012</span>
-      <small id="hdrSchoolSub">Ekdara, Jhajha - 811308, Dist. Jamui, Bihar</small>
+      <div class="brand-sub-row">
+        <span class="estd-pill">Estd. 2012</span>
+        <small id="hdrSchoolSub">Ekdara, Jhajha, Bihar</small>
+      </div>
     </div>
   </div>
   <div class="hdr-right">
-    <button id="installAppBtn" class="btn btn-gold btn-sm hidden" onclick="installPWA()">📲 Install</button>
-    <button id="backPublicBtn" class="btn btn-light btn-sm hidden" onclick="showView('public')">🌐 Home</button>
-    <button id="logoutBtn" class="btn btn-red btn-sm hidden" onclick="logout()">Sign Out</button>
+    <button id="backPublicBtn" class="btn btn-light btn-sm hidden" onclick="showView('public')" title="Home">🌐</button>
+    <button id="logoutBtn" class="btn btn-red btn-sm hidden" onclick="logout()" title="Sign Out">Exit</button>
     <button class="menu-btn" onclick="toggleDrawer(true)" title="Menu">☰</button>
   </div>
 </header>
