@@ -7,7 +7,8 @@
   <meta name="theme-color" content="#8b1526" />
   <link rel="manifest" href="./manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="./logo.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -25,13 +26,13 @@
       --border: #e4dfd5;
       --green: #15803d;
       --red: #dc2626;
-      --radius: 15px;
+      --radius: 14px;
       --shadow: 0 8px 24px rgba(15, 27, 45, 0.06);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; overflow-x: hidden; }
-    .school-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; letter-spacing: 0.4px; }
-    h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; letter-spacing: -0.2px; }
+    .school-title { font-weight: 800; letter-spacing: 0.4px; }
+    h2, h3 { font-weight: 800; letter-spacing: -0.2px; }
     button, input, select, textarea { font-family: inherit; }
 
     #topProgress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--gold), var(--crimson)); z-index: 9999; transition: width .25s ease, opacity .3s; }
@@ -42,7 +43,7 @@
 
     #splash { position: fixed; inset: 0; background: var(--navy); z-index: 9990; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; transition: opacity .3s ease; }
     #splash.hide { opacity: 0; pointer-events: none; }
-    .pulse-logo { width: 84px; height: 84px; border-radius: 50%; animation: pulse 1.2s infinite; object-fit: cover; background: #fff; border: 2px solid var(--gold); }
+    .pulse-logo { width: 82px; height: 82px; border-radius: 50%; animation: pulse 1.2s infinite; object-fit: cover; background: #fff; border: 2px solid var(--gold); }
     @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }
     .shimmer { background: linear-gradient(90deg, #ece8df 25%, #f7f4ee 50%, #ece8df 75%); background-size: 200% 100%; animation: shimmer 1.2s infinite; border-radius: 12px; height: 90px; }
     @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
@@ -68,16 +69,17 @@
     .btn-red { background: var(--red); color: #fff; }
     .btn-sm { padding: 6px 10px; font-size: 12px; border-radius: 8px; }
 
-    .hero { background: linear-gradient(135deg, var(--navy) 0%, #26121e 60%, var(--crimson-dark) 100%); color: #fff; padding: 52px 20px 44px; text-align: center; }
+    /* Clean Public Home (No login clutter on hero) */
+    .hero { background: linear-gradient(135deg, var(--navy) 0%, #26121e 60%, var(--crimson-dark) 100%); color: #fff; padding: 54px 20px 46px; text-align: center; }
     .hero-badge { display: inline-block; background: rgba(217,155,38,.18); color: #f6cf77; border: 1px solid rgba(217,155,38,.45); padding: 5px 14px; border-radius: 99px; font-size: 12px; font-weight: 700; margin-bottom: 12px; }
-    .hero .school-title { font-size: clamp(24px, 4vw, 38px); margin-bottom: 8px; }
-    .hero p { max-width: 680px; margin: 0 auto 22px; color: #dde4f0; font-size: 14.5px; }
-    .info-strip { max-width: 1120px; margin: 22px auto 0; padding: 0 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+    .hero .school-title { font-size: clamp(25px, 4vw, 40px); margin-bottom: 8px; }
+    .hero p { max-width: 700px; margin: 0 auto 20px; color: #dde4f0; font-size: 14.5px; }
+    .info-strip { max-width: 1140px; margin: 22px auto 0; padding: 0 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
     .info-box { background: #fff; border-radius: var(--radius); padding: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); }
     .info-box h3 { font-size: 15px; color: var(--crimson); margin-bottom: 4px; }
     .info-box p { font-size: 13px; color: var(--muted); }
 
-    .container { max-width: 1220px; margin: 0 auto; padding: 24px 16px; }
+    .container { max-width: 1240px; margin: 0 auto; padding: 24px 16px; }
     .sec-head { display: flex; align-items: end; justify-content: space-between; margin-bottom: 16px; gap: 10px; flex-wrap: wrap; }
     .sec-head small { color: var(--crimson); font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; font-size: 11px; display: block; }
     .sec-head h2 { font-size: 23px; color: var(--navy); }
@@ -150,22 +152,23 @@
 
 <div id="splash">
   <img id="splashLogo" class="pulse-logo" alt="Sunrise Logo" />
-  <div class="school-title" style="margin-top:12px;font-size:20px;color:#f6cf77;">SUNRISE PUBLIC SCHOOL</div>
-  <small style="color:#cbd5e1;">Ekdara, Jhajha • Estd. 2012</small>
+  <div class="school-title" id="splashSchoolName" style="margin-top:12px;font-size:20px;color:#f6cf77;">SUNRISE PUBLIC SCHOOL</div>
+  <small id="splashSub" style="color:#cbd5e1;">Ekdara, Jhajha • Estd. 2012</small>
 </div>
 
 <header class="topbar">
   <div class="brand" onclick="showView('public')">
     <img id="headerLogo" alt="Logo" />
     <div>
-      <div class="school-title">SUNRISE PUBLIC SCHOOL</div>
-      <small>Ekdara, P.O. & P.S. Jhajha, Dist. Jamui, Bihar - 811308 • Estd. 2012</small>
+      <div class="school-title" id="hdrSchoolName">SUNRISE PUBLIC SCHOOL</div>
+      <small id="hdrSchoolSub">Ekdara, P.O. & P.S. Jhajha, Dist. Jamui, Bihar - 811308 • Estd. 2012</small>
     </div>
   </div>
   <div class="nav-actions">
     <span id="syncStatus" class="sync-pill">● Live Synced</span>
     <button id="installAppBtn" class="btn btn-gold btn-sm hidden" onclick="installPWA()">📲 Install App</button>
-    <button id="portalBtn" class="btn btn-primary btn-sm" onclick="openLoginModal('admin')">🔐 Portal Login</button>
+    <button id="portalBtn" class="btn btn-primary btn-sm" onclick="openLoginModal('admin')">🔐 Administration Login</button>
+    <button id="guardianTopBtn" class="btn btn-outline btn-sm" onclick="openLoginModal('guardian')">🎓 Guardian Login</button>
     <button id="backPublicBtn" class="btn btn-outline btn-sm hidden" onclick="showView('public')">🌐 Home Site</button>
     <button id="logoutBtn" class="btn btn-red btn-sm hidden" onclick="logout()">Sign Out</button>
   </div>
@@ -173,14 +176,11 @@
 
 <main id="publicView">
   <section class="hero">
-    <span class="hero-badge">CBSE Pattern English Medium • Nursery to Class X • Reg. No: 330894</span>
-    <div class="school-title">SUNRISE PUBLIC SCHOOL, JHAJHA</div>
-    <p>Ekdara, P.O. & P.S. Jhajha, Dist. Jamui, Bihar - 811308 • Ph: +91 94312-81308 • Principal: Dr. R. K. Verma</p>
+    <span class="hero-badge" id="heroBadge">CBSE Pattern English Medium • Nursery to Class X • Reg. No: 330894</span>
+    <div class="school-title" id="heroSchoolName">SUNRISE PUBLIC SCHOOL, JHAJHA</div>
+    <p id="heroMeta">Ekdara, P.O. & P.S. Jhajha, Dist. Jamui, Bihar - 811308 • Ph: +91 94312-81308 • Principal: Dr. R. K. Verma</p>
     <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
       <button class="btn btn-gold" onclick="document.getElementById('enquirySec').scrollIntoView({behavior:'smooth'})">📝 Admission Enquiry</button>
-      <button class="btn btn-outline" onclick="openLoginModal('guardian')">🎓 Guardian / Marksheet Login</button>
-      <button class="btn btn-outline" onclick="openLoginModal('teacher')">👩‍🏫 Teacher Login</button>
-      <button class="btn btn-outline" onclick="openLoginModal('admin')">🛡️ Admin Login</button>
     </div>
   </section>
 
@@ -202,7 +202,7 @@
 
   <section id="enquirySec" class="container">
     <div class="card" style="max-width:780px;margin:0 auto;">
-      <div class="sec-head" style="margin-bottom:12px;"><div><small>Session 2026–27</small><h2>Admission Enquiry Form</h2></div></div>
+      <div class="sec-head" style="margin-bottom:12px;"><div><small id="enqSessionLbl">Session 2026–27</small><h2>Admission Enquiry Form</h2></div></div>
       <form id="enquiryForm" onsubmit="submitEnquiry(event)">
         <div class="form-grid">
           <div class="field"><label>Student Name *</label><input id="enqStudent" required placeholder="Student full name" /></div>
@@ -216,7 +216,7 @@
     </div>
   </section>
 
-  <footer>
+  <footer id="footerText">
     <strong class="school-title">SUNRISE PUBLIC SCHOOL</strong> • Ekdara, P.O. & P.S. Jhajha, Dist. Jamui, Bihar - 811308 • Ph: +91 94312-81308
   </footer>
 </main>
@@ -224,7 +224,7 @@
 <main id="adminView" class="container hidden">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
     <div>
-      <h2 id="dashTitle" style="font-size:22px;color:var(--navy);">Admin Command Center</h2>
+      <h2 id="dashTitle" style="font-size:22px;color:var(--navy);">Administration Command Center</h2>
       <small style="color:var(--muted);">Session stays active until Sign Out • Real-Time Firestore Sync</small>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -251,7 +251,7 @@
       <button class="side-btn admin-only" data-tab="admit" onclick="openTab('admit')">🪪 Bulk Admit & Marks PDF</button>
       <button class="side-btn admin-only" data-tab="whatsapp" onclick="openTab('whatsapp')">💬 WhatsApp & Enquiries</button>
       <button class="side-btn admin-only" data-tab="notices" onclick="openTab('notices')">📢 Notices & Photos</button>
-      <button class="side-btn admin-only" data-tab="settings" onclick="openTab('settings')">⚙️ Logins & Backup</button>
+      <button class="side-btn admin-only" data-tab="settings" onclick="openTab('settings')">⚙️ School, Logins & Backup</button>
     </aside>
 
     <div class="erp-main">
@@ -294,7 +294,7 @@
         <div class="card" style="margin-bottom:14px;">
           <h3 style="margin-bottom:10px;font-size:16px;">+ Record Fee Payment</h3>
           <form onsubmit="recordFee(event)" class="form-grid">
-            <div class="field"><label>Student (Name / Class / Adm) *</label><select id="feeStuSelect" required onchange="syncFeeClassFromStudent()"></select></div>
+            <div class="field"><label>Student *</label><select id="feeStuSelect" required onchange="syncFeeClassFromStudent()"></select></div>
             <div class="field"><label>Class</label><input id="feeClassDisp" readonly style="background:#eef1f5;font-weight:700;" /></div>
             <div class="field"><label>Fee Month / Head *</label>
               <select id="feeHead">
@@ -459,7 +459,22 @@
         </div>
       </section>
 
+      <!-- 8. SCHOOL DETAILS, PRINCIPAL, TEACHERS, GUARDIANS & BACKUP (NO CODING NEEDED) -->
       <section id="tab-settings" class="tab-pane hidden">
+        <div class="card" style="margin-bottom:14px;">
+          <h3 style="margin-bottom:10px;font-size:16px;">🏫 School & Principal Details (Bina Coding Ke Change Karein)</h3>
+          <form onsubmit="saveSchoolProfile(event)" class="form-grid">
+            <div class="field"><label>School Name</label><input id="spName" required /></div>
+            <div class="field"><label>Principal Name & Title</label><input id="spPrincipal" required /></div>
+            <div class="field"><label>Phone Number</label><input id="spPhone" required /></div>
+            <div class="field"><label>Reg. No / Affiliation Tag</label><input id="spReg" /></div>
+            <div class="field"><label>Academic Session</label><input id="spSession" /></div>
+            <div class="field"><label>Default Annual Fee (₹)</label><input id="spDefaultFee" type="number" /></div>
+            <div class="field" style="grid-column:1/-1;"><label>School Address</label><input id="spAddress" required /></div>
+            <div class="field" style="grid-column:1/-1;"><button class="btn btn-primary btn-sm">💾 Save School & Principal Details Live</button></div>
+          </form>
+        </div>
+
         <div class="grid-3" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
           <div class="card">
             <h3 style="margin-bottom:8px;font-size:16px;">👩‍🏫 Teacher Logins (Create / Delete)</h3>
@@ -476,7 +491,6 @@
 
           <div class="card">
             <h3 style="margin-bottom:8px;font-size:16px;">🎓 Guardian Login Access (Edit / Reset)</h3>
-            <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Guardian Admission No + Mobile/Custom Password se login karte hain. Yahan se update/reset karein:</p>
             <div id="guardianAccessList" style="max-height:240px;overflow-y:auto;display:flex;flex-direction:column;gap:7px;"></div>
           </div>
 
@@ -487,8 +501,7 @@
             <form onsubmit="saveAdminSettings(event)">
               <div class="field" style="margin-bottom:6px;"><label>Admin Username</label><input id="cfgUser" required /></div>
               <div class="field" style="margin-bottom:6px;"><label>New Admin Password</label><input id="cfgPass" type="password" placeholder="Leave blank to keep" /></div>
-              <div class="field" style="margin-bottom:8px;"><label>Default Fee (₹)</label><input id="cfgDefaultFee" type="number" value="6000" /></div>
-              <button class="btn btn-primary btn-sm">Save Settings</button>
+              <button class="btn btn-primary btn-sm">Update Admin Credentials</button>
             </form>
           </div>
         </div>
@@ -503,14 +516,14 @@
 
 <div id="loginModal" class="modal-bg">
   <div class="modal" style="max-width:420px;">
-    <div class="modal-head"><h3>🔐 Sunrise Portal Login</h3><button class="close-x" onclick="closeModal('loginModal')">×</button></div>
+    <div class="modal-head"><h3 id="loginModalTitle">🔐 Administration Login</h3><button class="close-x" onclick="closeModal('loginModal')">×</button></div>
     <div style="display:flex;gap:6px;margin-bottom:12px;">
-      <button class="pill active" id="roleAdmin" onclick="setLoginRole('admin')">Admin</button>
+      <button class="pill active" id="roleAdmin" onclick="setLoginRole('admin')">Administration</button>
       <button class="pill" id="roleTeacher" onclick="setLoginRole('teacher')">Teacher</button>
       <button class="pill" id="roleGuardian" onclick="setLoginRole('guardian')">Guardian</button>
     </div>
     <form onsubmit="handleLogin(event)">
-      <div class="field" style="margin-bottom:10px;"><label id="lblUser">Admin Username</label><input id="loginUser" required /></div>
+      <div class="field" style="margin-bottom:10px;"><label id="lblUser">Administration Username</label><input id="loginUser" required /></div>
       <div class="field" style="margin-bottom:12px;"><label id="lblPass">Security Password</label><input id="loginPass" type="password" required /></div>
       <button class="btn btn-primary" style="width:100%;justify-content:center;">Sign In</button>
     </form>
@@ -569,19 +582,32 @@ const DEFAULT_SUBJECTS = [
   { code:"104", name:"Environmental Studies", maxT:80, maxP:20, th:72, pr:18 },
   { code:"105", name:"Computer & GK", maxT:50, maxP:50, th:47, pr:48 }
 ];
+const DEFAULT_SCHOOL = {
+  schoolName: 'SUNRISE PUBLIC SCHOOL',
+  principalName: 'Dr. R. K. Verma',
+  phone: '+91 94312-81308',
+  address: 'Ekdara, P.O. & P.S. Jhajha, Dist. Jamui, Bihar - 811308',
+  regTag: 'CBSE Pattern English Medium • Nursery to Class X • Reg. No: 330894',
+  sessionLabel: 'Session 2026–27',
+  adminUser: 'admin',
+  adminPass: 'Sunrise@2026',
+  defaultFee: 6000
+};
 
-let DB = JSON.parse(localStorage.getItem('sunrise_cache_v4') || 'null') || {
+let DB = JSON.parse(localStorage.getItem('sunrise_cache_v5') || 'null') || {
   students: [], fees: [], attendance: {}, notices: [], gallery: [], enquiries: [], teachers: [],
-  config: { adminUser: 'admin', adminPass: 'Sunrise@2026', defaultFee: 6000 }
+  config: { ...DEFAULT_SCHOOL }
 };
 let currentUser = JSON.parse(sessionStorage.getItem('sunrise_session') || 'null');
 let loginRole = 'admin';
 let stuStatusFilter = 'all';
 let feeScope = 'day';
 let deferredPrompt = null;
-let LOGO_PNG = '', WATERMARK_PNG = '';
+let LOGO_DATA_URL = '';
+let WATERMARK_DATA_URL = '';
 
-function saveLocalCache() { localStorage.setItem('sunrise_cache_v4', JSON.stringify(DB)); }
+function getCfg() { return { ...DEFAULT_SCHOOL, ...(DB.config || {}) }; }
+function saveLocalCache() { localStorage.setItem('sunrise_cache_v5', JSON.stringify(DB)); }
 function setSession(u) { currentUser = u; sessionStorage.setItem('sunrise_session', JSON.stringify(u)); }
 function todayStr() { return new Date().toISOString().split('T')[0]; }
 function fmtDate(d) {
@@ -601,40 +627,84 @@ function setProgress(pct) {
   if (pct >= 100) setTimeout(() => { b.style.opacity = '0'; b.style.width = '0%'; }, 300);
 }
 
-// Load real school logo image (./1000122301.jpg) + very soft watermark (0.03 alpha)
-function loadRealSchoolLogo() {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-      const makeDataUrl = (alpha) => {
-        const c = document.createElement('canvas');
-        c.width = 240; c.height = 240;
-        const ctx = c.getContext('2d');
-        ctx.globalAlpha = alpha;
-        ctx.beginPath(); ctx.arc(120, 120, 116, 0, Math.PI * 2); ctx.closePath(); ctx.clip();
-        ctx.drawImage(img, 0, 0, 240, 240);
-        return c.toDataURL('image/png');
-      };
-      LOGO_PNG = makeDataUrl(1);
-      WATERMARK_PNG = makeDataUrl(0.03);
-      document.getElementById('headerLogo').src = LOGO_PNG;
-      document.getElementById('splashLogo').src = LOGO_PNG;
-      resolve();
+// Convert any loaded image into safe PNG dataURL for jsPDF (never fails crossOrigin)
+function imageToPngDataUrl(imgEl, softWatermark = false) {
+  try {
+    const c = document.createElement('canvas');
+    c.width = 240; c.height = 240;
+    const ctx = c.getContext('2d');
+    if (softWatermark) {
+      // Pre-blend white background so even without alpha support it looks soft gray/cream
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, 240, 240);
+      ctx.globalAlpha = 0.08;
+    }
+    ctx.beginPath(); ctx.arc(120, 120, 114, 0, Math.PI * 2); ctx.closePath(); ctx.clip();
+    ctx.drawImage(imgEl, 0, 0, 240, 240);
+    return c.toDataURL('image/png');
+  } catch (e) { return ''; }
+}
+
+function initLogos() {
+  const candidates = ['./logo.jpeg', './1000122301.jpg', window.SCHOOL_LOGO_SRC].filter(Boolean);
+  let idx = 0;
+  const tryNext = () => {
+    if (idx >= candidates.length) return;
+    const src = candidates[idx++];
+    const probe = new Image();
+    probe.onload = () => {
+      document.getElementById('headerLogo').src = src;
+      document.getElementById('splashLogo').src = src;
+      const png = imageToPngDataUrl(probe, false);
+      const wm = imageToPngDataUrl(probe, true);
+      if (png) LOGO_DATA_URL = png;
+      if (wm) WATERMARK_DATA_URL = wm;
     };
-    img.onerror = () => {
-      const c = document.createElement('canvas'); c.width = 200; c.height = 200;
-      const ctx = c.getContext('2d');
-      ctx.beginPath(); ctx.arc(100,100,95,0,Math.PI*2); ctx.fillStyle='#8b1526'; ctx.fill();
-      ctx.fillStyle='#fff'; ctx.font='bold 22px Arial'; ctx.textAlign='center'; ctx.fillText('SPS JHAJHA',100,108);
-      LOGO_PNG = c.toDataURL('image/png');
-      WATERMARK_PNG = c.toDataURL('image/png');
-      document.getElementById('headerLogo').src = './1000122301.jpg';
-      document.getElementById('splashLogo').src = './1000122301.jpg';
-      resolve();
-    };
-    img.src = './1000122301.jpg';
-  });
+    probe.onerror = tryNext;
+    probe.src = src;
+  };
+  tryNext();
+}
+
+function applySchoolProfileToUI() {
+  const cfg = getCfg();
+  document.getElementById('hdrSchoolName').textContent = cfg.schoolName;
+  document.getElementById('hdrSchoolSub').textContent = `${cfg.address} • Estd. 2012`;
+  document.getElementById('splashSchoolName').textContent = cfg.schoolName;
+  document.getElementById('heroBadge').textContent = cfg.regTag;
+  document.getElementById('heroSchoolName').textContent = `${cfg.schoolName}, JHAJHA`;
+  document.getElementById('heroMeta').textContent = `${cfg.address} • Ph: ${cfg.phone} • Principal: ${cfg.principalName}`;
+  document.getElementById('enqSessionLbl').textContent = cfg.sessionLabel;
+  document.getElementById('footerText').innerHTML = `<strong class="school-title">${cfg.schoolName}</strong> • ${cfg.address} • Ph: ${cfg.phone}`;
+
+  if (document.getElementById('spName')) {
+    document.getElementById('spName').value = cfg.schoolName;
+    document.getElementById('spPrincipal').value = cfg.principalName;
+    document.getElementById('spPhone').value = cfg.phone;
+    document.getElementById('spReg').value = cfg.regTag;
+    document.getElementById('spSession').value = cfg.sessionLabel;
+    document.getElementById('spAddress').value = cfg.address;
+    document.getElementById('spDefaultFee').value = cfg.defaultFee;
+    document.getElementById('cfgUser').value = cfg.adminUser;
+  }
+}
+
+async function saveSchoolProfile(e) {
+  e.preventDefault();
+  const upd = {
+    schoolName: document.getElementById('spName').value.trim(),
+    principalName: document.getElementById('spPrincipal').value.trim(),
+    phone: document.getElementById('spPhone').value.trim(),
+    regTag: document.getElementById('spReg').value.trim(),
+    sessionLabel: document.getElementById('spSession').value.trim(),
+    address: document.getElementById('spAddress').value.trim(),
+    defaultFee: Number(document.getElementById('spDefaultFee').value || 6000)
+  };
+  await db.collection('config').doc('main').set(upd, { merge: true });
+  DB.config = { ...DB.config, ...upd };
+  saveLocalCache();
+  applySchoolProfileToUI();
+  toast('School & Principal details updated live!');
 }
 
 function compressImage(file, maxW = 600, q = 0.72) {
@@ -670,17 +740,13 @@ function startRealtimeSync() {
     if (currentUser) renderAttendance();
   });
   db.collection('config').doc('main').onSnapshot(async doc => {
-    if (doc.exists) { DB.config = { ...DB.config, ...doc.data() }; saveLocalCache(); }
+    if (doc.exists) { DB.config = { ...DEFAULT_SCHOOL, ...doc.data() }; saveLocalCache(); applySchoolProfileToUI(); }
     else await seedInitial();
-    if (document.getElementById('cfgUser')) {
-      document.getElementById('cfgUser').value = DB.config.adminUser || 'admin';
-      document.getElementById('cfgDefaultFee').value = DB.config.defaultFee || 6000;
-    }
   });
 }
 
 async function seedInitial() {
-  await db.collection('config').doc('main').set({ adminUser: 'admin', adminPass: 'Sunrise@2026', defaultFee: 6000 });
+  await db.collection('config').doc('main').set(DEFAULT_SCHOOL);
   await db.collection('students').doc('SPS102').set({
     admNo: 'SPS102', roll: '04', name: 'ANANYA KUMARI', className: 'Class 5', section: 'B',
     dob: '22 Mar 2016', father: 'Suresh Kumar Barnwal', mother: 'Kavita Barnwal',
@@ -702,6 +768,7 @@ function showView(v) {
   ['publicView','adminView','guardianView'].forEach(id => document.getElementById(id).classList.add('hidden'));
   document.getElementById(v + 'View').classList.remove('hidden');
   document.getElementById('portalBtn').classList.toggle('hidden', !!currentUser);
+  document.getElementById('guardianTopBtn').classList.toggle('hidden', !!currentUser);
   document.getElementById('logoutBtn').classList.toggle('hidden', !currentUser);
   document.getElementById('backPublicBtn').classList.toggle('hidden', v === 'public');
 }
@@ -723,6 +790,7 @@ function openTab(name, preset) {
   if (name === 'attendance') renderAttendance();
   if (name === 'marks') loadStudentMarks();
   if (name === 'whatsapp') renderWaQueue();
+  if (name === 'settings') applySchoolProfileToUI();
 }
 
 function openModal(id) { document.getElementById(id).classList.add('open'); }
@@ -731,20 +799,22 @@ function openLoginModal(role = 'admin') { setLoginRole(role); openModal('loginMo
 function setLoginRole(r) {
   loginRole = r;
   ['Admin','Teacher','Guardian'].forEach(x => document.getElementById('role' + x).classList.toggle('active', x.toLowerCase() === r));
-  document.getElementById('lblUser').textContent = r === 'guardian' ? 'Admission No (e.g. SPS102)' : (r === 'teacher' ? 'Teacher User ID' : 'Admin Username');
+  document.getElementById('loginModalTitle').textContent = r === 'guardian' ? '🎓 Guardian Login' : (r === 'teacher' ? '👩‍🏫 Teacher Login' : '🔐 Administration Login');
+  document.getElementById('lblUser').textContent = r === 'guardian' ? 'Admission No (e.g. SPS102)' : (r === 'teacher' ? 'Teacher User ID' : 'Administration Username');
   document.getElementById('lblPass').textContent = r === 'guardian' ? 'Guardian Password / Mobile' : 'Password';
   document.getElementById('loginPass').type = r === 'guardian' ? 'text' : 'password';
 }
 
 function handleLogin(e) {
   e.preventDefault();
+  const cfg = getCfg();
   const u = document.getElementById('loginUser').value.trim();
   const p = document.getElementById('loginPass').value.trim();
   if (loginRole === 'admin') {
-    if (u === (DB.config.adminUser || 'admin') && p === (DB.config.adminPass || 'Sunrise@2026')) {
-      setSession({ role: 'admin', name: 'Admin' });
-      applyLoggedInUI(); closeModal('loginModal'); toast('Admin Login Successful');
-    } else toast('Invalid Admin credentials', 'err');
+    if (u === cfg.adminUser && p === cfg.adminPass) {
+      setSession({ role: 'admin', name: 'Administration' });
+      applyLoggedInUI(); closeModal('loginModal'); toast('Administration Login Successful');
+    } else toast('Invalid Administration credentials', 'err');
   } else if (loginRole === 'teacher') {
     const t = DB.teachers.find(x => x.user === u && x.pass === p);
     if (t) { setSession({ role: 'teacher', name: t.name }); applyLoggedInUI(); closeModal('loginModal'); toast('Welcome ' + t.name); }
@@ -765,7 +835,7 @@ function applyLoggedInUI() {
   }
   const isAdmin = currentUser.role === 'admin';
   document.querySelectorAll('.admin-only').forEach(el => el.classList.toggle('hidden', !isAdmin));
-  document.getElementById('dashTitle').textContent = isAdmin ? 'Admin Command Center' : ('Teacher Portal — ' + currentUser.name);
+  document.getElementById('dashTitle').textContent = isAdmin ? 'Administration Command Center' : ('Teacher Portal — ' + currentUser.name);
   showView('admin');
   openTab(isAdmin ? 'students' : 'attendance');
   refreshAllUI();
@@ -844,7 +914,7 @@ function renderStudents() {
   document.getElementById('studentsTbody').innerHTML = list.length ? list.map(s => {
     const d = getStuDues(s);
     return `<tr>
-      <td><div style="display:flex;align-items:center;gap:9px;"><img class="avatar" src="${s.photo||LOGO_PNG}" /><div><strong>${s.name}</strong><br><small style="color:var(--muted);">Roll: ${s.roll||'-'}</small></div></div></td>
+      <td><div style="display:flex;align-items:center;gap:9px;"><img class="avatar" src="${s.photo||LOGO_DATA_URL||'./logo.jpeg'}" /><div><strong>${s.name}</strong><br><small style="color:var(--muted);">Roll: ${s.roll||'-'}</small></div></div></td>
       <td><span class="tag navy">${s.admNo}</span><br><small>${s.className} (${s.section||'A'})</small></td>
       <td>${s.father}<br><small>📞 ${s.phone}</small></td>
       <td><span class="tag ${d>0?'':'green'}">${d>0?'Due: ₹'+d:'Paid ✓'}</span></td>
@@ -859,11 +929,12 @@ function renderStudents() {
 }
 
 function openAddStudentModal() {
+  const cfg = getCfg();
   document.getElementById('editStuId').value = '';
   document.getElementById('stuModalTitle').textContent = '+ Add Student';
   ['sAdm','sRoll','sName','sDob','sFather','sMother','sPhone','sAddr','sPhoto'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('sSec').value = 'A';
-  document.getElementById('sTotalFee').value = DB.config.defaultFee || 6000;
+  document.getElementById('sTotalFee').value = cfg.defaultFee || 6000;
   openModal('studentModal');
 }
 function editStudent(id) {
@@ -916,7 +987,7 @@ function openProfile360(id) {
   const stuFees = DB.fees.filter(f => f.studentId === s.id);
   document.getElementById('profileBody').innerHTML = `
     <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;">
-      <img src="${s.photo||LOGO_PNG}" style="width:68px;height:68px;border-radius:12px;object-fit:cover;border:2px solid var(--gold);" />
+      <img src="${s.photo||LOGO_DATA_URL||'./logo.jpeg'}" style="width:68px;height:68px;border-radius:12px;object-fit:cover;border:2px solid var(--gold);" />
       <div><h3>${s.name}</h3><span class="tag navy">${s.admNo}</span> <span class="tag gold">${s.className} (${s.section||'A'})</span><div style="font-size:12.5px;color:var(--muted);">Father: ${s.father} • 📞 ${s.phone}</div></div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;">
@@ -1010,7 +1081,7 @@ function renderAttendance() {
   const list = DB.students.filter(s => s.className === cls);
   document.getElementById('attTbody').innerHTML = list.length ? list.map(s => {
     const st = tempAtt[s.id] || 'P'; tempAtt[s.id] = st;
-    const wa = encodeURIComponent(`Sunrise Public School Jhajha: ${s.name} (${cls}) is ABSENT on ${fmtDate(dt)}.`);
+    const wa = encodeURIComponent(`${getCfg().schoolName}: ${s.name} (${cls}) is ABSENT on ${fmtDate(dt)}.`);
     return `<tr><td>${s.roll||'-'}</td><td><strong>${s.name}</strong></td>
       <td><button class="att-btn ${st==='P'?'P':''}" onclick="tempAtt['${s.id}']='P';renderAttendance()">P</button> <button class="att-btn ${st==='A'?'A':''}" onclick="tempAtt['${s.id}']='A';renderAttendance()">A</button></td>
       <td>${st==='A'?`<a class="btn btn-green btn-sm" target="_blank" href="https://wa.me/91${(s.phone||'').replace(/\D/g,'')}?text=${wa}">WhatsApp</a>`:'—'}</td></tr>`;
@@ -1050,59 +1121,88 @@ async function saveStudentMarks() {
 }
 function downloadSelectedMarksheet() { const id = document.getElementById('marksStuSelect').value; if (id) generateMarksheetPDF(id); }
 
+// Report-inspired clean layout + subtle watermark + school logo
 function drawMarksheetOnDoc(doc, s, examTitle) {
+  const cfg = getCfg();
   const m = s.marks || { att:'138/142 Days (97.2%)', result:'PASSED & PROMOTED', conduct:'EXEMPLARY', subjects:DEFAULT_SUBJECTS };
   const subs = m.subjects || DEFAULT_SUBJECTS;
-  doc.setDrawColor(139,21,38); doc.setLineWidth(1.1); doc.rect(8,8,194,281);
-  if (WATERMARK_PNG) doc.addImage(WATERMARK_PNG, 'PNG', 58, 105, 94, 94);
-  if (LOGO_PNG) doc.addImage(LOGO_PNG, 'PNG', 14, 14, 22, 22);
-  doc.setTextColor(139,21,38); doc.setFont('helvetica','bold'); doc.setFontSize(18);
-  doc.text('SUNRISE PUBLIC SCHOOL', 110, 21, { align:'center' });
-  doc.setTextColor(40); doc.setFont('helvetica','normal'); doc.setFontSize(9);
-  doc.text('Ekdara, P.O. & P.S. Jhajha, Dist. Jamui, Bihar - 811308 • Estd. 2012', 110, 27, { align:'center' });
-  doc.text('CBSE Pattern English Medium (Nursery to Class X) • Reg. No: 330894', 110, 32, { align:'center' });
-  doc.setFillColor(139,21,38); doc.rect(14,40,182,8,'F');
-  doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(10);
-  doc.text(examTitle || 'STATEMENT OF MARKS & REPORT CARD (SESSION 2026-27)', 105, 45.2, { align:'center' });
+
+  // Top Crimson Header Bar (inspired by clean official report style)
+  doc.setFillColor(139, 21, 38); doc.rect(0, 0, 210, 32, 'F');
+  doc.setFillColor(217, 155, 38); doc.rect(0, 32, 210, 2, 'F');
+  if (LOGO_DATA_URL) {
+    doc.setFillColor(255, 255, 255); doc.circle(23, 16, 11, 'F');
+    doc.addImage(LOGO_DATA_URL, 'PNG', 13, 6, 20, 20);
+  }
+  doc.setTextColor(255, 255, 255); doc.setFont('helvetica', 'bold'); doc.setFontSize(17);
+  doc.text(cfg.schoolName.toUpperCase(), 116, 14, { align: 'center' });
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5);
+  doc.text(`${cfg.address} • Ph: ${cfg.phone}`, 116, 21, { align: 'center' });
+  doc.text(cfg.regTag, 116, 26.5, { align: 'center' });
+
+  // Soft Watermark in center of page
+  if (WATERMARK_DATA_URL) {
+    doc.addImage(WATERMARK_DATA_URL, 'PNG', 62, 112, 86, 86);
+  }
+
+  doc.setTextColor(139, 21, 38); doc.setFont('helvetica', 'bold'); doc.setFontSize(12);
+  doc.text(examTitle || `STATEMENT OF MARKS & REPORT CARD (${cfg.sessionLabel.toUpperCase()})`, 105, 43, { align: 'center' });
 
   doc.autoTable({
-    startY:51, margin:{left:14,right:14}, theme:'grid', styles:{fontSize:9,cellPadding:2.2,textColor:[20,20,20]},
-    body:[['Student Name:',s.name,'Admission No:',s.admNo],['Class & Sec:',`${s.className} (${s.section||'A'})`,'Roll No:',s.roll||'-'],["Father's Name:",s.father,"Mother's Name:",s.mother||'-'],['DOB:',s.dob||'-','Address:',s.addr||'Jhajha']],
-    columnStyles:{0:{fontStyle:'bold',fillColor:[248,245,239]},2:{fontStyle:'bold',fillColor:[248,245,239]}}
+    startY: 47, margin: { left: 12, right: 12 }, theme: 'grid',
+    styles: { fontSize: 9, cellPadding: 2.3, textColor: [25, 35, 50], lineColor: [220, 216, 208] },
+    body: [
+      ['Student Name:', s.name, 'Admission No:', s.admNo],
+      ['Class & Section:', `${s.className} (${s.section||'A'})`, 'Roll No:', s.roll || '-'],
+      ["Father's Name:", s.father, "Mother's Name:", s.mother || '-'],
+      ['Date of Birth:', s.dob || '-', 'Residence:', s.addr || 'Jhajha']
+    ],
+    columnStyles: { 0:{fontStyle:'bold',fillColor:[250,247,241]}, 2:{fontStyle:'bold',fillColor:[250,247,241]} }
   });
 
-  let gt=0, gm=0;
+  let gt = 0, gm = 0;
   const rows = subs.map(sub => {
-    const t=Number(sub.th)+Number(sub.pr), mx=Number(sub.maxT)+Number(sub.maxP);
-    gt+=t; gm+=mx;
+    const t = Number(sub.th) + Number(sub.pr);
+    const mx = Number(sub.maxT) + Number(sub.maxP);
+    gt += t; gm += mx;
     return [sub.code, sub.name, `${sub.th}/${sub.maxT}`, `${sub.pr}/${sub.maxP}`, `${t}/${mx}`, calcGrade((t/(mx||1))*100)];
   });
   const pct = ((gt/(gm||1))*100).toFixed(2);
-  rows.push(['','GRAND TOTAL & %','','',`${gt}/${gm} (${pct}%)`,calcGrade(Number(pct))]);
+  rows.push(['', 'GRAND TOTAL & PERCENTAGE', '', '', `${gt}/${gm} (${pct}%)`, calcGrade(Number(pct))]);
 
   doc.autoTable({
-    startY:doc.lastAutoTable.finalY+5, margin:{left:14,right:14}, theme:'grid',
-    head:[['Code','Subject','Theory','Practical/IA','Total','Grade']],
-    headStyles:{fillColor:[15,27,45],textColor:255,fontSize:9},
-    styles:{fontSize:9,cellPadding:2.5,halign:'center'}, columnStyles:{1:{halign:'left',fontStyle:'bold'}}, body:rows
+    startY: doc.lastAutoTable.finalY + 5, margin: { left: 12, right: 12 }, theme: 'grid',
+    head: [['Code', 'Subject Name', 'Theory', 'Practical/IA', 'Total', 'Grade']],
+    headStyles: { fillColor: [139, 21, 38], textColor: 255, fontSize: 9 },
+    styles: { fontSize: 9, cellPadding: 2.6, halign: 'center', lineColor: [220, 216, 208] },
+    columnStyles: { 1: { halign: 'left', fontStyle: 'bold' } },
+    body: rows
   });
 
   doc.autoTable({
-    startY:doc.lastAutoTable.finalY+6, margin:{left:14,right:14}, theme:'grid',
-    head:[['Attendance','Result Status','Conduct']],
-    headStyles:{fillColor:[217,155,38],textColor:[15,27,45],halign:'center',fontSize:8.5},
-    body:[[m.att,m.result,m.conduct]], styles:{halign:'center',fontStyle:'bold',fontSize:9}
+    startY: doc.lastAutoTable.finalY + 6, margin: { left: 12, right: 12 }, theme: 'grid',
+    head: [['Attendance Summary', 'Final Result Status', 'Discipline & Conduct']],
+    headStyles: { fillColor: [15, 27, 45], textColor: 255, halign: 'center', fontSize: 8.5 },
+    body: [[m.att, m.result, m.conduct]],
+    styles: { halign: 'center', fontStyle: 'bold', fontSize: 9, lineColor: [220, 216, 208] }
   });
 
-  doc.setFontSize(9); doc.setTextColor(20);
-  doc.text('Class Teacher', 42, 272, {align:'center'});
-  doc.text('Dr. R. K. Verma (Principal)', 162, 272, {align:'center'});
+  doc.setFontSize(8); doc.setTextColor(100);
+  doc.text('Grading Scale: A1 (91-100), A2 (81-90), B1 (71-80), B2 (61-70), C1 (51-60), C2 (41-50), D (33-40), E (<33)', 105, doc.lastAutoTable.finalY + 7, { align: 'center' });
+
+  doc.setFontSize(9); doc.setTextColor(25); doc.setFont('helvetica', 'bold');
+  doc.text('Class Teacher', 40, 274, { align: 'center' });
+  doc.text(`${cfg.principalName} (Principal)`, 165, 274, { align: 'center' });
+  doc.setFillColor(139, 21, 38); doc.rect(0, 289, 210, 8, 'F');
+  doc.setTextColor(255); doc.setFontSize(7.5); doc.setFont('helvetica', 'normal');
+  doc.text(`${cfg.schoolName} • ${cfg.address}`, 12, 294);
+  doc.text(`Issued: ${fmtDate(todayStr())}`, 198, 294, { align: 'right' });
 }
 
 function generateMarksheetPDF(id) {
   const s = DB.students.find(x=>x.id===id); if (!s) return;
   const { jsPDF } = window.jspdf; const doc = new jsPDF('p','mm','a4');
-  drawMarksheetOnDoc(doc, s, 'ANNUAL STATEMENT OF MARKS & REPORT CARD (SESSION 2026-27)');
+  drawMarksheetOnDoc(doc, s, `STATEMENT OF MARKS & REPORT CARD (${getCfg().sessionLabel.toUpperCase()})`);
   doc.save(`Marksheet_${s.admNo}_${s.name.replace(/\s+/g,'_')}.pdf`);
 }
 
@@ -1120,33 +1220,40 @@ function generateBulkMarksheetsPDF() {
 function generateFeeReceiptPDF(feeId) {
   const f = DB.fees.find(x=>x.id===feeId); if (!f) return;
   const s = DB.students.find(x=>x.id===f.studentId) || {};
+  const cfg = getCfg();
   const { jsPDF } = window.jspdf; const doc = new jsPDF('p','mm','a5');
-  doc.setDrawColor(139,21,38); doc.setLineWidth(1); doc.rect(6,6,136,198);
-  if (WATERMARK_PNG) doc.addImage(WATERMARK_PNG, 'PNG', 42, 78, 64, 64);
-  if (LOGO_PNG) doc.addImage(LOGO_PNG, 'PNG', 11, 11, 18, 18);
-  doc.setTextColor(139,21,38); doc.setFont('helvetica','bold'); doc.setFontSize(14);
-  doc.text('SUNRISE PUBLIC SCHOOL', 82, 18, {align:'center'});
-  doc.setTextColor(60); doc.setFont('helvetica','normal'); doc.setFontSize(8);
-  doc.text('Ekdara, Jhajha, Jamui, Bihar - 811308', 82, 24, {align:'center'});
+  doc.setFillColor(139, 21, 38); doc.rect(0, 0, 148, 24, 'F');
+  if (LOGO_DATA_URL) {
+    doc.setFillColor(255, 255, 255); doc.circle(16, 12, 8, 'F');
+    doc.addImage(LOGO_DATA_URL, 'PNG', 9, 5, 14, 14);
+  }
+  doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(12.5);
+  doc.text(cfg.schoolName.toUpperCase(), 84, 11, {align:'center'});
+  doc.setFont('helvetica','normal'); doc.setFontSize(7.5);
+  doc.text(`${cfg.address} • Ph: ${cfg.phone}`, 84, 17, {align:'center'});
+  if (WATERMARK_DATA_URL) doc.addImage(WATERMARK_DATA_URL, 'PNG', 42, 78, 64, 64);
+
   doc.autoTable({
-    startY:36, margin:{left:10,right:10}, theme:'grid', styles:{fontSize:9,cellPadding:2.6},
+    startY:30, margin:{left:9,right:9}, theme:'grid', styles:{fontSize:9,cellPadding:2.5},
     body:[['Receipt No:',f.receiptNo],['Date:',fmtDate(f.date)],['Student:',f.studentName],['Class:',`${f.className} (${s.admNo||'-'})`],['Fee Month/Head:',f.head||'Tuition Fee'],['Amount:',`Rs. ${f.amount}/-`],['Mode:',f.mode],['Dues Left:',`Rs. ${s.id?getStuDues(s):0}/-`]],
-    columnStyles:{0:{fontStyle:'bold',fillColor:[248,245,239],cellWidth:42}}
+    columnStyles:{0:{fontStyle:'bold',fillColor:[250,247,241],cellWidth:42}}
   });
-  doc.text('Principal / Authorized Signatory', 134, 192, {align:'right'});
+  doc.setTextColor(30); doc.setFontSize(8.5);
+  doc.text(`${cfg.principalName} / Authorized Signatory`, 139, 194, {align:'right'});
   doc.save(`Receipt_${f.receiptNo}.pdf`);
 }
 
 function generateIDCardPDF(id) {
   const s = DB.students.find(x=>x.id===id); if (!s) return;
+  const cfg = getCfg();
   const { jsPDF } = window.jspdf; const doc = new jsPDF('p','mm',[60,92]);
   doc.setFillColor(139,21,38); doc.rect(0,0,60,19,'F');
-  if (LOGO_PNG) doc.addImage(LOGO_PNG,'PNG',3,3,13,13);
-  doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(8);
-  doc.text('SUNRISE PUBLIC SCHOOL',38,9,{align:'center'});
-  doc.setFontSize(6.5); doc.text('Ekdara, Jhajha',38,14,{align:'center'});
-  if (WATERMARK_PNG) doc.addImage(WATERMARK_PNG,'PNG',14,38,32,32);
-  if (s.photo || LOGO_PNG) doc.addImage(s.photo||LOGO_PNG,'PNG',19,22,22,23);
+  if (LOGO_DATA_URL) { doc.setFillColor(255,255,255); doc.circle(9.5,9.5,6.5,'F'); doc.addImage(LOGO_DATA_URL,'PNG',4,4,11,11); }
+  doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(7.8);
+  doc.text(cfg.schoolName.toUpperCase(),36,9,{align:'center'});
+  doc.setFontSize(6.2); doc.text('Jhajha, Jamui (Bihar)',36,14,{align:'center'});
+  if (WATERMARK_DATA_URL) doc.addImage(WATERMARK_DATA_URL,'PNG',14,38,32,32);
+  if (s.photo || LOGO_DATA_URL) doc.addImage(s.photo||LOGO_DATA_URL,'PNG',19,22,22,23);
   doc.setTextColor(15,27,45); doc.setFontSize(9); doc.text(s.name,30,52,{align:'center'});
   doc.setFont('helvetica','normal'); doc.setFontSize(7.5);
   doc.text(`${s.className} (${s.section||'A'}) • Roll ${s.roll||'-'}`,30,58,{align:'center'});
@@ -1171,6 +1278,7 @@ function generateBulkAdmitCardsPDF() {
   const cls = document.getElementById('admitClass').value;
   const exam = document.getElementById('admitExam').value.trim();
   const center = document.getElementById('admitCenter').value.trim();
+  const cfg = getCfg();
   const list = DB.students.filter(s=>s.className===cls);
   if (!list.length) return toast('No students in ' + cls, 'err');
   const tt = [...document.querySelectorAll('#timetableBox > div')].map(r=>[r.querySelector('.tt-sub').value, fmtDate(r.querySelector('.tt-dt').value), r.querySelector('.tt-tm').value]).filter(x=>x[0]);
@@ -1179,10 +1287,10 @@ function generateBulkAdmitCardsPDF() {
     if (idx>0 && idx%2===0) doc.addPage();
     const top = (idx%2===0) ? 8 : 152;
     doc.setDrawColor(139,21,38); doc.setLineWidth(0.9); doc.rect(8,top,194,136);
-    if (WATERMARK_PNG) doc.addImage(WATERMARK_PNG,'PNG',75,top+42,60,60);
-    if (LOGO_PNG) doc.addImage(LOGO_PNG,'PNG',12,top+4,16,16);
-    doc.setTextColor(139,21,38); doc.setFont('helvetica','bold'); doc.setFontSize(14);
-    doc.text('SUNRISE PUBLIC SCHOOL, JHAJHA',108,top+10,{align:'center'});
+    if (WATERMARK_DATA_URL) doc.addImage(WATERMARK_DATA_URL,'PNG',75,top+42,60,60);
+    if (LOGO_DATA_URL) doc.addImage(LOGO_DATA_URL,'PNG',12,top+4,16,16);
+    doc.setTextColor(139,21,38); doc.setFont('helvetica','bold'); doc.setFontSize(13.5);
+    doc.text(`${cfg.schoolName.toUpperCase()}, JHAJHA`,108,top+10,{align:'center'});
     doc.setTextColor(40); doc.setFontSize(8.5);
     doc.text(`ADMIT CARD — ${exam}`,108,top+16,{align:'center'});
     doc.setFont('helvetica','normal'); doc.setFontSize(8);
@@ -1190,13 +1298,13 @@ function generateBulkAdmitCardsPDF() {
     doc.autoTable({
       startY:top+25, margin:{left:12,right:12}, theme:'grid', styles:{fontSize:8.5,cellPadding:1.6},
       body:[['Student:',s.name,'Roll:',s.roll||'-'],['Class:',`${s.className} (${s.section||'A'})`,'Adm No:',s.admNo],['Father:',s.father,'Phone:',s.phone]],
-      columnStyles:{0:{fontStyle:'bold',fillColor:[248,245,239]},2:{fontStyle:'bold',fillColor:[248,245,239]}}
+      columnStyles:{0:{fontStyle:'bold',fillColor:[250,247,241]},2:{fontStyle:'bold',fillColor:[250,247,241]}}
     });
     if (tt.length) {
-      doc.autoTable({ startY:doc.lastAutoTable.finalY+2.5, margin:{left:12,right:12}, theme:'grid', head:[['Subject','Date','Timing']], headStyles:{fillColor:[15,27,45],fontSize:8}, styles:{fontSize:8,cellPadding:1.4}, body:tt });
+      doc.autoTable({ startY:doc.lastAutoTable.finalY+2.5, margin:{left:12,right:12}, theme:'grid', head:[['Subject','Date','Timing']], headStyles:{fillColor:[139,21,38],fontSize:8}, styles:{fontSize:8,cellPadding:1.4}, body:tt });
     }
     doc.setFont('helvetica','bold'); doc.setFontSize(8); doc.setTextColor(20);
-    doc.text('Principal Signature',192,top+131,{align:'right'});
+    doc.text(`${cfg.principalName} (Principal)`,192,top+131,{align:'right'});
   });
   doc.save(`Admit_Cards_${cls.replace(/\s+/g,'_')}.pdf`);
 }
@@ -1222,7 +1330,7 @@ function renderEnquiries() {
       <div style="display:flex;justify-content:space-between;"><strong>${q.student} (${q.className})</strong><small>${fmtDate(q.date)}</small></div>
       <div>${q.parent} • 📞 ${q.phone} ${q.village?'• '+q.village:''}</div>
       <div style="margin-top:5px;display:flex;gap:6px;">
-        <a class="btn btn-green btn-sm" target="_blank" href="https://wa.me/91${(q.phone||'').replace(/\D/g,'')}?text=${encodeURIComponent('Hello '+q.parent+', Sunrise Public School Jhajha admission enquiry received for '+q.student)}">WhatsApp</a>
+        <a class="btn btn-green btn-sm" target="_blank" href="https://wa.me/91${(q.phone||'').replace(/\D/g,'')}?text=${encodeURIComponent('Hello '+q.parent+', '+getCfg().schoolName+' admission enquiry received for '+q.student)}">WhatsApp</a>
         <button class="btn btn-red btn-sm" onclick="deleteDoc('enquiries','${q.id}')">Delete</button>
       </div>
     </div>`).join('') : '<small style="color:var(--muted);">No enquiries yet.</small>';
@@ -1281,10 +1389,10 @@ async function resetGuardianPass(id) {
 
 async function saveAdminSettings(e) {
   e.preventDefault();
-  const upd = { adminUser:document.getElementById('cfgUser').value.trim(), defaultFee:Number(document.getElementById('cfgDefaultFee').value||6000) };
+  const upd = { adminUser:document.getElementById('cfgUser').value.trim() };
   const np = document.getElementById('cfgPass').value.trim(); if (np) upd.adminPass = np;
   await db.collection('config').doc('main').set(upd, { merge:true });
-  document.getElementById('cfgPass').value = ''; toast('Settings saved!');
+  document.getElementById('cfgPass').value = ''; toast('Admin credentials updated!');
 }
 async function deleteDoc(col, id) { if (!confirm('Delete permanently?')) return; await db.collection(col).doc(id).delete(); toast('Deleted'); }
 
@@ -1304,7 +1412,7 @@ function renderGuardianPortal(s) {
   const paid = getStuPaid(s.id), dues = getStuDues(s), myFees = DB.fees.filter(f=>f.studentId===s.id);
   document.getElementById('guardianContent').innerHTML = `
     <div style="display:flex;gap:12px;align-items:center;margin-bottom:14px;">
-      <img src="${s.photo||LOGO_PNG}" style="width:70px;height:70px;border-radius:12px;border:2px solid var(--gold);object-fit:cover;" />
+      <img src="${s.photo||LOGO_DATA_URL||'./logo.jpeg'}" style="width:70px;height:70px;border-radius:12px;border:2px solid var(--gold);object-fit:cover;" />
       <div><h2>${s.name}</h2><span class="tag navy">${s.admNo}</span> <span class="tag gold">${s.className} (${s.section||'A'})</span><div style="font-size:12.5px;color:var(--muted);">Father: ${s.father} • Roll: ${s.roll||'-'}</div></div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;">
@@ -1324,8 +1432,9 @@ if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').ca
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; document.getElementById('installAppBtn').classList.remove('hidden'); });
 function installPWA() { if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt = null; } else alert('Browser menu (⋮) se "Install app" ya "Add to Home screen" chunein.'); }
 
-window.addEventListener('DOMContentLoaded', async () => {
-  await loadRealSchoolLogo();
+window.addEventListener('DOMContentLoaded', () => {
+  initLogos();
+  applySchoolProfileToUI();
   populateClassDropdowns();
   document.getElementById('feeCalDate').value = todayStr();
   document.getElementById('feeEntryDate').value = todayStr();
