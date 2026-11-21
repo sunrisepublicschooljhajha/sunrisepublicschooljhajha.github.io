@@ -9,9 +9,15 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Ccircle cx='96' cy='96' r='94' fill='%238b1526' stroke='%23d99b26' stroke-width='6'/%3E%3Ccircle cx='96' cy='96' r='68' fill='%23fff8ec'/%3E%3Ccircle cx='96' cy='86' r='26' fill='%23d99b26'/%3E%3Cpath d='M52 118 Q96 98 140 118 L140 132 Q96 112 52 132 Z' fill='%238b1526'/%3E%3Ctext x='96' y='158' font-family='Arial' font-size='18' font-weight='bold' fill='%238b1526' text-anchor='middle'%3ESPS%3C/text%3E%3C/svg%3E",
+      "src": "./logo.jpeg",
       "sizes": "192x192",
-      "type": "image/svg+xml",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./logo.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
       "purpose": "any maskable"
     }
   ]
