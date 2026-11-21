@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sunrise Public School | Ekdara, Jhajha (811308) • Estd. 2012</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans Devanagari', 'sans-serif'],
+            heading: ['Plus Jakarta Sans', 'Noto Sans Devanagari', 'sans-serif'],
+          },
+          colors: {
+            ivory: { 50: '#FDFBF7', 100: '#FAF6F0', 200: '#F2EBE0', 300: '#E5DDD0' },
+            navy: { 950: '#101722', 900: '#182232', 800: '#223046', 700: '#2F415E' },
+            crimson: { 900: '#6B1510', 800: '#871D17', 700: '#A4261E', 600: '#BE3229', 100: '#FBE6E4', 50: '#FDF4F3' },
+            gold: { 700: '#9A6B12', 600: '#B8821B', 500: '#D99B26', 400: '#E8B348', 100: '#FCF0D6', 50: '#FEF9EE' }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      background-color: #FAF6F0;
+      color: #182232;
+      background-image: radial-gradient(rgba(164, 38, 30, 0.03) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    @keyframes tickerScroll { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
+    .ticker-track { display: flex; width: max-content; animation: tickerScroll 36s linear infinite; }
+    .ticker-track:hover { animation-play-state: paused; }
+    .a4-paper-sheet { width: 210mm; min-height: 297mm; background: #FFFFFF; box-shadow: 0 24px 60px rgba(16, 23, 34, 0.35); margin: 0 auto; }
+    @media print {
+      body * { visibility: hidden !important; }
+      #pdf-print-stage, #pdf-print-stage * { visibility: visible !important; }
+      #pdf-print-stage { position: fixed !important; left: 0 !important; top: 0 !important; width: 210mm !important; margin: 0 !important; box-shadow: none !important; }
+    }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-crimson-700 selection:text-white overflow-x-hidden">
+
+<!-- ========================================================================= -->
+<!-- PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BELOW (ZERO PASSWORDS IN HTML!) -->
+<!-- ========================================================================= -->
+<script>
+  const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwKMngRguXaCdVWdsJXKkSN-VTSD_q6DnGMn3GbfuFiIP6dDjq_W89iWA3ivxrakX_a/exec";
+</script>
+
+<!-- EXACT ROYAL SUNRISE PUBLIC SCHOOL VECTOR CREST -->
+<template id="sps-emblem-template">
+  <svg viewBox="0 0 300 300" width="56" height="56" class="w-full h-full object-contain block" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="150" cy="150" r="143" fill="#FFFFFF" stroke="#A4261E" stroke-width="13"/>
+    <g stroke="#D99B26" stroke-width="4.5" stroke-linecap="round">
+      <line x1="150" y1="76" x2="150" y2="21"/><line x1="138" y1="77" x2="131" y2="24"/><line x1="162" y1="77" x2="169" y2="24"/>
+      <line x1="127" y1="80" x2="112" y2="30"/><line x1="173" y1="80" x2="188" y2="30"/><line x1="116" y1="85" x2="94" y2="40"/>
+      <line x1="184" y1="85" x2="206" y2="40"/><line x1="107" y1="91" x2="77" y2="52"/><line x1="193" y1="91" x2="223" y2="52"/>
+      <line x1="99" y1="99" x2="62" y2="67"/><line x1="201" y1="99" x2="238" y2="67"/><line x1="93" y1="107" x2="51" y2="84"/>
+      <line x1="207" y1="107" x2="249" y2="84"/><line x1="89" y1="115" x2="44" y2="102"/><line x1="211" y1="115" x2="256" y2="102"/>
+      <line x1="87" y1="123" x2="43" y2="120"/><line x1="213" y1="123" x2="257" y2="120"/>
+    </g>
+    <path d="M106 129 A44 44 0 0 1 194 129 Z" fill="#A4261E"/>
+    <path d="M122 101 C133 97, 145 99, 150 103 C155 99, 167 97, 178 101 L178 124 C167 120, 155 122, 150 126 C145 122, 133 120, 122 124 Z" fill="#D99B26" stroke="#9A6B12" stroke-width="1.2"/>
+    <line x1="150" y1="103" x2="150" y2="126" stroke="#871D17" stroke-width="1.6"/>
+    <g fill="none" stroke="#A4261E" stroke-width="4.5" stroke-linecap="round">
+      <path d="M38 133 Q75 127, 112 133 T188 133 T262 133"/>
+      <path d="M40 144 Q75 138, 112 144 T188 144 T260 144"/>
+      <path d="M44 155 Q77 149, 112 155 T188 155 T256 155"/>
+    </g>
+    <text x="150" y="191" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="35" letter-spacing="1.5" fill="#182232">SUNRISE</text>
+    <line x1="56" y1="199" x2="244" y2="199" stroke="#A4261E" stroke-width="4" stroke-linecap="round"/>
+    <text x="150" y="224" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="22.5" letter-spacing="0.8" fill="#182232">PUBLIC SCHOOL</text>
+    <line x1="62" y1="232" x2="238" y2="232" stroke="#A4261E" stroke-width="4" stroke-linecap="round"/>
+    <text x="150" y="257" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="21" fill="#182232">Estd. 2012</text>
+  </svg>
+</template>
+
+<!-- FLOATING TOAST -->
+<div id="toast-banner" class="fixed bottom-5 left-5 z-[140] hidden max-w-sm bg-navy-900 text-ivory-50 px-4 py-3.5 rounded-2xl shadow-2xl border border-gold-500/50 flex items-center gap-3">
+  <div id="toast-icon" class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0"><i data-lucide="check-circle-2" class="w-4 h-4"></i></div>
+  <p id="toast-text" class="text-xs sm:text-sm font-semibold leading-snug">Done</p>
+</div>
+
+<!-- ========================================================================= -->
+<!-- VIEW 1: PUBLIC SCHOOL WEBSITE (EXACT ROYAL THEME)                         -->
+<!-- ========================================================================= -->
+<div id="view-public-site">
+  <header class="sticky top-0 z-50 w-full bg-[#FAF6F0]/95 backdrop-blur-md border-b border-[#E5DEC9] shadow-sm">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-3">
+      <a href="#home" class="flex items-center gap-3 sm:gap-4 min-w-0 flex-1 group">
+        <div class="w-14 h-14 sm:w-[68px] sm:h-[68px] shrink-0 block transition-transform duration-300 group-hover:scale-[1.03]" data-emblem-slot></div>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 id="live-school-name" class="font-heading font-extrabold text-base sm:text-xl lg:text-2xl text-[#182232] tracking-tight leading-tight truncate">SUNRISE PUBLIC SCHOOL</h1>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-bold bg-[#FDF3DC] text-[#8A5A00] border border-[#E6C57A] shrink-0">Estd. 2012</span>
+          </div>
+          <p id="live-school-address" class="text-[11px] sm:text-xs lg:text-sm font-medium text-[#A4261E] truncate mt-0.5">Ekdara, Jhajha – 811308, Dist. Jamui, Bihar</p>
+        </div>
+      </a>
+      <button onclick="openMainDrawer()" aria-label="Open Navigation Drawer" class="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-xl bg-[#A4261E] hover:bg-[#891E17] text-white flex items-center justify-center shadow-sm transition active:scale-95">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" class="w-6 h-6">
+          <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- 3-LINE NAVIGATION DRAWER -->
+  <div id="main-slide-drawer" class="fixed inset-0 z-50 hidden">
+    <div onclick="closeMainDrawer()" class="absolute inset-0 bg-navy-950/60 backdrop-blur-xs"></div>
+    <aside class="relative ml-auto w-[340px] max-w-[92vw] h-full bg-ivory-50 text-navy-900 p-5 sm:p-6 flex flex-col justify-between shadow-2xl border-l border-ivory-300 overflow-y-auto">
+      <div class="space-y-5">
+        <div class="flex items-center justify-between pb-4 border-b border-ivory-300">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 shrink-0 block" data-emblem-slot></div>
+            <div>
+              <span data-i18n="schoolName" class="font-heading font-extrabold text-sm block text-navy-900 leading-tight">SUNRISE PUBLIC SCHOOL</span>
+              <span class="text-[11px] text-crimson-700 font-bold">Ekdara, Jhajha • Estd. 2012</span>
+            </div>
+          </div>
+          <button onclick="closeMainDrawer()" class="w-11 h-11 rounded-xl bg-ivory-200 hover:bg-ivory-300 text-navy-900 flex items-center justify-center"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
+
+        <div class="flex items-center justify-between p-3 rounded-2xl bg-gold-50 border border-gold-500/40">
+          <span class="text-xs font-bold text-navy-900 flex items-center gap-2"><i data-lucide="languages" class="w-4 h-4 text-crimson-700"></i><span>Language / भाषा</span></span>
+          <button onclick="toggleSiteLanguage()" class="min-h-[38px] px-3.5 py-1.5 rounded-xl bg-crimson-700 hover:bg-crimson-800 text-ivory-50 font-heading font-extrabold text-xs"><span id="lang-toggle-label">हिंदी / EN</span></button>
+        </div>
+
+        <div class="space-y-1">
+          <span class="text-[10px] font-extrabold uppercase tracking-widest text-navy-700/60 px-2 block mb-1">Website Navigation</span>
+          <a href="#home" onclick="closeMainDrawer()" class="min-h-[44px] flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-ivory-200 text-sm font-bold"><i data-lucide="home" class="w-4 h-4 text-crimson-700"></i><span data-i18n="navHome">Home</span></a>
+          <a href="#about" onclick="closeMainDrawer()" class="min-h-[44px] flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-ivory-200 text-sm font-bold"><i data-lucide="landmark" class="w-4 h-4 text-crimson-700"></i><span data-i18n="navAbout">About & Principal</span></a>
+          <a href="#academics" onclick="closeMainDrawer()" class="min-h-[44px] flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-ivory-200 text-sm font-bold"><i data-lucide="book-open" class="w-4 h-4 text-crimson-700"></i><span data-i18n="navAcademics">Academics & Facilities</span></a>
+          <a href="#notices-section" onclick="closeMainDrawer()" class="min-h-[44px] flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-ivory-200 text-sm font-bold"><i data-lucide="megaphone" class="w-4 h-4 text-crimson-700"></i><span data-i18n="navNotices">Notice Board</span></a>
+          <a href="#gallery" onclick="closeMainDrawer()" class="min-h-[44px] flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-ivory-200 text-sm font-bold"><i data-lucide="images" class="w-4 h-4 text-crimson-700"></i><span data-i18n="navGallery">Campus Gallery</span></a>
+          <a href="#admission-section" onclick="closeMainDrawer()" class="min-h-[44px] flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-ivory-200 text-sm font-bold"><i data-lucide="phone-call" class="w-4 h-4 text-crimson-700"></i><span data-i18n="navAdmission">Admission & Contact</span></a>
+        </div>
+
+        <div class="pt-3 border-t border-ivory-300 space-y-2">
+          <span class="text-[10px] font-extrabold uppercase tracking-widest text-navy-700/60 px-2 block">Dedicated ERP Portals</span>
+          <button onclick="closeMainDrawer(); openGuardianPortal('fees', 'login');" class="w-full min-h-[48px] text-left p-3 rounded-2xl bg-crimson-700 hover:bg-crimson-800 text-ivory-50 flex items-center gap-3">
+            <span class="w-9 h-9 rounded-xl bg-white/15 flex items-center justify-center shrink-0"><i data-lucide="graduation-cap" class="w-4 h-4"></i></span>
+            <div><span class="font-heading font-bold text-xs sm:text-sm block">Guardian Login / Register</span><span class="text-[11px] text-ivory-200">E-Slips, Register & Marks</span></div>
+          </button>
+          <button onclick="closeMainDrawer(); navigateToView('view-login-teacher');" class="w-full min-h-[48px] text-left p-3 rounded-2xl bg-gold-500 hover:bg-gold-400 text-navy-950 flex items-center gap-3">
+            <span class="w-9 h-9 rounded-xl bg-navy-950/10 flex items-center justify-center shrink-0"><i data-lucide="book-user" class="w-4 h-4"></i></span>
+            <div><span class="font-heading font-extrabold text-xs sm:text-sm block">Teacher Faculty Login</span><span class="text-[11px] text-navy-900">Attendance + Auto WhatsApp</span></div>
+          </button>
+          <button onclick="closeMainDrawer(); navigateToView('view-login-admin');" class="w-full min-h-[48px] text-left p-3 rounded-2xl bg-navy-900 hover:bg-navy-800 text-ivory-50 flex items-center gap-3">
+            <span class="w-9 h-9 rounded-xl bg-gold-500/20 text-gold-400 flex items-center justify-center shrink-0"><i data-lucide="shield-check" class="w-4 h-4"></i></span>
+            <div><span class="font-heading font-bold text-xs sm:text-sm block">Admin Office Login</span><span class="text-[11px] text-gold-400">Approvals, Bot, Registers & CMS</span></div>
+          </button>
+        </div>
+      </div>
+      <div class="pt-4 mt-5 border-t border-ivory-300 text-center text-[11px] text-navy-700">
+        Helpline: <a id="drawer-phone-link" href="tel:+919431281308" class="text-crimson-700 font-bold">+91 94312-81308</a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section id="home" class="relative bg-navy-900 text-ivory-50 border-b-4 border-gold-500 overflow-hidden">
+    <div class="absolute inset-0 opacity-15 pointer-events-none" style="background-image: radial-gradient(#D99B26 1px, transparent 1px); background-size: 28px 28px;"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 relative z-10">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="lg:col-span-7 space-y-5">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/15 border border-gold-500/50 text-gold-400 text-xs sm:text-sm font-extrabold">
+            <i data-lucide="award" class="w-4 h-4 text-gold-400 shrink-0"></i>
+            <span id="hero-badge-text">Admissions Open 2026–27 • Nursery to Class X (CBSE Pattern)</span>
+          </div>
+          <h2 id="hero-headline-text" class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-[48px] text-ivory-50 leading-[1.16] tracking-tight">
+            Illuminating Young Minds with Knowledge & Moral Values
+          </h2>
+          <p id="hero-subtitle-text" class="text-ivory-200/90 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed">
+            Trusted by families across Ekdara, Jhajha (811308) since 2012. Delivering disciplined English-medium CBSE-pattern education, smart classrooms, and holistic character building.
+          </p>
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
+            <a href="#admission-section" class="min-h-[48px] px-7 py-3.5 rounded-2xl bg-crimson-700 hover:bg-crimson-600 text-ivory-50 font-heading font-bold text-sm sm:text-base shadow-lg border border-crimson-600 flex items-center justify-center gap-2 transition">
+              <span data-i18n="heroApplyBtn">Apply for Admission</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+            <button onclick="openGuardianPortal('fees', 'login')" class="min-h-[48px] px-7 py-3.5 rounded-2xl bg-navy-800 hover:bg-navy-700 text-gold-400 font-heading font-bold text-sm sm:text-base border border-gold-500/40 flex items-center justify-center gap-2 transition">
+              <i data-lucide="graduation-cap" class="w-4 h-4"></i><span>Guardian Login / Register</span>
+            </button>
+          </div>
+          <div class="pt-3 grid grid-cols-3 gap-3 max-w-lg text-xs">
+            <div class="p-3 rounded-2xl bg-navy-800/90 border border-navy-700"><strong class="text-gold-400 font-heading text-base block">Nursery – X</strong><span class="text-ivory-200/80 text-[11px]">CBSE Pattern</span></div>
+            <div class="p-3 rounded-2xl bg-navy-800/90 border border-navy-700"><strong class="text-gold-400 font-heading text-base block">Estd. 2012</strong><span class="text-ivory-200/80 text-[11px]">14+ Years Legacy</span></div>
+            <div class="p-3 rounded-2xl bg-navy-800/90 border border-navy-700"><strong class="text-gold-400 font-heading text-base block">WhatsApp Bot</strong><span class="text-ivory-200/80 text-[11px]">Instant PDF E-Slips</span></div>
+          </div>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="relative rounded-3xl overflow-hidden bg-navy-800 p-3 shadow-2xl border border-gold-500/35">
+            <img id="live-hero-image" src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=85" alt="Sunrise Campus" class="w-full h-64 sm:h-80 lg:h-96 object-cover rounded-2xl">
+            <div class="mt-3 px-2 py-1 flex items-center justify-between text-xs">
+              <span class="font-bold text-ivory-100 flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-gold-400"></span><span id="live-school-tagline">English Medium • Reg. No: 330894</span></span>
+              <span class="font-extrabold text-gold-400">Jhajha – 811308</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE NOTICE TICKER -->
+  <div class="bg-crimson-700 text-ivory-50 border-b border-crimson-900 shadow-xs overflow-hidden">
+    <div class="max-w-7xl mx-auto flex items-center">
+      <div class="bg-gold-500 text-navy-950 font-heading font-extrabold text-xs sm:text-sm px-4 sm:px-5 py-3 shrink-0 flex items-center gap-2 z-10">
+        <span class="w-2 h-2 rounded-full bg-crimson-800 animate-ping"></span><span>LIVE NOTICES</span>
+      </div>
+      <div class="overflow-hidden flex-1 py-2.5"><div id="live-marquee-track" class="ticker-track flex items-center gap-10 px-4 text-xs sm:text-sm font-semibold"></div></div>
+    </div>
+  </div>
+
+  <!-- COUNTERS -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-14">
+    <div class="grid grid-cols-2 lg:grid-cols-4 bg-ivory-200/90 rounded-3xl shadow-xs border border-ivory-300 divide-y sm:divide-y-0 sm:divide-x divide-ivory-300 overflow-hidden">
+      <div class="p-5 sm:p-6 text-center"><p class="font-heading font-extrabold text-2xl sm:text-3xl text-crimson-700">14+</p><p class="font-bold text-xs sm:text-sm text-navy-900 mt-1">Years of Excellence</p><span class="text-[11px] text-navy-700">Established 2012</span></div>
+      <div class="p-5 sm:p-6 text-center"><p class="font-heading font-extrabold text-2xl sm:text-3xl text-navy-900">1200+</p><p class="font-bold text-xs sm:text-sm text-navy-900 mt-1">Happy Students</p><span class="text-[11px] text-navy-700">Nursery to Class X</span></div>
+      <div class="p-5 sm:p-6 text-center"><p class="font-heading font-extrabold text-2xl sm:text-3xl text-gold-700">100%</p><p class="font-bold text-xs sm:text-sm text-navy-900 mt-1">Class X Pass Rate</p><span class="text-[11px] text-navy-700">Consistent Toppers</span></div>
+      <div class="p-5 sm:p-6 text-center"><p class="font-heading font-extrabold text-2xl sm:text-3xl text-emerald-700">45+</p><p class="font-bold text-xs sm:text-sm text-navy-900 mt-1">Qualified Faculty</p><span class="text-[11px] text-navy-700">CBSE Trained Educators</span></div>
+    </div>
+  </section>
+
+  <!-- ABOUT & PRINCIPAL DESK -->
+  <section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20">
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div class="lg:col-span-5">
+        <div class="rounded-3xl overflow-hidden shadow-md border border-ivory-300 bg-ivory-200 p-3">
+          <div class="rounded-2xl overflow-hidden aspect-[4/4] relative">
+            <img id="live-principal-photo" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=85" alt="Principal" class="w-full h-full object-cover object-top">
+            <div class="absolute bottom-3 inset-x-3 rounded-2xl bg-ivory-50/95 backdrop-blur-md p-4 border border-ivory-300 shadow-sm">
+              <span class="px-2.5 py-0.5 rounded bg-gold-100 text-crimson-800 font-extrabold text-[10px] uppercase">From the Principal's Desk</span>
+              <h3 id="live-principal-name" class="font-heading font-extrabold text-base sm:text-lg text-navy-900 mt-1">Dr. R. K. Verma</h3>
+              <p id="live-principal-qual" class="text-xs text-navy-700">M.Sc., B.Ed., Ph.D. • Principal, Sunrise Public School</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lg:col-span-7 space-y-5">
+        <span class="text-crimson-700 font-extrabold text-xs uppercase tracking-widest">About Sunrise Public School</span>
+        <h2 class="font-heading font-extrabold text-2xl sm:text-4xl text-navy-900 leading-tight">Nurturing Discipline, Academic Excellence & Holistic Growth</h2>
+        <p id="live-principal-msg" class="text-navy-800 text-sm sm:text-base leading-relaxed">Founded in 2012 at Ekdara, Jhajha (811308), Sunrise Public School delivers an inspiring CBSE-pattern education where every student builds strong conceptual understanding, fluent English communication, and moral integrity.</p>
+        <div class="grid sm:grid-cols-3 gap-3.5 pt-2">
+          <div class="p-4 rounded-2xl bg-ivory-200/80 border border-ivory-300"><div class="w-9 h-9 rounded-xl bg-crimson-700 text-white flex items-center justify-center mb-2.5"><i data-lucide="shield" class="w-4 h-4"></i></div><h4 class="font-heading font-bold text-navy-900 text-sm">Discipline & Values</h4><p class="text-xs text-navy-700 mt-1">Respect, punctuality, and strong moral roots.</p></div>
+          <div class="p-4 rounded-2xl bg-ivory-200/80 border border-ivory-300"><div class="w-9 h-9 rounded-xl bg-navy-900 text-gold-400 flex items-center justify-center mb-2.5"><i data-lucide="book-open-check" class="w-4 h-4"></i></div><h4 class="font-heading font-bold text-navy-900 text-sm">Academic Excellence</h4><p class="text-xs text-navy-700 mt-1">NCERT & CBSE mastery from Nursery to Class X.</p></div>
+          <div class="p-4 rounded-2xl bg-ivory-200/80 border border-ivory-300"><div class="w-9 h-9 rounded-xl bg-gold-500 text-navy-950 flex items-center justify-center mb-2.5"><i data-lucide="sparkles" class="w-4 h-4"></i></div><h4 class="font-heading font-bold text-navy-900 text-sm">Holistic Growth</h4><p class="text-xs text-navy-700 mt-1">Sports, coding, public speaking & leadership.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACADEMICS & FACILITIES -->
+  <section id="academics" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20">
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <span class="text-crimson-700 font-extrabold text-xs uppercase tracking-widest">CBSE Pattern • Nursery to Class X</span>
+      <h2 class="font-heading font-extrabold text-2xl sm:text-4xl text-navy-900 mt-1">Academic Wings & Campus Facilities</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+      <div class="rounded-3xl overflow-hidden bg-ivory-50 border border-ivory-300 shadow-2xs hover:shadow-md transition">
+        <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=700&q=80" alt="Smart Classrooms" class="w-full h-44 object-cover">
+        <div class="p-5"><span class="text-[10px] font-extrabold uppercase text-crimson-700">Interactive Learning</span><h3 class="font-heading font-bold text-base text-navy-900 mt-1">Digital Smart Classrooms</h3><p class="text-xs text-navy-700 mt-1.5">Audio-visual smart boards making NCERT Science, Mathematics & English engaging.</p></div>
+      </div>
+      <div class="rounded-3xl overflow-hidden bg-ivory-50 border border-ivory-300 shadow-2xs hover:shadow-md transition">
+        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=700&q=80" alt="Science Labs" class="w-full h-44 object-cover">
+        <div class="p-5"><span class="text-[10px] font-extrabold uppercase text-gold-700">Practical Education</span><h3 class="font-heading font-bold text-base text-navy-900 mt-1">Science & Computer Labs</h3><p class="text-xs text-navy-700 mt-1.5">Composite Physics, Chemistry & Biology lab plus modern IT workstations.</p></div>
+      </div>
+      <div class="rounded-3xl overflow-hidden bg-ivory-50 border border-ivory-300 shadow-2xs hover:shadow-md transition">
+        <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=700&q=80" alt="Library" class="w-full h-44 object-cover">
+        <div class="p-5"><span class="text-[10px] font-extrabold uppercase text-emerald-700">Knowledge Hub</span><h3 class="font-heading font-bold text-base text-navy-900 mt-1">Rich Library & Reading Room</h3><p class="text-xs text-navy-700 mt-1.5">Over 4,500+ NCERT reference books, encyclopedias, storybooks, and newspapers.</p></div>
+      </div>
+      <div class="rounded-3xl overflow-hidden bg-ivory-50 border border-ivory-300 shadow-2xs hover:shadow-md transition">
+        <img src="https://images.unsplash.com/photo-1557223562-6c77ef16210f?auto=format&fit=crop&w=700&q=80" alt="Transport" class="w-full h-44 object-cover">
+        <div class="p-5"><span class="text-[10px] font-extrabold uppercase text-crimson-700">Safe Commute</span><h3 class="font-heading font-bold text-base text-navy-900 mt-1">GPS School Transport</h3><p class="text-xs text-navy-700 mt-1.5">Dedicated buses covering Ekdara, Jhajha Bazar, Station Road, Sono & Gidhaur.</p></div>
+      </div>
+      <div class="rounded-3xl overflow-hidden bg-ivory-50 border border-ivory-300 shadow-2xs hover:shadow-md transition">
+        <img src="https://images.unsplash.com/photo-1526232761682-d26e03ac148e?auto=format&fit=crop&w=700&q=80" alt="Sports" class="w-full h-44 object-cover">
+        <div class="p-5"><span class="text-[10px] font-extrabold uppercase text-gold-700">Physical Fitness</span><h3 class="font-heading font-bold text-base text-navy-900 mt-1">Sports & Athletics Complex</h3><p class="text-xs text-navy-700 mt-1.5">Spacious playground for cricket, football, volleyball, yoga & annual sports meets.</p></div>
+      </div>
+      <div class="rounded-3xl overflow-hidden bg-navy-900 text-ivory-50 border border-gold-500/40 p-6 flex flex-col justify-between">
+        <div>
+          <span class="px-2.5 py-1 rounded-lg bg-gold-500 text-navy-950 font-extrabold text-[10px] uppercase">Academic Structure</span>
+          <h3 class="font-heading font-extrabold text-lg text-ivory-50 mt-3">Nursery to Class X Wings</h3>
+          <ul class="mt-3 space-y-2 text-xs text-ivory-200">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-400"></i><strong>Foundational:</strong> Nursery, LKG & UKG</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-400"></i><strong>Primary & Middle:</strong> Class I to VIII</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-400"></i><strong>Secondary Board:</strong> Class IX & Class X</li>
+          </ul>
+        </div>
+        <a href="#admission-section" class="mt-5 min-h-[44px] w-full py-2.5 rounded-xl bg-crimson-700 hover:bg-crimson-600 text-white font-heading font-bold text-xs flex items-center justify-center gap-1.5">Enquire for 2026–27 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTICE BOARD -->
+  <section id="notices-section" class="py-16 sm:py-20 bg-ivory-200/75 border-y border-ivory-300 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <span class="text-crimson-700 font-extrabold text-xs uppercase tracking-widest">Official School Announcements</span>
+        <h2 class="font-heading font-extrabold text-2xl sm:text-4xl text-navy-900 mt-1">Notice Board & Circulars</h2>
+      </div>
+      <div id="home-notices-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"></div>
+    </div>
+  </section>
+
+  <!-- CAMPUS GALLERY -->
+  <section id="gallery" class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-8">
+      <span class="text-crimson-700 font-extrabold text-xs uppercase tracking-widest">Moments & Campus Life</span>
+      <h2 class="font-heading font-extrabold text-2xl sm:text-4xl text-navy-900 mt-1">Campus Gallery</h2>
+    </div>
+    <div id="home-gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+  </section>
+
+  <!-- ONLINE ADMISSION ENQUIRY FORM -->
+  <section id="admission-section" class="py-16 sm:py-20 bg-ivory-200/70 border-t border-ivory-300">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-8 items-center bg-ivory-50 p-6 sm:p-10 rounded-3xl border border-ivory-300 shadow-md">
+        <div class="lg:col-span-5 space-y-4">
+          <span class="px-3 py-1 rounded-full bg-gold-100 text-crimson-800 font-extrabold text-[11px] uppercase border border-gold-500/40">Session 2026–27</span>
+          <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-navy-900 leading-tight">Online Admission Enquiry (Nursery – Class X)</h2>
+          <p class="text-xs sm:text-sm text-navy-700 leading-relaxed">Submit your admission enquiry online. It syncs live to the School Admin Office and sends an instant WhatsApp confirmation.</p>
+        </div>
+        <form id="home-admission-form" class="lg:col-span-7 bg-ivory-100 p-5 sm:p-6 rounded-2xl border border-ivory-300 space-y-4 text-sm">
+          <div class="grid sm:grid-cols-2 gap-3.5">
+            <div><label class="block text-xs font-bold mb-1">Student Full Name *</label><input type="text" id="adm-student-name" required placeholder="Student Name" class="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-white border border-ivory-300"></div>
+            <div><label class="block text-xs font-bold mb-1">Class Applying For *</label>
+              <select id="adm-class" class="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-ivory-300 bg-white font-semibold">
+                <option>Nursery</option><option>LKG</option><option>UKG</option><option>Class 1</option><option>Class 2</option><option>Class 3</option><option>Class 4</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-3.5">
+            <div><label class="block text-xs font-bold mb-1">Father / Guardian Name *</label><input type="text" id="adm-parent-name" required placeholder="Guardian Name" class="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-white border border-ivory-300"></div>
+            <div><label class="block text-xs font-bold mb-1">WhatsApp Mobile *</label><input type="tel" id="adm-phone" required pattern="[0-9]{10}" placeholder="10-digit WhatsApp" class="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-white border border-ivory-300"></div>
+          </div>
+          <div><label class="block text-xs font-bold mb-1">Village / Locality *</label><input type="text" id="adm-village" required placeholder="Ekdara, Jhajha" class="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-white border border-ivory-300"></div>
+          <button type="submit" id="adm-submit-btn" class="w-full min-h-[48px] py-3.5 rounded-xl bg-crimson-700 hover:bg-crimson-800 text-ivory-50 font-heading font-bold text-sm shadow-sm">Submit Admission Enquiry</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4-COLUMN FOOTER WITH GOOGLE MAP -->
+  <footer id="contact" class="bg-navy-900 text-ivory-200 pt-14 pb-8 border-t-4 border-gold-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-navy-700">
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-14 h-14 shrink-0 block" data-emblem-slot></div>
+            <div><h3 id="footer-school-name" class="font-heading font-extrabold text-ivory-50 text-sm sm:text-base">SUNRISE PUBLIC SCHOOL</h3><p class="text-xs text-gold-400 font-bold">Ekdara, Jhajha – 811308 • Estd. 2012</p></div>
+          </div>
+          <p class="text-xs text-ivory-200/80 leading-relaxed">Co-educational English Medium School following CBSE Curriculum from Nursery to Class X in Jamui District, Bihar.</p>
+        </div>
+        <div class="text-xs space-y-2.5">
+          <h4 class="font-heading font-extrabold text-gold-400 text-sm uppercase mb-3">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="#about" class="hover:text-gold-400">About & Principal's Desk</a></li>
+            <li><a href="#academics" class="hover:text-gold-400">Academics & Facilities</a></li>
+            <li><button onclick="openGuardianPortal('fees', 'login')" class="hover:text-gold-400">Guardian Portal & Fee E-Slips</button></li>
+            <li><button onclick="navigateToView('view-login-teacher')" class="hover:text-gold-400">Teacher Faculty Login</button></li>
+            <li><button onclick="navigateToView('view-login-admin')" class="hover:text-gold-400">Admin Office ERP Login</button></li>
+          </ul>
+        </div>
+        <div class="text-xs space-y-2.5">
+          <h4 class="font-heading font-extrabold text-gold-400 text-sm uppercase mb-3">Contact Us</h4>
+          <p class="flex items-start gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-gold-400 shrink-0 mt-0.5"></i><span id="footer-address-display">Ekdara, Jhajha – 811308, Dist. Jamui, Bihar</span></p>
+          <p class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-gold-400 shrink-0"></i><a id="footer-phone-display" href="tel:+919431281308" class="text-ivory-50 font-bold">+91 94312-81308</a></p>
+          <p class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 text-gold-400 shrink-0"></i><span id="footer-email-display" class="break-all">office@sunrisepublicschooljhajha.edu.in</span></p>
+        </div>
+        <div>
+          <h4 class="font-heading font-extrabold text-gold-400 text-sm uppercase mb-3">Campus Location</h4>
+          <div class="rounded-2xl overflow-hidden border border-navy-700 h-40 bg-navy-800">
+            <iframe title="Sunrise Public School Map" src="https://maps.google.com/maps?q=Ekdara,%20Jhajha,%20Bihar%20811308&t=&z=14&ie=UTF8&iwloc=&output=embed" class="w-full h-full border-0" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="pt-6 text-center text-xs text-ivory-300/70">© 2026 Sunrise Public School, Ekdara, Jhajha (811308) • Secured Cloud ERP.</div>
+    </div>
+  </footer>
+
+  <!-- FLOATING AI ADMISSION ASSISTANT -->
+  <div class="fixed bottom-4 right-4 z-40">
+    <div id="ai-enquiry-panel" class="hidden mb-3 w-[340px] max-w-[92vw] bg-ivory-50 rounded-3xl shadow-2xl border border-ivory-300 overflow-hidden">
+      <div class="bg-navy-900 text-ivory-50 px-4 py-3.5 flex items-center justify-between border-b-2 border-gold-500">
+        <div class="flex items-center gap-2.5"><span class="w-9 h-9 rounded-xl bg-gold-500 text-navy-950 flex items-center justify-center"><i data-lucide="bot" class="w-5 h-5"></i></span><div><h4 class="font-heading font-extrabold text-xs sm:text-sm">Sunrise AI Assistant</h4><span class="text-[10px] text-gold-400 block">Ekdara, Jhajha</span></div></div>
+        <button onclick="document.getElementById('ai-enquiry-panel').classList.add('hidden')" class="w-8 h-8 rounded-lg bg-navy-800 text-ivory-50">✕</button>
+      </div>
+      <div id="ai-chat-messages" class="p-3.5 h-52 overflow-y-auto space-y-2.5 text-xs bg-ivory-100">
+        <div class="p-3 rounded-2xl bg-ivory-50 border border-ivory-300">Namaste! Ask about <strong>Admissions 2026–27</strong>, <strong>Fee Structure</strong>, <strong>Bus Routes</strong>, or <strong>Portal Login</strong>.</div>
+      </div>
+      <form id="ai-chat-form" class="p-2.5 bg-ivory-50 border-t border-ivory-300 flex items-center gap-2">
+        <input type="text" id="ai-chat-input" placeholder="Ask question..." class="flex-1 min-h-[40px] px-3 py-2 rounded-xl bg-white border border-ivory-300 text-xs">
+        <button type="submit" class="w-10 h-10 rounded-xl bg-navy-900 text-gold-400 flex items-center justify-center"><i data-lucide="send" class="w-4 h-4"></i></button>
+      </form>
+    </div>
+    <button onclick="document.getElementById('ai-enquiry-panel').classList.toggle('hidden')" class="ml-auto min-h-[48px] px-4 sm:px-5 py-3 rounded-full bg-navy-900 hover:bg-crimson-700 text-ivory-50 font-heading font-bold text-xs sm:text-sm shadow-xl border-2 border-gold-500 flex items-center gap-2.5">
+      <i data-lucide="bot" class="w-5 h-5 text-gold-400"></i><span>AI School Assistant</span>
+    </button>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- VIEW 2: GUARDIAN LOGIN & REGISTER NEW ACCOUNT (ZERO HARDCODED PASSWORDS)  -->
+<!-- ========================================================================= -->
+<div id="view-login-guardian" class="hidden min-h-screen bg-ivory-100 flex flex-col">
+  <div class="bg-ivory-50 border-b border-ivory-300 px-4 sm:px-8 py-3.5 flex items-center justify-between">
+    <div class="flex items-center gap-3"><div class="w-11 h-11 shrink-0" data-emblem-slot></div><span class="font-heading font-extrabold text-xs sm:text-sm text-navy-900">SUNRISE PUBLIC SCHOOL</span></div>
+    <button onclick="navigateToView('view-public-site')" class="min-h-[44px] px-4 py-2 rounded-xl bg-navy-900 text-ivory-50 text-xs font-bold">← Back to Home</button>
+  </div>
+  <div class="flex-1 flex items-center justify-center p-4 py-8">
+    <div class="max-w-md w-full bg-ivory-50 rounded-3xl p-6 sm:p-8 shadow-xl border border-ivory-300">
+      <div class="w-20 h-20 mx-auto mb-3" data-emblem-slot></div>
+      <div class="text-center">
+        <h2 class="font-heading font-extrabold text-2xl text-navy-900">Guardian & Student Portal</h2>
+        <p class="text-xs text-navy-700 mt-1">Sunrise Public School, Ekdara, Jhajha (811308)</p>
+      </div>
+      <div class="grid grid-cols-2 gap-2 p-1.5 rounded-2xl bg-ivory-200 border border-ivory-300 mt-5">
+        <button type="button" id="g-mode-login-btn" onclick="switchGuardianAuthMode('login')" class="min-h-[42px] py-2 rounded-xl font-heading font-bold text-xs bg-navy-900 text-ivory-50">Guardian Login</button>
+        <button type="button" id="g-mode-reg-btn" onclick="switchGuardianAuthMode('register')" class="min-h-[42px] py-2 rounded-xl font-heading font-bold text-xs text-navy-800">Register New Account</button>
+      </div>
+
+      <form id="guardian-login-form" class="mt-5 space-y-4">
+        <div><label class="block text-xs font-bold mb-1">Guardian ID / Admission No / Mobile *</label><input type="text" id="g-login-id" required placeholder="e.g. GRD101 or 10-digit mobile" class="w-full min-h-[46px] px-4 py-3 rounded-xl bg-white border border-ivory-300 text-sm font-semibold"></div>
+        <div><label class="block text-xs font-bold mb-1">Password *</label><input type="password" id="g-login-pin" required placeholder="••••••••" class="w-full min-h-[46px] px-4 py-3 rounded-xl bg-white border border-ivory-300 text-sm font-semibold"></div>
+        <div id="g-login-error" class="hidden p-3 rounded-xl bg-crimson-50 border border-crimson-200 text-crimson-800 text-xs font-bold"></div>
+        <button type="submit" id="g-login-btn" class="w-full min-h-[48px] py-3.5 rounded-xl bg-crimson-700 hover:bg-crimson-800 text-ivory-50 font-heading font-bold text-sm shadow-md">Sign In to Guardian Portal</button>
+      </form>
+
+      <form id="guardian-register-form" class="hidden mt-5 space-y-3.5 text-xs">
+        <div class="grid grid-cols-2 gap-3">
+          <div><label class="block font-bold mb-1">Parent / Guardian Name *</label><input type="text" id="greg-parent" required placeholder="Full Name" class="w-full min-h-[44px] px-3 py-2.5 rounded-xl bg-white border border-ivory-300"></div>
+          <div><label class="block font-bold mb-1">WhatsApp Mobile *</label><input type="tel" id="greg-phone" required pattern="[0-9]{10}" placeholder="10-Digit Mobile" class="w-full min-h-[44px] px-3 py-2.5 rounded-xl bg-white border border-ivory-300"></div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div><label class="block font-bold mb-1">Student Full Name *</label><input type="text" id="greg-student" required placeholder="Ward's Name" class="w-full min-h-[44px] px-3 py-2.5 rounded-xl bg-white border border-ivory-300"></div>
+          <div><label class="block font-bold mb-1">Student Class *</label>
+            <select id="greg-class" class="w-full min-h-[44px] px-3 py-2.5 rounded-xl bg-white border border-ivory-300 font-semibold">
+              <option>Nursery</option><option>LKG</option><option>UKG</option><option>Class 1</option><option>Class 2</option><option>Class 3</option><option>Class 4</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div><label class="block font-bold mb-1">Admission No (Optional)</label><input type="text" id="greg-adm" placeholder="e.g. SPS101" class="w-full min-h-[44px] px-3 py-2.5 rounded-xl bg-white border border-ivory-300 uppercase"></div>
+          <div><label class="block font-bold mb-1">Village / Locality *</label><input type="text" id="greg-village" required placeholder="Ekdara, Jhajha" class="w-full min-h-[44px] px-3 py-2.5 rounded-xl bg-white border border-ivory-300"></div>
+        </div>
+        <div><label class="block font-bold mb-1">Create Your Login Password *</label><input type="password" id="greg-pass" required minlength="4" placeholder="Choose secure password" class="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-white border border-ivory-300"></div>
+        <div id="g-reg-feedback" class="hidden p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold"></div>
+        <button type="submit" id="g-reg-btn" class="w-full min-h-[48px] py-3.5 rounded-xl bg-navy-900 hover:bg-crimson-700 text-ivory-50 font-heading font-bold text-sm shadow-md">Submit Registration for Admin Approval</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- VIEW 3: TEACHER LOGIN PAGE (ZERO HARDCODED PASSWORDS)                     -->
+<!-- ========================================================================= -->
+<div id="view-login-teacher" class="hidden min-h-screen bg-ivory-100 flex flex-col">
+  <div class="bg-ivory-50 border-b border-ivory-300 px-4 sm:px-8 py-3.5 flex items-center justify-between">
+    <div class="flex items-center gap-3"><div class="w-11 h-11 shrink-0" data-emblem-slot></div><span class="font-heading font-extrabold text-xs sm:text-sm text-navy-900">SUNRISE PUBLIC SCHOOL</span></div>
+    <button onclick="navigateToView('view-public-site')" class="min-h-[44px] px-4 py-2 rounded-xl bg-navy-900 text-ivory-50 text-xs font-bold">← Back to Home</button>
+  </div>
+  <div class="flex-1 flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-ivory-50 rounded-3xl p-6 sm:p-8 shadow-xl border border-ivory-300">
+      <div class="w-20 h-20 mx-auto mb-3" data-emblem-slot></div>
+      <div class="text-center"><h2 class="font-heading font-extrabold text-2xl text-navy-900">Teacher Faculty Login</h2><p class="text-xs text-navy-700 mt-1">Verified directly against School Cloud Database</p></div>
+      <form id="teacher-login-form" class="mt-6 space-y-4">
+        <div><label class="block text-xs font-bold mb-1">Staff ID *</label><input type="text" id="t-login-id" required placeholder="e.g. TCH01" class="w-full min-h-[46px] px-4 py-3 rounded-xl bg-white border border-ivory-300 text-sm font-semibold uppercase"></div>
+        <div><label class="block text-xs font-bold mb-1">Password *</label><input type="password" id="t-login-pass" required placeholder="••••••••" class="w-full min-h-[46px] px-4 py-3 rounded-xl bg-white border border-ivory-300 text-sm font-semibold"></div>
+        <div id="t-login-error" class="hidden p-3 rounded-xl bg-crimson-50 border border-crimson-200 text-crimson-700 text-xs font-bold"></div>
+        <button type="submit" id="t-login-btn" class="w-full min-h-[48px] py-3.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-heading font-extrabold text-sm shadow-md">Sign In to Teacher Portal</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- VIEW 4: ADMIN OFFICE LOGIN PAGE (ZERO HARDCODED PASSWORDS)                -->
+<!-- ========================================================================= -->
+<div id="view-login-admin" class="hidden min-h-screen bg-ivory-100 flex flex-col">
+  <div class="bg-ivory-50 border-b border-ivory-300 px-4 sm:px-8 py-3.5 flex items-center justify-between">
+    <div class="flex items-center gap-3"><div class="w-11 h-11 shrink-0" data-emblem-slot></div><span class="font-heading font-extrabold text-xs sm:text-sm text-navy-900">SUNRISE PUBLIC SCHOOL</span></div>
+    <button onclick="navigateToView('view-public-site')" class="min-h-[44px] px-4 py-2 rounded-xl bg-navy-900 text-ivory-50 text-xs font-bold">← Back to Home</button>
+  </div>
+  <div class="flex-1 flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-ivory-50 rounded-3xl p-6 sm:p-8 shadow-xl border border-ivory-300">
+      <div class="w-20 h-20 mx-auto mb-3" data-emblem-slot></div>
+      <div class="text-center"><h2 class="font-heading font-extrabold text-2xl text-navy-900">Admin Office Login</h2><p class="text-xs text-navy-700 mt-1">Encrypted Server-Side Verification (Zero Leak)</p></div>
+      <form id="admin-login-form" class="mt-6 space-y-4">
+        <div><label class="block text-xs font-bold mb-1">Admin Username *</label><input type="text" id="a-login-user" required placeholder="Enter Admin Username" class="w-full min-h-[46px] px-4 py-3 rounded-xl bg-white border border-ivory-300 text-sm font-semibold"></div>
+        <div><label class="block text-xs font-bold mb-1">Security Password *</label><input type="password" id="a-login-pass" required placeholder="••••••••" class="w-full min-h-[46px] px-4 py-3 rounded-xl bg-white border border-ivory-300 text-sm font-semibold"></div>
+        <div id="a-login-error" class="hidden p-3 rounded-xl bg-crimson-50 border border-crimson-200 text-crimson-700 text-xs font-bold"></div>
+        <button type="submit" id="a-login-btn" class="w-full min-h-[48px] py-3.5 rounded-xl bg-navy-900 hover:bg-crimson-700 text-ivory-50 font-heading font-bold text-sm shadow-md">Sign In to Office ERP & WhatsApp Bot</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- VIEW 5: GUARDIAN DASHBOARD                                                -->
+<!-- ========================================================================= -->
+<div id="view-dashboard-guardian" class="hidden min-h-screen bg-ivory-100">
+  <header class="bg-navy-900 text-ivory-50 border-b-2 border-gold-500 sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 min-w-0"><div class="w-11 h-11 shrink-0" data-emblem-slot></div><div class="min-w-0"><span class="font-heading font-extrabold text-sm sm:text-base block truncate">GUARDIAN & STUDENT PORTAL</span><span class="text-[11px] text-gold-400 font-bold block truncate">Sunrise Public School, Ekdara, Jhajha</span></div></div>
+      <div class="flex gap-2 shrink-0"><button onclick="navigateToView('view-public-site')" class="min-h-[42px] px-3.5 py-2 rounded-xl bg-navy-800 text-xs font-bold">Home</button><button onclick="logoutAll()" class="min-h-[42px] px-3.5 py-2 rounded-xl bg-crimson-700 text-xs font-bold">Sign Out</button></div>
+    </div>
+  </header>
+  <div class="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-6 space-y-5">
+    <div id="g-dash-header" class="bg-ivory-50 rounded-3xl p-5 border border-ivory-300 flex flex-col md:flex-row md:items-center justify-between gap-4"></div>
+    <div id="g-dash-kpis" class="grid grid-cols-2 lg:grid-cols-4 gap-3"></div>
+    <div class="flex overflow-x-auto no-scrollbar gap-2 bg-ivory-50 p-2 rounded-2xl border border-ivory-300">
+      <button onclick="switchGuardianTab('fees')" data-gtab="fees" class="g-tab-btn shrink-0 min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold bg-crimson-700 text-white">Fee Dues & E-Slips</button>
+      <button onclick="switchGuardianTab('attendance')" data-gtab="attendance" class="g-tab-btn shrink-0 min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold text-navy-800">Attendance Register</button>
+      <button onclick="switchGuardianTab('marksheet')" data-gtab="marksheet" class="g-tab-btn shrink-0 min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold text-navy-800">CBSE Marksheet</button>
+      <button onclick="switchGuardianTab('homework')" data-gtab="homework" class="g-tab-btn shrink-0 min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold text-navy-800">Homework & Leave</button>
+    </div>
+    <div id="g-dash-body" class="bg-ivory-50 rounded-3xl p-5 sm:p-8 border border-ivory-300"></div>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- VIEW 6: TEACHER DASHBOARD                                                 -->
+<!-- ========================================================================= -->
+<div id="view-dashboard-teacher" class="hidden min-h-screen bg-ivory-100">
+  <header class="bg-navy-900 text-ivory-50 border-b-2 border-gold-500 sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 min-w-0"><div class="w-11 h-11 shrink-0" data-emblem-slot></div><div class="min-w-0"><span class="font-heading font-extrabold text-sm sm:text-base block truncate">TEACHER FACULTY PORTAL</span><span class="text-[11px] text-gold-400 font-bold block truncate">Live Google Sheet Sync</span></div></div>
+      <div class="flex gap-2 shrink-0"><button onclick="navigateToView('view-public-site')" class="min-h-[42px] px-3.5 py-2 rounded-xl bg-navy-800 text-xs font-bold">Home</button><button onclick="logoutAll()" class="min-h-[42px] px-3.5 py-2 rounded-xl bg-crimson-700 text-xs font-bold">Sign Out</button></div>
+    </div>
+  </header>
+  <div class="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-6 space-y-5">
+    <div id="t-dash-header" class="bg-ivory-50 rounded-3xl p-5 border border-ivory-300"></div>
+    <div class="flex overflow-x-auto no-scrollbar gap-2 bg-ivory-50 p-2 rounded-2xl border border-ivory-300">
+      <button onclick="switchTeacherTab('student_att')" data-ttab="student_att" class="t-tab-btn shrink-0 min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold bg-crimson-700 text-white">Daily Attendance + Auto WhatsApp</button>
+      <button onclick="switchTeacherTab('marks_entry')" data-ttab="marks_entry" class="t-tab-btn shrink-0 min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold text-navy-800">Marks Entry & A4 PDF</button>
+      <button onclick="switchTeacherTab('homework')" data-ttab="homework" class="t-tab-btn shrink-0 min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold text-navy-800">Assign Homework</button>
+    </div>
+    <div id="t-dash-body" class="bg-ivory-50 rounded-3xl p-5 sm:p-8 border border-ivory-300"></div>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- VIEW 7: ADMIN 8-TAB CLOUD ERP & WHATSAPP BOT                              -->
+<!-- ========================================================================= -->
+<div id="view-dashboard-admin" class="hidden min-h-screen bg-ivory-100">
+  <header class="bg-navy-900 text-ivory-50 border-b-2 border-gold-500 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-11 h-11 shrink-0" data-emblem-slot></div>
+        <div class="min-w-0"><span class="font-heading font-extrabold text-sm sm:text-base block truncate">ADMIN OFFICE ERP & WHATSAPP BOT</span><span class="text-[11px] text-gold-400 font-bold block truncate">Live Synced with Google Sheets</span></div>
+      </div>
+      <div class="flex gap-2 shrink-0">
+        <button onclick="syncAdminNow()" class="min-h-[42px] px-3 py-2 rounded-xl bg-navy-800 text-xs font-bold">↻ Sync</button>
+        <button onclick="navigateToView('view-public-site')" class="min-h-[42px] px-3.5 py-2 rounded-xl bg-gold-500 text-navy-950 text-xs font-extrabold">Live Site</button>
+        <button onclick="logoutAll()" class="min-h-[42px] px-3.5 py-2 rounded-xl bg-crimson-700 text-xs font-bold">Sign Out</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 space-y-5">
+    <div id="a-dash-kpis" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3"></div>
+    <div class="flex overflow-x-auto no-scrollbar whitespace-nowrap gap-2 bg-ivory-50 p-2 rounded-2xl border border-ivory-300">
+      <button onclick="switchAdminTab('overview')" data-atab="overview" class="a-tab-btn shrink-0 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-bold bg-crimson-700 text-white">1. Dashboard & Enquiries</button>
+      <button onclick="switchAdminTab('whatsapp')" data-atab="whatsapp" class="a-tab-btn shrink-0 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-bold text-navy-800">2. WhatsApp Bot & Outbox</button>
+      <button onclick="switchAdminTab('students')" data-atab="students" class="a-tab-btn shrink-0 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-bold text-navy-800">3. Guardian Approvals & Students</button>
+      <button onclick="switchAdminTab('teachers')" data-atab="teachers" class="a-tab-btn shrink-0 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-bold text-navy-800">4. Teachers & Permissions</button>
+      <button onclick="switchAdminTab('attendance')" data-atab="attendance" class="a-tab-btn shrink-0 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-bold text-navy-800">5. Monthly Registers (1–31)</button>
+      <button onclick="switchAdminTab('fees')" data-atab="fees" class="a-tab-btn shrink-0 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-bold text-navy-800">6. Fee Entry & Auto PDF</button>
+      <button onclick="switchAdminTab('marksheets')" data-atab="marksheets" class="a-tab-btn shrink-0 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-bold text-navy-800">7. Marks & A4 PDFs</button>
+      <button onclick="switchAdminTab('cms')" data-atab="cms" class="a-tab-btn shrink-0 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-bold text-navy-800">8. CMS, Bot API & Passwords</button>
+    </div>
+    <div id="a-dash-body" class="bg-ivory-50 rounded-3xl p-5 sm:p-8 border border-ivory-300"></div>
+  </div>
+</div>
+
+<!-- A4 PDF PREVIEW MODAL -->
+<div id="modal-a4-pdf-viewer" class="fixed inset-0 z-[120] hidden bg-navy-950/85 backdrop-blur-sm flex flex-col">
+  <div class="bg-navy-900 text-ivory-50 px-4 sm:px-8 py-3 border-b border-gold-500/50 flex items-center justify-between gap-2">
+    <h3 id="pdf-modal-title" class="font-heading font-extrabold text-xs sm:text-base truncate">Official A4 Document</h3>
+    <div class="flex gap-2">
+      <button id="pdf-trigger-download-btn" class="min-h-[40px] px-4 py-2 rounded-xl bg-emerald-600 text-white font-bold text-xs">Save A4 .PDF</button>
+      <button onclick="window.print()" class="min-h-[40px] px-3.5 py-2 rounded-xl bg-gold-500 text-navy-950 font-bold text-xs">Print</button>
+      <button onclick="document.getElementById('modal-a4-pdf-viewer').classList.add('hidden')" class="min-h-[40px] px-3.5 py-2 rounded-xl bg-crimson-700 text-white font-bold text-xs">Close</button>
+    </div>
+  </div>
+  <div class="flex-1 overflow-auto p-4 sm:p-8 flex justify-center"><div id="pdf-print-stage" class="a4-paper-sheet p-8 text-navy-900"></div></div>
+</div>
+
+<script>
+let currentLang = 'en';
+let AUTH = { role: null, user: '', pass: '' };
+let PUBLIC_DATA = { siteSettings: {}, notices: [], gallery: [] };
+let GUARDIAN_STATE = null;
+let TEACHER_STATE = null;
+let ADMIN_STATE = null;
+let currentGTab = 'fees', currentTTab = 'student_att', currentATab = 'overview';
+let selectedMarksStuId = '', selectedMonth = '2026-11';
+
+function injectEmblems() {
+  const tpl = document.getElementById('sps-emblem-template').innerHTML;
+  document.querySelectorAll('[data-emblem-slot]').forEach(el => el.innerHTML = tpl);
+}
+function refreshIcons() { if (window.lucide) window.lucide.createIcons(); }
+function showToast(msg, isErr = false) {
+  const b = document.getElementById('toast-banner');
+  document.getElementById('toast-text').textContent = msg;
+  b.classList.remove('hidden');
+  clearTimeout(window._tt);
+  window._tt = setTimeout(() => b.classList.add('hidden'), 3800);
+}
+function openMainDrawer() { document.getElementById('main-slide-drawer').classList.remove('hidden'); }
+function closeMainDrawer() { document.getElementById('main-slide-drawer').classList.add('hidden'); }
+
+function navigateToView(id) {
+  ['view-public-site','view-login-guardian','view-login-teacher','view-login-admin','view-dashboard-guardian','view-dashboard-teacher','view-dashboard-admin'].forEach(v => {
+    document.getElementById(v).classList.toggle('hidden', v !== id);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  refreshIcons();
+}
+
+function logoutAll() {
+  AUTH = { role: null, user: '', pass: '' };
+  GUARDIAN_STATE = null; TEACHER_STATE = null; ADMIN_STATE = null;
+  navigateToView('view-public-site');
+  showToast('Signed out safely.');
+}
+
+async function apiPost(payload) {
+  if (!GAS_WEB_APP_URL || GAS_WEB_APP_URL.includes('PASTE_YOUR')) {
+    throw new Error('Please paste your Google Apps Script Web App URL in index.html first.');
+  }
+  const res = await fetch(GAS_WEB_APP_URL, { method: 'POST', body: JSON.stringify(payload) });
+  return await res.json();
+}
+
+/* ==================== PUBLIC WEBSITE LOAD ==================== */
+async function loadPublicSite() {
+  if (!GAS_WEB_APP_URL || GAS_WEB_APP_URL.includes('PASTE_YOUR')) return;
+  try {
+    const res = await fetch(GAS_WEB_APP_URL);
+    const data = await res.json();
+    if (data.ok) {
+      PUBLIC_DATA = data;
+      renderPublicSite();
+    }
+  } catch (e) { console.warn('Public sync error:', e); }
+}
+
+function toggleSiteLanguage() {
+  currentLang = currentLang === 'en' ? 'hi' : 'en';
+  renderPublicSite();
+  showToast(currentLang === 'hi' ? 'भाषा हिंदी में बदल गई' : 'Switched to English');
+}
+
+function renderPublicSite() {
+  const s = PUBLIC_DATA.siteSettings || {};
+  const isHi = currentLang === 'hi';
+  if (s.schoolNameEn) {
+    document.getElementById('live-school-name').textContent = isHi ? (s.schoolNameHi || s.schoolNameEn) : s.schoolNameEn;
+    document.getElementById('footer-school-name').textContent = isHi ? (s.schoolNameHi || s.schoolNameEn) : s.schoolNameEn;
+    document.getElementById('live-school-address').textContent = isHi ? (s.addressHi || s.addressEn) : s.addressEn;
+    document.getElementById('footer-address-display').textContent = s.addressEn;
+    document.getElementById('hero-badge-text').textContent = isHi ? (s.heroBadgeHi || s.heroBadgeEn) : s.heroBadgeEn;
+    document.getElementById('hero-headline-text').textContent = isHi ? (s.heroHeadlineHi || s.heroHeadlineEn) : s.heroHeadlineEn;
+    document.getElementById('hero-subtitle-text').textContent = isHi ? (s.heroSubtitleHi || s.heroSubtitleEn) : s.heroSubtitleEn;
+    document.getElementById('live-principal-name').textContent = s.principalName || 'Dr. R. K. Verma';
+    document.getElementById('live-principal-msg').textContent = isHi ? (s.principalMessageHi || s.principalMessageEn) : s.principalMessageEn;
+    document.getElementById('footer-phone-display').textContent = s.phone || '+91 94312-81308';
+    document.getElementById('drawer-phone-link').textContent = s.phone || '+91 94312-81308';
+    document.getElementById('footer-email-display').textContent = s.email || '';
+  }
+
+  const notices = PUBLIC_DATA.notices || [];
+  if (notices.length) {
+    const tHtml = notices.map(n => `<span class="inline-flex items-center gap-2"><span class="px-2 py-0.5 rounded bg-ivory-50 text-crimson-700 text-[10px] font-extrabold">${n.tag}</span><span>${n.title}</span><span class="text-ivory-100/80 text-[11px]">(${n.date})</span></span><span class="text-gold-400">•</span>`).join('');
+    document.getElementById('live-marquee-track').innerHTML = tHtml + tHtml;
+    document.getElementById('home-notices-grid').innerHTML = notices.slice(0, 6).map(n => `
+      <article class="p-6 rounded-3xl bg-ivory-50 border border-ivory-300 shadow-xs flex flex-col justify-between">
+        <div>
+          <div class="flex justify-between mb-3"><span class="px-2.5 py-1 rounded-lg bg-crimson-700 text-white text-[10px] font-extrabold uppercase">${n.tag}</span><span class="text-xs font-semibold text-navy-700">${n.date}</span></div>
+          <h3 class="font-heading font-bold text-base text-navy-900">${n.title}</h3>
+          <p class="text-xs text-navy-700 mt-2 leading-relaxed">${n.desc}</p>
+        </div>
+      </article>`).join('');
+  }
+
+  const gal = PUBLIC_DATA.gallery || [];
+  if (gal.length) {
+    document.getElementById('home-gallery-grid').innerHTML = gal.map(g => `
+      <div class="rounded-3xl overflow-hidden aspect-[4/3] bg-ivory-50 border border-ivory-300 relative group">
+        <img src="${g.url}" alt="${g.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+        <div class="absolute bottom-3 left-3 right-3 px-3.5 py-2.5 rounded-xl bg-ivory-50/95 border border-ivory-300 flex justify-between text-xs font-bold">
+          <span class="truncate">${g.title}</span><span class="text-[10px] text-crimson-700 uppercase">${g.category}</span>
+        </div>
+      </div>`).join('');
+  }
+  refreshIcons();
+}
+
+/* ==================== PUBLIC FORMS & AI BOT ==================== */
+document.getElementById('home-admission-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('adm-submit-btn');
+  btn.textContent = 'Submitting to School Office...';
+  try {
+    const res = await apiPost({
+      action: 'submitEnquiry', source: 'Website Form',
+      student: document.getElementById('adm-student-name').value.trim(),
+      className: document.getElementById('adm-class').value,
+      parent: document.getElementById('adm-parent-name').value.trim(),
+      phone: document.getElementById('adm-phone').value.trim(),
+      village: document.getElementById('adm-village').value.trim()
+    });
+    if (res.ok) { this.reset(); showToast(`Enquiry ${res.id} sent to Admin Office!`); }
+  } catch (err) { showToast(err.message, true); }
+  btn.textContent = 'Submit Admission Enquiry';
+});
+
+document.getElementById('ai-chat-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const inp = document.getElementById('ai-chat-input');
+  const q = inp.value.trim(); if (!q) return;
+  const box = document.getElementById('ai-chat-messages');
+  box.innerHTML += `<div class="ml-auto max-w-[82%] p-3 rounded-2xl bg-crimson-700 text-white">${q}</div>`;
+  const ql = q.toLowerCase();
+  let ans = 'Admissions 2026–27 (Nursery to Class X) are open at Sunrise Public School, Ekdara, Jhajha. Helpline: +91 94312-81308.';
+  if (ql.includes('fee')) ans = 'Nursery–UKG: ₹950/mo • Class 1–5: ₹1,150/mo • Class 6–8: ₹1,350/mo • Class 9–10: ₹1,650/mo. Instant WhatsApp PDF receipts provided.';
+  else if (ql.includes('bus') || ql.includes('transport')) ans = 'GPS School Buses cover Ekdara, Jhajha Bazar, Station Road, Sono Chowk & Gidhaur.';
+  else if (ql.includes('login') || ql.includes('register')) ans = 'Open the top-right Red Menu (☰) → Guardian Login / Register. New registrations activate after Admin Office approval.';
+  box.innerHTML += `<div class="mr-auto max-w-[88%] p-3 rounded-2xl bg-ivory-50 border border-ivory-300">${ans}</div>`;
+  inp.value = ''; box.scrollTop = box.scrollHeight;
+});
+
+/* ==================== GUARDIAN AUTH & REGISTRATION ==================== */
+function openGuardianPortal(tab, mode) {
+  currentGTab = tab || 'fees';
+  if (GUARDIAN_STATE) { navigateToView('view-dashboard-guardian'); renderGuardianDashboard(); }
+  else { navigateToView('view-login-guardian'); switchGuardianAuthMode(mode || 'login'); }
+}
+
+function switchGuardianAuthMode(mode) {
+  const isReg = mode === 'register';
+  document.getElementById('guardian-login-form').classList.toggle('hidden', isReg);
+  document.getElementById('guardian-register-form').classList.toggle('hidden', !isReg);
+  document.getElementById('g-mode-login-btn').className = isReg ? 'min-h-[42px] py-2 rounded-xl font-heading font-bold text-xs text-navy-800' : 'min-h-[42px] py-2 rounded-xl font-heading font-bold text-xs bg-navy-900 text-ivory-50';
+  document.getElementById('g-mode-reg-btn').className = isReg ? 'min-h-[42px] py-2 rounded-xl font-heading font-bold text-xs bg-navy-900 text-ivory-50' : 'min-h-[42px] py-2 rounded-xl font-heading font-bold text-xs text-navy-800';
+}
+
+document.getElementById('guardian-register-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('g-reg-btn');
+  btn.textContent = 'Sending to Admin Panel...';
+  try {
+    const res = await apiPost({
+      action: 'registerGuardian',
+      parentName: document.getElementById('greg-parent').value.trim(),
+      phone: document.getElementById('greg-phone').value.trim(),
+      studentName: document.getElementById('greg-student').value.trim(),
+      className: document.getElementById('greg-class').value,
+      admNoInput: document.getElementById('greg-adm').value.trim().toUpperCase(),
+      village: document.getElementById('greg-village').value.trim(),
+      password: document.getElementById('greg-pass').value
+    });
+    if (res.ok) {
+      const fb = document.getElementById('g-reg-feedback');
+      fb.innerHTML = `✅ Registration Sent! Ref ID: <strong>${res.regId}</strong>. Once Admin approves in the Admin Panel, you can sign in with your Mobile & Password.`;
+      fb.classList.remove('hidden');
+      this.reset();
+    }
+  } catch (err) { showToast(err.message, true); }
+  btn.textContent = 'Submit Registration for Admin Approval';
+});
+
+document.getElementById('guardian-login-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('g-login-btn');
+  const errEl = document.getElementById('g-login-error');
+  errEl.classList.add('hidden'); btn.textContent = 'Verifying...';
+  try {
+    const res = await apiPost({ action: 'login', role: 'guardian', userId: document.getElementById('g-login-id').value.trim(), password: document.getElementById('g-login-pin').value });
+    if (!res.ok) { errEl.textContent = res.error; errEl.classList.remove('hidden'); }
+    else { GUARDIAN_STATE = res; navigateToView('view-dashboard-guardian'); renderGuardianDashboard(); }
+  } catch (err) { errEl.textContent = err.message; errEl.classList.remove('hidden'); }
+  btn.textContent = 'Sign In to Guardian Portal';
+});
+
+/* ==================== GUARDIAN DASHBOARD ==================== */
+function computeGrade(pct) { return pct >= 91 ? 'A1' : pct >= 81 ? 'A2' : pct >= 71 ? 'B1' : pct >= 61 ? 'B2' : pct >= 51 ? 'C1' : pct >= 33 ? 'D' : 'E'; }
+
+function renderGuardianDashboard() {
+  const st = GUARDIAN_STATE.student;
+  const due = Math.max(0, Number(st.totalAnnualFee) - Number(st.paidFee));
+  document.getElementById('g-dash-header').innerHTML = `
+    <div class="flex items-center gap-4">
+      <div class="w-14 h-14 rounded-2xl bg-crimson-700 text-white font-heading font-extrabold text-xl flex items-center justify-center">${st.name.charAt(0)}</div>
+      <div><h2 class="font-heading font-extrabold text-lg text-navy-900">${st.name} <span class="text-xs text-crimson-700">(${st.id} • ${st.guardianId})</span></h2><p class="text-xs text-navy-700">${st.className}-${st.section} • Guardian: <strong>${st.fatherName}</strong> (${st.phone})</p></div>
+    </div>
+    <button onclick="openMarksheetPDF(GUARDIAN_STATE.student)" class="min-h-[44px] px-5 py-2.5 rounded-xl bg-navy-900 text-ivory-50 font-bold text-xs">Download A4 Marksheet PDF</button>`;
+  document.getElementById('g-dash-kpis').innerHTML = `
+    <div class="bg-ivory-50 p-4 rounded-2xl border border-ivory-300"><span class="text-xs text-navy-700">Annual Fee</span><p class="font-heading font-extrabold text-xl mt-1">₹${Number(st.totalAnnualFee).toLocaleString()}</p></div>
+    <div class="bg-ivory-50 p-4 rounded-2xl border border-ivory-300"><span class="text-xs text-navy-700">Paid Fee</span><p class="font-heading font-extrabold text-xl text-emerald-700 mt-1">₹${Number(st.paidFee).toLocaleString()}</p></div>
+    <div class="bg-ivory-50 p-4 rounded-2xl border border-ivory-300"><span class="text-xs text-navy-700">Pending Dues</span><p class="font-heading font-extrabold text-xl text-crimson-700 mt-1">₹${due.toLocaleString()}</p></div>
+    <div class="bg-ivory-50 p-4 rounded-2xl border border-ivory-300"><span class="text-xs text-navy-700">Today Status</span><p class="font-heading font-extrabold text-xl mt-1">${st.todayStatus || 'Present'}</p></div>`;
+  switchGuardianTab(currentGTab);
+}
+
+function switchGuardianTab(tab) {
+  currentGTab = tab;
+  document.querySelectorAll('.g-tab-btn').forEach(b => b.className = b.dataset.gtab === tab ? 'g-tab-btn shrink-0 min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold bg-crimson-700 text-white' : 'g-tab-btn shrink-0 min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold text-navy-800');
+  const st = GUARDIAN_STATE.student, body = document.getElementById('g-dash-body');
+  if (tab === 'fees') {
+    body.innerHTML = `<h3 class="font-heading font-extrabold text-lg mb-4">Fee Dues & Official PDF E-Slips</h3><div class="space-y-3 text-xs">${(st.feeLedger || []).map((f, i) => `
+      <div class="p-4 rounded-2xl bg-ivory-100 border border-ivory-300 flex flex-wrap items-center justify-between gap-3">
+        <div><strong class="text-sm">${f.term}</strong><p class="text-navy-700">₹${Number(f.amount).toLocaleString()} • ${f.date}</p></div>
+        ${f.status === 'Paid'
+          ? (f.pdfUrl ? `<a href="${f.pdfUrl}" target="_blank" class="px-4 py-2 rounded-xl bg-navy-900 text-white font-bold">Download PDF (${f.receiptNo})</a>` : `<span class="px-3 py-1.5 rounded-lg bg-emerald-100 text-emerald-800 font-bold">Paid (${f.receiptNo})</span>`)
+          : `<button onclick="guardianPayOnline(${i})" class="px-4 py-2 rounded-xl bg-emerald-700 text-white font-bold">Pay ₹${Number(f.amount).toLocaleString()} Now</button>`}
+      </div>`).join('')}</div>`;
+  } else if (tab === 'attendance') {
+    const reg = (st.monthlyRegister && st.monthlyRegister[selectedMonth]) || {};
+    let grid = '';
+    for (let d = 1; d <= 30; d++) {
+      const v = reg[d] || '-';
+      grid += `<div class="p-2 rounded-xl border text-center ${v==='P'?'bg-emerald-100 text-emerald-800':v==='A'?'bg-crimson-100 text-crimson-800':'bg-white'}"><span class="text-[10px] block">Day ${d}</span><strong class="text-xs">${v}</strong></div>`;
+    }
+    body.innerHTML = `<h3 class="font-heading font-extrabold text-lg mb-4">Monthly Attendance Register (${selectedMonth})</h3><div class="grid grid-cols-5 sm:grid-cols-10 gap-2">${grid}</div>`;
+  } else if (tab === 'marksheet') {
+    body.innerHTML = `<div class="flex justify-between items-center mb-4"><h3 class="font-heading font-extrabold text-lg">CBSE Statement of Marks</h3><button onclick="openMarksheetPDF(GUARDIAN_STATE.student)" class="px-4 py-2 rounded-xl bg-crimson-700 text-white text-xs font-bold">Download A4 PDF</button></div>
+      <div class="space-y-2 text-xs">${(st.marks || []).map(m => `<div class="p-3 rounded-xl bg-ivory-100 border flex justify-between"><strong>${m.subject}</strong><span>Theory: ${m.theoryObt}/${m.theoryMax} • Prac: ${m.pracObt}/${m.pracMax} • <strong>Total: ${Number(m.theoryObt)+Number(m.pracObt)}</strong></span></div>`).join('')}</div>`;
+  } else if (tab === 'homework') {
+    body.innerHTML = `<div class="grid md:grid-cols-2 gap-6 text-xs">
+      <div><h3 class="font-heading font-extrabold text-base mb-3">Class Homework (${st.className})</h3>${(GUARDIAN_STATE.homework || []).map(h => `<div class="p-3.5 mb-2 rounded-2xl bg-ivory-100 border"><strong>${h.subject}</strong> (Due ${h.dueDate})<p class="mt-1">${h.title}</p></div>`).join('') || '<p>No homework yet.</p>'}</div>
+      <div><h3 class="font-heading font-extrabold text-base mb-3">Submit Leave Application</h3>
+        <form onsubmit="guardianSubmitLeave(event)" class="p-4 rounded-2xl bg-ivory-100 border space-y-2.5">
+          <input required id="gl-date" value="25 Nov 2026" placeholder="From Date" class="w-full p-2.5 rounded-xl bg-white border">
+          <input required id="gl-days" type="number" value="1" class="w-full p-2.5 rounded-xl bg-white border">
+          <input required id="gl-reason" placeholder="Reason for leave" class="w-full p-2.5 rounded-xl bg-white border">
+          <button type="submit" class="w-full py-2.5 rounded-xl bg-crimson-700 text-white font-bold">Send Leave Request to Admin</button>
+        </form>
+        <div class="mt-3 space-y-1.5">${(GUARDIAN_STATE.leaveRequests || []).map(l => `<div class="p-2.5 rounded-xl border flex justify-between"><span>${l.fromDate} (${l.days}d): ${l.reason}</span><strong class="text-crimson-700">${l.status}</strong></div>`).join('')}</div>
+      </div></div>`;
+  }
+}
+
+async function guardianPayOnline(idx) {
+  if (!confirm('Confirm online fee payment? Official PDF E-Slip will be generated & sent on WhatsApp.')) return;
+  showToast('Processing & generating PDF E-Slip...');
+  const res = await apiPost({ action: 'guardianPayFee', studentId: GUARDIAN_STATE.student.id, feeIdx: idx, mode: 'UPI / Online' });
+  if (res.ok) { GUARDIAN_STATE.student = res.student; renderGuardianDashboard(); showToast('Fee Paid! PDF E-Slip sent to WhatsApp.'); }
+}
+
+async function guardianSubmitLeave(e) {
+  e.preventDefault();
+  const st = GUARDIAN_STATE.student;
+  const res = await apiPost({ action: 'guardianSubmitLeave', studentId: st.id, studentName: st.name, className: st.className, fromDate: document.getElementById('gl-date').value, days: document.getElementById('gl-days').value, reason: document.getElementById('gl-reason').value });
+  if (res.ok) { GUARDIAN_STATE.leaveRequests = res.leaveRequests; switchGuardianTab('homework'); showToast('Leave request synced to Admin Panel!'); }
+}
+
+/* ==================== TEACHER LOGIN & PORTAL ==================== */
+document.getElementById('teacher-login-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('t-login-btn'), errEl = document.getElementById('t-login-error');
+  errEl.classList.add('hidden'); btn.textContent = 'Verifying...';
+  const userId = document.getElementById('t-login-id').value.trim(), password = document.getElementById('t-login-pass').value;
+  try {
+    const res = await apiPost({ action: 'login', role: 'teacher', userId, password });
+    if (!res.ok) { errEl.textContent = res.error; errEl.classList.remove('hidden'); }
+    else { AUTH = { role: 'teacher', user: userId, pass: password }; TEACHER_STATE = res; navigateToView('view-dashboard-teacher'); renderTeacherDashboard(); }
+  } catch (err) { errEl.textContent = err.message; errEl.classList.remove('hidden'); }
+  btn.textContent = 'Sign In to Teacher Portal';
+});
+
+function renderTeacherDashboard() {
+  const t = TEACHER_STATE.teacher;
+  document.getElementById('t-dash-header').innerHTML = `<h2 class="font-heading font-extrabold text-lg">${t.name} (${t.id})</h2><p class="text-xs text-navy-700">${t.designation} • Subject: ${t.subject}</p>`;
+  switchTeacherTab(currentTTab);
+}
+
+function switchTeacherTab(tab) {
+  currentTTab = tab;
+  document.querySelectorAll('.t-tab-btn').forEach(b => b.className = b.dataset.ttab === tab ? 't-tab-btn shrink-0 min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold bg-crimson-700 text-white' : 't-tab-btn shrink-0 min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold text-navy-800');
+  const body = document.getElementById('t-dash-body');
+  if (tab === 'student_att') {
+    body.innerHTML = `<h3 class="font-heading font-extrabold text-base mb-4">Mark Daily Attendance (Absent Auto-Sends WhatsApp Alert)</h3>
+      <div class="space-y-2.5 text-xs">${TEACHER_STATE.students.map(s => `
+        <div class="p-3.5 rounded-2xl bg-ivory-100 border flex flex-wrap justify-between items-center gap-2">
+          <div><strong>${s.name}</strong> (${s.className}-${s.section} • ${s.id})</div>
+          <div class="flex gap-2">
+            <button onclick="teacherMarkAtt('${s.id}','Present')" class="px-3.5 py-2 rounded-xl font-bold ${s.todayStatus==='Present'?'bg-emerald-700 text-white':'bg-white border'}">Present</button>
+            <button onclick="teacherMarkAtt('${s.id}','Absent')" class="px-3.5 py-2 rounded-xl font-bold ${s.todayStatus==='Absent'?'bg-crimson-700 text-white':'bg-white border'}">Absent + WhatsApp</button>
+          </div>
+        </div>`).join('')}</div>`;
+  } else if (tab === 'marks_entry') {
+    const st = TEACHER_STATE.students.find(s => s.id === selectedMarksStuId) || TEACHER_STATE.students[0];
+    if (!st) return body.innerHTML = '<p>No students.</p>';
+    body.innerHTML = `<div class="flex justify-between mb-4"><h3 class="font-heading font-extrabold text-base">Edit Subject Marks</h3>
+      <select onchange="selectedMarksStuId=this.value; switchTeacherTab('marks_entry')" class="px-3 py-2 rounded-xl border text-xs font-bold">${TEACHER_STATE.students.map(s => `<option value="${s.id}" ${s.id===st.id?'selected':''}>${s.name} (${s.className})</option>`).join('')}</select></div>
+      <form onsubmit="teacherSaveMarks(event,'${st.id}')" class="space-y-3 text-xs">${(st.marks||[]).map((m,i) => `<div class="p-3 rounded-xl bg-ivory-100 border grid grid-cols-3 gap-2 items-center"><strong>${m.subject}</strong><input type="number" data-th="${i}" value="${m.theoryObt}" max="${m.theoryMax}" class="p-2 rounded-lg bg-white border"><input type="number" data-pr="${i}" value="${m.pracObt}" max="${m.pracMax}" class="p-2 rounded-lg bg-white border"></div>`).join('')}
+      <button type="submit" class="px-5 py-2.5 rounded-xl bg-emerald-700 text-white font-bold">Save Marks to Sheet</button></form>`;
+  } else if (tab === 'homework') {
+    body.innerHTML = `<form onsubmit="teacherPostHW(event)" class="grid sm:grid-cols-3 gap-2.5 mb-4 text-xs">
+      <select id="thw-cls" class="p-2.5 rounded-xl border bg-white font-bold"><option>Nursery</option><option>Class 1</option><option>Class 5</option><option>Class 8</option><option>Class 10</option></select>
+      <input required id="thw-txt" placeholder="Homework details..." class="p-2.5 rounded-xl border bg-white">
+      <button type="submit" class="py-2.5 rounded-xl bg-crimson-700 text-white font-bold">Publish Homework</button>
+    </form><div class="space-y-2 text-xs">${(TEACHER_STATE.homework||[]).map(h => `<div class="p-3 rounded-xl bg-ivory-100 border"><strong>[${h.className}] ${h.subject}:</strong> ${h.title}</div>`).join('')}</div>`;
+  }
+}
+
+async function teacherMarkAtt(stId, status) {
+  const st = TEACHER_STATE.students.find(s => s.id === stId);
+  st.todayStatus = status;
+  if (!st.monthlyRegister) st.monthlyRegister = {};
+  if (!st.monthlyRegister[selectedMonth]) st.monthlyRegister[selectedMonth] = {};
+  const day = new Date().getDate();
+  st.monthlyRegister[selectedMonth][day] = status === 'Present' ? 'P' : 'A';
+  if (!st.attendanceLog) st.attendanceLog = [];
+  st.attendanceLog.unshift({ date: new Date().toLocaleDateString('en-IN'), status, note: 'Marked by ' + TEACHER_STATE.teacher.name });
+  switchTeacherTab('student_att');
+  await apiPost({ action: 'teacherSaveAttendance', authUser: AUTH.user, authPass: AUTH.pass, studentId: stId, status, monthlyRegister: st.monthlyRegister, attendanceLog: st.attendanceLog, triggerAbsentWA: status === 'Absent', dateLabel: new Date().toLocaleDateString('en-IN') });
+  showToast(status === 'Absent' ? `Marked Absent & WhatsApp Alert sent for ${st.name}` : `Marked Present for ${st.name}`);
+}
+
+async function teacherSaveMarks(e, stId) {
+  e.preventDefault();
+  const st = TEACHER_STATE.students.find(s => s.id === stId);
+  st.marks.forEach((m, i) => { m.theoryObt = Number(document.querySelector(`[data-th="${i}"]`).value); m.pracObt = Number(document.querySelector(`[data-pr="${i}"]`).value); });
+  await apiPost({ action: 'teacherSaveMarks', authUser: AUTH.user, authPass: AUTH.pass, studentId: stId, marks: st.marks });
+  showToast('Marks synced to Google Sheet!');
+}
+
+async function teacherPostHW(e) {
+  e.preventDefault();
+  const hwItem = { id: Date.now(), className: document.getElementById('thw-cls').value, subject: TEACHER_STATE.teacher.subject, title: document.getElementById('thw-txt').value, dueDate: 'Next Class', teacher: TEACHER_STATE.teacher.name };
+  const res = await apiPost({ action: 'teacherAddHomework', authUser: AUTH.user, authPass: AUTH.pass, hwItem });
+  if (res.ok) { TEACHER_STATE.homework = res.homework; switchTeacherTab('homework'); showToast('Homework published!'); }
+}
+
+/* ==================== ADMIN LOGIN & 8-TAB CLOUD ERP ==================== */
+document.getElementById('admin-login-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('a-login-btn'), errEl = document.getElementById('a-login-error');
+  errEl.classList.add('hidden'); btn.textContent = 'Verifying...';
+  const userId = document.getElementById('a-login-user').value.trim(), password = document.getElementById('a-login-pass').value;
+  try {
+    const res = await apiPost({ action: 'login', role: 'admin', userId, password });
+    if (!res.ok) { errEl.textContent = res.error; errEl.classList.remove('hidden'); }
+    else { AUTH = { role: 'admin', user: userId, pass: password }; ADMIN_STATE = res.data; navigateToView('view-dashboard-admin'); renderAdminDashboard(); showToast('Admin ERP Synced!'); }
+  } catch (err) { errEl.textContent = err.message; errEl.classList.remove('hidden'); }
+  btn.textContent = 'Sign In to Office ERP & WhatsApp Bot';
+});
+
+async function syncAdminNow() {
+  const res = await apiPost({ action: 'getAdminData', authUser: AUTH.user, authPass: AUTH.pass });
+  if (res.ok) { ADMIN_STATE = res.data; renderAdminDashboard(); showToast('Synced latest data from Google Sheet!'); }
+}
+
+function renderAdminDashboard() {
+  const d = ADMIN_STATE;
+  const pendingRegs = d.pendingGuardianRegistrations.filter(r => r.status === 'Pending').length;
+  const paid = d.students.reduce((a, b) => a + Number(b.paidFee || 0), 0);
+  const due = d.students.reduce((a, b) => a + Math.max(0, Number(b.totalAnnualFee || 0) - Number(b.paidFee || 0)), 0);
+
+  document.getElementById('a-dash-kpis').innerHTML = `
+    <div class="bg-ivory-50 p-4 rounded-2xl border border-ivory-300"><span class="text-[11px] text-navy-700">Students</span><p class="font-heading font-extrabold text-xl">${d.students.length}</p></div>
+    <div class="bg-ivory-50 p-4 rounded-2xl border border-ivory-300"><span class="text-[11px] text-navy-700">Guardian Requests</span><p class="font-heading font-extrabold text-xl ${pendingRegs?'text-crimson-700':'text-emerald-700'}">${pendingRegs} Pending</p></div>
+    <div class="bg-ivory-50 p-4 rounded-2xl border border-ivory-300"><span class="text-[11px] text-navy-700">Enquiries</span><p class="font-heading font-extrabold text-xl">${d.enquiries.length}</p></div>
+    <div class="bg-ivory-50 p-4 rounded-2xl border border-ivory-300"><span class="text-[11px] text-navy-700">WhatsApp Sent</span><p class="font-heading font-extrabold text-xl text-emerald-700">${d.whatsappLogs.length}</p></div>
+    <div class="bg-ivory-50 p-4 rounded-2xl border border-ivory-300"><span class="text-[11px] text-navy-700">Fees Collected</span><p class="font-heading font-extrabold text-xl text-emerald-700">₹${paid.toLocaleString()}</p></div>
+    <div class="bg-ivory-50 p-4 rounded-2xl border border-ivory-300"><span class="text-[11px] text-navy-700">Pending Dues</span><p class="font-heading font-extrabold text-xl text-crimson-700">₹${due.toLocaleString()}</p></div>`;
+  switchAdminTab(currentATab);
+}
+
+function switchAdminTab(tab) {
+  currentATab = tab;
+  document.querySelectorAll('.a-tab-btn').forEach(b => b.className = b.dataset.atab === tab ? 'a-tab-btn shrink-0 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-bold bg-crimson-700 text-white' : 'a-tab-btn shrink-0 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-bold text-navy-800');
+  const d = ADMIN_STATE, body = document.getElementById('a-dash-body');
+
+  if (tab === 'overview') {
+    body.innerHTML = `<div class="grid md:grid-cols-2 gap-6 text-xs">
+      <div><h3 class="font-heading font-extrabold text-base mb-3">Admission Enquiries (${d.enquiries.length})</h3>
+        <div class="space-y-2.5">${d.enquiries.map(e => `<div class="p-3.5 rounded-2xl bg-ivory-100 border flex justify-between items-center gap-2">
+          <div><strong class="text-crimson-700">${e.student} (${e.className})</strong><p>${e.parent} • ${e.phone} • ${e.village}</p></div>
+          <button onclick="adminToggleEnq('${e.id}')" class="px-3 py-1.5 rounded-xl bg-navy-900 text-gold-400 font-bold">${e.status}</button>
+        </div>`).join('') || '<p>No enquiries yet.</p>'}</div>
+      </div>
+      <div><h3 class="font-heading font-extrabold text-base mb-3">Guardian Leave Requests (${d.leaveRequests.length})</h3>
+        <div class="space-y-2.5">${d.leaveRequests.map(l => `<div class="p-3.5 rounded-2xl bg-ivory-100 border flex justify-between items-center gap-2">
+          <div><strong>${l.studentName} (${l.className})</strong><p>${l.fromDate} (${l.days}d): ${l.reason}</p></div>
+          ${l.status==='Pending' ? `<div class="flex gap-1.5"><button onclick="adminUpdateLeave('${l.id}','Approved')" class="px-3 py-1.5 rounded-lg bg-emerald-700 text-white font-bold">Approve</button><button onclick="adminUpdateLeave('${l.id}','Rejected')" class="px-3 py-1.5 rounded-lg bg-crimson-700 text-white font-bold">Reject</button></div>` : `<strong class="text-emerald-700">${l.status}</strong>`}
+        </div>`).join('') || '<p>No leave requests.</p>'}</div>
+      </div></div>`;
+  }
+
+  else if (tab === 'whatsapp') {
+    body.innerHTML = `<div class="grid lg:grid-cols-12 gap-6 text-xs">
+      <div class="lg:col-span-5 bg-ivory-100 p-5 rounded-3xl border space-y-3">
+        <h3 class="font-heading font-extrabold text-base">Direct WhatsApp Bot Broadcaster (4s Anti-Ban)</h3>
+        <form onsubmit="adminBulkBroadcast(event)" class="space-y-3">
+          <select id="wa-grp" class="w-full p-2.5 rounded-xl bg-white border font-bold">
+            <option value="ALL">All Guardians (${d.students.length})</option>
+            <option value="DUES">Only Pending Fee Dues Guardians</option>
+          </select>
+          <textarea required id="wa-msg" rows="4" class="w-full p-3 rounded-xl bg-white border" placeholder="Message text...">Namaste! Reminder from Sunrise Public School, Ekdara, Jhajha.</textarea>
+          <button type="submit" id="wa-send-btn" class="w-full py-3 rounded-xl bg-emerald-700 text-white font-bold">Send via WhatsApp Bot</button>
+        </form>
+      </div>
+      <div class="lg:col-span-7 space-y-2.5">
+        <h3 class="font-heading font-extrabold text-base">Live WhatsApp Bot Delivery Logs (${d.whatsappLogs.length})</h3>
+        <div class="max-h-[450px] overflow-y-auto space-y-2">${d.whatsappLogs.map(l => `<div class="p-3.5 rounded-2xl bg-ivory-100 border"><div class="flex justify-between font-bold"><span class="text-emerald-700">${l.trigger} • ${l.recipientName} (${l.phone})</span><span>${l.status}</span></div><p class="mt-1 text-navy-700">${l.message}</p></div>`).join('') || '<p>No logs yet.</p>'}</div>
+      </div></div>`;
+  }
+
+  else if (tab === 'students') {
+    const pending = d.pendingGuardianRegistrations.filter(r => r.status === 'Pending');
+    body.innerHTML = `<div class="space-y-6 text-xs">
+      <div>
+        <h3 class="font-heading font-extrabold text-base mb-3">Pending Guardian Registrations (${pending.length}) — Approve to Activate & Sync</h3>
+        ${pending.length ? `<div class="space-y-2.5">${pending.map(r => `
+          <div class="p-4 rounded-2xl bg-gold-50 border border-gold-400 flex flex-wrap justify-between items-center gap-3">
+            <div><span class="px-2 py-0.5 rounded bg-navy-900 text-gold-400 font-bold mr-2">${r.regId}</span><strong class="text-sm">${r.parentName}</strong> (WA: ${r.phone})<p class="mt-1">Student: <strong>${r.studentName}</strong> (${r.className}) • ${r.village}</p></div>
+            <div class="flex gap-2"><button onclick="adminApproveReg('${r.regId}')" class="px-4 py-2 rounded-xl bg-emerald-700 text-white font-bold">Approve & Activate</button><button onclick="adminRejectReg('${r.regId}')" class="px-3.5 py-2 rounded-xl bg-crimson-700 text-white font-bold">Reject</button></div>
+          </div>`).join('')}</div>` : '<p class="p-3 rounded-xl bg-ivory-100 border">No pending guardian registration requests.</p>'}
+      </div>
+
+      <div>
+        <h3 class="font-heading font-extrabold text-base mb-3">➕ Create / Edit Student & Unique Guardian ID / Password</h3>
+        <form onsubmit="adminSaveStudent(event)" class="grid sm:grid-cols-4 gap-2.5 p-4 rounded-2xl bg-ivory-100 border">
+          <input required id="ns-id" placeholder="Admission ID (e.g. SPS102)" class="p-2.5 rounded-xl bg-white border">
+          <input required id="ns-name" placeholder="Student Full Name" class="p-2.5 rounded-xl bg-white border">
+          <select id="ns-class" class="p-2.5 rounded-xl bg-white border font-bold"><option>Nursery</option><option>LKG</option><option>UKG</option><option>Class 1</option><option>Class 2</option><option>Class 3</option><option>Class 4</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option></select>
+          <input required id="ns-father" placeholder="Father / Guardian Name" class="p-2.5 rounded-xl bg-white border">
+          <input required id="ns-phone" placeholder="Guardian WhatsApp Mobile" class="p-2.5 rounded-xl bg-white border">
+          <input required id="ns-grdid" placeholder="Unique Guardian ID (GRD102)" class="p-2.5 rounded-xl bg-gold-50 border font-bold">
+          <input required id="ns-grdpass" placeholder="Guardian Password (Pass@102)" class="p-2.5 rounded-xl bg-gold-50 border font-bold">
+          <input required id="ns-fee" type="number" value="15000" placeholder="Annual Fee (₹)" class="p-2.5 rounded-xl bg-white border">
+          <button type="submit" class="sm:col-span-4 py-2.5 rounded-xl bg-crimson-700 text-white font-bold">Save Student & Guardian Credentials to Sheet</button>
+        </form>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+        ${d.students.map(s => `<div class="p-4 rounded-2xl bg-ivory-100 border space-y-2">
+          <div class="flex justify-between"><strong class="text-crimson-700">${s.id}</strong><span class="font-bold">Dues: ₹${Math.max(0, s.totalAnnualFee - s.paidFee).toLocaleString()}</span></div>
+          <p class="font-heading font-extrabold text-sm">${s.name} (${s.className})</p>
+          <p class="text-navy-700">C/o ${s.fatherName} • WA: ${s.phone}</p>
+          <div class="p-2 rounded-lg bg-white border font-mono text-[11px]">ID: <strong>${s.guardianId}</strong> | Pass: <strong class="text-crimson-700">${s.guardianPassword}</strong></div>
+          <div class="flex gap-2 pt-1">
+            <button onclick='fillStudentEdit(${JSON.stringify(s)})' class="flex-1 py-1.5 rounded-lg bg-navy-900 text-white font-bold">Edit ID/Pass</button>
+            <button onclick="adminDelStudent('${s.id}')" class="px-3 py-1.5 rounded-lg bg-crimson-100 text-crimson-700 font-bold">Delete</button>
+          </div>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  else if (tab === 'teachers') {
+    body.innerHTML = `<div class="space-y-5 text-xs">
+      <form onsubmit="adminSaveTeacher(event)" class="grid sm:grid-cols-5 gap-2.5 p-4 rounded-2xl bg-ivory-100 border">
+        <input required id="nt-id" placeholder="Staff ID (TCH02)" class="p-2.5 rounded-xl bg-white border">
+        <input required id="nt-name" placeholder="Teacher Full Name" class="p-2.5 rounded-xl bg-white border">
+        <input required id="nt-sub" placeholder="Subject" class="p-2.5 rounded-xl bg-white border">
+        <input required id="nt-pass" placeholder="Login Password" class="p-2.5 rounded-xl bg-gold-50 border font-bold">
+        <button type="submit" class="py-2.5 rounded-xl bg-crimson-700 text-white font-bold">Save Teacher</button>
+      </form>
+      <div class="grid md:grid-cols-2 gap-3">${d.teachers.map(t => `<div class="p-4 rounded-2xl bg-ivory-100 border flex justify-between items-center">
+        <div><strong class="text-sm">${t.name} (${t.id})</strong><p>${t.subject} • Pass: <span class="font-mono text-crimson-700 font-bold">${t.password}</span></p></div>
+        <button onclick="adminDelTeacher('${t.id}')" class="px-3 py-1.5 rounded-lg bg-crimson-100 text-crimson-700 font-bold">Delete</button>
+      </div>`).join('')}</div>
+    </div>`;
+  }
+
+  else if (tab === 'attendance') {
+    let hdr = ''; for (let i = 1; i <= 30; i++) hdr += `<th class="p-1 text-center border">${i}</th>`;
+    body.innerHTML = `<h3 class="font-heading font-extrabold text-base mb-3">Student Monthly Attendance Register (${selectedMonth})</h3>
+      <div class="overflow-x-auto bg-white rounded-2xl border text-[11px]"><table class="w-full border-collapse">
+        <thead><tr class="bg-navy-900 text-white"><th class="p-2 text-left">Student</th>${hdr}</tr></thead>
+        <tbody>${d.students.map(s => {
+          const r = (s.monthlyRegister && s.monthlyRegister[selectedMonth]) || {};
+          let cells = ''; for (let i = 1; i <= 30; i++) cells += `<td class="p-1 text-center border font-bold ${r[i]==='P'?'text-emerald-700':r[i]==='A'?'text-crimson-700':'text-slate-300'}">${r[i]||'-'}</td>`;
+          return `<tr><td class="p-2 border font-bold whitespace-nowrap">${s.name} (${s.className})</td>${cells}</tr>`;
+        }).join('')}</tbody>
+      </table></div>`;
+  }
+
+  else if (tab === 'fees') {
+    body.innerHTML = `<div class="space-y-5 text-xs">
+      <form onsubmit="adminDirectFee(event)" class="grid sm:grid-cols-5 gap-2.5 p-4 rounded-2xl bg-emerald-50 border border-emerald-300">
+        <select id="dfe-st" class="p-2.5 rounded-xl bg-white border font-bold">${d.students.map(s => `<option value="${s.id}">${s.name} (${s.className})</option>`).join('')}</select>
+        <input required id="dfe-term" placeholder="Particular (e.g. Nov Tuition)" class="p-2.5 rounded-xl bg-white border">
+        <input required id="dfe-amt" type="number" placeholder="Amount (₹)" class="p-2.5 rounded-xl bg-white border font-bold">
+        <select id="dfe-mode" class="p-2.5 rounded-xl bg-white border"><option>Cash at Office</option><option>UPI / QR</option><option>Bank Transfer</option></select>
+        <button type="submit" id="dfe-btn" class="py-2.5 rounded-xl bg-emerald-700 text-white font-bold">Record & Send PDF</button>
+      </form>
+      <div class="space-y-3">${d.students.map(s => `<div class="p-4 rounded-2xl bg-ivory-100 border">
+        <div class="flex justify-between font-bold mb-2"><span>${s.name} (${s.id})</span><span class="text-crimson-700">Dues: ₹${Math.max(0, s.totalAnnualFee - s.paidFee).toLocaleString()}</span></div>
+        ${(s.feeLedger||[]).map((f,i) => `<div class="p-2.5 mb-1.5 rounded-xl bg-white border flex justify-between items-center"><span>${f.term} — ₹${f.amount}</span>
+          ${f.status==='Paid' ? (f.pdfUrl ? `<a href="${f.pdfUrl}" target="_blank" class="px-3 py-1 rounded-lg bg-navy-900 text-white font-bold">PDF (${f.receiptNo})</a>` : `<span class="text-emerald-700 font-bold">Paid</span>`) : `<button onclick="adminPayDue('${s.id}',${i})" class="px-3 py-1 rounded-lg bg-emerald-700 text-white font-bold">Accept & Send PDF</button>`}
+        </div>`).join('')}
+      </div>`).join('')}</div>
+    </div>`;
+  }
+
+  else if (tab === 'marksheets') {
+    const st = d.students.find(s => s.id === selectedMarksStuId) || d.students[0];
+    if (!st) return body.innerHTML = '<p>No students.</p>';
+    body.innerHTML = `<div class="flex justify-between mb-4"><h3 class="font-heading font-extrabold text-base">Edit Marks & Generate A4 Marksheet</h3>
+      <select onchange="selectedMarksStuId=this.value; switchAdminTab('marksheets')" class="px-3 py-2 rounded-xl border text-xs font-bold">${d.students.map(s => `<option value="${s.id}" ${s.id===st.id?'selected':''}>${s.name} (${s.className})</option>`).join('')}</select></div>
+      <form onsubmit="adminSaveMarks(event,'${st.id}')" class="space-y-3 text-xs">${(st.marks||[]).map((m,i) => `<div class="p-3 rounded-xl bg-ivory-100 border grid grid-cols-3 gap-2 items-center"><strong>${m.subject}</strong><input type="number" data-ath="${i}" value="${m.theoryObt}" max="${m.theoryMax}" class="p-2 rounded-lg bg-white border"><input type="number" data-apr="${i}" value="${m.pracObt}" max="${m.pracMax}" class="p-2 rounded-lg bg-white border"></div>`).join('')}
+      <div class="flex gap-2"><button type="submit" class="px-5 py-2.5 rounded-xl bg-emerald-700 text-white font-bold">Save Marks</button><button type="button" onclick="openMarksheetPDF(ADMIN_STATE.students.find(x=>x.id==='${st.id}'))" class="px-5 py-2.5 rounded-xl bg-navy-900 text-white font-bold">Preview & Save A4 PDF</button></div></form>`;
+  }
+
+  else if (tab === 'cms') {
+    const c = d.config || {}, s = d.siteSettings || {};
+    body.innerHTML = `<div class="space-y-6 text-xs">
+      <form onsubmit="adminSaveSecurityAndBot(event)" class="p-5 rounded-2xl bg-crimson-50 border border-crimson-200 grid sm:grid-cols-2 gap-3">
+        <h3 class="sm:col-span-2 font-heading font-extrabold text-base text-crimson-900">🔐 Admin Username/Password & WhatsApp Bot API Settings</h3>
+        <div><label class="font-bold">Admin Username</label><input id="cfg-au" value="${c.ADMIN_USER||''}" class="w-full mt-1 p-2.5 rounded-xl bg-white border font-bold"></div>
+        <div><label class="font-bold">New Admin Password (leave blank to keep current)</label><input id="cfg-ap" type="password" placeholder="Enter new strong password" class="w-full mt-1 p-2.5 rounded-xl bg-white border font-bold"></div>
+        <div><label class="font-bold">WhatsApp Provider</label>
+          <select id="cfg-wp" class="w-full mt-1 p-2.5 rounded-xl bg-white border font-bold">
+            <option value="CUSTOM_BOT" ${c.WA_PROVIDER==='CUSTOM_BOT'?'selected':''}>CUSTOM_BOT (wa-manager)</option>
+            <option value="ULTRAMSG" ${c.WA_PROVIDER==='ULTRAMSG'?'selected':''}>ULTRAMSG</option>
+            <option value="GREENAPI" ${c.WA_PROVIDER==='GREENAPI'?'selected':''}>GREENAPI</option>
+            <option value="META_CLOUD" ${c.WA_PROVIDER==='META_CLOUD'?'selected':''}>META_CLOUD</option>
+            <option value="OFF" ${c.WA_PROVIDER==='OFF'?'selected':''}>OFF</option>
+          </select>
+        </div>
+        <div><label class="font-bold">Bot API URL</label><input id="cfg-wu" value="${c.WA_API_URL||''}" placeholder="http://IP:3000/send" class="w-full mt-1 p-2.5 rounded-xl bg-white border"></div>
+        <div><label class="font-bold">Bot Token / API Key</label><input id="cfg-wt" value="${c.WA_TOKEN||''}" class="w-full mt-1 p-2.5 rounded-xl bg-white border"></div>
+        <div><label class="font-bold">Instance ID (UltraMsg/GreenAPI)</label><input id="cfg-wi" value="${c.WA_INSTANCE_ID||''}" class="w-full mt-1 p-2.5 rounded-xl bg-white border"></div>
+        <button type="submit" class="sm:col-span-2 py-3 rounded-xl bg-crimson-700 text-white font-bold">Save Security & WhatsApp Bot Config</button>
+      </form>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <form onsubmit="adminAddNotice(event)" class="p-4 rounded-2xl bg-ivory-100 border space-y-2.5">
+          <h4 class="font-heading font-extrabold text-sm">📢 Publish Live Website Notice</h4>
+          <select id="an-tag" class="w-full p-2.5 rounded-xl bg-white border font-bold"><option>ADMISSION</option><option>EXAM</option><option>HOLIDAY</option><option>SPORTS</option></select>
+          <input required id="an-title" placeholder="Notice Headline" class="w-full p-2.5 rounded-xl bg-white border">
+          <input required id="an-desc" placeholder="Notice Details" class="w-full p-2.5 rounded-xl bg-white border">
+          <button type="submit" class="w-full py-2.5 rounded-xl bg-navy-900 text-white font-bold">Publish Notice</button>
+        </form>
+        <form onsubmit="adminAddPhoto(event)" class="p-4 rounded-2xl bg-ivory-100 border space-y-2.5">
+          <h4 class="font-heading font-extrabold text-sm">🖼️ Add Campus Gallery Photo</h4>
+          <select id="ag-cat" class="w-full p-2.5 rounded-xl bg-white border font-bold"><option>Academics</option><option>Sports</option></select>
+          <input required id="ag-title" placeholder="Caption" class="w-full p-2.5 rounded-xl bg-white border">
+          <input required id="ag-url" placeholder="Direct Image URL (https://...)" class="w-full p-2.5 rounded-xl bg-white border">
+          <button type="submit" class="w-full py-2.5 rounded-xl bg-emerald-700 text-white font-bold">Add Photo</button>
+        </form>
+      </div>
+    </div>`;
+  }
+}
+
+/* ==================== ADMIN MUTATION HANDLERS ==================== */
+async function adminApproveReg(regId) {
+  showToast('Approving & activating Guardian account...');
+  const res = await apiPost({ action: 'approveGuardian', authUser: AUTH.user, authPass: AUTH.pass, regId });
+  if (res.ok) { ADMIN_STATE = res.data; renderAdminDashboard(); showToast(`Approved! Guardian ID: ${res.guardianId} synced & activated.`); }
+}
+async function adminRejectReg(regId) {
+  const res = await apiPost({ action: 'rejectGuardian', authUser: AUTH.user, authPass: AUTH.pass, regId });
+  if (res.ok) { ADMIN_STATE = res.data; renderAdminDashboard(); showToast('Registration rejected.'); }
+}
+function fillStudentEdit(s) {
+  document.getElementById('ns-id').value = s.id; document.getElementById('ns-name').value = s.name;
+  document.getElementById('ns-class').value = s.className; document.getElementById('ns-father').value = s.fatherName;
+  document.getElementById('ns-phone').value = s.phone; document.getElementById('ns-grdid').value = s.guardianId;
+  document.getElementById('ns-grdpass').value = s.guardianPassword || ''; document.getElementById('ns-fee').value = s.totalAnnualFee;
+  window.scrollTo({ top: 300, behavior: 'smooth' });
+}
+async function adminSaveStudent(e) {
+  e.preventDefault();
+  const id = document.getElementById('ns-id').value.trim();
+  const existing = ADMIN_STATE.students.find(x => x.id === id);
+  const fee = Number(document.getElementById('ns-fee').value);
+  const stu = Object.assign({
+    section: 'A', rollNo: '01', village: 'Ekdara, Jhajha', todayStatus: 'Present', monthlyRegister: { '2026-11': {} }, attendanceLog: [],
+    feeLedger: [{ term: 'Annual Academic Fee', amount: fee, status: 'Due', date: '2026-27', receiptNo: '-', mode: '-' }],
+    marks: [{ code: '101', subject: 'English', theoryMax: 80, theoryObt: 0, pracMax: 20, pracObt: 0 }, { code: '102', subject: 'Hindi', theoryMax: 80, theoryObt: 0, pracMax: 20, pracObt: 0 }, { code: '103', subject: 'Mathematics', theoryMax: 80, theoryObt: 0, pracMax: 20, pracObt: 0 }, { code: '104', subject: 'Science', theoryMax: 80, theoryObt: 0, pracMax: 20, pracObt: 0 }]
+  }, existing || {}, {
+    id, name: document.getElementById('ns-name').value.trim(), className: document.getElementById('ns-class').value,
+    fatherName: document.getElementById('ns-father').value.trim(), phone: document.getElementById('ns-phone').value.trim(),
+    guardianId: document.getElementById('ns-grdid').value.trim(), guardianPassword: document.getElementById('ns-grdpass').value.trim()
+  });
+  const res = await apiPost({ action: 'saveStudent', authUser: AUTH.user, authPass: AUTH.pass, student: stu });
+  if (res.ok) { ADMIN_STATE = res.data; renderAdminDashboard(); showToast('Student & Guardian ID/Password saved!'); }
+}
+async function adminDelStudent(studentId) {
+  if (!confirm('Delete student?')) return;
+  const res = await apiPost({ action: 'deleteStudent', authUser: AUTH.user, authPass: AUTH.pass, studentId });
+  if (res.ok) { ADMIN_STATE = res.data; renderAdminDashboard(); }
+}
+async function adminSaveTeacher(e) {
+  e.preventDefault();
+  const t = { id: document.getElementById('nt-id').value.trim(), name: document.getElementById('nt-name').value.trim(), subject: document.getElementById('nt-sub').value.trim(), designation: 'Faculty', password: document.getElementById('nt-pass').value.trim(), permissions: { canMarkAttendance: true, canEditMarks: true, canAssignHomework: true } };
+  const res = await apiPost({ action: 'saveTeacher', authUser: AUTH.user, authPass: AUTH.pass, teacher: t });
+  if (res.ok) { ADMIN_STATE = res.data; renderAdminDashboard(); showToast('Teacher saved!'); }
+}
+async function adminDelTeacher(teacherId) {
+  if (!confirm('Delete teacher?')) return;
+  const res = await apiPost({ action: 'deleteTeacher', authUser: AUTH.user, authPass: AUTH.pass, teacherId });
+  if (res.ok) { ADMIN_STATE = res.data; renderAdminDashboard(); }
+}
+async function adminDirectFee(e) {
+  e.preventDefault();
+  const btn = document.getElementById('dfe-btn'); btn.textContent = 'Generating PDF...';
+  const res = await apiPost({ action: 'recordFee', authUser: AUTH.user, authPass: AUTH.pass, studentId: document.getElementById('dfe-st').value, term: document.getElementById('dfe-term').value, amount: document.getElementById('dfe-amt').value, mode: document.getElementById('dfe-mode').value });
+  btn.textContent = 'Record & Send PDF';
+  if (res.ok) { ADMIN_STATE = res.data; renderAdminDashboard(); showToast(`Receipt ${res.receiptNo} PDF Sent! (${res.waStatus})`); }
+}
+async function adminPayDue(studentId, feeIdx) {
+  showToast('Generating PDF Receipt & sending on WhatsApp...');
+  const res = await apiPost({ action: 'recordFee', authUser: AUTH.user, authPass: AUTH.pass, studentId, feeIdx, mode: 'Cash at Office' });
+  if (res.ok) { ADMIN_STATE = res.data; renderAdminDashboard(); showToast(`Paid! Receipt ${res.receiptNo} sent.`); }
+}
+async function adminSaveMarks(e, stId) {
+  e.preventDefault();
+  const st = ADMIN_STATE.students.find(s => s.id === stId);
+  st.marks.forEach((m, i) => { m.theoryObt = Number(document.querySelector(`[data-ath="${i}"]`).value); m.pracObt = Number(document.querySelector(`[data-apr="${i}"]`).value); });
+  const res = await apiPost({ action: 'saveStudent', authUser: AUTH.user, authPass: AUTH.pass, student: st });
+  if (res.ok) { ADMIN_STATE = res.data; showToast('Marks saved!'); }
+}
+async function adminBulkBroadcast(e) {
+  e.preventDefault();
+  const btn = document.getElementById('wa-send-btn'); btn.textContent = 'Dispatching (4s Anti-Ban)...';
+  const grp = document.getElementById('wa-grp').value, msg = document.getElementById('wa-msg').value;
+  const list = grp === 'DUES' ? ADMIN_STATE.students.filter(s => (s.totalAnnualFee - s.paidFee) > 0) : ADMIN_STATE.students;
+  const targets = list.map(s => ({ phone: s.phone, name: s.fatherName, message: msg }));
+  const res = await apiPost({ action: 'bulkWhatsApp', authUser: AUTH.user, authPass: AUTH.pass, targets, trigger: 'BULK_' + grp });
+  btn.textContent = 'Send via WhatsApp Bot';
+  if (res.ok) { ADMIN_STATE = res.data; renderAdminDashboard(); showToast(`Sent to ${res.count} guardians!`); }
+}
+async function adminToggleEnq(id) {
+  const res = await apiPost({ action: 'toggleEnquiryStatus', authUser: AUTH.user, authPass: AUTH.pass, id });
+  if (res.ok) { ADMIN_STATE = res.data; renderAdminDashboard(); }
+}
+async function adminUpdateLeave(id, status) {
+  const list = ADMIN_STATE.leaveRequests.map(l => l.id === id ? Object.assign({}, l, { status }) : l);
+  const res = await apiPost({ action: 'updateMeta', authUser: AUTH.user, authPass: AUTH.pass, key: 'leaveRequests', value: list });
+  if (res.ok) { ADMIN_STATE = res.data; renderAdminDashboard(); }
+}
+async function adminSaveSecurityAndBot(e) {
+  e.preventDefault();
+  const updates = {
+    ADMIN_USER: document.getElementById('cfg-au').value.trim(),
+    WA_PROVIDER: document.getElementById('cfg-wp').value,
+    WA_API_URL: document.getElementById('cfg-wu').value.trim(),
+    WA_TOKEN: document.getElementById('cfg-wt').value.trim(),
+    WA_INSTANCE_ID: document.getElementById('cfg-wi').value.trim()
+  };
+  const newPass = document.getElementById('cfg-ap').value.trim();
+  if (newPass) updates.ADMIN_PASS = newPass;
+  const res = await apiPost({ action: 'updateConfig', authUser: AUTH.user, authPass: AUTH.pass, updates });
+  if (res.ok) {
+    AUTH.user = updates.ADMIN_USER;
+    if (newPass) AUTH.pass = newPass;
+    ADMIN_STATE = res.data;
+    showToast('Admin Password & WhatsApp Bot Config Saved!');
+  }
+}
+async function adminAddNotice(e) {
+  e.preventDefault();
+  const res = await apiPost({ action: 'addNotice', authUser: AUTH.user, authPass: AUTH.pass, tag: document.getElementById('an-tag').value, title: document.getElementById('an-title').value, desc: document.getElementById('an-desc').value });
+  if (res.ok) { ADMIN_STATE = res.data; loadPublicSite(); showToast('Notice published live!'); e.target.reset(); }
+}
+async function adminAddPhoto(e) {
+  e.preventDefault();
+  const res = await apiPost({ action: 'addGallery', authUser: AUTH.user, authPass: AUTH.pass, category: document.getElementById('ag-cat').value, title: document.getElementById('ag-title').value, url: document.getElementById('ag-url').value });
+  if (res.ok) { ADMIN_STATE = res.data; loadPublicSite(); showToast('Photo added to live gallery!'); e.target.reset(); }
+}
+
+/* ==================== A4 MARKSHEET PDF GENERATOR ==================== */
+function openMarksheetPDF(st) {
+  if (!st) return;
+  let maxT = 0, obtT = 0;
+  const rows = (st.marks || []).map(m => {
+    const mx = Number(m.theoryMax) + Number(m.pracMax), ob = Number(m.theoryObt) + Number(m.pracObt);
+    maxT += mx; obtT += ob;
+    return `<tr class="border-b"><td class="p-2">${m.code}</td><td class="p-2 font-bold">${m.subject}</td><td class="p-2 text-center">${m.theoryObt}/${m.theoryMax}</td><td class="p-2 text-center">${m.pracObt}/${m.pracMax}</td><td class="p-2 text-center font-bold">${ob}/${mx}</td><td class="p-2 text-center font-bold text-crimson-700">${computeGrade((ob/mx)*100)}</td></tr>`;
+  }).join('');
+  const pct = maxT ? ((obtT / maxT) * 100).toFixed(2) : '0.00';
+
+  document.getElementById('pdf-modal-title').textContent = `A4 Marksheet — ${st.name}`;
+  document.getElementById('pdf-print-stage').innerHTML = `
+    <div class="border-2 border-crimson-700 p-6 min-h-[260mm] flex flex-col justify-between">
+      <div>
+        <div class="text-center border-b-2 border-crimson-700 pb-3">
+          <h1 class="font-heading font-extrabold text-2xl text-navy-900">SUNRISE PUBLIC SCHOOL (Estd. 2012)</h1>
+          <p class="text-xs font-bold text-crimson-700">Ekdara, Jhajha – 811308, Dist. Jamui, Bihar • CBSE Pattern</p>
+        </div>
+        <div class="mt-3 py-2 bg-navy-900 text-white text-center font-bold text-xs">STATEMENT OF MARKS (SESSION 2026–27)</div>
+        <div class="grid grid-cols-2 gap-2 text-xs mt-4 p-3 bg-slate-50 border">
+          <div>Student: <strong>${st.name}</strong></div><div>Admission ID: <strong>${st.id}</strong></div>
+          <div>Father: <strong>${st.fatherName}</strong></div><div>Class: <strong>${st.className}-${st.section}</strong></div>
+        </div>
+        <table class="w-full mt-4 border text-xs"><thead class="bg-navy-900 text-white"><tr><th class="p-2">Code</th><th class="p-2 text-left">Subject</th><th class="p-2">Theory</th><th class="p-2">Prac</th><th class="p-2">Total</th><th class="p-2">Grade</th></tr></thead><tbody>${rows}</tbody></table>
+        <p class="mt-4 font-bold text-sm text-right">Grand Total: ${obtT}/${maxT} (${pct}%) • Grade: ${computeGrade(parseFloat(pct))}</p>
+      </div>
+      <div class="flex justify-between text-xs pt-10"><span>Class Teacher</span><span class="font-bold text-crimson-700">Principal Signature & Seal</span></div>
+    </div>`;
+
+  document.getElementById('pdf-trigger-download-btn').onclick = () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.setDrawColor(164, 38, 30); doc.rect(10, 10, 190, 277);
+    doc.setFontSize(18); doc.setTextColor(164, 38, 30); doc.text('SUNRISE PUBLIC SCHOOL (Estd. 2012)', 105, 24, { align: 'center' });
+    doc.setFontSize(10); doc.setTextColor(40); doc.text('Ekdara, Jhajha - 811308, Dist. Jamui, Bihar (CBSE Pattern)', 105, 31, { align: 'center' });
+    doc.setFontSize(12); doc.text(`Student: ${st.name} (${st.id}) | Class: ${st.className}-${st.section}`, 20, 48);
+    doc.text(`Father: ${st.fatherName}`, 20, 56);
+    let y = 72;
+    (st.marks || []).forEach(m => { doc.text(`${m.subject}: ${Number(m.theoryObt)+Number(m.pracObt)} / ${Number(m.theoryMax)+Number(m.pracMax)}`, 20, y); y += 10; });
+    doc.text(`Grand Total: ${obtT}/${maxT} (${pct}%)`, 20, y + 10);
+    doc.save(`Marksheet_${st.id}.pdf`);
+  };
+  document.getElementById('modal-a4-pdf-viewer').classList.remove('hidden');
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  injectEmblems();
+  refreshIcons();
+  loadPublicSite();
+});
+</script>
+</body>
+</html>
