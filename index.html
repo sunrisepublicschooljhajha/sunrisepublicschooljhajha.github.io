@@ -15,6 +15,17 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <!-- OneSignal Background Push Notifications -->
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+      await OneSignal.init({
+        appId: "b420ee0e-c64e-40da-b0f4-09f0f2aaacb0",
+        notifyButton: { enable: true }
+      });
+    });
+  </script>
   <style>
     :root {
       --crimson: #a11626;
@@ -42,14 +53,13 @@
     .toast.ok { border-left-color: #22c55e; }
     .toast.err { border-left-color: #ef4444; }
 
-    /* Splash */
     #splash { position: fixed; inset: 0; background: var(--navy); z-index: 9990; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; transition: opacity .35s ease; }
     #splash.hide { opacity: 0; pointer-events: none; }
     .pulse-logo { width: 88px; height: 88px; border-radius: 50%; animation: pulse 1.2s infinite; object-fit: cover; background: #fff; border: 3px solid var(--gold); }
     @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.07); } }
 
-    /* White Top Header (Matching Reference) */
-   .topbar { position: sticky; top: 0; z-index: 200; background: #ffffff; color: var(--navy); padding: 10px 14px; border-bottom: 1.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; box-shadow: 0 2px 12px rgba(0,0,0,.04); }
+    /* Clean Single-Line Header */
+    .topbar { position: sticky; top: 0; z-index: 200; background: #ffffff; color: var(--navy); padding: 10px 14px; border-bottom: 1.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; box-shadow: 0 2px 12px rgba(0,0,0,.04); }
     .brand { display: flex; align-items: center; gap: 10px; cursor: pointer; min-width: 0; flex: 1; }
     .brand img { width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%; border: 2px solid var(--crimson); background: #fff; object-fit: cover; }
     .brand-text { min-width: 0; }
@@ -59,7 +69,8 @@
     .brand small { font-size: 11px; color: var(--crimson); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .hdr-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
     .menu-btn { background: var(--crimson); color: #fff; border: none; width: 40px; height: 40px; border-radius: 10px; font-size: 20px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
-    /* Right Slide Drawer */
+
+    /* Slide Drawer */
     .drawer-bg { position: fixed; inset: 0; background: rgba(15,27,45,.55); z-index: 400; display: none; }
     .drawer-bg.open { display: block; }
     .drawer { position: fixed; top: 0; right: -310px; width: 290px; max-width: 85vw; height: 100%; background: #fff; z-index: 450; box-shadow: -8px 0 30px rgba(0,0,0,.18); transition: right .25s ease; display: flex; flex-direction: column; padding: 18px; overflow-y: auto; }
@@ -82,7 +93,7 @@
     .btn-red { background: var(--red); color: #fff; }
     .btn-sm { padding: 6px 10px; font-size: 12px; border-radius: 8px; }
 
-    /* Home Page (Rich Dark Navy Hero + Warm Cream Sections) */
+    /* Public Home */
     .hero { background: linear-gradient(160deg, #101929 0%, #172338 100%); color: #fff; padding: 46px 20px 44px; }
     .hero-inner { max-width: 1100px; margin: 0 auto; }
     .hero-pill { display: inline-block; background: rgba(217,155,38,.12); color: #f4c96b; border: 1px solid rgba(217,155,38,.45); padding: 6px 14px; border-radius: 99px; font-size: 12px; font-weight: 700; margin-bottom: 16px; }
@@ -118,9 +129,9 @@
     .phone-wrap span { padding: 9px 10px; background: #efeae0; font-weight: 800; font-size: 13px; color: var(--navy); border-right: 1px solid var(--border); }
     .phone-wrap input { border: none !important; background: transparent !important; }
 
-    /* ERP Layout with Perpendicular Sidebar */
+    /* ERP Perpendicular Sidebar */
     .erp-layout { display: grid; grid-template-columns: 245px 1fr; gap: 18px; align-items: start; }
-    .side-nav { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 10px; box-shadow: var(--shadow); position: sticky; top: 78px; display: flex; flex-direction: column; gap: 4px; }
+    .side-nav { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 10px; box-shadow: var(--shadow); position: sticky; top: 74px; display: flex; flex-direction: column; gap: 4px; }
     .side-btn { width: 100%; text-align: left; padding: 10px 12px; border-radius: 10px; border: none; background: transparent; color: var(--navy); font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; }
     .side-btn:hover { background: #f4f1ea; }
     .side-btn.active { background: var(--crimson); color: #fff; }
@@ -148,7 +159,6 @@
     .cal-nav { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
     .cal-nav input[type=date] { padding: 6px 9px; border-radius: 8px; border: none; font-weight: 700; font-size: 12.5px; }
 
-    /* Modals */
     .modal-bg { position: fixed; inset: 0; background: rgba(15,27,45,.68); z-index: 500; display: none; align-items: center; justify-content: center; padding: 14px; }
     .modal-bg.open { display: flex; }
     .modal { background: #fff; width: 100%; max-width: 580px; max-height: 92vh; overflow-y: auto; border-radius: 16px; padding: 20px; }
@@ -160,7 +170,6 @@
     .att-btn.A { background: #fee2e2; color: var(--red); border-color: var(--red); }
     .hidden { display: none !important; }
 
-    /* Rich Dark Footer */
     footer { background: var(--navy); color: #cbd5e1; padding: 36px 18px 22px; margin-top: 40px; border-top: 3px solid var(--gold); }
     .foot-grid { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 24px; }
     .foot-h { color: var(--gold); font-size: 13px; font-weight: 800; letter-spacing: .8px; margin-bottom: 10px; }
@@ -180,14 +189,12 @@
 <div id="topProgress"></div>
 <div id="toastBox"></div>
 
-<!-- Splash -->
 <div id="splash">
   <img id="splashLogo" class="pulse-logo" src="./logo.jpeg" alt="Sunrise Logo" />
   <div id="splashSchoolName" style="margin-top:12px;font-size:20px;font-weight:800;color:#f6cf77;">SUNRISE PUBLIC SCHOOL</div>
   <small style="color:#cbd5e1;">Ekdara, Jhajha • Estd. 2012</small>
 </div>
 
-<!-- White Top Header -->
 <header class="topbar">
   <div class="brand" onclick="showView('public')">
     <img id="headerLogo" src="./logo.jpeg" alt="Logo" />
@@ -206,7 +213,6 @@
   </div>
 </header>
 
-<!-- Right Side 3-Line Slide Drawer -->
 <div id="drawerBg" class="drawer-bg" onclick="toggleDrawer(false)"></div>
 <aside id="slideDrawer" class="drawer">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);">
@@ -223,7 +229,11 @@
   <button class="drawer-item" onclick="goPublicSection('noticeSec')">📢 Notice Board</button>
   <button class="drawer-item" onclick="goPublicSection('gallerySec')">🖼️ Photo Gallery</button>
   <button class="drawer-item" onclick="goPublicSection('enquirySec')">📝 Admission Enquiry</button>
-  <button class="drawer-item" onclick="enableBrowserNotifications()">🔔 Allow Notice Notifications</button>
+  <button class="drawer-item" onclick="toggleDrawer(false);installPWA()">📲 Download / Install App</button>
+  <button class="drawer-item" onclick="toggleDrawer(false);triggerPushPrompt()">🔔 Allow Push Notifications</button>
+  <hr style="border:none;border-top:1px solid var(--border);margin:12px 0;" />
+  <button class="drawer-item" onclick="toggleDrawer(false);openLegalModal('terms')">📜 Terms & Conditions</button>
+  <button class="drawer-item" onclick="toggleDrawer(false);openLegalModal('privacy')">🔒 Privacy Policy</button>
 </aside>
 
 <!-- ==================== PUBLIC HOME PAGE ==================== -->
@@ -236,7 +246,7 @@
       <div class="hero-btns">
         <button class="btn btn-primary" onclick="goPublicSection('enquirySec')">Apply for Admission →</button>
         <button class="btn btn-navy" onclick="goPublicSection('noticeSec')">📢 Notice Board</button>
-        <button class="btn btn-gold" onclick="enableBrowserNotifications()">🔔 Get Notice Alerts</button>
+        <button class="btn btn-gold" onclick="installPWA()">📲 Install School App</button>
       </div>
       <div class="hero-stats">
         <div class="h-stat"><strong>Nursery – X</strong><small>CBSE Pattern</small></div>
@@ -246,11 +256,8 @@
     </div>
   </section>
 
-  <!-- About & Core Values -->
   <section id="aboutSec" class="container">
-    <div class="sec-head">
-      <div><small>WHY CHOOSE SUNRISE</small><h2>Nurturing Discipline, Academic Excellence & Holistic Growth</h2></div>
-    </div>
+    <div class="sec-head"><div><small>WHY CHOOSE SUNRISE</small><h2>Nurturing Discipline, Academic Excellence & Holistic Growth</h2></div></div>
     <p style="color:var(--muted);max-width:780px;margin-bottom:18px;font-size:14.5px;">Founded in 2012 at Ekdara, Jhajha (811308), Sunrise Public School delivers an inspiring CBSE-pattern education where every student builds strong conceptual understanding, fluent English communication, and moral integrity.</p>
     <div class="grid-3">
       <div class="val-card"><div class="val-ico" style="background:var(--crimson);">🛡️</div><h3>Discipline & Values</h3><p style="font-size:13.5px;color:var(--muted);margin-top:4px;">Respect, punctuality, and strong Indian moral roots.</p></div>
@@ -259,7 +266,6 @@
     </div>
   </section>
 
-  <!-- Principal's Desk & School Staff (Dynamic from Admin) -->
   <section class="container">
     <div class="sec-head"><div><small>LEADERSHIP & FACULTY</small><h2>Principal's Desk & School Staff</h2></div></div>
     <div class="card" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-bottom:16px;">
@@ -273,22 +279,19 @@
     <div id="publicStaffGrid" class="grid-3"></div>
   </section>
 
-  <!-- Notice Board -->
   <section id="noticeSec" class="container">
     <div class="sec-head">
       <div><small>OFFICIAL ANNOUNCEMENTS</small><h2>Notice Board & Circulars</h2></div>
-      <button class="btn btn-light btn-sm" onclick="enableBrowserNotifications()">🔔 Notify Me on New Notice</button>
+      <button class="btn btn-light btn-sm" onclick="triggerPushPrompt()">🔔 Notify Me on New Notice</button>
     </div>
     <div id="publicNotices" class="grid-3"></div>
   </section>
 
-  <!-- Photo Gallery -->
   <section id="gallerySec" class="container">
     <div class="sec-head"><div><small>CAMPUS LIFE</small><h2>School Photo Gallery</h2></div></div>
     <div id="publicGallery" class="grid-3"></div>
   </section>
 
-  <!-- Admission Enquiry -->
   <section id="enquirySec" class="container">
     <div class="card" style="max-width:780px;margin:0 auto;">
       <div class="sec-head" style="margin-bottom:12px;"><div><small id="enqSessionLbl">SESSION 2026–27</small><h2>Online Admission Enquiry</h2></div></div>
@@ -307,7 +310,6 @@
     </div>
   </section>
 
-  <!-- Rich Dark Footer with Campus Map -->
   <footer>
     <div class="foot-grid">
       <div>
@@ -318,12 +320,13 @@
         <p style="font-size:13px;">Co-educational English Medium School following the CBSE Curriculum from Nursery to Class X in Jamui District, Bihar.</p>
       </div>
       <div>
-        <div class="foot-h">QUICK LINKS</div>
+        <div class="foot-h">QUICK LINKS & LEGAL</div>
         <span class="foot-link" onclick="goPublicSection('aboutSec')">About & Principal's Desk</span>
         <span class="foot-link" onclick="goPublicSection('noticeSec')">Notice Board & Circulars</span>
-        <span class="foot-link" onclick="goPublicSection('gallerySec')">Campus Photo Gallery</span>
         <span class="foot-link" onclick="openSeparateLogin('guardian')">Guardian Portal & Fee Details</span>
-        <span class="foot-link" onclick="openSeparateLogin('teacher')">Teacher Portal</span>
+        <span class="foot-link" onclick="installPWA()">📲 Download / Install App</span>
+        <span class="foot-link" onclick="openLegalModal('terms')">Terms & Conditions</span>
+        <span class="foot-link" onclick="openLegalModal('privacy')">Privacy Policy</span>
       </div>
       <div>
         <div class="foot-h">CONTACT US</div>
@@ -361,23 +364,22 @@
     <div class="kpi-card" onclick="openTab('fees','today')"><div class="k-lbl">Selected Day Fee</div><div class="k-val" style="color:var(--green);" id="kpiTodayFee">₹0</div><div class="k-sub">Daily Calendar →</div></div>
     <div class="kpi-card" onclick="openTab('fees','all')"><div class="k-lbl">Total Collected</div><div class="k-val" style="color:var(--green);" id="kpiTotalFee">₹0</div><div class="k-sub">All Receipts →</div></div>
     <div class="kpi-card" onclick="openTab('students','dues')"><div class="k-lbl">Pending Dues</div><div class="k-val" style="color:var(--red);" id="kpiDues">₹0</div><div class="k-sub">Dues List →</div></div>
-    <div class="kpi-card" onclick="openTab('whatsapp')"><div class="k-lbl">Enquiries</div><div class="k-val" id="kpiEnquiries">0</div><div class="k-sub">View Enquiries →</div></div>
+    <div class="kpi-card" onclick="openTab('settings')"><div class="k-lbl">Pending Approvals</div><div class="k-val" style="color:var(--crimson);" id="kpiPending">0</div><div class="k-sub">Approve Logins →</div></div>
   </div>
 
   <div class="erp-layout">
-    <!-- Left Perpendicular Sidebar (Every Section Separate) -->
     <aside class="side-nav">
       <button class="side-btn active admin-only" data-tab="students" onclick="openTab('students')">🎓 Student 360°</button>
       <button class="side-btn admin-only" data-tab="fees" onclick="openTab('fees')">💰 Daily Fee Calendar</button>
       <button class="side-btn admin-only" data-tab="feestruct" onclick="openTab('feestruct')">📑 Fee Structure</button>
-      <button class="side-btn" data-tab="attendance" onclick="openTab('attendance')">📋 Attendance</button>
-      <button class="side-btn" data-tab="marks" onclick="openTab('marks')">📊 Marks Entry</button>
+      <button class="side-btn" id="sideAttBtn" data-tab="attendance" onclick="openTab('attendance')">📋 Attendance</button>
+      <button class="side-btn" id="sideMarksBtn" data-tab="marks" onclick="openTab('marks')">📊 Marks Entry</button>
       <button class="side-btn admin-only" data-tab="admit" onclick="openTab('admit')">🪪 Bulk Admit Cards</button>
       <button class="side-btn admin-only" data-tab="bulkmarks" onclick="openTab('bulkmarks')">📚 Bulk Marksheets</button>
       <button class="side-btn admin-only" data-tab="whatsapp" onclick="openTab('whatsapp')">💬 WhatsApp & Enquiries</button>
       <button class="side-btn admin-only" data-tab="notices" onclick="openTab('notices')">📢 Notices & Gallery</button>
       <button class="side-btn admin-only" data-tab="school" onclick="openTab('school')">🏫 School, Principal & Staff</button>
-      <button class="side-btn admin-only" data-tab="settings" onclick="openTab('settings')">⚙️ Logins & Backup</button>
+      <button class="side-btn admin-only" data-tab="settings" onclick="openTab('settings')">⚙️ Approvals, Logins & Backup</button>
     </aside>
 
     <div class="erp-main">
@@ -419,19 +421,14 @@
           </div>
         </div>
         <div class="card" style="margin-bottom:14px;">
-          <h3 style="margin-bottom:10px;font-size:16px;">+ Record Fee Payment</h3>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+            <h3 style="font-size:16px;">+ Record Fee Payment</h3>
+            <button type="button" class="btn btn-gold btn-sm" onclick="addCustomFeeHead()">+ Add New Fee Type / Head</button>
+          </div>
           <form onsubmit="recordFee(event)" class="form-grid">
             <div class="field"><label>Filter Class</label><select id="feeClassFilterEntry" onchange="populateFeeStudentDropdown()"></select></div>
             <div class="field"><label>Student *</label><select id="feeStuSelect" required onchange="syncFeeClassFromStudent()"></select></div>
-            <div class="field"><label>Fee Head / Month *</label>
-              <select id="feeHead">
-                <option>Monthly Tuition Fee</option><option>Admission Fee</option><option>Bus / Transport Fee</option>
-                <option>Exam Fee</option><option>Function / Annual Fee</option><option>Books & Uniform</option>
-                <option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option>
-                <option>October</option><option>November</option><option>December</option><option>January</option><option>February</option><option>March</option>
-                <option>Other Fee</option>
-              </select>
-            </div>
+            <div class="field"><label>Fee Head / Month *</label><select id="feeHead"></select></div>
             <div class="field"><label>Amount (₹) *</label><input id="feeAmount" type="number" min="1" required /></div>
             <div class="field"><label>Mode</label><select id="feeMode"><option>Cash</option><option>UPI / PhonePe</option><option>Bank Transfer</option></select></div>
             <div class="field"><label>Date</label><input id="feeEntryDate" type="date" required /></div>
@@ -454,11 +451,11 @@
         </div>
       </section>
 
-      <!-- 3. CLASS-WISE FEE STRUCTURE -->
+      <!-- 3. FEE STRUCTURE -->
       <section id="tab-feestruct" class="tab-pane hidden">
         <div class="card">
-          <h3 style="margin-bottom:6px;">📑 Class-Wise Fee Structure (Guardians Can View & Download PDF)</h3>
-          <p style="font-size:12.5px;color:var(--muted);margin-bottom:14px;">Har class ki Monthly Tuition, Bus/Transport, Admission, Function, Exam aur Other Fees yahan set karein.</p>
+          <h3 style="margin-bottom:6px;">📑 Class-Wise Fee Structure</h3>
+          <p style="font-size:12.5px;color:var(--muted);margin-bottom:14px;">Har class ki Tuition, Bus, Admission, Function, Exam aur Other Fees yahan set karein.</p>
           <form onsubmit="saveFeeStructure(event)" class="form-grid" style="margin-bottom:16px;">
             <div class="field"><label>Class *</label><select id="fsClass" onchange="loadFeeStructForm()"></select></div>
             <div class="field"><label>Monthly Tuition Fee (₹)</label><input id="fsTuition" type="number" value="500" /></div>
@@ -467,7 +464,7 @@
             <div class="field"><label>Exam Fee (₹)</label><input id="fsExam" type="number" value="300" /></div>
             <div class="field"><label>Function / Annual Fee (₹)</label><input id="fsFunction" type="number" value="500" /></div>
             <div class="field"><label>Other Fees (₹)</label><input id="fsOther" type="number" value="0" /></div>
-            <div class="field" style="display:flex;align-items:end;"><button class="btn btn-primary" style="width:100%;justify-content:center;">💾 Save Class Fee Structure</button></div>
+            <div class="field" style="display:flex;align-items:end;"><button class="btn btn-primary" style="width:100%;justify-content:center;">💾 Save Fee Structure</button></div>
           </form>
           <div class="table-wrap">
             <table>
@@ -478,7 +475,7 @@
         </div>
       </section>
 
-      <!-- 4. ATTENDANCE (FIXED + FILTERS) -->
+      <!-- 4. ATTENDANCE -->
       <section id="tab-attendance" class="tab-pane hidden">
         <div class="filter-bar">
           <select id="attClass" onchange="renderAttendance()"></select>
@@ -495,7 +492,7 @@
         </div>
       </section>
 
-      <!-- 5. MARKS ENTRY (SEPARATE TAB, CLASS FILTER, BLANK/CUSTOM FULL MARKS) -->
+      <!-- 5. MARKS ENTRY -->
       <section id="tab-marks" class="tab-pane hidden">
         <div class="card">
           <div class="filter-bar" style="border:none;padding:0;margin-bottom:12px;">
@@ -510,7 +507,7 @@
             <div class="field"><label>Conduct</label><input id="mkConduct" placeholder="e.g. GOOD / EXEMPLARY" /></div>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <strong style="font-size:13px;">Subjects & Marks (Aap Apne Hisab Se Full Marks & Obtained Marks Bharein)</strong>
+            <strong style="font-size:13px;">Subjects & Marks</strong>
             <button class="btn btn-light btn-sm" onclick="addMarkSubjectRow()">+ Add Subject</button>
           </div>
           <div class="table-wrap" style="margin-bottom:12px;">
@@ -523,10 +520,10 @@
         </div>
       </section>
 
-      <!-- 6. BULK ADMIT CARDS ONLY -->
+      <!-- 6. BULK ADMIT CARDS -->
       <section id="tab-admit" class="tab-pane hidden">
         <div class="card">
-          <h3 style="margin-bottom:6px;">🪪 Bulk Admit Cards Generator (Class & Exam Wise)</h3>
+          <h3 style="margin-bottom:6px;">🪪 Bulk Admit Cards Generator</h3>
           <div class="form-grid" style="margin-bottom:12px;">
             <div class="field"><label>Select Class *</label><select id="admitClass"></select></div>
             <div class="field"><label>Exam Name *</label><input id="admitExam" value="ANNUAL EXAMINATION (2026-27)" /></div>
@@ -537,15 +534,14 @@
             <button class="btn btn-light btn-sm" onclick="addTimetableRow()">+ Add Subject</button>
           </div>
           <div id="timetableBox" style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;"></div>
-          <button class="btn btn-primary" onclick="generateBulkAdmitCardsPDF()">👁️ Preview & Download Class Admit Cards PDF</button>
+          <button class="btn btn-primary" onclick="generateBulkAdmitCardsPDF()">👁️ Preview & Download Admit Cards PDF</button>
         </div>
       </section>
 
-      <!-- 7. BULK MARKSHEETS ONLY (SEPARATE TAB) -->
+      <!-- 7. BULK MARKSHEETS -->
       <section id="tab-bulkmarks" class="tab-pane hidden">
         <div class="card">
-          <h3 style="margin-bottom:6px;">📚 Bulk Marksheets Generator (Class & Exam Wise)</h3>
-          <p style="font-size:12.5px;color:var(--muted);margin-bottom:12px;">Class aur Exam choose karein, pehle preview check karein aur poori class ki marksheets ek saath PDF mein download karein.</p>
+          <h3 style="margin-bottom:6px;">📚 Bulk Marksheets Generator</h3>
           <div class="form-grid" style="margin-bottom:14px;">
             <div class="field"><label>Select Class *</label><select id="bmClass" onchange="renderBulkMarksPreviewList()"></select></div>
             <div class="field"><label>Exam Title *</label><input id="bmExam" value="ANNUAL STATEMENT OF MARKS (2026-27)" /></div>
@@ -580,7 +576,7 @@
       <section id="tab-notices" class="tab-pane hidden">
         <div class="grid-3" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
           <div class="card">
-            <h3 style="margin-bottom:10px;font-size:16px;">📢 Publish Notice (Sends Notification)</h3>
+            <h3 style="margin-bottom:10px;font-size:16px;">📢 Publish Notice</h3>
             <form onsubmit="publishNotice(event)">
               <div class="field" style="margin-bottom:8px;"><label>Tag</label><select id="notTag"><option>HOLIDAY</option><option>EXAM</option><option>ADMISSION</option><option>GENERAL</option></select></div>
               <div class="field" style="margin-bottom:8px;"><label>Headline *</label><input id="notTitle" required /></div>
@@ -601,10 +597,10 @@
         </div>
       </section>
 
-      <!-- 10. SCHOOL, PRINCIPAL & STAFF (NO CODING NEEDED) -->
+      <!-- 10. SCHOOL, PRINCIPAL & STAFF -->
       <section id="tab-school" class="tab-pane hidden">
         <div class="card" style="margin-bottom:14px;">
-          <h3 style="margin-bottom:10px;font-size:16px;">🏫 School & Principal Details (Website Par Live Update Hoga)</h3>
+          <h3 style="margin-bottom:10px;font-size:16px;">🏫 School & Principal Details</h3>
           <form onsubmit="saveSchoolProfile(event)" class="form-grid">
             <div class="field"><label>School Name</label><input id="spName" required /></div>
             <div class="field"><label>Principal Name</label><input id="spPrincipal" required /></div>
@@ -614,17 +610,16 @@
             <div class="field"><label>Reg. / Affiliation Tag</label><input id="spReg" /></div>
             <div class="field" style="grid-column:1/-1;"><label>Address</label><input id="spAddress" required /></div>
             <div class="field" style="grid-column:1/-1;"><label>Principal Message</label><textarea id="spMsg" rows="2"></textarea></div>
-            <div class="field"><label>Principal Photo (Optional Upload)</label><input id="spPhoto" type="file" accept="image/*" /></div>
+            <div class="field"><label>Principal Photo</label><input id="spPhoto" type="file" accept="image/*" /></div>
             <div class="field" style="display:flex;align-items:end;"><button id="spSaveBtn" class="btn btn-primary" style="width:100%;justify-content:center;">💾 Save School & Principal Details</button></div>
           </form>
         </div>
-
         <div class="card">
-          <h3 style="margin-bottom:10px;font-size:16px;">👥 Add Teacher / Worker / Staff to Website (With Photo)</h3>
+          <h3 style="margin-bottom:10px;font-size:16px;">👥 Add Teacher / Worker / Staff to Website</h3>
           <form onsubmit="addPublicStaff(event)" class="form-grid" style="margin-bottom:14px;">
             <div class="field"><label>Full Name *</label><input id="stfName" required /></div>
-            <div class="field"><label>Role / Designation *</label><input id="stfRole" required placeholder="e.g. Senior Maths Teacher / Accountant" /></div>
-            <div class="field"><label>Qualification / Info</label><input id="stfInfo" placeholder="e.g. M.Sc, B.Ed • 8 Yrs Exp" /></div>
+            <div class="field"><label>Role / Designation *</label><input id="stfRole" required /></div>
+            <div class="field"><label>Qualification / Info</label><input id="stfInfo" /></div>
             <div class="field"><label>Photo</label><input id="stfPhoto" type="file" accept="image/*" /></div>
             <div class="field" style="display:flex;align-items:end;"><button id="stfSaveBtn" class="btn btn-gold" style="width:100%;justify-content:center;">+ Add to Website</button></div>
           </form>
@@ -632,30 +627,30 @@
         </div>
       </section>
 
-      <!-- 11. LOGINS (WITH FILTERS) & BACKUP -->
+      <!-- 11. APPROVALS, PERMISSIONS, LOGINS & BACKUP -->
       <section id="tab-settings" class="tab-pane hidden">
-        <div class="grid-3" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
+        <div class="grid-3" style="grid-template-columns:repeat(auto-fit,minmax(310px,1fr));">
           <div class="card">
-            <h3 style="margin-bottom:8px;font-size:16px;">👩‍🏫 Teacher Logins</h3>
+            <h3 style="margin-bottom:8px;font-size:16px;">👩‍🏫 Teacher Approvals & Permissions</h3>
             <form onsubmit="addTeacher(event)" style="margin-bottom:10px;">
               <div class="form-grid">
                 <div class="field"><label>Name</label><input id="tName" required /></div>
                 <div class="field"><label>User ID</label><input id="tUser" required /></div>
                 <div class="field"><label>Password</label><input id="tPass" required /></div>
               </div>
-              <button class="btn btn-primary btn-sm" style="margin-top:8px;">+ Add Teacher</button>
+              <button class="btn btn-primary btn-sm" style="margin-top:8px;">+ Add Approved Teacher</button>
             </form>
             <input id="tSearch" placeholder="🔍 Filter teacher..." oninput="renderTeachers()" style="width:100%;padding:7px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;font-size:12.5px;" />
-            <div id="teachersList" style="display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto;"></div>
+            <div id="teachersList" style="display:flex;flex-direction:column;gap:8px;max-height:280px;overflow-y:auto;"></div>
           </div>
 
           <div class="card">
-            <h3 style="margin-bottom:8px;font-size:16px;">🎓 Guardian Logins (Filter & Edit)</h3>
+            <h3 style="margin-bottom:8px;font-size:16px;">🎓 Guardian Approvals & Logins</h3>
             <div style="display:flex;gap:6px;margin-bottom:8px;">
               <input id="gSearch" placeholder="🔍 Name / Adm..." oninput="renderGuardianAccess()" style="flex:1;padding:7px;border:1px solid var(--border);border-radius:8px;font-size:12px;" />
               <select id="gClassFilter" onchange="renderGuardianAccess()" style="padding:7px;border:1px solid var(--border);border-radius:8px;font-size:12px;"></select>
             </div>
-            <div id="guardianAccessList" style="max-height:250px;overflow-y:auto;display:flex;flex-direction:column;gap:7px;"></div>
+            <div id="guardianAccessList" style="max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:7px;"></div>
           </div>
 
           <div class="card">
@@ -679,7 +674,7 @@
   <div id="guardianContent" class="card" style="max-width:860px;margin:0 auto;"></div>
 </main>
 
-<!-- ==================== SEPARATE LOGIN / REGISTER MODALS ==================== -->
+<!-- ==================== MODALS ==================== -->
 <div id="adminLoginModal" class="modal-bg">
   <div class="modal" style="max-width:400px;">
     <div class="modal-head"><h3>🛡️ Administration Login</h3><button class="close-x" onclick="closeModal('adminLoginModal')">×</button></div>
@@ -696,7 +691,7 @@
     <div class="modal-head"><h3>👩‍🏫 Teacher Portal</h3><button class="close-x" onclick="closeModal('teacherLoginModal')">×</button></div>
     <div style="display:flex;gap:6px;margin-bottom:12px;">
       <button class="pill active" id="tModeLogin" onclick="switchTMode('login')">Sign In</button>
-      <button class="pill" id="tModeReg" onclick="switchTMode('reg')">Register New Teacher</button>
+      <button class="pill" id="tModeReg" onclick="switchTMode('reg')">Request Teacher Account</button>
     </div>
     <form id="tLoginForm" onsubmit="handleTeacherLogin(event)">
       <div class="field" style="margin-bottom:10px;"><label>Teacher User ID</label><input id="tchUserIn" required /></div>
@@ -704,10 +699,11 @@
       <button class="btn btn-navy" style="width:100%;justify-content:center;">Sign In</button>
     </form>
     <form id="tRegForm" class="hidden" onsubmit="handleTeacherRegister(event)">
+      <p style="font-size:12px;color:var(--crimson);margin-bottom:8px;font-weight:600;">Note: Registration ke baad Administration approval & permission milne par hi login hoga.</p>
       <div class="field" style="margin-bottom:8px;"><label>Full Name *</label><input id="tchRegName" required /></div>
       <div class="field" style="margin-bottom:8px;"><label>Choose User ID *</label><input id="tchRegUser" required /></div>
       <div class="field" style="margin-bottom:12px;"><label>Create Password *</label><input id="tchRegPass" required /></div>
-      <button class="btn btn-primary" style="width:100%;justify-content:center;">Register Teacher Account</button>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;">Submit Request for Admin Approval</button>
     </form>
   </div>
 </div>
@@ -717,25 +713,26 @@
     <div class="modal-head"><h3>🎓 Guardian Portal</h3><button class="close-x" onclick="closeModal('guardianLoginModal')">×</button></div>
     <div style="display:flex;gap:6px;margin-bottom:12px;">
       <button class="pill active" id="gModeLogin" onclick="switchGMode('login')">Sign In</button>
-      <button class="pill" id="gModeReg" onclick="switchGMode('reg')">New Guardian Register</button>
+      <button class="pill" id="gModeReg" onclick="switchGMode('reg')">Request Guardian Access</button>
     </div>
     <form id="gLoginForm" onsubmit="handleGuardianLogin(event)">
       <div class="field" style="margin-bottom:10px;"><label>Admission No (e.g. SPS102)</label><input id="grdUserIn" required /></div>
-      <div class="field" style="margin-bottom:14px;"><label>Password / Registered Mobile</label><input id="grdPassIn" required /></div>
+      <div class="field" style="margin-bottom:14px;"><label>Password</label><input id="grdPassIn" required /></div>
       <button class="btn btn-primary" style="width:100%;justify-content:center;">Sign In</button>
     </form>
     <form id="gRegForm" class="hidden" onsubmit="handleGuardianRegister(event)">
+      <p style="font-size:12px;color:var(--crimson);margin-bottom:8px;font-weight:600;">Note: Student details verify hone aur Administration acceptance ke baad login chalu hoga.</p>
       <div class="field" style="margin-bottom:8px;"><label>Student Admission No *</label><input id="grdRegAdm" required placeholder="e.g. SPS102" /></div>
+      <div class="field" style="margin-bottom:8px;"><label>Student Full Name *</label><input id="grdRegName" required placeholder="Exact student name" /></div>
       <div class="field" style="margin-bottom:8px;"><label>Registered Mobile (10 Digits) *</label>
         <div class="phone-wrap"><span>+91</span><input id="grdRegPhone" required maxlength="10" oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)" /></div>
       </div>
       <div class="field" style="margin-bottom:12px;"><label>Set Your Password *</label><input id="grdRegPass" required /></div>
-      <button class="btn btn-green" style="width:100%;justify-content:center;">Activate Guardian Login</button>
+      <button class="btn btn-green" style="width:100%;justify-content:center;">Submit for Admin Verification</button>
     </form>
   </div>
 </div>
 
-<!-- STUDENT REGISTRATION MODAL (DOES NOT AUTO-CLOSE AFTER SAVE) -->
 <div id="studentModal" class="modal-bg">
   <div class="modal">
     <div class="modal-head"><h3 id="stuModalTitle">+ New Student Registration</h3><button class="close-x" onclick="closeModal('studentModal')">×</button></div>
@@ -745,17 +742,17 @@
       <div class="form-grid">
         <div class="field"><label>Admission No (Auto SPS) *</label><input id="sAdm" required /></div>
         <div class="field"><label>Class *</label><select id="sClass" required></select></div>
-        <div class="field"><label>Roll No (Unique per Class) *</label><input id="sRoll" required placeholder="e.g. 01" /></div>
+        <div class="field"><label>Roll No (Unique per Class) *</label><input id="sRoll" required /></div>
         <div class="field"><label>Section</label><input id="sSec" value="A" /></div>
         <div class="field"><label>Student Name *</label><input id="sName" required /></div>
-        <div class="field"><label>Date of Birth (Year/Month/Date)</label><input id="sDob" type="date" /></div>
+        <div class="field"><label>Date of Birth</label><input id="sDob" type="date" /></div>
         <div class="field"><label>Father's Name *</label><input id="sFather" required /></div>
         <div class="field"><label>Mother's Name</label><input id="sMother" /></div>
         <div class="field"><label>Mobile (10 Digits Only) *</label>
-          <div class="phone-wrap"><span>+91</span><input id="sPhone" required maxlength="10" oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)" placeholder="10 digits" /></div>
+          <div class="phone-wrap"><span>+91</span><input id="sPhone" required maxlength="10" oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)" /></div>
         </div>
         <div class="field"><label>Annual Fee (₹)</label><input id="sTotalFee" type="number" value="6000" /></div>
-        <div class="field"><label>Guardian Login Password (Optional)</label><input id="sGPass" placeholder="Default: Mobile No" /></div>
+        <div class="field"><label>Guardian Password (Optional)</label><input id="sGPass" placeholder="Default: Mobile No" /></div>
         <div class="field"><label>Address</label><input id="sAddr" /></div>
         <div class="field" style="grid-column:1/-1;"><label>Student Photo</label><input id="sPhoto" type="file" accept="image/*" /></div>
       </div>
@@ -767,7 +764,6 @@
   </div>
 </div>
 
-<!-- 360 PROFILE MODAL -->
 <div id="profileModal" class="modal-bg">
   <div class="modal" style="max-width:650px;">
     <div class="modal-head"><h3>🎓 Student 360°</h3><button class="close-x" onclick="closeModal('profileModal')">×</button></div>
@@ -775,7 +771,6 @@
   </div>
 </div>
 
-<!-- PDF PREVIEW MODAL (PREVIEW BEFORE DOWNLOAD) -->
 <div id="pdfPreviewModal" class="modal-bg">
   <div class="modal" style="max-width:860px;height:90vh;display:flex;flex-direction:column;">
     <div class="modal-head">
@@ -786,6 +781,26 @@
       </div>
     </div>
     <iframe id="pdfPreviewFrame" style="flex:1;width:100%;border:1px solid var(--border);border-radius:10px;background:#f1f5f9;"></iframe>
+  </div>
+</div>
+
+<div id="legalModal" class="modal-bg">
+  <div class="modal" style="max-width:600px;">
+    <div class="modal-head"><h3 id="legalTitle">Terms & Conditions</h3><button class="close-x" onclick="closeModal('legalModal')">×</button></div>
+    <div id="legalBody" style="font-size:13.5px;color:var(--muted);line-height:1.7;"></div>
+  </div>
+</div>
+
+<div id="appInstallModal" class="modal-bg">
+  <div class="modal" style="max-width:440px;">
+    <div class="modal-head"><h3>📲 Install Sunrise School App</h3><button class="close-x" onclick="closeModal('appInstallModal')">×</button></div>
+    <p style="font-size:13.5px;color:var(--muted);margin-bottom:12px;">Apne phone par bina Play Store ke Sunrise Public School App install karne ke liye:</p>
+    <ol style="font-size:13px;padding-left:18px;line-height:1.8;margin-bottom:14px;">
+      <li>Browser ke upar right mein <strong>3-dots (⋮)</strong> ya <strong>Share</strong> icon par click karein.</li>
+      <li><strong>"Install app"</strong> ya <strong>"Add to Home screen"</strong> select karein.</li>
+      <li><strong>Install</strong> dabaein — Sunrise Logo ke saath App Home Screen par aa jayega!</li>
+    </ol>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="closeModal('appInstallModal')">Got It</button>
   </div>
 </div>
 
@@ -803,12 +818,16 @@ const db = firebase.firestore();
 db.enablePersistence({ synchronizeTabs: true }).catch(() => {});
 
 const CLASSES = ["Nursery","LKG","UKG","Class 1","Class 2","Class 3","Class 4","Class 5","Class 6","Class 7","Class 8","Class 9","Class 10"];
+const DEFAULT_FEE_HEADS = [
+  "Monthly Tuition Fee","Admission Fee","Bus / Transport Fee","Exam Fee","Function / Annual Fee","Books & Uniform",
+  "April","May","June","July","August","September","October","November","December","January","February","March","Other Fee"
+];
 const DEFAULT_SCHOOL = {
   schoolName: 'SUNRISE PUBLIC SCHOOL',
-  principalName: 'Dr. R. K. Verma',
+  principalName: 'MR. JAISHYAM KUMAR',
   principalMsg: '"Our mission is to build confident, disciplined, and compassionate learners prepared for tomorrow\'s world."',
   principalPhoto: '',
-  phone: '+91 94312-81308',
+  phone: '+91 9931581871',
   email: 'office@sunrisepublicschooljhajha.edu.in',
   timings: 'Mon – Sat: 8:00 AM – 2:15 PM',
   address: 'Ekdara, Jhajha - 811308, Dist. Jamui, Bihar',
@@ -816,10 +835,11 @@ const DEFAULT_SCHOOL = {
   sessionLabel: 'SESSION 2026–27',
   adminUser: 'admin',
   adminPass: 'Sunrise@2026',
-  defaultFee: 6000
+  defaultFee: 6000,
+  customFeeHeads: []
 };
 
-let DB = JSON.parse(localStorage.getItem('sunrise_cache_v6') || 'null') || {
+let DB = JSON.parse(localStorage.getItem('sunrise_cache_v8') || 'null') || {
   students: [], fees: [], attendance: {}, notices: [], gallery: [], enquiries: [], teachers: [], staff: [], feeStructure: {},
   config: { ...DEFAULT_SCHOOL }
 };
@@ -827,11 +847,9 @@ let currentUser = JSON.parse(sessionStorage.getItem('sunrise_session') || 'null'
 let stuStatusFilter = 'all', feeScope = 'day', deferredPrompt = null;
 let LOGO_DATA_URL = '', WATERMARK_DATA_URL = '';
 let lastPdfDoc = null, lastPdfName = 'Document.pdf';
-let knownNoticeIds = new Set();
-let noticesLoadedOnce = false;
 
 function getCfg() { return { ...DEFAULT_SCHOOL, ...(DB.config || {}) }; }
-function saveLocalCache() { localStorage.setItem('sunrise_cache_v6', JSON.stringify(DB)); }
+function saveLocalCache() { localStorage.setItem('sunrise_cache_v8', JSON.stringify(DB)); }
 function setSession(u) { currentUser = u; sessionStorage.setItem('sunrise_session', JSON.stringify(u)); }
 function todayStr() { return new Date().toISOString().split('T')[0]; }
 function fmtDate(d) {
@@ -841,7 +859,7 @@ function fmtDate(d) {
 }
 function toast(msg, type = 'ok') {
   const el = document.createElement('div'); el.className = 'toast ' + type; el.textContent = msg;
-  document.getElementById('toastBox').appendChild(el); setTimeout(() => el.remove(), 2800);
+  document.getElementById('toastBox').appendChild(el); setTimeout(() => el.remove(), 3000);
 }
 function setProgress(pct) {
   const b = document.getElementById('topProgress');
@@ -849,30 +867,43 @@ function setProgress(pct) {
   if (pct >= 100) setTimeout(() => { b.style.opacity = '0'; b.style.width = '0%'; }, 300);
 }
 
-// PDF Preview Helper
-function openPdfPreview(doc, filename, title = 'PDF Preview') {
-  lastPdfDoc = doc; lastPdfName = filename;
-  document.getElementById('pdfPreviewTitle').textContent = '📄 ' + title;
-  const blobUrl = doc.output('bloburl');
-  document.getElementById('pdfPreviewFrame').src = blobUrl;
-  openModal('pdfPreviewModal');
-}
-function downloadPreviewedPDF() {
-  if (lastPdfDoc) { lastPdfDoc.save(lastPdfName); toast('PDF Downloaded!'); }
-}
-
-// Browser Notifications
-function enableBrowserNotifications() {
-  if (!('Notification' in window)) return toast('Notifications not supported in this browser', 'err');
-  Notification.requestPermission().then(p => {
-    if (p === 'granted') {
-      toast('Notifications Enabled! Naya notice aate hi alert milega.');
-      new Notification('Sunrise Public School', { body: 'School Notice Alerts are now active!', icon: './logo.jpeg' });
-    } else toast('Notification permission denied', 'err');
+// OneSignal Push Prompt
+function triggerPushPrompt() {
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    try {
+      await OneSignal.Notifications.requestPermission();
+      toast('Push Notifications Enabled ✓');
+    } catch {
+      alert('Agar notifications block hain, toh browser address bar ke left Lock/Settings icon se Notifications Allow karein.');
+    }
   });
 }
 
-// Logo & Soft Watermark
+// Legal Modals
+function openLegalModal(type) {
+  const cfg = getCfg();
+  document.getElementById('legalTitle').textContent = type === 'terms' ? '📜 Terms & Conditions' : '🔒 Privacy Policy';
+  document.getElementById('legalBody').innerHTML = type === 'terms'
+    ? `<p><strong>1. Official School Portal:</strong> This ERP portal is exclusively operated by ${cfg.schoolName}, ${cfg.address} for students, guardians, and authorized staff.</p>
+       <p style="margin-top:8px;"><strong>2. Account Approval:</strong> All Teacher and Guardian registrations require explicit verification and approval by the School Administration before portal access is granted.</p>
+       <p style="margin-top:8px;"><strong>3. Fees & Documents:</strong> Fee receipts, marksheets, and admit cards generated here are official digital copies subject to verification against school office ledgers.</p>`
+    : `<p><strong>1. Data Collection:</strong> ${cfg.schoolName} collects student academic records, attendance, fee payments, and guardian contact details strictly for school administration and communication.</p>
+       <p style="margin-top:8px;"><strong>2. Data Security:</strong> Records are securely stored on Google Firebase Cloud Firestore. We never sell or share student/guardian phone numbers or personal data with third parties.</p>
+       <p style="margin-top:8px;"><strong>3. Contact:</strong> For data correction or deletion requests, please contact the school office at ${cfg.phone}.</p>`;
+  openModal('legalModal');
+}
+
+// PDF Preview
+function openPdfPreview(doc, filename, title = 'PDF Preview') {
+  lastPdfDoc = doc; lastPdfName = filename;
+  document.getElementById('pdfPreviewTitle').textContent = '📄 ' + title;
+  document.getElementById('pdfPreviewFrame').src = doc.output('bloburl');
+  openModal('pdfPreviewModal');
+}
+function downloadPreviewedPDF() { if (lastPdfDoc) { lastPdfDoc.save(lastPdfName); toast('PDF Downloaded!'); } }
+
+// Logos & Soft Watermark
 function imageToPng(imgEl, softWatermark = false) {
   try {
     const c = document.createElement('canvas'); c.width = 240; c.height = 240;
@@ -885,13 +916,9 @@ function imageToPng(imgEl, softWatermark = false) {
 }
 function initLogos() {
   const probe = new Image();
-  probe.onload = () => {
-    LOGO_DATA_URL = imageToPng(probe, false);
-    WATERMARK_DATA_URL = imageToPng(probe, true);
-  };
+  probe.onload = () => { LOGO_DATA_URL = imageToPng(probe, false); WATERMARK_DATA_URL = imageToPng(probe, true); };
   probe.src = './logo.jpeg';
 }
-
 function compressImage(file, maxW = 600, q = 0.72) {
   return new Promise((res, rej) => {
     const r = new FileReader();
@@ -909,7 +936,7 @@ function compressImage(file, maxW = 600, q = 0.72) {
   });
 }
 
-// Drawer & Public Navigation
+// Drawer & Modals
 function toggleDrawer(open) {
   document.getElementById('drawerBg').classList.toggle('open', open);
   document.getElementById('slideDrawer').classList.toggle('open', open);
@@ -921,7 +948,7 @@ function goPublicSection(id) {
 function openModal(id) { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
-// Separate Login Modals
+// Separate Logins & Strict Approvals
 function openSeparateLogin(role) {
   if (role === 'admin') openModal('adminLoginModal');
   else if (role === 'teacher') { switchTMode('login'); openModal('teacherLoginModal'); }
@@ -951,34 +978,38 @@ function handleTeacherLogin(e) {
   e.preventDefault();
   const u = document.getElementById('tchUserIn').value.trim(), p = document.getElementById('tchPassIn').value.trim();
   const t = DB.teachers.find(x => x.user === u && x.pass === p);
-  if (t) { setSession({ role: 'teacher', name: t.name }); closeModal('teacherLoginModal'); applyLoggedInUI(); toast('Welcome ' + t.name); }
-  else toast('Invalid Teacher credentials', 'err');
+  if (!t) return toast('Invalid Teacher credentials', 'err');
+  if (t.approved !== true) return toast('Account Pending! Administration approval zaroori hai.', 'err');
+  const perms = t.perms || { attendance: false, marks: false };
+  if (!perms.attendance && !perms.marks) return toast('No edit permissions assigned by Administration yet.', 'err');
+  setSession({ role: 'teacher', id: t.id, name: t.name, perms });
+  closeModal('teacherLoginModal'); applyLoggedInUI(); toast('Welcome ' + t.name);
 }
 async function handleTeacherRegister(e) {
   e.preventDefault();
-  const name = document.getElementById('tchRegName').value.trim();
-  const user = document.getElementById('tchRegUser').value.trim();
-  const pass = document.getElementById('tchRegPass').value.trim();
+  const name = document.getElementById('tchRegName').value.trim(), user = document.getElementById('tchRegUser').value.trim(), pass = document.getElementById('tchRegPass').value.trim();
   if (DB.teachers.some(x => x.user.toLowerCase() === user.toLowerCase())) return toast('User ID already exists!', 'err');
-  await db.collection('teachers').add({ name, user, pass, createdAt: Date.now() });
-  toast('Teacher Registered! Now Sign In.'); switchTMode('login');
+  await db.collection('teachers').add({ name, user, pass, approved: false, perms: { attendance: false, marks: false }, createdAt: Date.now() });
+  e.target.reset(); toast('Request sent! Admin approval milne par aap login kar payenge.'); switchTMode('login');
 }
+
 function handleGuardianLogin(e) {
   e.preventDefault();
   const u = document.getElementById('grdUserIn').value.trim().toLowerCase(), p = document.getElementById('grdPassIn').value.trim();
   const s = DB.students.find(x => (x.admNo||'').toLowerCase() === u && ((x.guardianPass || x.phone || '') === p));
-  if (s) { setSession({ role: 'guardian', studentId: s.id }); closeModal('guardianLoginModal'); applyLoggedInUI(); toast('Welcome Guardian'); }
-  else toast('Invalid Admission No or Password', 'err');
+  if (!s) return toast('Invalid Admission No or Password', 'err');
+  if (s.guardianApproved === false) return toast('Guardian account pending Administration verification!', 'err');
+  setSession({ role: 'guardian', studentId: s.id });
+  closeModal('guardianLoginModal'); applyLoggedInUI(); toast('Welcome Guardian');
 }
 async function handleGuardianRegister(e) {
   e.preventDefault();
-  const adm = document.getElementById('grdRegAdm').value.trim().toLowerCase();
-  const ph = document.getElementById('grdRegPhone').value.trim();
-  const pw = document.getElementById('grdRegPass').value.trim();
-  const s = DB.students.find(x => (x.admNo||'').toLowerCase() === adm && (x.phone||'') === ph);
-  if (!s) return toast('Admission No & Registered Mobile not matched in school records!', 'err');
-  await db.collection('students').doc(s.id).set({ guardianPass: pw }, { merge: true });
-  toast('Guardian Login Activated! Now Sign In.'); switchGMode('login');
+  const adm = document.getElementById('grdRegAdm').value.trim().toLowerCase(), stName = document.getElementById('grdRegName').value.trim().toLowerCase();
+  const ph = document.getElementById('grdRegPhone').value.trim(), pw = document.getElementById('grdRegPass').value.trim();
+  const s = DB.students.find(x => (x.admNo||'').toLowerCase() === adm && (x.phone||'') === ph && (x.name||'').toLowerCase().includes(stName));
+  if (!s) return toast('Student Name, Admission No aur Mobile school record se match nahi hua!', 'err');
+  await db.collection('students').doc(s.id).set({ guardianPass: pw, guardianApproved: false, guardianRequestedAt: Date.now() }, { merge: true });
+  e.target.reset(); toast('Request submitted! Admin acceptance ke baad login chalu hoga.'); switchGMode('login');
 }
 
 function showView(v) {
@@ -995,20 +1026,28 @@ function applyLoggedInUI() {
   }
   const isAdmin = currentUser.role === 'admin';
   document.querySelectorAll('.admin-only').forEach(el => el.classList.toggle('hidden', !isAdmin));
-  document.getElementById('dashTitle').textContent = isAdmin ? 'Administration Command Center' : ('Teacher Portal — ' + currentUser.name);
-  showView('admin'); openTab(isAdmin ? 'students' : 'attendance'); refreshAllUI();
+  if (!isAdmin) {
+    const perms = currentUser.perms || { attendance: false, marks: false };
+    document.getElementById('sideAttBtn').classList.toggle('hidden', !perms.attendance);
+    document.getElementById('sideMarksBtn').classList.toggle('hidden', !perms.marks);
+    document.getElementById('dashTitle').textContent = 'Teacher Portal — ' + currentUser.name;
+    showView('admin'); openTab(perms.attendance ? 'attendance' : 'marks');
+  } else {
+    document.getElementById('sideAttBtn').classList.remove('hidden');
+    document.getElementById('sideMarksBtn').classList.remove('hidden');
+    document.getElementById('dashTitle').textContent = 'Administration Command Center';
+    showView('admin'); openTab('students');
+  }
+  refreshAllUI();
 }
-function logout() {
-  if (!confirm('Sign out of portal?')) return;
-  currentUser = null; sessionStorage.removeItem('sunrise_session'); showView('public');
-}
+function logout() { if (!confirm('Sign out of portal?')) return; currentUser = null; sessionStorage.removeItem('sunrise_session'); showView('public'); }
 
 function openTab(name, preset) {
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.add('hidden'));
   document.querySelectorAll('.side-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
   document.getElementById('tab-' + name).classList.remove('hidden');
   if (name === 'students' && preset) { stuStatusFilter = preset; renderStudents(); }
-  if (name === 'fees') { populateFeeStudentDropdown(); if (preset === 'today') { setFeeToday(); setFeeScope('day'); } else if (preset === 'all') setFeeScope('all'); }
+  if (name === 'fees') { populateFeeStudentDropdown(); populateFeeHeadsDropdown(); if (preset === 'today') { setFeeToday(); setFeeScope('day'); } else if (preset === 'all') setFeeScope('all'); }
   if (name === 'feestruct') { loadFeeStructForm(); renderFeeStructTable(); }
   if (name === 'attendance') renderAttendance();
   if (name === 'marks') populateMarksStudentDropdown();
@@ -1020,24 +1059,11 @@ function openTab(name, preset) {
 // Firestore Real-Time Sync
 function startRealtimeSync() {
   setProgress(30);
-  ['students','fees','gallery','enquiries','teachers','staff'].forEach(col => {
+  ['students','fees','notices','gallery','enquiries','teachers','staff'].forEach(col => {
     db.collection(col).onSnapshot(snap => {
       DB[col] = snap.docs.map(d => ({ id: d.id, ...d.data() }));
       saveLocalCache(); refreshAllUI(); setProgress(100);
     });
-  });
-  db.collection('notices').onSnapshot(snap => {
-    const list = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    if (noticesLoadedOnce && 'Notification' in window && Notification.permission === 'granted') {
-      list.forEach(n => {
-        if (!knownNoticeIds.has(n.id)) {
-          new Notification('📢 New School Notice: ' + n.title, { body: n.desc, icon: './logo.jpeg' });
-        }
-      });
-    }
-    list.forEach(n => knownNoticeIds.add(n.id));
-    noticesLoadedOnce = true;
-    DB.notices = list; saveLocalCache(); refreshAllUI();
   });
   db.collection('attendance').onSnapshot(snap => {
     DB.attendance = {}; snap.docs.forEach(d => DB.attendance[d.id] = d.data());
@@ -1048,9 +1074,26 @@ function startRealtimeSync() {
     saveLocalCache(); renderFeeStructTable();
   });
   db.collection('config').doc('main').onSnapshot(async doc => {
-    if (doc.exists) { DB.config = { ...DEFAULT_SCHOOL, ...doc.data() }; saveLocalCache(); applySchoolProfileToUI(); }
+    if (doc.exists) { DB.config = { ...DEFAULT_SCHOOL, ...doc.data() }; saveLocalCache(); applySchoolProfileToUI(); populateFeeHeadsDropdown(); }
     else await db.collection('config').doc('main').set(DEFAULT_SCHOOL);
   });
+}
+
+// Custom Fee Heads
+function populateFeeHeadsDropdown() {
+  const el = document.getElementById('feeHead'); if (!el) return;
+  const heads = [...DEFAULT_FEE_HEADS, ...(getCfg().customFeeHeads || [])];
+  el.innerHTML = heads.map(h => `<option value="${h}">${h}</option>`).join('');
+}
+async function addCustomFeeHead() {
+  const name = prompt('Enter New Fee Type / Payment Name (e.g. Picnic Fee, Computer Fee, Late Fine):');
+  if (!name || !name.trim()) return;
+  const cur = getCfg().customFeeHeads || [];
+  if (!cur.includes(name.trim())) {
+    cur.push(name.trim());
+    await db.collection('config').doc('main').set({ customFeeHeads: cur }, { merge: true });
+    toast(`Added "${name.trim()}" to Fee Types!`);
+  }
 }
 
 function applySchoolProfileToUI() {
@@ -1068,7 +1111,6 @@ function applySchoolProfileToUI() {
   document.getElementById('footEmail').textContent = cfg.email;
   document.getElementById('footTime').textContent = cfg.timings;
   document.getElementById('footCopy').textContent = cfg.schoolName;
-
   if (document.getElementById('spName')) {
     document.getElementById('spName').value = cfg.schoolName;
     document.getElementById('spPrincipal').value = cfg.principalName;
@@ -1086,20 +1128,16 @@ async function saveSchoolProfile(e) {
   e.preventDefault(); const btn = document.getElementById('spSaveBtn'); btn.disabled = true;
   try {
     const upd = {
-      schoolName: document.getElementById('spName').value.trim(),
-      principalName: document.getElementById('spPrincipal').value.trim(),
-      phone: document.getElementById('spPhone').value.trim(),
-      email: document.getElementById('spEmail').value.trim(),
-      timings: document.getElementById('spTimings').value.trim(),
-      regTag: document.getElementById('spReg').value.trim(),
-      address: document.getElementById('spAddress').value.trim(),
-      principalMsg: document.getElementById('spMsg').value.trim()
+      schoolName: document.getElementById('spName').value.trim(), principalName: document.getElementById('spPrincipal').value.trim(),
+      phone: document.getElementById('spPhone').value.trim(), email: document.getElementById('spEmail').value.trim(),
+      timings: document.getElementById('spTimings').value.trim(), regTag: document.getElementById('spReg').value.trim(),
+      address: document.getElementById('spAddress').value.trim(), principalMsg: document.getElementById('spMsg').value.trim()
     };
     const f = document.getElementById('spPhoto').files[0];
     if (f) upd.principalPhoto = await compressImage(f, 320, 0.75);
     await db.collection('config').doc('main').set(upd, { merge: true });
     DB.config = { ...DB.config, ...upd }; saveLocalCache(); applySchoolProfileToUI();
-    toast('School & Principal details updated live!');
+    toast('School & Principal details updated!');
   } catch (err) { toast(err.message, 'err'); }
   btn.disabled = false;
 }
@@ -1107,80 +1145,50 @@ async function saveSchoolProfile(e) {
 async function addPublicStaff(e) {
   e.preventDefault(); const btn = document.getElementById('stfSaveBtn'); btn.disabled = true;
   try {
-    let photo = '';
-    const f = document.getElementById('stfPhoto').files[0];
+    let photo = ''; const f = document.getElementById('stfPhoto').files[0];
     if (f) photo = await compressImage(f, 320, 0.72);
-    await db.collection('staff').add({
-      name: document.getElementById('stfName').value.trim(),
-      role: document.getElementById('stfRole').value.trim(),
-      info: document.getElementById('stfInfo').value.trim(),
-      photo, createdAt: Date.now()
-    });
-    e.target.reset(); toast('Staff member added to website!');
+    await db.collection('staff').add({ name: document.getElementById('stfName').value.trim(), role: document.getElementById('stfRole').value.trim(), info: document.getElementById('stfInfo').value.trim(), photo, createdAt: Date.now() });
+    e.target.reset(); toast('Staff added to website!');
   } catch (err) { toast(err.message, 'err'); }
   btn.disabled = false;
 }
 
 function populateClassDropdowns() {
   const opts = CLASSES.map(c => `<option value="${c}">${c}</option>`).join('');
-  ['enqClass','sClass','attClass','admitClass','bmClass','waClass','fsClass'].forEach(id => {
-    const el = document.getElementById(id); if (el) el.innerHTML = opts;
-  });
-  ['stuClassFilter','feeClassFilterEntry','marksClassFilter','gClassFilter'].forEach(id => {
-    const el = document.getElementById(id); if (el) el.innerHTML = '<option value="">All Classes</option>' + opts;
-  });
+  ['enqClass','sClass','attClass','admitClass','bmClass','waClass','fsClass'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = opts; });
+  ['stuClassFilter','feeClassFilterEntry','marksClassFilter','gClassFilter'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = '<option value="">All Classes</option>' + opts; });
 }
-
 function getStuPaid(id) { return DB.fees.filter(f => f.studentId === id).reduce((s, f) => s + Number(f.amount || 0), 0); }
 function getStuDues(s) { return Math.max(0, Number(s.totalFee || 0) - getStuPaid(s.id)); }
 
 function refreshAllUI() {
   renderPublic();
   if (!currentUser) return;
-  if (currentUser.role === 'guardian') {
-    const s = DB.students.find(x => x.id === currentUser.studentId);
-    if (s) renderGuardianPortal(s); return;
-  }
+  if (currentUser.role === 'guardian') { const s = DB.students.find(x => x.id === currentUser.studentId); if (s) renderGuardianPortal(s); return; }
   const selDate = document.getElementById('feeCalDate').value || todayStr();
+  const pendT = DB.teachers.filter(t => t.approved !== true).length, pendG = DB.students.filter(s => s.guardianApproved === false).length;
   document.getElementById('kpiStudents').textContent = DB.students.length;
   document.getElementById('kpiTodayFee').textContent = '₹' + DB.fees.filter(f=>f.date===selDate).reduce((s,f)=>s+Number(f.amount||0),0).toLocaleString('en-IN');
   document.getElementById('kpiTotalFee').textContent = '₹' + DB.fees.reduce((s,f)=>s+Number(f.amount||0),0).toLocaleString('en-IN');
   document.getElementById('kpiDues').textContent = '₹' + DB.students.reduce((s,x)=>s+getStuDues(x),0).toLocaleString('en-IN');
-  document.getElementById('kpiEnquiries').textContent = DB.enquiries.length;
-
+  document.getElementById('kpiPending').textContent = pendT + pendG;
   renderStudents(); renderFees(); renderAdminNoticesGallery(); renderEnquiries(); renderTeachers(); renderGuardianAccess(); renderWaQueue(); renderAdminStaff();
 }
 
 function renderPublic() {
   const sN = [...DB.notices].sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-  document.getElementById('publicNotices').innerHTML = sN.length ? sN.map(n=>`
-    <div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span class="tag">${n.tag||'NOTICE'}</span><small style="color:var(--muted);">${fmtDate(n.date)}</small></div>
-    <h3 style="font-size:16px;margin-bottom:5px;color:var(--navy);">${n.title}</h3><p style="font-size:13px;color:var(--muted);">${n.desc}</p></div>`).join('') : '<p style="color:var(--muted);">No notices published yet.</p>';
-
+  document.getElementById('publicNotices').innerHTML = sN.length ? sN.map(n=>`<div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span class="tag">${n.tag||'NOTICE'}</span><small style="color:var(--muted);">${fmtDate(n.date)}</small></div><h3 style="font-size:16px;margin-bottom:5px;color:var(--navy);">${n.title}</h3><p style="font-size:13px;color:var(--muted);">${n.desc}</p></div>`).join('') : '<p style="color:var(--muted);">No notices published yet.</p>';
   const sG = [...DB.gallery].sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
   document.getElementById('publicGallery').innerHTML = sG.length ? sG.map(g=>`<div class="card" style="padding:12px;"><img class="gallery-img" src="${g.img}" loading="lazy" /><strong>${g.title}</strong></div>`).join('') : '<p style="color:var(--muted);">Campus photos coming soon.</p>';
-
-  document.getElementById('publicStaffGrid').innerHTML = DB.staff.map(st=>`
-    <div class="card" style="display:flex;gap:12px;align-items:center;">
-      <img src="${st.photo||'./logo.jpeg'}" style="width:58px;height:58px;border-radius:12px;object-fit:cover;border:1.5px solid var(--gold);" />
-      <div><strong>${st.name}</strong><br><span class="tag navy">${st.role}</span><br><small style="color:var(--muted);">${st.info||''}</small></div>
-    </div>`).join('');
+  document.getElementById('publicStaffGrid').innerHTML = DB.staff.map(st=>`<div class="card" style="display:flex;gap:12px;align-items:center;"><img src="${st.photo||'./logo.jpeg'}" style="width:58px;height:58px;border-radius:12px;object-fit:cover;border:1.5px solid var(--gold);" /><div><strong>${st.name}</strong><br><span class="tag navy">${st.role}</span><br><small style="color:var(--muted);">${st.info||''}</small></div></div>`).join('');
 }
 function renderAdminStaff() {
-  document.getElementById('adminStaffList').innerHTML = DB.staff.map(st=>`
-    <div class="card" style="padding:12px;display:flex;justify-content:space-between;align-items:center;">
-      <div><strong>${st.name}</strong><br><small>${st.role}</small></div>
-      <button class="btn btn-red btn-sm" onclick="deleteDoc('staff','${st.id}')">Del</button>
-    </div>`).join('');
+  document.getElementById('adminStaffList').innerHTML = DB.staff.map(st=>`<div class="card" style="padding:12px;display:flex;justify-content:space-between;align-items:center;"><div><strong>${st.name}</strong><br><small>${st.role}</small></div><button class="btn btn-red btn-sm" onclick="deleteDoc('staff','${st.id}')">Del</button></div>`).join('');
 }
 
-// Student Registration (Auto SPS, Unique AdmNo & Unique Roll per Class, Stays Open)
+// Student Registration
 function getNextSpsAdmNo() {
-  let max = 100;
-  DB.students.forEach(s => {
-    const m = String(s.admNo||'').match(/SPS(\d+)/i);
-    if (m) max = Math.max(max, Number(m[1]));
-  });
+  let max = 100; DB.students.forEach(s => { const m = String(s.admNo||'').match(/SPS(\d+)/i); if (m) max = Math.max(max, Number(m[1])); });
   return 'SPS' + (max + 1);
 }
 function openAddStudentModal() {
@@ -1198,44 +1206,26 @@ function editStudent(id) {
   document.getElementById('editStuId').value = s.id;
   document.getElementById('stuModalTitle').textContent = 'Edit Student — ' + s.name;
   document.getElementById('stuRegBanner').classList.add('hidden');
-  document.getElementById('sAdm').value = s.admNo||'';
-  document.getElementById('sRoll').value = s.roll||'';
-  document.getElementById('sName').value = s.name||'';
-  document.getElementById('sClass').value = s.className||'Class 1';
-  document.getElementById('sSec').value = s.section||'A';
-  document.getElementById('sDob').value = s.dob||'';
-  document.getElementById('sFather').value = s.father||'';
-  document.getElementById('sMother').value = s.mother||'';
-  document.getElementById('sPhone').value = s.phone||'';
-  document.getElementById('sGPass').value = s.guardianPass||'';
-  document.getElementById('sTotalFee').value = s.totalFee||6000;
-  document.getElementById('sAddr').value = s.addr||'';
+  document.getElementById('sAdm').value = s.admNo||''; document.getElementById('sRoll').value = s.roll||'';
+  document.getElementById('sName').value = s.name||''; document.getElementById('sClass').value = s.className||'Class 1';
+  document.getElementById('sSec').value = s.section||'A'; document.getElementById('sDob').value = s.dob||'';
+  document.getElementById('sFather').value = s.father||''; document.getElementById('sMother').value = s.mother||'';
+  document.getElementById('sPhone').value = s.phone||''; document.getElementById('sGPass').value = s.guardianPass||'';
+  document.getElementById('sTotalFee').value = s.totalFee||6000; document.getElementById('sAddr').value = s.addr||'';
   openModal('studentModal');
 }
 async function saveStudent(e) {
   e.preventDefault();
   const editId = document.getElementById('editStuId').value;
   const admNo = document.getElementById('sAdm').value.trim().toUpperCase();
-  const cls = document.getElementById('sClass').value;
-  const roll = document.getElementById('sRoll').value.trim();
-  const ph = document.getElementById('sPhone').value.trim();
+  const cls = document.getElementById('sClass').value, roll = document.getElementById('sRoll').value.trim(), ph = document.getElementById('sPhone').value.trim();
   if (ph.length !== 10) return toast('Mobile number must be exactly 10 digits!', 'err');
-
-  // Duplicate AdmNo check
-  if (DB.students.some(s => s.id !== editId && (s.admNo||'').toUpperCase() === admNo)) {
-    return toast(`Admission No ${admNo} already registered!`, 'err');
-  }
-  // Duplicate Roll No in same class check
-  if (roll && DB.students.some(s => s.id !== editId && s.className === cls && String(s.roll||'').trim() === roll)) {
-    return toast(`Roll No ${roll} already exists in ${cls}!`, 'err');
-  }
-
+  if (DB.students.some(s => s.id !== editId && (s.admNo||'').toUpperCase() === admNo)) return toast(`Admission No ${admNo} already registered!`, 'err');
+  if (roll && DB.students.some(s => s.id !== editId && s.className === cls && String(s.roll||'').trim() === roll)) return toast(`Roll No ${roll} already exists in ${cls}!`, 'err');
   const btn = document.getElementById('stuSaveBtn'); btn.disabled = true;
   try {
-    const id = editId || admNo;
-    const ex = DB.students.find(x=>x.id===id) || {};
-    let photo = ex.photo || '';
-    const f = document.getElementById('sPhoto').files[0];
+    const id = editId || admNo, ex = DB.students.find(x=>x.id===id) || {};
+    let photo = ex.photo || ''; const f = document.getElementById('sPhoto').files[0];
     if (f) photo = await compressImage(f, 260, 0.72);
     const gPass = document.getElementById('sGPass').value.trim() || ex.guardianPass || ph;
     await db.collection('students').doc(id).set({
@@ -1243,11 +1233,10 @@ async function saveStudent(e) {
       className: cls, section: document.getElementById('sSec').value.trim()||'A',
       dob: document.getElementById('sDob').value, father: document.getElementById('sFather').value.trim(),
       mother: document.getElementById('sMother').value.trim(), phone: ph, guardianPass: gPass,
+      guardianApproved: ex.guardianApproved !== undefined ? ex.guardianApproved : true,
       totalFee: Number(document.getElementById('sTotalFee').value||0), addr: document.getElementById('sAddr').value.trim(),
-      photo, marks: ex.marks || { exam:'', att:'', result:'', conduct:'', subjects:[] },
-      createdAt: ex.createdAt || Date.now()
+      photo, marks: ex.marks || { exam:'', att:'', result:'', conduct:'', subjects:[] }, createdAt: ex.createdAt || Date.now()
     }, { merge: true });
-
     const banner = document.getElementById('stuRegBanner');
     banner.textContent = `✓ Saved ${admNo} (${document.getElementById('sName').value.trim().toUpperCase()})! Ready for next entry.`;
     banner.classList.remove('hidden');
@@ -1260,39 +1249,20 @@ async function saveStudent(e) {
   btn.disabled = false;
 }
 
-function setStuStatus(st, btn) {
-  stuStatusFilter = st;
-  document.querySelectorAll('#tab-students .pill').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active'); renderStudents();
-}
+function setStuStatus(st, btn) { stuStatusFilter = st; document.querySelectorAll('#tab-students .pill').forEach(p=>p.classList.remove('active')); btn.classList.add('active'); renderStudents(); }
 function renderStudents() {
-  const q = (document.getElementById('stuSearch').value||'').toLowerCase();
-  const cls = document.getElementById('stuClassFilter').value, sort = document.getElementById('stuSort').value;
-  let list = DB.students.filter(s => {
-    const mQ = !q || (s.name||'').toLowerCase().includes(q) || (s.admNo||'').toLowerCase().includes(q) || (s.phone||'').includes(q);
-    const mC = !cls || s.className === cls;
-    const d = getStuDues(s);
-    const mS = stuStatusFilter==='all' || (stuStatusFilter==='dues' ? d>0 : d===0);
-    return mQ && mC && mS;
-  });
+  const q = (document.getElementById('stuSearch').value||'').toLowerCase(), cls = document.getElementById('stuClassFilter').value, sort = document.getElementById('stuSort').value;
+  let list = DB.students.filter(s => (!q || (s.name||'').toLowerCase().includes(q) || (s.admNo||'').toLowerCase().includes(q) || (s.phone||'').includes(q)) && (!cls || s.className===cls) && (stuStatusFilter==='all' || (stuStatusFilter==='dues'?getStuDues(s)>0:getStuDues(s)===0)));
   if (sort==='name') list.sort((a,b)=>(a.name||'').localeCompare(b.name||''));
   if (sort==='dues_desc') list.sort((a,b)=>getStuDues(b)-getStuDues(a));
   if (sort==='newest') list.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-
   document.getElementById('studentsTbody').innerHTML = list.length ? list.map(s => {
     const d = getStuDues(s);
-    return `<tr>
-      <td><div style="display:flex;align-items:center;gap:9px;"><img class="avatar" src="${s.photo||'./logo.jpeg'}" /><strong>${s.name}</strong></div></td>
+    return `<tr><td><div style="display:flex;align-items:center;gap:9px;"><img class="avatar" src="${s.photo||'./logo.jpeg'}" /><strong>${s.name}</strong></div></td>
       <td><span class="tag navy">${s.admNo}</span><br><small>${s.className} (${s.section||'A'}) • Roll ${s.roll||'-'}</small></td>
       <td>${s.father}<br><small>+91 ${s.phone}</small></td>
       <td><span class="tag ${d>0?'':'green'}">${d>0?'Due: ₹'+d:'Paid ✓'}</span></td>
-      <td><div style="display:flex;gap:4px;flex-wrap:wrap;">
-        <button class="btn btn-light btn-sm" onclick="openProfile360('${s.id}')">360°</button>
-        <button class="btn btn-gold btn-sm" onclick="generateMarksheetPDF('${s.id}')">Marksheet</button>
-        <button class="btn btn-light btn-sm" onclick="editStudent('${s.id}')">Edit</button>
-        <button class="btn btn-red btn-sm" onclick="deleteDoc('students','${s.id}')">Del</button>
-      </div></td>
-    </tr>`;
+      <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><button class="btn btn-light btn-sm" onclick="openProfile360('${s.id}')">360°</button><button class="btn btn-gold btn-sm" onclick="generateMarksheetPDF('${s.id}')">Marksheet</button><button class="btn btn-light btn-sm" onclick="editStudent('${s.id}')">Edit</button><button class="btn btn-red btn-sm" onclick="deleteDoc('students','${s.id}')">Del</button></div></td></tr>`;
   }).join('') : '<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);">No students found.</td></tr>';
 }
 
@@ -1300,67 +1270,32 @@ function openProfile360(id) {
   const s = DB.students.find(x=>x.id===id); if (!s) return;
   const paid = getStuPaid(s.id), dues = getStuDues(s), stuFees = DB.fees.filter(f=>f.studentId===s.id);
   document.getElementById('profileBody').innerHTML = `
-    <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;">
-      <img src="${s.photo||'./logo.jpeg'}" style="width:68px;height:68px;border-radius:12px;object-fit:cover;border:2px solid var(--gold);" />
-      <div><h3>${s.name}</h3><span class="tag navy">${s.admNo}</span> <span class="tag gold">${s.className} (${s.section||'A'}) • Roll ${s.roll||'-'}</span><div style="font-size:12.5px;color:var(--muted);">Father: ${s.father} • +91 ${s.phone}</div></div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;">
-      <div class="card" style="padding:9px;text-align:center;"><small>Annual Fee</small><br><strong>₹${s.totalFee}</strong></div>
-      <div class="card" style="padding:9px;text-align:center;"><small>Paid</small><br><strong style="color:var(--green);">₹${paid}</strong></div>
-      <div class="card" style="padding:9px;text-align:center;"><small>Dues</small><br><strong style="color:var(--red);">₹${dues}</strong></div>
-    </div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
-      <button class="btn btn-primary btn-sm" onclick="generateMarksheetPDF('${s.id}')">👁️ Preview Marksheet PDF</button>
-      <button class="btn btn-gold btn-sm" onclick="generateGuardianFeeDetailsPDF('${s.id}')">👁️ Preview Fee Statement PDF</button>
-    </div>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;"><img src="${s.photo||'./logo.jpeg'}" style="width:68px;height:68px;border-radius:12px;object-fit:cover;border:2px solid var(--gold);" /><div><h3>${s.name}</h3><span class="tag navy">${s.admNo}</span> <span class="tag gold">${s.className} (${s.section||'A'}) • Roll ${s.roll||'-'}</span><div style="font-size:12.5px;color:var(--muted);">Father: ${s.father} • +91 ${s.phone}</div></div></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;"><div class="card" style="padding:9px;text-align:center;"><small>Annual Fee</small><br><strong>₹${s.totalFee}</strong></div><div class="card" style="padding:9px;text-align:center;"><small>Paid</small><br><strong style="color:var(--green);">₹${paid}</strong></div><div class="card" style="padding:9px;text-align:center;"><small>Dues</small><br><strong style="color:var(--red);">₹${dues}</strong></div></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;"><button class="btn btn-primary btn-sm" onclick="generateMarksheetPDF('${s.id}')">👁️ Preview Marksheet</button><button class="btn btn-gold btn-sm" onclick="generateGuardianFeeDetailsPDF('${s.id}')">👁️ Preview Fee Statement</button></div>
     <strong style="font-size:13px;">Fee Receipts</strong>
-    <div style="margin-top:6px;display:flex;flex-direction:column;gap:6px;">
-      ${stuFees.length ? stuFees.map(f=>`<div style="display:flex;justify-content:space-between;background:#f8f6f1;padding:8px 10px;border-radius:8px;font-size:12.5px;">
-        <span><strong>${f.receiptNo}</strong> • ${f.head||''} • ${fmtDate(f.date)}</span>
-        <span><strong>₹${f.amount}</strong> <button class="btn btn-light btn-sm" onclick="generateFeeReceiptPDF('${f.id}')">Preview PDF</button></span>
-      </div>`).join('') : '<small style="color:var(--muted);">No receipts yet.</small>'}
-    </div>`;
+    <div style="margin-top:6px;display:flex;flex-direction:column;gap:6px;">${stuFees.length ? stuFees.map(f=>`<div style="display:flex;justify-content:space-between;background:#f8f6f1;padding:8px 10px;border-radius:8px;font-size:12.5px;"><span><strong>${f.receiptNo}</strong> • ${f.head||''} • ${fmtDate(f.date)}</span><span><strong>₹${f.amount}</strong> <button class="btn btn-light btn-sm" onclick="generateFeeReceiptPDF('${f.id}')">Preview PDF</button></span></div>`).join('') : '<small style="color:var(--muted);">No receipts yet.</small>'}</div>`;
   openModal('profileModal');
 }
 
-// Fee Structure
+// Fee Structure & Daily Fee Calendar
 function loadFeeStructForm() {
-  const cls = document.getElementById('fsClass').value;
-  const fs = DB.feeStructure[cls] || { tuition: 500, admission: 1500, bus: 400, exam: 300, func: 500, other: 0 };
-  document.getElementById('fsTuition').value = fs.tuition || 0;
-  document.getElementById('fsAdmission').value = fs.admission || 0;
-  document.getElementById('fsBus').value = fs.bus || 0;
-  document.getElementById('fsExam').value = fs.exam || 0;
-  document.getElementById('fsFunction').value = fs.func || 0;
-  document.getElementById('fsOther').value = fs.other || 0;
+  const cls = document.getElementById('fsClass').value, fs = DB.feeStructure[cls] || { tuition:500, admission:1500, bus:400, exam:300, func:500, other:0 };
+  document.getElementById('fsTuition').value = fs.tuition||0; document.getElementById('fsAdmission').value = fs.admission||0;
+  document.getElementById('fsBus').value = fs.bus||0; document.getElementById('fsExam').value = fs.exam||0;
+  document.getElementById('fsFunction').value = fs.func||0; document.getElementById('fsOther').value = fs.other||0;
 }
 async function saveFeeStructure(e) {
-  e.preventDefault();
-  const cls = document.getElementById('fsClass').value;
-  await db.collection('feeStructure').doc(cls).set({
-    className: cls,
-    tuition: Number(document.getElementById('fsTuition').value||0),
-    admission: Number(document.getElementById('fsAdmission').value||0),
-    bus: Number(document.getElementById('fsBus').value||0),
-    exam: Number(document.getElementById('fsExam').value||0),
-    func: Number(document.getElementById('fsFunction').value||0),
-    other: Number(document.getElementById('fsOther').value||0)
-  });
+  e.preventDefault(); const cls = document.getElementById('fsClass').value;
+  await db.collection('feeStructure').doc(cls).set({ className:cls, tuition:Number(document.getElementById('fsTuition').value||0), admission:Number(document.getElementById('fsAdmission').value||0), bus:Number(document.getElementById('fsBus').value||0), exam:Number(document.getElementById('fsExam').value||0), func:Number(document.getElementById('fsFunction').value||0), other:Number(document.getElementById('fsOther').value||0) });
   toast(`Fee structure saved for ${cls}!`);
 }
 function renderFeeStructTable() {
   const el = document.getElementById('feeStructTbody'); if (!el) return;
-  el.innerHTML = CLASSES.map(c => {
-    const fs = DB.feeStructure[c];
-    if (!fs) return '';
-    return `<tr><td><strong>${c}</strong></td><td>₹${fs.tuition}</td><td>₹${fs.admission}</td><td>₹${fs.bus}</td><td>₹${fs.exam}</td><td>₹${fs.func}</td><td>₹${fs.other}</td></tr>`;
-  }).join('') || '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:16px;">Save a class fee structure above to display here.</td></tr>';
+  el.innerHTML = CLASSES.map(c => { const fs = DB.feeStructure[c]; return fs ? `<tr><td><strong>${c}</strong></td><td>₹${fs.tuition}</td><td>₹${fs.admission}</td><td>₹${fs.bus}</td><td>₹${fs.exam}</td><td>₹${fs.func}</td><td>₹${fs.other}</td></tr>` : ''; }).join('') || '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:16px;">Save a class fee structure above.</td></tr>';
 }
-
-// Daily Fee Calendar
 function populateFeeStudentDropdown() {
-  const cls = document.getElementById('feeClassFilterEntry').value;
-  const list = DB.students.filter(s => !cls || s.className === cls);
+  const cls = document.getElementById('feeClassFilterEntry').value, list = DB.students.filter(s => !cls || s.className === cls);
   document.getElementById('feeStuSelect').innerHTML = list.map(s=>`<option value="${s.id}">${s.name} • ${s.className} (${s.admNo})</option>`).join('') || '<option value="">No students</option>';
   syncFeeClassFromStudent();
 }
@@ -1369,31 +1304,16 @@ function syncFeeClassFromStudent() {
   document.getElementById('feeDueHint').textContent = s ? `Class: ${s.className} | Annual Fee: ₹${s.totalFee} | Pending Dues: ₹${getStuDues(s)}` : '';
 }
 function setFeeToday() { document.getElementById('feeCalDate').value = todayStr(); renderFees(); refreshAllUI(); }
-function shiftFeeDate(d) {
-  const el = document.getElementById('feeCalDate'), dt = new Date((el.value||todayStr())+'T00:00:00');
-  dt.setDate(dt.getDate()+d); el.value = dt.toISOString().split('T')[0]; renderFees(); refreshAllUI();
-}
-function setFeeScope(sc) {
-  feeScope = sc;
-  document.getElementById('feeViewDayBtn').classList.toggle('active', sc==='day');
-  document.getElementById('feeViewAllBtn').classList.toggle('active', sc==='all');
-  renderFees();
-}
+function shiftFeeDate(d) { const el = document.getElementById('feeCalDate'), dt = new Date((el.value||todayStr())+'T00:00:00'); dt.setDate(dt.getDate()+d); el.value = dt.toISOString().split('T')[0]; renderFees(); refreshAllUI(); }
+function setFeeScope(sc) { feeScope = sc; document.getElementById('feeViewDayBtn').classList.toggle('active', sc==='day'); document.getElementById('feeViewAllBtn').classList.toggle('active', sc==='all'); renderFees(); }
 async function recordFee(e) {
   e.preventDefault(); const btn = document.getElementById('feeSaveBtn'); btn.disabled = true;
   try {
-    const s = DB.students.find(x=>x.id===document.getElementById('feeStuSelect').value);
-    if (!s) throw new Error('Select student');
+    const s = DB.students.find(x=>x.id===document.getElementById('feeStuSelect').value); if (!s) throw new Error('Select student');
     const receiptNo = 'SPS-' + Math.floor(1000 + Math.random()*9000);
-    const ref = await db.collection('fees').add({
-      receiptNo, studentId: s.id, studentName: s.name, className: s.className, phone: s.phone,
-      amount: Number(document.getElementById('feeAmount').value), mode: document.getElementById('feeMode').value,
-      date: document.getElementById('feeEntryDate').value, head: document.getElementById('feeHead').value,
-      note: document.getElementById('feeNote').value.trim(), createdAt: Date.now()
-    });
+    const ref = await db.collection('fees').add({ receiptNo, studentId:s.id, studentName:s.name, className:s.className, phone:s.phone, amount:Number(document.getElementById('feeAmount').value), mode:document.getElementById('feeMode').value, date:document.getElementById('feeEntryDate').value, head:document.getElementById('feeHead').value, note:document.getElementById('feeNote').value.trim(), createdAt:Date.now() });
     document.getElementById('feeAmount').value = ''; document.getElementById('feeNote').value = '';
-    toast('Fee Saved! Opening Preview...');
-    setTimeout(() => generateFeeReceiptPDF(ref.id), 350);
+    toast('Fee Saved! Opening Preview...'); setTimeout(() => generateFeeReceiptPDF(ref.id), 350);
   } catch (err) { toast(err.message, 'err'); }
   btn.disabled = false;
 }
@@ -1404,295 +1324,138 @@ function renderFees() {
   document.getElementById('calSummaryText').textContent = `₹${tot.toLocaleString('en-IN')} (${dayList.length} Receipts) on ${fmtDate(selDate)}`;
   document.getElementById('calBreakdown').textContent = `Cash: ₹${cash.toLocaleString('en-IN')} • UPI/Bank: ₹${(tot-cash).toLocaleString('en-IN')}`;
   const list = (feeScope==='day'?dayList:[...DB.fees]).filter(f=>!modeF||f.mode===modeF).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-  document.getElementById('feesTbody').innerHTML = list.length ? list.map(f=>`<tr>
-    <td><strong>${f.receiptNo}</strong></td><td>${fmtDate(f.date)}</td>
-    <td><strong>${f.studentName}</strong><br><small>${f.className}</small></td>
-    <td>${f.head||'Fee'}${f.note?' • '+f.note:''}</td>
-    <td><strong style="color:var(--green);">₹${f.amount}</strong><br><small>${f.mode}</small></td>
-    <td><button class="btn btn-gold btn-sm" onclick="generateFeeReceiptPDF('${f.id}')">Preview PDF</button> <button class="btn btn-red btn-sm" onclick="deleteDoc('fees','${f.id}')">Del</button></td>
-  </tr>`).join('') : '<tr><td colspan="6" style="text-align:center;padding:18px;color:var(--muted);">No fee records.</td></tr>';
+  document.getElementById('feesTbody').innerHTML = list.length ? list.map(f=>`<tr><td><strong>${f.receiptNo}</strong></td><td>${fmtDate(f.date)}</td><td><strong>${f.studentName}</strong><br><small>${f.className}</small></td><td>${f.head||'Fee'}${f.note?' • '+f.note:''}</td><td><strong style="color:var(--green);">₹${f.amount}</strong><br><small>${f.mode}</small></td><td><button class="btn btn-gold btn-sm" onclick="generateFeeReceiptPDF('${f.id}')">Preview PDF</button> <button class="btn btn-red btn-sm" onclick="deleteDoc('fees','${f.id}')">Del</button></td></tr>`).join('') : '<tr><td colspan="6" style="text-align:center;padding:18px;color:var(--muted);">No fee records.</td></tr>';
 }
 function exportFeesCSV() {
   const rows = [['Receipt','Date','Student','Class','Head','Amount','Mode','Note'], ...DB.fees.map(f=>[f.receiptNo,f.date,f.studentName,f.className,f.head||'',f.amount,f.mode,f.note||''])];
   downloadFile(rows.map(r=>r.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(',')).join('\n'), `Sunrise_Fees_${todayStr()}.csv`, 'text/csv');
 }
 
-// Attendance (Fixed!)
+// Attendance & Marks
 let tempAtt = {}, lastAttKey = '';
 function renderAttendance() {
-  const cls = document.getElementById('attClass').value || 'Class 1';
-  const dt = document.getElementById('attDate').value || todayStr();
-  const q = (document.getElementById('attSearch').value || '').toLowerCase();
-  const key = `${dt}_${cls}`;
-  if (lastAttKey !== key) {
-    tempAtt = { ...((DB.attendance[key]||{}).records || {}) };
-    lastAttKey = key;
-  }
-  const list = DB.students.filter(s => s.className === cls && (!q || (s.name||'').toLowerCase().includes(q)));
+  const cls = document.getElementById('attClass').value || 'Class 1', dt = document.getElementById('attDate').value || todayStr(), q = (document.getElementById('attSearch').value||'').toLowerCase(), key = `${dt}_${cls}`;
+  if (lastAttKey !== key) { tempAtt = { ...((DB.attendance[key]||{}).records || {}) }; lastAttKey = key; }
+  const list = DB.students.filter(s => s.className===cls && (!q || (s.name||'').toLowerCase().includes(q)));
   document.getElementById('attTbody').innerHTML = list.length ? list.map(s => {
     const st = tempAtt[s.id] || 'P'; tempAtt[s.id] = st;
     const wa = encodeURIComponent(`${getCfg().schoolName}: ${s.name} (${cls}) is ABSENT on ${fmtDate(dt)}.`);
-    return `<tr><td>${s.roll||'-'}</td><td><strong>${s.name}</strong><br><small>${s.admNo}</small></td>
-      <td><button class="att-btn ${st==='P'?'P':''}" onclick="tempAtt['${s.id}']='P';renderAttendance()">Present</button>
-          <button class="att-btn ${st==='A'?'A':''}" onclick="tempAtt['${s.id}']='A';renderAttendance()">Absent</button></td>
-      <td>${st==='A'?`<a class="btn btn-green btn-sm" target="_blank" href="https://wa.me/91${(s.phone||'').replace(/\D/g,'')}?text=${wa}">WhatsApp</a>`:'—'}</td></tr>`;
+    return `<tr><td>${s.roll||'-'}</td><td><strong>${s.name}</strong><br><small>${s.admNo}</small></td><td><button class="att-btn ${st==='P'?'P':''}" onclick="tempAtt['${s.id}']='P';renderAttendance()">Present</button> <button class="att-btn ${st==='A'?'A':''}" onclick="tempAtt['${s.id}']='A';renderAttendance()">Absent</button></td><td>${st==='A'?`<a class="btn btn-green btn-sm" target="_blank" href="https://wa.me/91${(s.phone||'').replace(/\D/g,'')}?text=${wa}">WhatsApp</a>`:'—'}</td></tr>`;
   }).join('') : '<tr><td colspan="4" style="text-align:center;padding:18px;color:var(--muted);">No students in this class.</td></tr>';
 }
 function markAllAtt(st) { Object.keys(tempAtt).forEach(k=>tempAtt[k]=st); renderAttendance(); }
 async function saveAttendanceBatch() {
   const cls = document.getElementById('attClass').value, dt = document.getElementById('attDate').value;
   await db.collection('attendance').doc(`${dt}_${cls}`).set({ date:dt, className:cls, records:tempAtt, updatedAt:Date.now() });
-  toast(`Attendance saved for ${cls} (${fmtDate(dt)})!`);
+  toast(`Attendance saved for ${cls}!`);
 }
 
-// Marks Entry (Blank/Custom Full Marks + Class Filter)
 function populateMarksStudentDropdown() {
-  const cls = document.getElementById('marksClassFilter').value;
-  const list = DB.students.filter(s => !cls || s.className === cls);
+  const cls = document.getElementById('marksClassFilter').value, list = DB.students.filter(s => !cls || s.className===cls);
   document.getElementById('marksStuSelect').innerHTML = list.map(s=>`<option value="${s.id}">${s.name} • ${s.className} (${s.admNo})</option>`).join('') || '<option value="">No students</option>';
   loadStudentMarks();
 }
-function calcGrade(p) {
-  if (p>=91) return 'A1'; if (p>=81) return 'A2'; if (p>=71) return 'B1'; if (p>=61) return 'B2';
-  if (p>=51) return 'C1'; if (p>=41) return 'C2'; if (p>=33) return 'D'; return 'E';
-}
+function calcGrade(p) { if (p>=91) return 'A1'; if (p>=81) return 'A2'; if (p>=71) return 'B1'; if (p>=61) return 'B2'; if (p>=51) return 'C1'; if (p>=41) return 'C2'; if (p>=33) return 'D'; return 'E'; }
 function addMarkSubjectRow(sub = { code:'', name:'', th:'', maxT:80, pr:'', maxP:20 }) {
   const tr = document.createElement('tr');
-  tr.innerHTML = `<td><input class="mk-code" value="${sub.code||''}" style="width:52px;" /></td>
-    <td><input class="mk-name" value="${sub.name||''}" placeholder="Subject" style="width:135px;" /></td>
-    <td><input type="number" class="mk-th" value="${sub.th}" placeholder="0" style="width:52px;" /> / <input type="number" class="mk-maxt" value="${sub.maxT||80}" style="width:52px;" /></td>
-    <td><input type="number" class="mk-pr" value="${sub.pr}" placeholder="0" style="width:52px;" /> / <input type="number" class="mk-maxp" value="${sub.maxP||20}" style="width:52px;" /></td>
-    <td class="mk-tot">—</td>
-    <td><button class="btn btn-red btn-sm" onclick="this.closest('tr').remove()">×</button></td>`;
+  tr.innerHTML = `<td><input class="mk-code" value="${sub.code||''}" style="width:52px;" /></td><td><input class="mk-name" value="${sub.name||''}" placeholder="Subject" style="width:135px;" /></td><td><input type="number" class="mk-th" value="${sub.th}" placeholder="0" style="width:52px;" /> / <input type="number" class="mk-maxt" value="${sub.maxT||80}" style="width:52px;" /></td><td><input type="number" class="mk-pr" value="${sub.pr}" placeholder="0" style="width:52px;" /> / <input type="number" class="mk-maxp" value="${sub.maxP||20}" style="width:52px;" /></td><td class="mk-tot">—</td><td><button class="btn btn-red btn-sm" onclick="this.closest('tr').remove()">×</button></td>`;
   document.getElementById('marksRows').appendChild(tr);
 }
 function loadStudentMarks() {
-  const s = DB.students.find(x=>x.id===document.getElementById('marksStuSelect').value);
-  const tbody = document.getElementById('marksRows'); tbody.innerHTML = '';
-  if (!s) return;
+  const s = DB.students.find(x=>x.id===document.getElementById('marksStuSelect').value), tbody = document.getElementById('marksRows');
+  tbody.innerHTML = ''; if (!s) return;
   const m = s.marks || {};
-  document.getElementById('mkExam').value = m.exam || '';
-  document.getElementById('mkAtt').value = m.att || '';
-  document.getElementById('mkResult').value = m.result || '';
-  document.getElementById('mkConduct').value = m.conduct || '';
+  document.getElementById('mkExam').value = m.exam||''; document.getElementById('mkAtt').value = m.att||'';
+  document.getElementById('mkResult').value = m.result||''; document.getElementById('mkConduct').value = m.conduct||'';
   if (m.subjects && m.subjects.length) m.subjects.forEach(sub => addMarkSubjectRow(sub));
   else addMarkSubjectRow({ code:'101', name:'', th:'', maxT:80, pr:'', maxP:20 });
 }
 async function saveStudentMarks() {
   const id = document.getElementById('marksStuSelect').value; if (!id) return;
-  const subjects = [...document.querySelectorAll('#marksRows tr')].map(tr => ({
-    code: tr.querySelector('.mk-code').value.trim(),
-    name: tr.querySelector('.mk-name').value.trim(),
-    th: Number(tr.querySelector('.mk-th').value||0),
-    maxT: Number(tr.querySelector('.mk-maxt').value||80),
-    pr: Number(tr.querySelector('.mk-pr').value||0),
-    maxP: Number(tr.querySelector('.mk-maxp').value||20)
-  })).filter(x=>x.name);
-  await db.collection('students').doc(id).set({
-    marks: {
-      exam: document.getElementById('mkExam').value.trim(),
-      att: document.getElementById('mkAtt').value.trim(),
-      result: document.getElementById('mkResult').value.trim(),
-      conduct: document.getElementById('mkConduct').value.trim(),
-      subjects
-    }
-  }, { merge: true });
+  const subjects = [...document.querySelectorAll('#marksRows tr')].map(tr => ({ code:tr.querySelector('.mk-code').value.trim(), name:tr.querySelector('.mk-name').value.trim(), th:Number(tr.querySelector('.mk-th').value||0), maxT:Number(tr.querySelector('.mk-maxt').value||80), pr:Number(tr.querySelector('.mk-pr').value||0), maxP:Number(tr.querySelector('.mk-maxp').value||20) })).filter(x=>x.name);
+  await db.collection('students').doc(id).set({ marks:{ exam:document.getElementById('mkExam').value.trim(), att:document.getElementById('mkAtt').value.trim(), result:document.getElementById('mkResult').value.trim(), conduct:document.getElementById('mkConduct').value.trim(), subjects } }, { merge:true });
   toast('Marks saved!');
 }
-function downloadSelectedMarksheet() {
-  const id = document.getElementById('marksStuSelect').value; if (id) generateMarksheetPDF(id);
-}
+function downloadSelectedMarksheet() { const id = document.getElementById('marksStuSelect').value; if (id) generateMarksheetPDF(id); }
 
-// PDFs (All open in Preview Modal first!)
+// PDFs
 function drawMarksheetOnDoc(doc, s, examTitle) {
   const cfg = getCfg(), m = s.marks || {}, subs = m.subjects || [];
-  doc.setFillColor(161, 22, 38); doc.rect(0, 0, 210, 32, 'F');
-  doc.setFillColor(217, 155, 38); doc.rect(0, 32, 210, 2, 'F');
+  doc.setFillColor(161,22,38); doc.rect(0,0,210,32,'F'); doc.setFillColor(217,155,38); doc.rect(0,32,210,2,'F');
   if (LOGO_DATA_URL) { doc.setFillColor(255,255,255); doc.circle(23,16,11,'F'); doc.addImage(LOGO_DATA_URL,'PNG',13,6,20,20); }
-  doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(17);
-  doc.text(cfg.schoolName.toUpperCase(), 116, 14, {align:'center'});
-  doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
-  doc.text(`${cfg.address} • Ph: ${cfg.phone}`, 116, 21, {align:'center'});
-  doc.text(cfg.regTag, 116, 26.5, {align:'center'});
+  doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(17); doc.text(cfg.schoolName.toUpperCase(), 116, 14, {align:'center'});
+  doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.text(`${cfg.address} • Ph: ${cfg.phone}`, 116, 21, {align:'center'}); doc.text(cfg.regTag, 116, 26.5, {align:'center'});
   if (WATERMARK_DATA_URL) doc.addImage(WATERMARK_DATA_URL,'PNG',62,112,86,86);
-
-  doc.setTextColor(161,22,38); doc.setFont('helvetica','bold'); doc.setFontSize(12);
-  doc.text(examTitle || m.exam || `STATEMENT OF MARKS (${cfg.sessionLabel})`, 105, 43, {align:'center'});
-
-  doc.autoTable({
-    startY:47, margin:{left:12,right:12}, theme:'grid', styles:{fontSize:9,cellPadding:2.3,textColor:[25,35,50]},
-    body:[['Student Name:',s.name,'Admission No:',s.admNo],['Class & Sec:',`${s.className} (${s.section||'A'})`,'Roll No:',s.roll||'-'],["Father's Name:",s.father,"Mother's Name:",s.mother||'-'],['DOB:',fmtDate(s.dob)||'-','Address:',s.addr||'Jhajha']],
-    columnStyles:{0:{fontStyle:'bold',fillColor:[250,247,241]},2:{fontStyle:'bold',fillColor:[250,247,241]}}
-  });
-
+  doc.setTextColor(161,22,38); doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text(examTitle || m.exam || `STATEMENT OF MARKS (${cfg.sessionLabel})`, 105, 43, {align:'center'});
+  doc.autoTable({ startY:47, margin:{left:12,right:12}, theme:'grid', styles:{fontSize:9,cellPadding:2.3,textColor:[25,35,50]}, body:[['Student Name:',s.name,'Admission No:',s.admNo],['Class & Sec:',`${s.className} (${s.section||'A'})`,'Roll No:',s.roll||'-'],["Father's Name:",s.father,"Mother's Name:",s.mother||'-'],['DOB:',fmtDate(s.dob)||'-','Address:',s.addr||'Jhajha']], columnStyles:{0:{fontStyle:'bold',fillColor:[250,247,241]},2:{fontStyle:'bold',fillColor:[250,247,241]}} });
   let gt=0, gm=0;
-  const rows = subs.map(sub => {
-    const t=Number(sub.th)+Number(sub.pr), mx=Number(sub.maxT)+Number(sub.maxP); gt+=t; gm+=mx;
-    return [sub.code, sub.name, `${sub.th}/${sub.maxT}`, `${sub.pr}/${sub.maxP}`, `${t}/${mx}`, calcGrade((t/(mx||1))*100)];
-  });
-  const pct = gm ? ((gt/gm)*100).toFixed(2) : '0.00';
-  rows.push(['','GRAND TOTAL & PERCENTAGE','','',`${gt}/${gm} (${pct}%)`,calcGrade(Number(pct))]);
-
-  doc.autoTable({
-    startY:doc.lastAutoTable.finalY+5, margin:{left:12,right:12}, theme:'grid',
-    head:[['Code','Subject Name','Theory','Practical/IA','Total','Grade']],
-    headStyles:{fillColor:[161,22,38],textColor:255,fontSize:9},
-    styles:{fontSize:9,cellPadding:2.5,halign:'center'}, columnStyles:{1:{halign:'left',fontStyle:'bold'}}, body:rows
-  });
-  doc.autoTable({
-    startY:doc.lastAutoTable.finalY+6, margin:{left:12,right:12}, theme:'grid',
-    head:[['Attendance','Result Status','Conduct']], headStyles:{fillColor:[18,28,45],textColor:255,halign:'center',fontSize:8.5},
-    body:[[m.att||'-',m.result||'-',m.conduct||'-']], styles:{halign:'center',fontStyle:'bold',fontSize:9}
-  });
-  doc.setFontSize(9); doc.setTextColor(25); doc.setFont('helvetica','bold');
-  doc.text('Class Teacher', 40, 274, {align:'center'});
-  doc.text(`${cfg.principalName} (Principal)`, 165, 274, {align:'center'});
-  doc.setFillColor(161,22,38); doc.rect(0,289,210,8,'F');
-  doc.setTextColor(255); doc.setFontSize(7.5); doc.setFont('helvetica','normal');
-  doc.text(`${cfg.schoolName} • ${cfg.address}`, 12, 294);
-  doc.text(`Issued: ${fmtDate(todayStr())}`, 198, 294, {align:'right'});
+  const rows = subs.map(sub => { const t=Number(sub.th)+Number(sub.pr), mx=Number(sub.maxT)+Number(sub.maxP); gt+=t; gm+=mx; return [sub.code,sub.name,`${sub.th}/${sub.maxT}`,`${sub.pr}/${sub.maxP}`,`${t}/${mx}`,calcGrade((t/(mx||1))*100)]; });
+  const pct = gm ? ((gt/gm)*100).toFixed(2) : '0.00'; rows.push(['','GRAND TOTAL & PERCENTAGE','','',`${gt}/${gm} (${pct}%)`,calcGrade(Number(pct))]);
+  doc.autoTable({ startY:doc.lastAutoTable.finalY+5, margin:{left:12,right:12}, theme:'grid', head:[['Code','Subject Name','Theory','Practical/IA','Total','Grade']], headStyles:{fillColor:[161,22,38],textColor:255,fontSize:9}, styles:{fontSize:9,cellPadding:2.5,halign:'center'}, columnStyles:{1:{halign:'left',fontStyle:'bold'}}, body:rows });
+  doc.autoTable({ startY:doc.lastAutoTable.finalY+6, margin:{left:12,right:12}, theme:'grid', head:[['Attendance','Result Status','Conduct']], headStyles:{fillColor:[18,28,45],textColor:255,halign:'center',fontSize:8.5}, body:[[m.att||'-',m.result||'-',m.conduct||'-']], styles:{halign:'center',fontStyle:'bold',fontSize:9} });
+  doc.setFontSize(9); doc.setTextColor(25); doc.setFont('helvetica','bold'); doc.text('Class Teacher',40,274,{align:'center'}); doc.text(`${cfg.principalName} (Principal)`,165,274,{align:'center'});
+  doc.setFillColor(161,22,38); doc.rect(0,289,210,8,'F'); doc.setTextColor(255); doc.setFontSize(7.5); doc.setFont('helvetica','normal'); doc.text(`${cfg.schoolName} • ${cfg.address}`,12,294); doc.text(`Issued: ${fmtDate(todayStr())}`,198,294,{align:'right'});
 }
-
-function generateMarksheetPDF(id) {
-  const s = DB.students.find(x=>x.id===id); if (!s) return;
-  const { jsPDF } = window.jspdf; const doc = new jsPDF('p','mm','a4');
-  drawMarksheetOnDoc(doc, s, (s.marks && s.marks.exam) || '');
-  openPdfPreview(doc, `Marksheet_${s.admNo}.pdf`, `Marksheet — ${s.name}`);
-}
-
-function renderBulkMarksPreviewList() {
-  const cls = document.getElementById('bmClass').value, q = (document.getElementById('bmSearch').value||'').toLowerCase();
-  const list = DB.students.filter(s => s.className===cls && (!q || (s.name||'').toLowerCase().includes(q)));
-  document.getElementById('bmCountInfo').textContent = `Ready to generate ${list.length} Marksheet(s) for ${cls}.`;
-}
-function generateBulkMarksheetsPDF() {
-  const cls = document.getElementById('bmClass').value, exam = document.getElementById('bmExam').value.trim(), q = (document.getElementById('bmSearch').value||'').toLowerCase();
-  const list = DB.students.filter(s => s.className===cls && (!q || (s.name||'').toLowerCase().includes(q)));
-  if (!list.length) return toast('No students match filter', 'err');
-  const { jsPDF } = window.jspdf; const doc = new jsPDF('p','mm','a4');
-  list.forEach((s,i) => { if (i>0) doc.addPage(); drawMarksheetOnDoc(doc, s, exam); });
-  openPdfPreview(doc, `Bulk_Marksheets_${cls.replace(/\s+/g,'_')}.pdf`, `Bulk Marksheets — ${cls} (${list.length})`);
-}
-
+function generateMarksheetPDF(id) { const s = DB.students.find(x=>x.id===id); if (!s) return; const { jsPDF } = window.jspdf; const doc = new jsPDF('p','mm','a4'); drawMarksheetOnDoc(doc, s, (s.marks&&s.marks.exam)||''); openPdfPreview(doc, `Marksheet_${s.admNo}.pdf`, `Marksheet — ${s.name}`); }
+function renderBulkMarksPreviewList() { const cls = document.getElementById('bmClass').value, q = (document.getElementById('bmSearch').value||'').toLowerCase(), list = DB.students.filter(s=>s.className===cls&&(!q||(s.name||'').toLowerCase().includes(q))); document.getElementById('bmCountInfo').textContent = `Ready to generate ${list.length} Marksheet(s) for ${cls}.`; }
+function generateBulkMarksheetsPDF() { const cls = document.getElementById('bmClass').value, exam = document.getElementById('bmExam').value.trim(), q = (document.getElementById('bmSearch').value||'').toLowerCase(), list = DB.students.filter(s=>s.className===cls&&(!q||(s.name||'').toLowerCase().includes(q))); if (!list.length) return toast('No students match filter','err'); const { jsPDF } = window.jspdf; const doc = new jsPDF('p','mm','a4'); list.forEach((s,i)=>{ if(i>0) doc.addPage(); drawMarksheetOnDoc(doc,s,exam); }); openPdfPreview(doc, `Bulk_Marksheets_${cls.replace(/\s+/g,'_')}.pdf`, `Bulk Marksheets — ${cls}`); }
 function generateFeeReceiptPDF(feeId) {
-  const f = DB.fees.find(x=>x.id===feeId); if (!f) return;
-  const s = DB.students.find(x=>x.id===f.studentId) || {}, cfg = getCfg();
-  const { jsPDF } = window.jspdf; const doc = new jsPDF('p','mm','a5');
-  doc.setFillColor(161,22,38); doc.rect(0,0,148,24,'F');
-  if (LOGO_DATA_URL) { doc.setFillColor(255,255,255); doc.circle(16,12,8,'F'); doc.addImage(LOGO_DATA_URL,'PNG',9,5,14,14); }
-  doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(12.5);
-  doc.text(cfg.schoolName.toUpperCase(), 84, 11, {align:'center'});
-  doc.setFont('helvetica','normal'); doc.setFontSize(7.5);
-  doc.text(`${cfg.address} • Ph: ${cfg.phone}`, 84, 17, {align:'center'});
+  const f = DB.fees.find(x=>x.id===feeId); if (!f) return; const s = DB.students.find(x=>x.id===f.studentId)||{}, cfg = getCfg(), { jsPDF } = window.jspdf, doc = new jsPDF('p','mm','a5');
+  doc.setFillColor(161,22,38); doc.rect(0,0,148,24,'F'); if (LOGO_DATA_URL) { doc.setFillColor(255,255,255); doc.circle(16,12,8,'F'); doc.addImage(LOGO_DATA_URL,'PNG',9,5,14,14); }
+  doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(12.5); doc.text(cfg.schoolName.toUpperCase(),84,11,{align:'center'}); doc.setFont('helvetica','normal'); doc.setFontSize(7.5); doc.text(`${cfg.address} • Ph: ${cfg.phone}`,84,17,{align:'center'});
   if (WATERMARK_DATA_URL) doc.addImage(WATERMARK_DATA_URL,'PNG',42,78,64,64);
-  doc.autoTable({
-    startY:30, margin:{left:9,right:9}, theme:'grid', styles:{fontSize:9,cellPadding:2.5},
-    body:[['Receipt No:',f.receiptNo],['Date:',fmtDate(f.date)],['Student:',f.studentName],['Class:',`${f.className} (${s.admNo||'-'})`],['Fee Head:',f.head||'Fee'],['Amount:',`Rs. ${f.amount}/-`],['Mode:',f.mode],['Dues Left:',`Rs. ${s.id?getStuDues(s):0}/-`]],
-    columnStyles:{0:{fontStyle:'bold',fillColor:[250,247,241],cellWidth:42}}
-  });
-  doc.setTextColor(30); doc.setFontSize(8.5);
-  doc.text(`${cfg.principalName} / Authorized Signatory`, 139, 194, {align:'right'});
+  doc.autoTable({ startY:30, margin:{left:9,right:9}, theme:'grid', styles:{fontSize:9,cellPadding:2.5}, body:[['Receipt No:',f.receiptNo],['Date:',fmtDate(f.date)],['Student:',f.studentName],['Class:',`${f.className} (${s.admNo||'-'})`],['Fee Head:',f.head||'Fee'],['Amount:',`Rs. ${f.amount}/-`],['Mode:',f.mode],['Dues Left:',`Rs. ${s.id?getStuDues(s):0}/-`]], columnStyles:{0:{fontStyle:'bold',fillColor:[250,247,241],cellWidth:42}} });
+  doc.setTextColor(30); doc.setFontSize(8.5); doc.text(`${cfg.principalName} / Authorized Signatory`,139,194,{align:'right'});
   openPdfPreview(doc, `Receipt_${f.receiptNo}.pdf`, `Fee Receipt — ${f.receiptNo}`);
 }
-
 function generateGuardianFeeDetailsPDF(stuId) {
-  const s = DB.students.find(x=>x.id===stuId); if (!s) return;
-  const cfg = getCfg(), fs = DB.feeStructure[s.className] || {}, myFees = DB.fees.filter(f=>f.studentId===s.id);
-  const { jsPDF } = window.jspdf; const doc = new jsPDF('p','mm','a4');
-  doc.setFillColor(161,22,38); doc.rect(0,0,210,30,'F');
-  if (LOGO_DATA_URL) { doc.setFillColor(255,255,255); doc.circle(22,15,10,'F'); doc.addImage(LOGO_DATA_URL,'PNG',13,6,18,18); }
-  doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(16);
-  doc.text(cfg.schoolName.toUpperCase(), 115, 14, {align:'center'});
-  doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
-  doc.text(`OFFICIAL FEE STRUCTURE & PAYMENT STATEMENT • ${cfg.address}`, 115, 22, {align:'center'});
+  const s = DB.students.find(x=>x.id===stuId); if (!s) return; const cfg = getCfg(), fs = DB.feeStructure[s.className]||{}, myFees = DB.fees.filter(f=>f.studentId===s.id), { jsPDF } = window.jspdf, doc = new jsPDF('p','mm','a4');
+  doc.setFillColor(161,22,38); doc.rect(0,0,210,30,'F'); if (LOGO_DATA_URL) { doc.setFillColor(255,255,255); doc.circle(22,15,10,'F'); doc.addImage(LOGO_DATA_URL,'PNG',13,6,18,18); }
+  doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(16); doc.text(cfg.schoolName.toUpperCase(),115,14,{align:'center'}); doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.text(`OFFICIAL FEE STRUCTURE & PAYMENT STATEMENT`,115,22,{align:'center'});
   if (WATERMARK_DATA_URL) doc.addImage(WATERMARK_DATA_URL,'PNG',62,110,86,86);
-
-  doc.autoTable({
-    startY:36, margin:{left:12,right:12}, theme:'grid', styles:{fontSize:9.5},
-    body:[['Student Name:',s.name,'Admission No:',s.admNo],['Class:',`${s.className} (${s.section||'A'})`,'Annual Fee:',`Rs. ${s.totalFee}`],['Total Paid:',`Rs. ${getStuPaid(s.id)}`,'Pending Dues:',`Rs. ${getStuDues(s)}`]],
-    columnStyles:{0:{fontStyle:'bold',fillColor:[250,247,241]},2:{fontStyle:'bold',fillColor:[250,247,241]}}
-  });
-  doc.autoTable({
-    startY:doc.lastAutoTable.finalY+6, margin:{left:12,right:12}, theme:'grid',
-    head:[['Class Fee Structure ('+s.className+')','Amount']], headStyles:{fillColor:[18,28,45]},
-    body:[['Monthly Tuition Fee',`Rs. ${fs.tuition||0}`],['Admission Fee',`Rs. ${fs.admission||0}`],['Bus / Transport Fee',`Rs. ${fs.bus||0}`],['Exam Fee',`Rs. ${fs.exam||0}`],['Function / Annual Fee',`Rs. ${fs.func||0}`],['Other Fees',`Rs. ${fs.other||0}`]]
-  });
-  doc.autoTable({
-    startY:doc.lastAutoTable.finalY+6, margin:{left:12,right:12}, theme:'grid',
-    head:[['Receipt No','Date','Fee Head','Mode','Amount']], headStyles:{fillColor:[161,22,38]},
-    body: myFees.length ? myFees.map(f=>[f.receiptNo,fmtDate(f.date),f.head||'Fee',f.mode,`Rs. ${f.amount}`]) : [['-','-','No payments recorded','-','-']]
-  });
+  doc.autoTable({ startY:36, margin:{left:12,right:12}, theme:'grid', styles:{fontSize:9.5}, body:[['Student:',s.name,'Adm No:',s.admNo],['Class:',`${s.className} (${s.section||'A'})`,'Annual Fee:',`Rs. ${s.totalFee}`],['Paid:',`Rs. ${getStuPaid(s.id)}`,'Pending Dues:',`Rs. ${getStuDues(s)}`]], columnStyles:{0:{fontStyle:'bold',fillColor:[250,247,241]},2:{fontStyle:'bold',fillColor:[250,247,241]}} });
+  doc.autoTable({ startY:doc.lastAutoTable.finalY+6, margin:{left:12,right:12}, theme:'grid', head:[['Class Fee Structure ('+s.className+')','Amount']], headStyles:{fillColor:[18,28,45]}, body:[['Monthly Tuition',`Rs. ${fs.tuition||0}`],['Admission',`Rs. ${fs.admission||0}`],['Bus / Transport',`Rs. ${fs.bus||0}`],['Exam',`Rs. ${fs.exam||0}`],['Function / Annual',`Rs. ${fs.func||0}`],['Other',`Rs. ${fs.other||0}`]] });
+  doc.autoTable({ startY:doc.lastAutoTable.finalY+6, margin:{left:12,right:12}, theme:'grid', head:[['Receipt','Date','Fee Head','Mode','Amount']], headStyles:{fillColor:[161,22,38]}, body:myFees.length?myFees.map(f=>[f.receiptNo,fmtDate(f.date),f.head||'Fee',f.mode,`Rs. ${f.amount}`]):[['-','-','No payments','-','-']] });
   openPdfPreview(doc, `Fee_Details_${s.admNo}.pdf`, `Fee Statement — ${s.name}`);
 }
-
 function addTimetableRow(sub='', dt='', tm='09:00 AM - 12:00 PM') {
-  const r = document.createElement('div');
-  r.style.cssText = 'display:grid;grid-template-columns:1.3fr 1fr 1.2fr auto;gap:8px;';
-  r.innerHTML = `<input class="tt-sub" placeholder="Subject" value="${sub}" style="padding:7px;border:1px solid var(--border);border-radius:8px;" />
-    <input class="tt-dt" type="date" value="${dt}" style="padding:7px;border:1px solid var(--border);border-radius:8px;" />
-    <input class="tt-tm" value="${tm}" style="padding:7px;border:1px solid var(--border);border-radius:8px;" />
-    <button class="btn btn-red btn-sm" onclick="this.parentElement.remove()">×</button>`;
+  const r = document.createElement('div'); r.style.cssText = 'display:grid;grid-template-columns:1.3fr 1fr 1.2fr auto;gap:8px;';
+  r.innerHTML = `<input class="tt-sub" placeholder="Subject" value="${sub}" style="padding:7px;border:1px solid var(--border);border-radius:8px;" /><input class="tt-dt" type="date" value="${dt}" style="padding:7px;border:1px solid var(--border);border-radius:8px;" /><input class="tt-tm" value="${tm}" style="padding:7px;border:1px solid var(--border);border-radius:8px;" /><button class="btn btn-red btn-sm" onclick="this.parentElement.remove()">×</button>`;
   document.getElementById('timetableBox').appendChild(r);
 }
 function generateBulkAdmitCardsPDF() {
-  const cls = document.getElementById('admitClass').value, exam = document.getElementById('admitExam').value.trim(), center = document.getElementById('admitCenter').value.trim(), cfg = getCfg();
-  const list = DB.students.filter(s=>s.className===cls);
-  if (!list.length) return toast('No students in ' + cls, 'err');
-  const tt = [...document.querySelectorAll('#timetableBox > div')].map(r=>[r.querySelector('.tt-sub').value, fmtDate(r.querySelector('.tt-dt').value), r.querySelector('.tt-tm').value]).filter(x=>x[0]);
-  const { jsPDF } = window.jspdf; const doc = new jsPDF('p','mm','a4');
-  list.forEach((s, idx) => {
-    if (idx>0 && idx%2===0) doc.addPage();
-    const top = (idx%2===0) ? 8 : 152;
+  const cls = document.getElementById('admitClass').value, exam = document.getElementById('admitExam').value.trim(), center = document.getElementById('admitCenter').value.trim(), cfg = getCfg(), list = DB.students.filter(s=>s.className===cls);
+  if (!list.length) return toast('No students in '+cls,'err');
+  const tt = [...document.querySelectorAll('#timetableBox > div')].map(r=>[r.querySelector('.tt-sub').value,fmtDate(r.querySelector('.tt-dt').value),r.querySelector('.tt-tm').value]).filter(x=>x[0]);
+  const { jsPDF } = window.jspdf, doc = new jsPDF('p','mm','a4');
+  list.forEach((s,idx)=>{
+    if(idx>0&&idx%2===0) doc.addPage(); const top=(idx%2===0)?8:152;
     doc.setDrawColor(161,22,38); doc.setLineWidth(0.9); doc.rect(8,top,194,136);
-    if (WATERMARK_DATA_URL) doc.addImage(WATERMARK_DATA_URL,'PNG',75,top+42,60,60);
-    if (LOGO_DATA_URL) doc.addImage(LOGO_DATA_URL,'PNG',12,top+4,16,16);
-    doc.setTextColor(161,22,38); doc.setFont('helvetica','bold'); doc.setFontSize(13.5);
-    doc.text(`${cfg.schoolName.toUpperCase()}`,108,top+10,{align:'center'});
-    doc.setTextColor(40); doc.setFontSize(8.5); doc.text(`ADMIT CARD — ${exam}`,108,top+16,{align:'center'});
-    doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.text(`Center: ${center}`,108,top+21,{align:'center'});
-    doc.autoTable({
-      startY:top+25, margin:{left:12,right:12}, theme:'grid', styles:{fontSize:8.5,cellPadding:1.6},
-      body:[['Student:',s.name,'Roll:',s.roll||'-'],['Class:',`${s.className} (${s.section||'A'})`,'Adm No:',s.admNo],['Father:',s.father,'Phone:',`+91 ${s.phone}`]],
-      columnStyles:{0:{fontStyle:'bold',fillColor:[250,247,241]},2:{fontStyle:'bold',fillColor:[250,247,241]}}
-    });
-    if (tt.length) doc.autoTable({ startY:doc.lastAutoTable.finalY+2.5, margin:{left:12,right:12}, theme:'grid', head:[['Subject','Date','Timing']], headStyles:{fillColor:[161,22,38],fontSize:8}, styles:{fontSize:8,cellPadding:1.4}, body:tt });
-    doc.setFont('helvetica','bold'); doc.setFontSize(8); doc.setTextColor(20);
-    doc.text(`${cfg.principalName} (Principal)`,192,top+131,{align:'right'});
+    if(WATERMARK_DATA_URL) doc.addImage(WATERMARK_DATA_URL,'PNG',75,top+42,60,60); if(LOGO_DATA_URL) doc.addImage(LOGO_DATA_URL,'PNG',12,top+4,16,16);
+    doc.setTextColor(161,22,38); doc.setFont('helvetica','bold'); doc.setFontSize(13.5); doc.text(cfg.schoolName.toUpperCase(),108,top+10,{align:'center'});
+    doc.setTextColor(40); doc.setFontSize(8.5); doc.text(`ADMIT CARD — ${exam}`,108,top+16,{align:'center'}); doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.text(`Center: ${center}`,108,top+21,{align:'center'});
+    doc.autoTable({ startY:top+25, margin:{left:12,right:12}, theme:'grid', styles:{fontSize:8.5,cellPadding:1.6}, body:[['Student:',s.name,'Roll:',s.roll||'-'],['Class:',`${s.className} (${s.section||'A'})`,'Adm No:',s.admNo],['Father:',s.father,'Phone:',`+91 ${s.phone}`]], columnStyles:{0:{fontStyle:'bold',fillColor:[250,247,241]},2:{fontStyle:'bold',fillColor:[250,247,241]}} });
+    if(tt.length) doc.autoTable({ startY:doc.lastAutoTable.finalY+2.5, margin:{left:12,right:12}, theme:'grid', head:[['Subject','Date','Timing']], headStyles:{fillColor:[161,22,38],fontSize:8}, styles:{fontSize:8,cellPadding:1.4}, body:tt });
+    doc.setFont('helvetica','bold'); doc.setFontSize(8); doc.setTextColor(20); doc.text(`${cfg.principalName} (Principal)`,192,top+131,{align:'right'});
   });
   openPdfPreview(doc, `Admit_Cards_${cls.replace(/\s+/g,'_')}.pdf`, `Bulk Admit Cards — ${cls}`);
 }
 
-// Enquiries, WhatsApp, Notices, Gallery, Logins, Backup
+// Enquiries, WhatsApp, Notices, Gallery, Approvals & Permissions
 async function submitEnquiry(e) {
   e.preventDefault(); const btn = document.getElementById('enqSubmitBtn'); btn.disabled = true;
-  await db.collection('enquiries').add({
-    student: document.getElementById('enqStudent').value.trim(), className: document.getElementById('enqClass').value,
-    parent: document.getElementById('enqParent').value.trim(), phone: document.getElementById('enqPhone').value.trim(),
-    village: document.getElementById('enqVillage').value.trim(), date: todayStr(), createdAt: Date.now()
-  });
+  await db.collection('enquiries').add({ student:document.getElementById('enqStudent').value.trim(), className:document.getElementById('enqClass').value, parent:document.getElementById('enqParent').value.trim(), phone:document.getElementById('enqPhone').value.trim(), village:document.getElementById('enqVillage').value.trim(), date:todayStr(), createdAt:Date.now() });
   e.target.reset(); toast('Enquiry submitted!'); btn.disabled = false;
 }
 function renderEnquiries() {
   const list = [...DB.enquiries].sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-  document.getElementById('enquiriesList').innerHTML = list.length ? list.map(q=>`
-    <div style="background:#f8f6f1;padding:9px 11px;border-radius:9px;font-size:12.5px;">
-      <div style="display:flex;justify-content:space-between;"><strong>${q.student} (${q.className})</strong><small>${fmtDate(q.date)}</small></div>
-      <div>${q.parent} • +91 ${q.phone} ${q.village?'• '+q.village:''}</div>
-      <div style="margin-top:5px;display:flex;gap:6px;">
-        <a class="btn btn-green btn-sm" target="_blank" href="https://wa.me/91${(q.phone||'').replace(/\D/g,'')}?text=${encodeURIComponent('Hello '+q.parent+', '+getCfg().schoolName+' enquiry received for '+q.student)}">WhatsApp</a>
-        <button class="btn btn-red btn-sm" onclick="deleteDoc('enquiries','${q.id}')">Delete</button>
-      </div>
-    </div>`).join('') : '<small style="color:var(--muted);">No enquiries yet.</small>';
+  document.getElementById('enquiriesList').innerHTML = list.length ? list.map(q=>`<div style="background:#f8f6f1;padding:9px 11px;border-radius:9px;font-size:12.5px;"><div style="display:flex;justify-content:space-between;"><strong>${q.student} (${q.className})</strong><small>${fmtDate(q.date)}</small></div><div>${q.parent} • +91 ${q.phone} ${q.village?'• '+q.village:''}</div><div style="margin-top:5px;display:flex;gap:6px;"><a class="btn btn-green btn-sm" target="_blank" href="https://wa.me/91${(q.phone||'').replace(/\D/g,'')}?text=${encodeURIComponent('Hello '+q.parent+', '+getCfg().schoolName+' enquiry received for '+q.student)}">WhatsApp</a><button class="btn btn-red btn-sm" onclick="deleteDoc('enquiries','${q.id}')">Delete</button></div></div>`).join('') : '<small style="color:var(--muted);">No enquiries yet.</small>';
 }
 function renderWaQueue() {
-  const t = document.getElementById('waTarget').value;
-  document.getElementById('waClassWrap').classList.toggle('hidden', t!=='class');
+  const t = document.getElementById('waTarget').value; document.getElementById('waClassWrap').classList.toggle('hidden', t!=='class');
   const cls = document.getElementById('waClass').value, tpl = document.getElementById('waMsg').value;
   const list = DB.students.filter(s => t==='all' || (t==='dues'?getStuDues(s)>0:s.className===cls));
-  document.getElementById('waQueueList').innerHTML = list.length ? list.map(s=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:#f8f6f1;border-radius:9px;font-size:12px;">
-    <span><strong>${s.name}</strong> (${s.className}) • Due ₹${getStuDues(s)}</span>
-    <a class="btn btn-green btn-sm" target="_blank" href="https://wa.me/91${(s.phone||'').replace(/\D/g,'')}?text=${encodeURIComponent(tpl.replace(/\{name\}/g,s.name).replace(/\{dues\}/g,getStuDues(s)))}">Send ↗</a>
-  </div>`).join('') : '<small style="color:var(--muted);">No recipients.</small>';
+  document.getElementById('waQueueList').innerHTML = list.length ? list.map(s=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:#f8f6f1;border-radius:9px;font-size:12px;"><span><strong>${s.name}</strong> (${s.className}) • Due ₹${getStuDues(s)}</span><a class="btn btn-green btn-sm" target="_blank" href="https://wa.me/91${(s.phone||'').replace(/\D/g,'')}?text=${encodeURIComponent(tpl.replace(/\{name\}/g,s.name).replace(/\{dues\}/g,getStuDues(s)))}">Send ↗</a></div>`).join('') : '<small style="color:var(--muted);">No recipients.</small>';
 }
 async function publishNotice(e) {
   e.preventDefault(); const btn = document.getElementById('notSaveBtn'); btn.disabled = true;
@@ -1709,34 +1472,56 @@ function renderAdminNoticesGallery() {
   document.getElementById('adminNoticesList').innerHTML = DB.notices.map(n=>`<div style="display:flex;justify-content:space-between;background:#f8f6f1;padding:7px 9px;border-radius:8px;font-size:12px;"><span><strong>${n.title}</strong></span><button class="btn btn-red btn-sm" onclick="deleteDoc('notices','${n.id}')">×</button></div>`).join('');
   document.getElementById('adminGalleryList').innerHTML = DB.gallery.map(g=>`<div style="position:relative;"><img src="${g.img}" style="width:100%;height:80px;object-fit:cover;border-radius:8px;" /><button class="btn btn-red btn-sm" style="position:absolute;top:4px;right:4px;padding:2px 6px;" onclick="deleteDoc('gallery','${g.id}')">×</button></div>`).join('');
 }
+
 async function addTeacher(e) {
   e.preventDefault();
-  await db.collection('teachers').add({ name:document.getElementById('tName').value.trim(), user:document.getElementById('tUser').value.trim(), pass:document.getElementById('tPass').value.trim() });
-  e.target.reset(); toast('Teacher added!');
+  await db.collection('teachers').add({ name:document.getElementById('tName').value.trim(), user:document.getElementById('tUser').value.trim(), pass:document.getElementById('tPass').value.trim(), approved:true, perms:{ attendance:true, marks:true }, createdAt:Date.now() });
+  e.target.reset(); toast('Approved Teacher added!');
+}
+async function toggleTeacherApproval(id, val) { await db.collection('teachers').doc(id).set({ approved: val }, { merge: true }); toast(val ? 'Teacher Approved!' : 'Teacher Blocked'); }
+async function toggleTeacherPerm(id, key, val) {
+  const t = DB.teachers.find(x=>x.id===id); if (!t) return;
+  const perms = { ...(t.perms || { attendance:false, marks:false }), [key]: val };
+  await db.collection('teachers').doc(id).set({ perms }, { merge: true }); toast('Permissions updated');
 }
 function renderTeachers() {
   const q = (document.getElementById('tSearch').value||'').toLowerCase();
-  const list = DB.teachers.filter(t => !q || (t.name||'').toLowerCase().includes(q) || (t.user||'').toLowerCase().includes(q));
-  document.getElementById('teachersList').innerHTML = list.map(t=>`<div style="display:flex;justify-content:space-between;align-items:center;background:#f8f6f1;padding:7px 9px;border-radius:8px;font-size:12px;"><span><strong>${t.name}</strong> • ID: <code>${t.user}</code> • Pass: <code>${t.pass}</code></span><button class="btn btn-red btn-sm" onclick="deleteDoc('teachers','${t.id}')">×</button></div>`).join('');
+  const list = [...DB.teachers].sort((a,b)=>(a.approved===true?1:0)-(b.approved===true?1:0)).filter(t => !q || (t.name||'').toLowerCase().includes(q) || (t.user||'').toLowerCase().includes(q));
+  document.getElementById('teachersList').innerHTML = list.map(t => {
+    const p = t.perms || { attendance:false, marks:false };
+    return `<div style="background:#f8f6f1;padding:9px;border-radius:9px;font-size:12px;border-left:3px solid ${t.approved?'#15803d':'#dc2626'};">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span><strong>${t.name}</strong> (${t.user}) <span class="tag ${t.approved?'green':''}">${t.approved?'Approved':'Pending'}</span></span>
+        <div style="display:flex;gap:4px;">
+          <button class="btn ${t.approved?'btn-light':'btn-green'} btn-sm" onclick="toggleTeacherApproval('${t.id}',${!t.approved})">${t.approved?'Block':'Approve ✓'}</button>
+          <button class="btn btn-red btn-sm" onclick="deleteDoc('teachers','${t.id}')">×</button>
+        </div>
+      </div>
+      <div style="margin-top:6px;display:flex;gap:12px;">
+        <label><input type="checkbox" ${p.attendance?'checked':''} onchange="toggleTeacherPerm('${t.id}','attendance',this.checked)" /> Attendance</label>
+        <label><input type="checkbox" ${p.marks?'checked':''} onchange="toggleTeacherPerm('${t.id}','marks',this.checked)" /> Marks Entry</label>
+      </div>
+    </div>`;
+  }).join('') || '<small style="color:var(--muted);">No teachers yet.</small>';
 }
+
+async function setGuardianApproval(id, val) { await db.collection('students').doc(id).set({ guardianApproved: val }, { merge: true }); toast(val ? 'Guardian Approved!' : 'Guardian Blocked'); }
 function renderGuardianAccess() {
   const q = (document.getElementById('gSearch').value||'').toLowerCase(), cls = document.getElementById('gClassFilter').value;
-  const list = DB.students.filter(s => (!cls || s.className===cls) && (!q || (s.name||'').toLowerCase().includes(q) || (s.admNo||'').toLowerCase().includes(q)));
-  document.getElementById('guardianAccessList').innerHTML = list.map(s=>`<div style="display:flex;justify-content:space-between;align-items:center;background:#f8f6f1;padding:7px 9px;border-radius:8px;font-size:12px;gap:6px;">
-    <span><strong>${s.admNo}</strong> (${s.name} • ${s.className})<br>Pass: <code>${s.guardianPass||s.phone}</code></span>
-    <button class="btn btn-light btn-sm" onclick="resetGuardianPass('${s.id}')">Edit</button>
-  </div>`).join('');
+  const list = [...DB.students].sort((a,b)=>(a.guardianApproved===false?0:1)-(b.guardianApproved===false?0:1)).filter(s => (!cls || s.className===cls) && (!q || (s.name||'').toLowerCase().includes(q) || (s.admNo||'').toLowerCase().includes(q)));
+  document.getElementById('guardianAccessList').innerHTML = list.map(s => {
+    const app = s.guardianApproved !== false;
+    return `<div style="display:flex;justify-content:space-between;align-items:center;background:#f8f6f1;padding:8px 9px;border-radius:8px;font-size:12px;gap:6px;border-left:3px solid ${app?'#15803d':'#dc2626'};">
+      <span><strong>${s.admNo}</strong> (${s.name}) <span class="tag ${app?'green':''}">${app?'Active':'Pending'}</span><br>Pass: <code>${s.guardianPass||s.phone}</code></span>
+      <div style="display:flex;gap:4px;">
+        <button class="btn ${app?'btn-light':'btn-green'} btn-sm" onclick="setGuardianApproval('${s.id}',${!app})">${app?'Block':'Approve ✓'}</button>
+        <button class="btn btn-light btn-sm" onclick="resetGuardianPass('${s.id}')">Pass</button>
+      </div>
+    </div>`;
+  }).join('');
 }
-async function resetGuardianPass(id) {
-  const np = prompt('Enter new Guardian Password:'); if (!np) return;
-  await db.collection('students').doc(id).set({ guardianPass: np.trim() }, { merge: true }); toast('Password updated!');
-}
-async function saveAdminSettings(e) {
-  e.preventDefault(); const upd = { adminUser:document.getElementById('cfgUser').value.trim() };
-  const np = document.getElementById('cfgPass').value.trim(); if (np) upd.adminPass = np;
-  await db.collection('config').doc('main').set(upd, { merge:true });
-  document.getElementById('cfgPass').value = ''; toast('Admin credentials updated!');
-}
+async function resetGuardianPass(id) { const np = prompt('Enter new Guardian Password:'); if (!np) return; await db.collection('students').doc(id).set({ guardianPass: np.trim(), guardianApproved: true }, { merge: true }); toast('Password updated!'); }
+async function saveAdminSettings(e) { e.preventDefault(); const upd = { adminUser:document.getElementById('cfgUser').value.trim() }; const np = document.getElementById('cfgPass').value.trim(); if (np) upd.adminPass = np; await db.collection('config').doc('main').set(upd, { merge:true }); document.getElementById('cfgPass').value = ''; toast('Admin credentials updated!'); }
 async function deleteDoc(col, id) { if (!confirm('Delete permanently?')) return; await db.collection(col).doc(id).delete(); toast('Deleted'); }
 function downloadFile(content, fn, type) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([content],{type})); a.download = fn; a.click(); }
 function exportFullBackup() { downloadFile(JSON.stringify(DB,null,2), `Sunrise_Backup_${todayStr()}.json`, 'application/json'); toast('Backup downloaded!'); }
@@ -1750,37 +1535,26 @@ async function restoreFullBackup(e) {
   toast('Backup restored!'); e.target.value = '';
 }
 
-// Guardian Portal (With Fee Structure + Download Fee Details PDF)
 function renderGuardianPortal(s) {
   const paid = getStuPaid(s.id), dues = getStuDues(s), myFees = DB.fees.filter(f=>f.studentId===s.id), fs = DB.feeStructure[s.className] || {};
   document.getElementById('guardianContent').innerHTML = `
-    <div style="display:flex;gap:12px;align-items:center;margin-bottom:14px;flex-wrap:wrap;">
-      <img src="${s.photo||'./logo.jpeg'}" style="width:72px;height:72px;border-radius:12px;border:2px solid var(--gold);object-fit:cover;" />
-      <div><h2>${s.name}</h2><span class="tag navy">${s.admNo}</span> <span class="tag gold">${s.className} (${s.section||'A'}) • Roll ${s.roll||'-'}</span><div style="font-size:12.5px;color:var(--muted);">Father: ${s.father} • +91 ${s.phone}</div></div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;">
-      <div class="card" style="padding:10px;text-align:center;"><small>Annual Fee</small><br><strong>₹${s.totalFee}</strong></div>
-      <div class="card" style="padding:10px;text-align:center;"><small>Paid</small><br><strong style="color:var(--green);">₹${paid}</strong></div>
-      <div class="card" style="padding:10px;text-align:center;"><small>Dues</small><br><strong style="color:var(--red);">₹${dues}</strong></div>
-    </div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">
-      <button class="btn btn-primary btn-sm" onclick="generateMarksheetPDF('${s.id}')">👁️ Preview & Download Marksheet</button>
-      <button class="btn btn-gold btn-sm" onclick="generateGuardianFeeDetailsPDF('${s.id}')">👁️ Preview & Download Fee Details PDF</button>
-    </div>
-    <div style="background:#f8f5ef;padding:12px;border-radius:10px;margin-bottom:14px;font-size:13px;">
-      <strong>Class Fee Structure (${s.className}):</strong>
-      Tuition: ₹${fs.tuition||0}/mo • Bus: ₹${fs.bus||0}/mo • Admission: ₹${fs.admission||0} • Exam: ₹${fs.exam||0} • Function: ₹${fs.func||0} • Other: ₹${fs.other||0}
-    </div>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:14px;flex-wrap:wrap;"><img src="${s.photo||'./logo.jpeg'}" style="width:72px;height:72px;border-radius:12px;border:2px solid var(--gold);object-fit:cover;" /><div><h2>${s.name}</h2><span class="tag navy">${s.admNo}</span> <span class="tag gold">${s.className} (${s.section||'A'}) • Roll ${s.roll||'-'}</span><div style="font-size:12.5px;color:var(--muted);">Father: ${s.father} • +91 ${s.phone}</div></div></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;"><div class="card" style="padding:10px;text-align:center;"><small>Annual Fee</small><br><strong>₹${s.totalFee}</strong></div><div class="card" style="padding:10px;text-align:center;"><small>Paid</small><br><strong style="color:var(--green);">₹${paid}</strong></div><div class="card" style="padding:10px;text-align:center;"><small>Dues</small><br><strong style="color:var(--red);">₹${dues}</strong></div></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;"><button class="btn btn-primary btn-sm" onclick="generateMarksheetPDF('${s.id}')">👁️ Preview & Download Marksheet</button><button class="btn btn-gold btn-sm" onclick="generateGuardianFeeDetailsPDF('${s.id}')">👁️ Preview & Download Fee Details PDF</button></div>
+    <div style="background:#f8f5ef;padding:12px;border-radius:10px;margin-bottom:14px;font-size:13px;"><strong>Class Fee Structure (${s.className}):</strong> Tuition: ₹${fs.tuition||0}/mo • Bus: ₹${fs.bus||0}/mo • Admission: ₹${fs.admission||0} • Exam: ₹${fs.exam||0} • Function: ₹${fs.func||0} • Other: ₹${fs.other||0}</div>
     <h3 style="font-size:15px;margin-bottom:8px;">Payment Receipts</h3>
     ${myFees.length ? myFees.map(f=>`<div style="display:flex;justify-content:space-between;background:#f8f6f1;padding:8px 10px;border-radius:8px;margin-bottom:6px;font-size:12.5px;"><span><strong>${f.receiptNo}</strong> • ${f.head||''} • ${fmtDate(f.date)} • ₹${f.amount}</span><button class="btn btn-light btn-sm" onclick="generateFeeReceiptPDF('${f.id}')">Preview PDF</button></div>`).join('') : '<small style="color:var(--muted);">No receipts yet.</small>'}`;
 }
 
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});
-window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; document.getElementById('installAppBtn').classList.remove('hidden'); });
-function installPWA() { if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt = null; } else alert('Browser menu (⋮) se "Install app" ya "Add to Home screen" chunein.'); }
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; });
+function installPWA() {
+  if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt = null; }
+  else openModal('appInstallModal');
+}
 
 window.addEventListener('DOMContentLoaded', () => {
-  initLogos(); applySchoolProfileToUI(); populateClassDropdowns();
+  initLogos(); applySchoolProfileToUI(); populateClassDropdowns(); populateFeeHeadsDropdown();
   document.getElementById('feeCalDate').value = todayStr();
   document.getElementById('feeEntryDate').value = todayStr();
   document.getElementById('attDate').value = todayStr();
