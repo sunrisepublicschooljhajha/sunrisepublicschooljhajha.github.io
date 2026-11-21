@@ -24,7 +24,7 @@
         appId: "b420ee0e-c64e-40da-b0f4-09f0f2aaacb0",
         notifyButton: { enable: true }
       });
-      OneSignal.Slidedown.promptPush();
+      OneSignal.Slidedown.promptPush({ force: true });
     });
   </script>
   <style>
@@ -1546,7 +1546,7 @@ function renderGuardianPortal(s) {
     <h3 style="font-size:15px;margin-bottom:8px;">Payment Receipts</h3>
     ${myFees.length ? myFees.map(f=>`<div style="display:flex;justify-content:space-between;background:#f8f6f1;padding:8px 10px;border-radius:8px;margin-bottom:6px;font-size:12.5px;"><span><strong>${f.receiptNo}</strong> • ${f.head||''} • ${fmtDate(f.date)} • ₹${f.amount}</span><button class="btn btn-light btn-sm" onclick="generateFeeReceiptPDF('${f.id}')">Preview PDF</button></div>`).join('') : '<small style="color:var(--muted);">No receipts yet.</small>'}`;
 }
-
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('./OneSignalSDKWorker.js').catch(()=>{});
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; });
 function installPWA() {
   if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt = null; }
