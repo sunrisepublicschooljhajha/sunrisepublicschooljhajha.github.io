@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sunrise Public School, Ekdara, Jhajha | Official ERP</title>
   <meta name="theme-color" content="#8b1526" />
-  <link rel="icon" type="image/jpeg" href="./logo.jpeg" />
-  <link rel="apple-touch-icon" href="./logo.jpeg" />
+  <link rel="icon" type="image/png" href="./logo.png" />
+  <link rel="apple-touch-icon" href="./logo.png" />
   <link rel="manifest" href="./manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -40,6 +40,7 @@
       --muted: #5c687a;
       --border: #e6e0d5;
       --green: #15803d;
+      --blue: #1d4ed8;
       --red: #dc2626;
       --radius: 14px;
       --shadow: 0 8px 24px rgba(15, 27, 45, 0.06);
@@ -56,20 +57,20 @@
 
     #splash { position: fixed; inset: 0; background: var(--navy); z-index: 9990; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; transition: opacity .35s ease; }
     #splash.hide { opacity: 0; pointer-events: none; }
-    .pulse-logo { width: 88px; height: 88px; border-radius: 50%; animation: pulse 1.2s infinite; object-fit: cover; background: #fff; border: 3px solid var(--gold); }
+    .pulse-logo { width: 96px; height: 96px; border-radius: 50%; animation: pulse 1.2s infinite; object-fit: cover; background: #fff; border: 3px solid var(--gold); }
     @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.07); } }
 
-    /* Clean Single-Line Header */
-    .topbar { position: sticky; top: 0; z-index: 200; background: #ffffff; color: var(--navy); padding: 10px 14px; border-bottom: 1.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; box-shadow: 0 2px 12px rgba(0,0,0,.04); }
-    .brand { display: flex; align-items: center; gap: 10px; cursor: pointer; min-width: 0; flex: 1; }
-    .brand img { width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%; border: 2px solid var(--crimson); background: #fff; object-fit: cover; }
+    /* Bigger & Clearer Header */
+    .topbar { position: sticky; top: 0; z-index: 200; background: #ffffff; color: var(--navy); padding: 11px 16px; border-bottom: 2px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 3px 14px rgba(0,0,0,.06); }
+    .brand { display: flex; align-items: center; gap: 12px; cursor: pointer; min-width: 0; flex: 1; }
+    .brand img { width: 58px; height: 58px; flex-shrink: 0; border-radius: 50%; border: 2.5px solid var(--crimson); background: #fff; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
     .brand-text { min-width: 0; }
-    .brand-title { font-size: clamp(14.5px, 4.1vw, 19px); font-weight: 800; color: var(--navy); letter-spacing: 0.2px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .brand-sub-row { display: flex; align-items: center; gap: 6px; margin-top: 2px; flex-wrap: nowrap; overflow: hidden; }
-    .estd-pill { flex-shrink: 0; background: #fef3c7; color: #92400e; font-size: 10px; font-weight: 800; padding: 1px 7px; border-radius: 99px; }
-    .brand small { font-size: 11px; color: var(--crimson); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .brand-title { font-size: clamp(18px, 4.6vw, 25px); font-weight: 800; color: var(--navy); letter-spacing: 0.3px; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .brand-sub-row { display: flex; align-items: center; gap: 7px; margin-top: 3px; flex-wrap: nowrap; overflow: hidden; }
+    .estd-pill { flex-shrink: 0; background: #fef3c7; color: #92400e; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 99px; }
+    .brand small { font-size: 12.5px; color: var(--crimson); font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .hdr-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-    .menu-btn { background: var(--crimson); color: #fff; border: none; width: 40px; height: 40px; border-radius: 10px; font-size: 20px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+    .menu-btn { background: var(--crimson); color: #fff; border: none; width: 42px; height: 42px; border-radius: 10px; font-size: 21px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
 
     /* Slide Drawer */
     .drawer-bg { position: fixed; inset: 0; background: rgba(15,27,45,.55); z-index: 400; display: none; }
@@ -91,6 +92,7 @@
     .btn-gold { background: var(--gold); color: var(--navy); }
     .btn-light { background: #fff; color: var(--navy); border: 1px solid var(--border); }
     .btn-green { background: var(--green); color: #fff; }
+    .btn-blue { background: var(--blue); color: #fff; }
     .btn-red { background: var(--red); color: #fff; }
     .btn-sm { padding: 6px 10px; font-size: 12px; border-radius: 8px; }
 
@@ -117,6 +119,7 @@
     .val-ico { width: 42px; height: 42px; border-radius: 11px; display: inline-flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 10px; color: #fff; }
     .tag { display: inline-block; padding: 3px 9px; border-radius: 99px; font-size: 11px; font-weight: 800; background: #fee2e2; color: var(--crimson); }
     .tag.green { background: #dcfce7; color: var(--green); }
+    .tag.blue { background: #dbeafe; color: var(--blue); }
     .tag.gold { background: #fef3c7; color: #92400e; }
     .tag.navy { background: #e2e8f0; color: var(--navy); }
     .gallery-img { width: 100%; height: 185px; object-fit: cover; border-radius: 11px; margin-bottom: 10px; background: #eee; }
@@ -130,9 +133,9 @@
     .phone-wrap span { padding: 9px 10px; background: #efeae0; font-weight: 800; font-size: 13px; color: var(--navy); border-right: 1px solid var(--border); }
     .phone-wrap input { border: none !important; background: transparent !important; }
 
-    /* ERP Perpendicular Sidebar */
+    /* ERP Sidebar */
     .erp-layout { display: grid; grid-template-columns: 245px 1fr; gap: 18px; align-items: start; }
-    .side-nav { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 10px; box-shadow: var(--shadow); position: sticky; top: 74px; display: flex; flex-direction: column; gap: 4px; }
+    .side-nav { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 10px; box-shadow: var(--shadow); position: sticky; top: 88px; display: flex; flex-direction: column; gap: 4px; }
     .side-btn { width: 100%; text-align: left; padding: 10px 12px; border-radius: 10px; border: none; background: transparent; color: var(--navy); font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; }
     .side-btn:hover { background: #f4f1ea; }
     .side-btn.active { background: var(--crimson); color: #fff; }
@@ -170,6 +173,8 @@
     .att-btn.P { background: #dcfce7; color: var(--green); border-color: var(--green); }
     .att-btn.A { background: #fee2e2; color: var(--red); border-color: var(--red); }
     .hidden { display: none !important; }
+    .ms-cell { width: 68px; padding: 6px; border: 1.5px solid var(--border); border-radius: 7px; text-align: center; font-weight: 700; }
+    .ms-cell:focus { outline: none; border-color: var(--crimson); background: #fffbeb; }
 
     footer { background: var(--navy); color: #cbd5e1; padding: 36px 18px 22px; margin-top: 40px; border-top: 3px solid var(--gold); }
     .foot-grid { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 24px; }
@@ -179,6 +184,7 @@
     .foot-bot { max-width: 1140px; margin: 24px auto 0; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.12); text-align: center; font-size: 12px; }
 
     @media (max-width: 820px) {
+      .brand img { width: 48px; height: 48px; }
       .erp-layout { grid-template-columns: 1fr; }
       .side-nav { position: static; flex-direction: row; overflow-x: auto; padding: 8px; }
       .side-btn { width: auto; white-space: nowrap; }
@@ -191,14 +197,14 @@
 <div id="toastBox"></div>
 
 <div id="splash">
-  <img id="splashLogo" class="pulse-logo" src="./logo.jpeg" alt="Sunrise Logo" />
-  <div id="splashSchoolName" style="margin-top:12px;font-size:20px;font-weight:800;color:#f6cf77;">SUNRISE PUBLIC SCHOOL</div>
+  <img id="splashLogo" class="pulse-logo" src="./logo.png" onerror="this.src='./logo.jpeg'" alt="Sunrise Logo" />
+  <div id="splashSchoolName" style="margin-top:12px;font-size:22px;font-weight:800;color:#f6cf77;">SUNRISE PUBLIC SCHOOL</div>
   <small style="color:#cbd5e1;">Ekdara, Jhajha • Estd. 2012</small>
 </div>
 
 <header class="topbar">
   <div class="brand" onclick="showView('public')">
-    <img id="headerLogo" src="./logo.jpeg" alt="Logo" />
+    <img id="headerLogo" src="./logo.png" onerror="this.src='./logo.jpeg'" alt="Logo" />
     <div class="brand-text">
       <div class="brand-title" id="hdrSchoolName">SUNRISE PUBLIC SCHOOL</div>
       <div class="brand-sub-row">
@@ -230,7 +236,7 @@
   <button class="drawer-item" onclick="goPublicSection('noticeSec')">📢 Notice Board</button>
   <button class="drawer-item" onclick="goPublicSection('gallerySec')">🖼️ Photo Gallery</button>
   <button class="drawer-item" onclick="goPublicSection('enquirySec')">📝 Admission Enquiry</button>
-  <button class="drawer-item" onclick="toggleDrawer(false);installPWA()">📲 Download / Install App</button>
+  <button class="drawer-item install-app-btn" onclick="toggleDrawer(false);installPWA()">📲 Download / Install App</button>
   <button class="drawer-item" onclick="toggleDrawer(false);triggerPushPrompt()">🔔 Allow Push Notifications</button>
   <hr style="border:none;border-top:1px solid var(--border);margin:12px 0;" />
   <button class="drawer-item" onclick="toggleDrawer(false);openLegalModal('terms')">📜 Terms & Conditions</button>
@@ -247,7 +253,7 @@
       <div class="hero-btns">
         <button class="btn btn-primary" onclick="goPublicSection('enquirySec')">Apply for Admission →</button>
         <button class="btn btn-navy" onclick="goPublicSection('noticeSec')">📢 Notice Board</button>
-        <button class="btn btn-gold" onclick="installPWA()">📲 Install School App</button> 
+        <button class="btn btn-gold install-app-btn" onclick="installPWA()">📲 Install School App</button>
         <button class="btn btn-navy" onclick="openSeparateLogin('guardian')">🎓 Guardian / Student Login</button>
       </div>
       <div class="hero-stats">
@@ -271,10 +277,10 @@
   <section class="container">
     <div class="sec-head"><div><small>LEADERSHIP & FACULTY</small><h2>Principal's Desk & School Staff</h2></div></div>
     <div class="card" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-bottom:16px;">
-      <img id="pubPrincipalImg" src="./logo.jpeg" style="width:92px;height:92px;border-radius:16px;object-fit:cover;border:2px solid var(--gold);" />
+      <img id="pubPrincipalImg" src="./logo.png" onerror="this.src='./logo.jpeg'" style="width:92px;height:92px;border-radius:16px;object-fit:cover;border:2px solid var(--gold);" />
       <div style="flex:1;min-width:220px;">
         <span class="tag gold">PRINCIPAL'S MESSAGE</span>
-        <h3 id="pubPrincipalName" style="margin:4px 0;">Dr. R. K. Verma</h3>
+        <h3 id="pubPrincipalName" style="margin:4px 0;">MR. JAISHYAM KUMAR</h3>
         <p id="pubPrincipalMsg" style="font-size:13.5px;color:var(--muted);">"Our mission is to build confident, disciplined, and compassionate learners prepared for tomorrow's world."</p>
       </div>
     </div>
@@ -316,8 +322,8 @@
     <div class="foot-grid">
       <div>
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-          <img id="footLogo" src="./logo.jpeg" style="width:44px;height:44px;border-radius:50%;background:#fff;object-fit:cover;" />
-          <div><strong id="footName" style="color:#fff;font-size:15px;">SUNRISE PUBLIC SCHOOL</strong><br><small style="color:var(--gold);">Ekdara, Jhajha • Estd. 2012</small></div>
+          <img id="footLogo" src="./logo.png" onerror="this.src='./logo.jpeg'" style="width:48px;height:48px;border-radius:50%;background:#fff;object-fit:cover;" />
+          <div><strong id="footName" style="color:#fff;font-size:16px;">SUNRISE PUBLIC SCHOOL</strong><br><small style="color:var(--gold);">Ekdara, Jhajha • Estd. 2012</small></div>
         </div>
         <p style="font-size:13px;">Co-educational English Medium School following the CBSE Curriculum from Nursery to Class X in Jamui District, Bihar.</p>
       </div>
@@ -326,7 +332,7 @@
         <span class="foot-link" onclick="goPublicSection('aboutSec')">About & Principal's Desk</span>
         <span class="foot-link" onclick="goPublicSection('noticeSec')">Notice Board & Circulars</span>
         <span class="foot-link" onclick="openSeparateLogin('guardian')">Guardian Portal & Fee Details</span>
-        <span class="foot-link" onclick="installPWA()">📲 Download / Install App</span>
+        <span class="foot-link install-app-btn" onclick="installPWA()">📲 Download / Install App</span>
         <span class="foot-link" onclick="openLegalModal('terms')">Terms & Conditions</span>
         <span class="foot-link" onclick="openLegalModal('privacy')">Privacy Policy</span>
       </div>
@@ -334,7 +340,7 @@
         <div class="foot-h">CONTACT US</div>
         <div style="font-size:13px;line-height:1.9;">
           📍 <span id="footAddr">Ekdara, Jhajha - 811308, Dist. Jamui, Bihar</span><br>
-          📞 <span id="footPhone">+91 94312-81308</span><br>
+          📞 <span id="footPhone">+91 9931581871</span><br>
           ✉️ <span id="footEmail">office@sunrisepublicschooljhajha.edu.in</span><br>
           🕒 <span id="footTime">Mon – Sat: 8:00 AM – 2:15 PM</span>
         </div>
@@ -375,9 +381,9 @@
       <button class="side-btn admin-only" data-tab="fees" onclick="openTab('fees')">💰 Daily Fee Calendar</button>
       <button class="side-btn admin-only" data-tab="feestruct" onclick="openTab('feestruct')">📑 Fee Structure</button>
       <button class="side-btn" id="sideAttBtn" data-tab="attendance" onclick="openTab('attendance')">📋 Attendance</button>
-      <button class="side-btn" id="sideMarksBtn" data-tab="marks" onclick="openTab('marks')">📊 Marks Entry</button>
+      <button class="side-btn" id="sideMarksBtn" data-tab="marks" onclick="openTab('marks')">📊 Marks Entry (Bulk)</button>
       <button class="side-btn admin-only" data-tab="admit" onclick="openTab('admit')">🪪 Bulk Admit Cards</button>
-      <button class="side-btn admin-only" data-tab="bulkmarks" onclick="openTab('bulkmarks')">📚 Bulk Marksheets</button>
+      <button class="side-btn admin-only" data-tab="bulkmarks" onclick="openTab('bulkmarks')">📚 Marksheets & Yearly</button>
       <button class="side-btn admin-only" data-tab="whatsapp" onclick="openTab('whatsapp')">💬 WhatsApp & Enquiries</button>
       <button class="side-btn admin-only" data-tab="notices" onclick="openTab('notices')">📢 Notices & Gallery</button>
       <button class="side-btn admin-only" data-tab="school" onclick="openTab('school')">🏫 School, Principal & Staff</button>
@@ -397,11 +403,12 @@
           </select>
           <button class="pill active" data-st="all" onclick="setStuStatus('all',this)">All</button>
           <button class="pill" data-st="dues" onclick="setStuStatus('dues',this)">Pending Dues</button>
+          <button class="pill" data-st="advance" onclick="setStuStatus('advance',this)">Advance</button>
           <button class="pill" data-st="paid" onclick="setStuStatus('paid',this)">Paid</button>
         </div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Student</th><th>Adm / Class / Roll</th><th>Parent & Mobile</th><th>Fee Status</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Student</th><th>Adm / Class / Roll</th><th>Parent & Mobile</th><th>Fee Status (Due / Adv)</th><th>Actions</th></tr></thead>
             <tbody id="studentsTbody"></tbody>
           </table>
         </div>
@@ -424,8 +431,12 @@
         </div>
         <div class="card" style="margin-bottom:14px;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
-            <h3 style="font-size:16px;">+ Record Fee Payment</h3>
-            <button type="button" class="btn btn-gold btn-sm" onclick="addCustomFeeHead()">+ Add New Fee Type / Head</button>
+            <h3 style="font-size:16px;">+ Record Fee / Advance Payment</h3>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <button type="button" class="btn btn-red btn-sm" onclick="quickAddDueForSelected()">+ Add Extra Due</button>
+              <button type="button" class="btn btn-blue btn-sm" onclick="quickAddAdvanceForSelected()">+ Add Advance</button>
+              <button type="button" class="btn btn-gold btn-sm" onclick="addCustomFeeHead()">+ New Fee Type</button>
+            </div>
           </div>
           <form onsubmit="recordFee(event)" class="form-grid">
             <div class="field"><label>Filter Class</label><select id="feeClassFilterEntry" onchange="populateFeeStudentDropdown()"></select></div>
@@ -494,131 +505,38 @@
         </div>
       </section>
 
-      <!-- 5. MARKS ENTRY -->
-     <!-- ==================== MARKSHEET MODULE START ==================== -->
-<div id="marksheetModule" style="padding:14px; font-family:inherit;">
-  <h2 style="margin:0 0 12px; color:#0f1b2d;">📝 Marksheet Management (No Practical)</h2>
+      <!-- 5. MARKS ENTRY (1-TIME SUBJECTS + EXCEL-STYLE BULK ENTRY, NO PRACTICAL) -->
+      <section id="tab-marks" class="tab-pane hidden">
+        <!-- 1-Time Class Subject Setup -->
+        <div class="card" style="margin-bottom:14px;">
+          <h3 style="font-size:16px;margin-bottom:6px;">1️⃣ Ek Baar Class Ke Subjects Save Karein (No Practical)</h3>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:10px;">Ek class ke subjects comma (,) lagakar ek baar save kar lein — phir har exam mein apne aap aa jayenge.</p>
+          <div class="form-grid" style="align-items:end;">
+            <div class="field"><label>Class</label><select id="msSubClass" onchange="msLoadClassSubjects()"></select></div>
+            <div class="field" style="grid-column:span 2;"><label>Subjects (Comma se alag likhein)</label><input id="msSubInput" placeholder="e.g. Hindi, English, Maths, Science, SST, Computer" /></div>
+            <div class="field"><button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="msSaveClassSubjects()">💾 Save Subjects</button></div>
+          </div>
+          <div id="msSubSavedList" style="margin-top:8px;font-size:12.5px;color:var(--green);font-weight:700;"></div>
+        </div>
 
-  <!-- Sub-Navigation Tabs -->
-  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
-    <button class="btn btn-navy" onclick="msSwitchTab('msSubjectsTab')">1. Class Subjects Setup</button>
-    <button class="btn btn-primary" onclick="msSwitchTab('msEntryTab')">2. Bulk Marks Entry / Edit</button>
-    <button class="btn btn-navy" onclick="msSwitchTab('msRecordsTab')">3. Saved Marksheets & Delete</button>
-    <button class="btn btn-gold" onclick="msSwitchTab('msYearlyTab')">4. Yearly Consolidated Marksheet</button>
-  </div>
-
-  <!-- TAB 1: ONE-TIME CLASS SUBJECT SETUP -->
-  <div id="msSubjectsTab" class="ms-tab" style="background:#fff; padding:16px; border-radius:10px; border:1px solid #ddd;">
-    <h3 style="margin-top:0;">1. Ek Baar Class Ke Subjects Save Karein</h3>
-    <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:end; margin-bottom:12px;">
-      <div>
-        <label style="font-size:12px; font-weight:600;">Class Chunein</label><br>
-        <select id="msSubClass" onchange="msLoadClassSubjects()" style="padding:8px; border-radius:6px; border:1px solid #ccc; min-width:140px;">
-          <option value="Nursery">Nursery</option><option value="LKG">LKG</option><option value="UKG">UKG</option>
-          <option value="Class 1">Class 1</option><option value="Class 2">Class 2</option><option value="Class 3">Class 3</option>
-          <option value="Class 4">Class 4</option><option value="Class 5">Class 5</option><option value="Class 6">Class 6</option>
-          <option value="Class 7">Class 7</option><option value="Class 8">Class 8</option><option value="Class 9">Class 9</option>
-          <option value="Class 10">Class 10</option>
-        </select>
-      </div>
-      <div style="flex:1; min-width:240px;">
-        <label style="font-size:12px; font-weight:600;">Subjects (Comma lagakar likhein — e.g. Hindi, English, Maths, Science, SST)</label><br>
-        <input id="msSubInput" type="text" placeholder="Hindi, English, Maths, Science, SST, Computer" style="width:100%; padding:8px; border-radius:6px; border:1px solid #ccc;">
-      </div>
-      <button class="btn btn-primary" onclick="msSaveClassSubjects()">💾 Save Subjects</button>
-    </div>
-    <div id="msSubSavedList" style="font-size:13px; color:#155724; background:#e8f5e9; padding:10px; border-radius:6px;"></div>
-  </div>
-
-  <!-- TAB 2: EXCEL-STYLE BULK ENTRY & EDIT -->
-  <div id="msEntryTab" class="ms-tab" style="display:none; background:#fff; padding:16px; border-radius:10px; border:1px solid #ddd;">
-    <h3 style="margin-top:0;">2. Bulk Marks Entry / Edit (Excel Style)</h3>
-    <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:end; margin-bottom:14px;">
-      <div>
-        <label style="font-size:12px; font-weight:600;">Session</label><br>
-        <input id="msSession" type="text" value="2026-27" style="padding:8px; width:100px; border-radius:6px; border:1px solid #ccc;">
-      </div>
-      <div>
-        <label style="font-size:12px; font-weight:600;">Class</label><br>
-        <select id="msEntryClass" style="padding:8px; border-radius:6px; border:1px solid #ccc; min-width:130px;">
-          <option value="Nursery">Nursery</option><option value="LKG">LKG</option><option value="UKG">UKG</option>
-          <option value="Class 1">Class 1</option><option value="Class 2">Class 2</option><option value="Class 3">Class 3</option>
-          <option value="Class 4">Class 4</option><option value="Class 5">Class 5</option><option value="Class 6">Class 6</option>
-          <option value="Class 7">Class 7</option><option value="Class 8">Class 8</option><option value="Class 9">Class 9</option>
-          <option value="Class 10">Class 10</option>
-        </select>
-      </div>
-      <div>
-        <label style="font-size:12px; font-weight:600;">Exam Name (Khud Likhein)</label><br>
-        <input id="msExamName" type="text" placeholder="e.g. Quarterly / Semi-Final / Final" style="padding:8px; width:210px; border-radius:6px; border:1px solid #ccc;">
-      </div>
-      <div>
-        <label style="font-size:12px; font-weight:600;">Full Marks / Sub</label><br>
-        <input id="msFullMarks" type="number" value="100" style="padding:8px; width:95px; border-radius:6px; border:1px solid #ccc;">
-      </div>
-      <button class="btn btn-navy" onclick="msLoadBulkGrid()">📋 Load Students</button>
-    </div>
-
-    <div id="msBulkGridWrap" style="overflow-x:auto;"></div>
-    <div id="msBulkSaveBar" style="display:none; margin-top:12px;">
-      <button class="btn btn-primary" onclick="msSaveBulkMarks()">💾 Save All Marks (Bulk Save)</button>
-    </div>
-  </div>
-
-  <!-- TAB 3: SAVED MARKSHEETS, SINGLE/BULK PRINT & DELETE -->
-  <div id="msRecordsTab" class="ms-tab" style="display:none; background:#fff; padding:16px; border-radius:10px; border:1px solid #ddd;">
-    <h3 style="margin-top:0;">3. Saved Marksheets (Print / Edit / Delete)</h3>
-    <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:end; margin-bottom:14px;">
-      <div>
-        <label style="font-size:12px; font-weight:600;">Session</label><br>
-        <input id="msRecSession" type="text" value="2026-27" style="padding:8px; width:100px; border-radius:6px; border:1px solid #ccc;">
-      </div>
-      <div>
-        <label style="font-size:12px; font-weight:600;">Class</label><br>
-        <select id="msRecClass" style="padding:8px; border-radius:6px; border:1px solid #ccc;">
-          <option value="Nursery">Nursery</option><option value="LKG">LKG</option><option value="UKG">UKG</option>
-          <option value="Class 1">Class 1</option><option value="Class 2">Class 2</option><option value="Class 3">Class 3</option>
-          <option value="Class 4">Class 4</option><option value="Class 5">Class 5</option><option value="Class 6">Class 6</option>
-          <option value="Class 7">Class 7</option><option value="Class 8">Class 8</option><option value="Class 9">Class 9</option>
-          <option value="Class 10">Class 10</option>
-        </select>
-      </div>
-      <div>
-        <label style="font-size:12px; font-weight:600;">Exam Name</label><br>
-        <input id="msRecExam" type="text" placeholder="Exact Exam Name" style="padding:8px; width:190px; border-radius:6px; border:1px solid #ccc;">
-      </div>
-      <button class="btn btn-navy" onclick="msLoadSavedRecords()">🔍 Show Records</button>
-      <button class="btn btn-gold" onclick="msBulkPrintExam()">🖨️ Bulk Download / Print All</button>
-      <button class="btn btn-primary" style="background:#b91c1c;" onclick="msBulkDeleteSelected()">🗑️ Bulk Delete Selected</button>
-    </div>
-    <div id="msRecordsList" style="overflow-x:auto;"></div>
-  </div>
-
-  <!-- TAB 4: YEARLY CONSOLIDATED MARKSHEET -->
-  <div id="msYearlyTab" class="ms-tab" style="display:none; background:#fff; padding:16px; border-radius:10px; border:1px solid #ddd;">
-    <h3 style="margin-top:0;">4. Yearly Consolidated Marksheet (Quarter + Semi-Quarter + Semi-Final + Final)</h3>
-    <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:end; margin-bottom:12px;">
-      <div>
-        <label style="font-size:12px; font-weight:600;">Session</label><br>
-        <input id="msYrSession" type="text" value="2026-27" style="padding:8px; width:100px; border-radius:6px; border:1px solid #ccc;">
-      </div>
-      <div>
-        <label style="font-size:12px; font-weight:600;">Class</label><br>
-        <select id="msYrClass" style="padding:8px; border-radius:6px; border:1px solid #ccc;">
-          <option value="Nursery">Nursery</option><option value="LKG">LKG</option><option value="UKG">UKG</option>
-          <option value="Class 1">Class 1</option><option value="Class 2">Class 2</option><option value="Class 3">Class 3</option>
-          <option value="Class 4">Class 4</option><option value="Class 5">Class 5</option><option value="Class 6">Class 6</option>
-          <option value="Class 7">Class 7</option><option value="Class 8">Class 8</option><option value="Class 9">Class 9</option>
-          <option value="Class 10">Class 10</option>
-        </select>
-      </div>
-      <button class="btn btn-navy" onclick="msFindAvailableExams()">🔎 Find Saved Exams</button>
-    </div>
-    <div id="msYrExamsBox" style="margin-bottom:14px;"></div>
-    <div id="msYrStudentsList" style="overflow-x:auto;"></div>
-  </div>
-</div>
-<!-- ==================== MARKSHEET MODULE END ==================== -->
+        <!-- Excel-Style Bulk Entry / Instant Edit -->
+        <div class="card">
+          <h3 style="font-size:16px;margin-bottom:6px;">2️⃣ Excel-Style Bulk Marks Entry / Edit</h3>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">Naya Exam naam likhein (jaise Quarterly, Semi-Quarterly, Semi-Final, Final). Purana Exam naam likhne par purane marks Edit ke liye bhar kar aa jayenge.</p>
+          <div class="form-grid" style="align-items:end;margin-bottom:12px;">
+            <div class="field"><label>Session *</label><input id="msSession" value="2026-27" /></div>
+            <div class="field"><label>Class *</label><select id="msEntryClass"></select></div>
+            <div class="field"><label>Exam Name (Khud Likhein) *</label><input id="msExamName" placeholder="e.g. Quarterly / Semi-Final / Final" list="msSavedExamDatalist" /></div>
+            <div class="field"><label>Full Marks / Subject *</label><input id="msFullMarks" type="number" value="100" min="1" /></div>
+            <div class="field"><button class="btn btn-navy" style="width:100%;justify-content:center;" onclick="msLoadBulkGrid()">📋 Load Students</button></div>
+          </div>
+          <datalist id="msSavedExamDatalist"></datalist>
+          <div id="msBulkGridWrap" class="table-wrap" style="margin-bottom:12px;"></div>
+          <div id="msBulkSaveBar" class="hidden" style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button id="msBulkSaveBtn" class="btn btn-green" onclick="msSaveBulkMarks()">💾 Save All Marks (Bulk Save)</button>
+          </div>
+        </div>
+      </section>
 
       <!-- 6. BULK ADMIT CARDS -->
       <section id="tab-admit" class="tab-pane hidden">
@@ -638,17 +556,35 @@
         </div>
       </section>
 
-      <!-- 7. BULK MARKSHEETS -->
+      <!-- 7. SAVED MARKSHEETS, SINGLE/BULK DELETE & YEARLY CONSOLIDATED -->
       <section id="tab-bulkmarks" class="tab-pane hidden">
-        <div class="card">
-          <h3 style="margin-bottom:6px;">📚 Bulk Marksheets Generator</h3>
-          <div class="form-grid" style="margin-bottom:14px;">
-            <div class="field"><label>Select Class *</label><select id="bmClass" onchange="renderBulkMarksPreviewList()"></select></div>
-            <div class="field"><label>Exam Title *</label><input id="bmExam" value="ANNUAL STATEMENT OF MARKS (2026-27)" /></div>
-            <div class="field"><label>Search Student (Optional)</label><input id="bmSearch" placeholder="Filter by name..." oninput="renderBulkMarksPreviewList()" /></div>
+        <!-- Part A: Exam-Wise Saved Marksheets -->
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="font-size:16px;margin-bottom:8px;">📚 Saved Exam Marksheets (Single / Bulk Print & Delete)</h3>
+          <div class="form-grid" style="align-items:end;margin-bottom:12px;">
+            <div class="field"><label>Session</label><input id="msRecSession" value="2026-27" onchange="msRefreshExamDropdown()" /></div>
+            <div class="field"><label>Class</label><select id="msRecClass" onchange="msRefreshExamDropdown()"></select></div>
+            <div class="field"><label>Saved Exam</label><select id="msRecExam" onchange="msLoadSavedRecords()"></select></div>
+            <div class="field"><button class="btn btn-navy" style="width:100%;justify-content:center;" onclick="msLoadSavedRecords()">🔍 Show Records</button></div>
           </div>
-          <div id="bmCountInfo" style="font-size:13px;font-weight:700;color:var(--crimson);margin-bottom:10px;"></div>
-          <button class="btn btn-gold" onclick="generateBulkMarksheetsPDF()">👁️ Preview & Download Bulk Marksheets PDF</button>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+            <button class="btn btn-gold btn-sm" onclick="msBulkPrintExamPDF()">👁️ Bulk Preview & Download PDF</button>
+            <button class="btn btn-red btn-sm" onclick="msBulkDeleteSelected()">🗑️ Bulk Delete Selected</button>
+          </div>
+          <div id="msRecordsList" class="table-wrap"></div>
+        </div>
+
+        <!-- Part B: Yearly Consolidated Marksheet -->
+        <div class="card">
+          <h3 style="font-size:16px;margin-bottom:6px;">🏆 Yearly Consolidated Marksheet (Quarter + Semi-Quarter + Semi-Final + Final)</h3>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">Session aur Class chunein → jin exams ko saal bhar ki marksheet mein jodna hai unhe tick karein → Single ya Bulk Yearly PDF nikal lein.</p>
+          <div class="form-grid" style="align-items:end;margin-bottom:12px;">
+            <div class="field"><label>Session</label><input id="msYrSession" value="2026-27" /></div>
+            <div class="field"><label>Class</label><select id="msYrClass"></select></div>
+            <div class="field"><button class="btn btn-navy" style="width:100%;justify-content:center;" onclick="msFindAvailableExams()">🔎 Find Saved Exams</button></div>
+          </div>
+          <div id="msYrExamsBox" style="margin-bottom:12px;"></div>
+          <div id="msYrStudentsList" class="table-wrap"></div>
         </div>
       </section>
 
@@ -662,18 +598,7 @@
               <select id="waTarget" onchange="renderWaQueue()"><option value="all">All Guardians</option><option value="dues">Pending Dues</option><option value="class">Specific Class</option></select>
             </div>
             <div id="waClassWrap" class="field hidden" style="margin-bottom:8px;"><label>Class</label><select id="waClass" onchange="renderWaQueue()"></select></div>
-            <div class="field" style="margin-bottom:10px;"><label>Message ({name}, {dues})</label><textarea id="waMsg" rows="2">Dear {name}'s Parents,
-
-Greetings from Sunrise Public School, Jhajha!
-
-This is to inform you that the school fee of your ward is currently pending. As per our records, the outstanding fee amount is ₹{dues}.
-
-We kindly request you to clear the pending dues at the earliest to avoid any inconvenience. Your cooperation and timely payment will be highly appreciated.
-
-Thank you for your understanding and support.
-
-Regards,
-Sunrise Public School, Jhajha. Pending fee: Rs. {dues}.</textarea></div>
+            <div class="field" style="margin-bottom:10px;"><label>Message ({name}, {dues})</label><textarea id="waMsg" rows="2">Namaskar {name} ke abhibhavak, Sunrise Public School Jhajha se soochna. Pending fee: Rs. {dues}.</textarea></div>
             <div id="waQueueList" style="max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:7px;"></div>
           </div>
           <div class="card">
@@ -863,6 +788,8 @@ Sunrise Public School, Jhajha. Pending fee: Rs. {dues}.</textarea></div>
           <div class="phone-wrap"><span>+91</span><input id="sPhone" required maxlength="10" oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)" /></div>
         </div>
         <div class="field"><label>Annual Fee (₹)</label><input id="sTotalFee" type="number" value="6000" /></div>
+        <div class="field"><label>Previous / Extra Due (₹)</label><input id="sExtraDue" type="number" value="0" /></div>
+        <div class="field"><label>Opening Advance (₹)</label><input id="sOpeningAdv" type="number" value="0" /></div>
         <div class="field"><label>Guardian Password (Optional)</label><input id="sGPass" placeholder="Default: Mobile No" /></div>
         <div class="field"><label>Address</label><input id="sAddr" /></div>
         <div class="field" style="grid-column:1/-1;"><label>Student Photo</label><input id="sPhoto" type="file" accept="image/*" /></div>
@@ -904,12 +831,15 @@ Sunrise Public School, Jhajha. Pending fee: Rs. {dues}.</textarea></div>
 
 <div id="appInstallModal" class="modal-bg">
   <div class="modal" style="max-width:440px;">
-    <div class="modal-head"><h3>📲 Install Sunrise School App</h3><button class="close-x" onclick="closeModal('appInstallModal')">×</button></div>
-    <p style="font-size:13.5px;color:var(--muted);margin-bottom:12px;">Apne phone par bina Play Store ke Sunrise Public School App install karne ke liye:</p>
+    <div class="modal-head"><h3>📲 Install Sps Jhajha App</h3><button class="close-x" onclick="closeModal('appInstallModal')">×</button></div>
+    <div style="background:#fef3c7;color:#92400e;padding:9px 12px;border-radius:9px;font-size:12.5px;font-weight:700;margin-bottom:10px;">
+      Note: Agar aapke phone mein Sps Jhajha app pehle se install hai, toh Home Screen se direct open karein.
+    </div>
+    <p style="font-size:13.5px;color:var(--muted);margin-bottom:10px;">Naye phone par install karne ke liye:</p>
     <ol style="font-size:13px;padding-left:18px;line-height:1.8;margin-bottom:14px;">
       <li>Browser ke upar right mein <strong>3-dots (⋮)</strong> ya <strong>Share</strong> icon par click karein.</li>
       <li><strong>"Install app"</strong> ya <strong>"Add to Home screen"</strong> select karein.</li>
-      <li><strong>Install</strong> dabaein — Sunrise Logo ke saath App Home Screen par aa jayega!</li>
+      <li><strong>Install</strong> dabaein — App Home Screen par aa jayega!</li>
     </ol>
     <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="closeModal('appInstallModal')">Got It</button>
   </div>
@@ -930,7 +860,7 @@ db.enablePersistence({ synchronizeTabs: true }).catch(() => {});
 
 const CLASSES = ["Nursery","LKG","UKG","Class 1","Class 2","Class 3","Class 4","Class 5","Class 6","Class 7","Class 8","Class 9","Class 10"];
 const DEFAULT_FEE_HEADS = [
-  "Monthly Tuition Fee","Admission Fee","Bus / Transport Fee","Exam Fee","Function / Annual Fee","Books & Uniform",
+  "Monthly Tuition Fee","Advance Fee","Admission Fee","Bus / Transport Fee","Exam Fee","Function / Annual Fee","Books & Uniform",
   "April","May","June","July","August","September","October","November","December","January","February","March","Other Fee"
 ];
 const DEFAULT_SCHOOL = {
@@ -950,8 +880,9 @@ const DEFAULT_SCHOOL = {
   customFeeHeads: []
 };
 
-let DB = JSON.parse(localStorage.getItem('sunrise_cache_v8') || 'null') || {
+let DB = JSON.parse(localStorage.getItem('sunrise_cache_v9') || 'null') || {
   students: [], fees: [], attendance: {}, notices: [], gallery: [], enquiries: [], teachers: [], staff: [], feeStructure: {},
+  classSubjects: {}, marksheets: [],
   config: { ...DEFAULT_SCHOOL }
 };
 let currentUser = JSON.parse(sessionStorage.getItem('sunrise_session') || 'null');
@@ -960,7 +891,7 @@ let LOGO_DATA_URL = '', WATERMARK_DATA_URL = '';
 let lastPdfDoc = null, lastPdfName = 'Document.pdf';
 
 function getCfg() { return { ...DEFAULT_SCHOOL, ...(DB.config || {}) }; }
-function saveLocalCache() { localStorage.setItem('sunrise_cache_v8', JSON.stringify(DB)); }
+function saveLocalCache() { localStorage.setItem('sunrise_cache_v9', JSON.stringify(DB)); }
 function setSession(u) { currentUser = u; sessionStorage.setItem('sunrise_session', JSON.stringify(u)); }
 function todayStr() { return new Date().toISOString().split('T')[0]; }
 function fmtDate(d) {
@@ -978,34 +909,27 @@ function setProgress(pct) {
   if (pct >= 100) setTimeout(() => { b.style.opacity = '0'; b.style.width = '0%'; }, 300);
 }
 
-// OneSignal Push Prompt
 function triggerPushPrompt() {
   window.OneSignalDeferred = window.OneSignalDeferred || [];
   OneSignalDeferred.push(async function(OneSignal) {
-    try {
-      await OneSignal.Notifications.requestPermission();
-      toast('Push Notifications Enabled ✓');
-    } catch {
-      alert('Agar notifications block hain, toh browser address bar ke left Lock/Settings icon se Notifications Allow karein.');
-    }
+    try { await OneSignal.Notifications.requestPermission(); toast('Push Notifications Enabled ✓'); }
+    catch { alert('Browser address bar ke left Lock/Settings icon se Notifications Allow karein.'); }
   });
 }
 
-// Legal Modals
 function openLegalModal(type) {
   const cfg = getCfg();
   document.getElementById('legalTitle').textContent = type === 'terms' ? '📜 Terms & Conditions' : '🔒 Privacy Policy';
   document.getElementById('legalBody').innerHTML = type === 'terms'
-    ? `<p><strong>1. Official School Portal:</strong> This ERP portal is exclusively operated by ${cfg.schoolName}, ${cfg.address} for students, guardians, and authorized staff.</p>
-       <p style="margin-top:8px;"><strong>2. Account Approval:</strong> All Teacher and Guardian registrations require explicit verification and approval by the School Administration before portal access is granted.</p>
-       <p style="margin-top:8px;"><strong>3. Fees & Documents:</strong> Fee receipts, marksheets, and admit cards generated here are official digital copies subject to verification against school office ledgers.</p>`
-    : `<p><strong>1. Data Collection:</strong> ${cfg.schoolName} collects student academic records, attendance, fee payments, and guardian contact details strictly for school administration and communication.</p>
-       <p style="margin-top:8px;"><strong>2. Data Security:</strong> Records are securely stored on Google Firebase Cloud Firestore. We never sell or share student/guardian phone numbers or personal data with third parties.</p>
-       <p style="margin-top:8px;"><strong>3. Contact:</strong> For data correction or deletion requests, please contact the school office at ${cfg.phone}.</p>`;
+    ? `<p><strong>1. Official School Portal:</strong> Operated by ${cfg.schoolName}, ${cfg.address}.</p>
+       <p style="margin-top:8px;"><strong>2. Account Approval:</strong> Teacher & Guardian accounts require Administration approval.</p>
+       <p style="margin-top:8px;"><strong>3. Fees & Documents:</strong> Digital receipts, marksheets, and admit cards are subject to school ledger verification.</p>`
+    : `<p><strong>1. Data Collection:</strong> ${cfg.schoolName} collects student records strictly for school administration.</p>
+       <p style="margin-top:8px;"><strong>2. Security:</strong> Stored securely on Google Firebase Cloud Firestore. Never shared with third parties.</p>
+       <p style="margin-top:8px;"><strong>3. Contact:</strong> ${cfg.phone}.</p>`;
   openModal('legalModal');
 }
 
-// PDF Preview
 function openPdfPreview(doc, filename, title = 'PDF Preview') {
   lastPdfDoc = doc; lastPdfName = filename;
   document.getElementById('pdfPreviewTitle').textContent = '📄 ' + title;
@@ -1014,7 +938,6 @@ function openPdfPreview(doc, filename, title = 'PDF Preview') {
 }
 function downloadPreviewedPDF() { if (lastPdfDoc) { lastPdfDoc.save(lastPdfName); toast('PDF Downloaded!'); } }
 
-// Logos & Soft Watermark
 function imageToPng(imgEl, softWatermark = false) {
   try {
     const c = document.createElement('canvas'); c.width = 240; c.height = 240;
@@ -1028,7 +951,8 @@ function imageToPng(imgEl, softWatermark = false) {
 function initLogos() {
   const probe = new Image();
   probe.onload = () => { LOGO_DATA_URL = imageToPng(probe, false); WATERMARK_DATA_URL = imageToPng(probe, true); };
-  probe.src = './logo.jpeg';
+  probe.onerror = () => { if (!probe.src.includes('logo.jpeg')) probe.src = './logo.jpeg'; };
+  probe.src = './logo.png';
 }
 function compressImage(file, maxW = 600, q = 0.72) {
   return new Promise((res, rej) => {
@@ -1047,7 +971,6 @@ function compressImage(file, maxW = 600, q = 0.72) {
   });
 }
 
-// Drawer & Modals
 function toggleDrawer(open) {
   document.getElementById('drawerBg').classList.toggle('open', open);
   document.getElementById('slideDrawer').classList.toggle('open', open);
@@ -1059,7 +982,6 @@ function goPublicSection(id) {
 function openModal(id) { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
-// Separate Logins & Strict Approvals
 function openSeparateLogin(role) {
   if (role === 'admin') openModal('adminLoginModal');
   else if (role === 'teacher') { switchTMode('login'); openModal('teacherLoginModal'); }
@@ -1161,8 +1083,8 @@ function openTab(name, preset) {
   if (name === 'fees') { populateFeeStudentDropdown(); populateFeeHeadsDropdown(); if (preset === 'today') { setFeeToday(); setFeeScope('day'); } else if (preset === 'all') setFeeScope('all'); }
   if (name === 'feestruct') { loadFeeStructForm(); renderFeeStructTable(); }
   if (name === 'attendance') renderAttendance();
-  if (name === 'marks') populateMarksStudentDropdown();
-  if (name === 'bulkmarks') renderBulkMarksPreviewList();
+  if (name === 'marks') { msLoadClassSubjects(); msUpdateExamDatalist(); }
+  if (name === 'bulkmarks') { msRefreshExamDropdown(); }
   if (name === 'school') applySchoolProfileToUI();
   if (name === 'whatsapp') renderWaQueue();
 }
@@ -1170,7 +1092,7 @@ function openTab(name, preset) {
 // Firestore Real-Time Sync
 function startRealtimeSync() {
   setProgress(30);
-  ['students','fees','notices','gallery','enquiries','teachers','staff'].forEach(col => {
+  ['students','fees','notices','gallery','enquiries','teachers','staff','marksheets'].forEach(col => {
     db.collection(col).onSnapshot(snap => {
       DB[col] = snap.docs.map(d => ({ id: d.id, ...d.data() }));
       saveLocalCache(); refreshAllUI(); setProgress(100);
@@ -1184,13 +1106,49 @@ function startRealtimeSync() {
     DB.feeStructure = {}; snap.docs.forEach(d => DB.feeStructure[d.id] = d.data());
     saveLocalCache(); renderFeeStructTable();
   });
+  db.collection('classSubjects').onSnapshot(snap => {
+    DB.classSubjects = {}; snap.docs.forEach(d => DB.classSubjects[d.id] = d.data().subjects || []);
+    saveLocalCache(); if (currentUser) msLoadClassSubjects();
+  });
   db.collection('config').doc('main').onSnapshot(async doc => {
     if (doc.exists) { DB.config = { ...DEFAULT_SCHOOL, ...doc.data() }; saveLocalCache(); applySchoolProfileToUI(); populateFeeHeadsDropdown(); }
     else await db.collection('config').doc('main').set(DEFAULT_SCHOOL);
   });
 }
 
-// Custom Fee Heads
+// Fee Calculations (Annual + Extra Due vs Paid + Opening Advance)
+function getStuTotalPayable(s) { return Number(s.totalFee || 0) + Number(s.extraDue || 0); }
+function getStuPaid(id) {
+  const s = DB.students.find(x => x.id === id) || {};
+  const receipts = DB.fees.filter(f => f.studentId === id).reduce((sum, f) => sum + Number(f.amount || 0), 0);
+  return receipts + Number(s.openingAdvance || 0);
+}
+function getStuDues(s) { return Math.max(0, getStuTotalPayable(s) - getStuPaid(s.id)); }
+function getStuAdvance(s) { return Math.max(0, getStuPaid(s.id) - getStuTotalPayable(s)); }
+
+async function addExtraDue(stuId) {
+  const s = DB.students.find(x => x.id === stuId); if (!s) return;
+  const amt = Number(prompt(`Enter Extra / Previous Due amount (₹) to ADD for ${s.name}:`));
+  if (!amt || amt <= 0) return;
+  const newDue = Number(s.extraDue || 0) + amt;
+  await db.collection('students').doc(s.id).set({ extraDue: newDue }, { merge: true });
+  toast(`₹${amt} Extra Due added for ${s.name}!`);
+}
+async function addAdvancePayment(stuId) {
+  const s = DB.students.find(x => x.id === stuId); if (!s) return;
+  const amt = Number(prompt(`Enter Advance Fee amount (₹) received from ${s.name}:`));
+  if (!amt || amt <= 0) return;
+  const receiptNo = 'ADV-' + Math.floor(1000 + Math.random()*9000);
+  const ref = await db.collection('fees').add({
+    receiptNo, studentId: s.id, studentName: s.name, className: s.className, phone: s.phone,
+    amount: amt, mode: 'Cash', date: todayStr(), head: 'Advance Fee', note: 'Advance Fee Deposit', createdAt: Date.now()
+  });
+  toast(`₹${amt} Advance saved! Opening Receipt...`);
+  setTimeout(() => generateFeeReceiptPDF(ref.id), 350);
+}
+function quickAddDueForSelected() { const id = document.getElementById('feeStuSelect').value; if (id) addExtraDue(id); else toast('Select a student first', 'err'); }
+function quickAddAdvanceForSelected() { const id = document.getElementById('feeStuSelect').value; if (id) addAdvancePayment(id); else toast('Select a student first', 'err'); }
+
 function populateFeeHeadsDropdown() {
   const el = document.getElementById('feeHead'); if (!el) return;
   const heads = [...DEFAULT_FEE_HEADS, ...(getCfg().customFeeHeads || [])];
@@ -1266,11 +1224,9 @@ async function addPublicStaff(e) {
 
 function populateClassDropdowns() {
   const opts = CLASSES.map(c => `<option value="${c}">${c}</option>`).join('');
-  ['enqClass','sClass','attClass','admitClass','bmClass','waClass','fsClass'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = opts; });
-  ['stuClassFilter','feeClassFilterEntry','marksClassFilter','gClassFilter'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = '<option value="">All Classes</option>' + opts; });
+  ['enqClass','sClass','attClass','admitClass','waClass','fsClass','msSubClass','msEntryClass','msRecClass','msYrClass'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = opts; });
+  ['stuClassFilter','feeClassFilterEntry','gClassFilter'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = '<option value="">All Classes</option>' + opts; });
 }
-function getStuPaid(id) { return DB.fees.filter(f => f.studentId === id).reduce((s, f) => s + Number(f.amount || 0), 0); }
-function getStuDues(s) { return Math.max(0, Number(s.totalFee || 0) - getStuPaid(s.id)); }
 
 function refreshAllUI() {
   renderPublic();
@@ -1284,6 +1240,7 @@ function refreshAllUI() {
   document.getElementById('kpiDues').textContent = '₹' + DB.students.reduce((s,x)=>s+getStuDues(x),0).toLocaleString('en-IN');
   document.getElementById('kpiPending').textContent = pendT + pendG;
   renderStudents(); renderFees(); renderAdminNoticesGallery(); renderEnquiries(); renderTeachers(); renderGuardianAccess(); renderWaQueue(); renderAdminStaff();
+  msUpdateExamDatalist();
 }
 
 function renderPublic() {
@@ -1291,7 +1248,7 @@ function renderPublic() {
   document.getElementById('publicNotices').innerHTML = sN.length ? sN.map(n=>`<div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span class="tag">${n.tag||'NOTICE'}</span><small style="color:var(--muted);">${fmtDate(n.date)}</small></div><h3 style="font-size:16px;margin-bottom:5px;color:var(--navy);">${n.title}</h3><p style="font-size:13px;color:var(--muted);">${n.desc}</p></div>`).join('') : '<p style="color:var(--muted);">No notices published yet.</p>';
   const sG = [...DB.gallery].sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
   document.getElementById('publicGallery').innerHTML = sG.length ? sG.map(g=>`<div class="card" style="padding:12px;"><img class="gallery-img" src="${g.img}" loading="lazy" /><strong>${g.title}</strong></div>`).join('') : '<p style="color:var(--muted);">Campus photos coming soon.</p>';
-  document.getElementById('publicStaffGrid').innerHTML = DB.staff.map(st=>`<div class="card" style="display:flex;gap:12px;align-items:center;"><img src="${st.photo||'./logo.jpeg'}" style="width:58px;height:58px;border-radius:12px;object-fit:cover;border:1.5px solid var(--gold);" /><div><strong>${st.name}</strong><br><span class="tag navy">${st.role}</span><br><small style="color:var(--muted);">${st.info||''}</small></div></div>`).join('');
+  document.getElementById('publicStaffGrid').innerHTML = DB.staff.map(st=>`<div class="card" style="display:flex;gap:12px;align-items:center;"><img src="${st.photo||'./logo.png'}" onerror="this.src='./logo.jpeg'" style="width:58px;height:58px;border-radius:12px;object-fit:cover;border:1.5px solid var(--gold);" /><div><strong>${st.name}</strong><br><span class="tag navy">${st.role}</span><br><small style="color:var(--muted);">${st.info||''}</small></div></div>`).join('');
 }
 function renderAdminStaff() {
   document.getElementById('adminStaffList').innerHTML = DB.staff.map(st=>`<div class="card" style="padding:12px;display:flex;justify-content:space-between;align-items:center;"><div><strong>${st.name}</strong><br><small>${st.role}</small></div><button class="btn btn-red btn-sm" onclick="deleteDoc('staff','${st.id}')">Del</button></div>`).join('');
@@ -1310,6 +1267,8 @@ function openAddStudentModal() {
   document.getElementById('sAdm').value = getNextSpsAdmNo();
   document.getElementById('sSec').value = 'A';
   document.getElementById('sTotalFee').value = getCfg().defaultFee || 6000;
+  document.getElementById('sExtraDue').value = 0;
+  document.getElementById('sOpeningAdv').value = 0;
   openModal('studentModal');
 }
 function editStudent(id) {
@@ -1322,7 +1281,10 @@ function editStudent(id) {
   document.getElementById('sSec').value = s.section||'A'; document.getElementById('sDob').value = s.dob||'';
   document.getElementById('sFather').value = s.father||''; document.getElementById('sMother').value = s.mother||'';
   document.getElementById('sPhone').value = s.phone||''; document.getElementById('sGPass').value = s.guardianPass||'';
-  document.getElementById('sTotalFee').value = s.totalFee||6000; document.getElementById('sAddr').value = s.addr||'';
+  document.getElementById('sTotalFee').value = s.totalFee||6000;
+  document.getElementById('sExtraDue').value = s.extraDue||0;
+  document.getElementById('sOpeningAdv').value = s.openingAdvance||0;
+  document.getElementById('sAddr').value = s.addr||'';
   openModal('studentModal');
 }
 async function saveStudent(e) {
@@ -1345,14 +1307,18 @@ async function saveStudent(e) {
       dob: document.getElementById('sDob').value, father: document.getElementById('sFather').value.trim(),
       mother: document.getElementById('sMother').value.trim(), phone: ph, guardianPass: gPass,
       guardianApproved: ex.guardianApproved !== undefined ? ex.guardianApproved : true,
-      totalFee: Number(document.getElementById('sTotalFee').value||0), addr: document.getElementById('sAddr').value.trim(),
-      photo, marks: ex.marks || { exam:'', att:'', result:'', conduct:'', subjects:[] }, createdAt: ex.createdAt || Date.now()
+      totalFee: Number(document.getElementById('sTotalFee').value||0),
+      extraDue: Number(document.getElementById('sExtraDue').value||0),
+      openingAdvance: Number(document.getElementById('sOpeningAdv').value||0),
+      addr: document.getElementById('sAddr').value.trim(),
+      photo, createdAt: ex.createdAt || Date.now()
     }, { merge: true });
     const banner = document.getElementById('stuRegBanner');
     banner.textContent = `✓ Saved ${admNo} (${document.getElementById('sName').value.trim().toUpperCase()})! Ready for next entry.`;
     banner.classList.remove('hidden');
     if (!editId) {
       ['sRoll','sName','sDob','sFather','sMother','sPhone','sGPass','sAddr','sPhoto'].forEach(k=>document.getElementById(k).value='');
+      document.getElementById('sExtraDue').value = 0; document.getElementById('sOpeningAdv').value = 0;
       setTimeout(() => { document.getElementById('sAdm').value = getNextSpsAdmNo(); }, 250);
     }
     toast('Student Saved!');
@@ -1363,27 +1329,44 @@ async function saveStudent(e) {
 function setStuStatus(st, btn) { stuStatusFilter = st; document.querySelectorAll('#tab-students .pill').forEach(p=>p.classList.remove('active')); btn.classList.add('active'); renderStudents(); }
 function renderStudents() {
   const q = (document.getElementById('stuSearch').value||'').toLowerCase(), cls = document.getElementById('stuClassFilter').value, sort = document.getElementById('stuSort').value;
-  let list = DB.students.filter(s => (!q || (s.name||'').toLowerCase().includes(q) || (s.admNo||'').toLowerCase().includes(q) || (s.phone||'').includes(q)) && (!cls || s.className===cls) && (stuStatusFilter==='all' || (stuStatusFilter==='dues'?getStuDues(s)>0:getStuDues(s)===0)));
+  let list = DB.students.filter(s => {
+    const d = getStuDues(s), adv = getStuAdvance(s);
+    const matchText = !q || (s.name||'').toLowerCase().includes(q) || (s.admNo||'').toLowerCase().includes(q) || (s.phone||'').includes(q);
+    const matchCls = !cls || s.className===cls;
+    const matchSt = stuStatusFilter==='all' || (stuStatusFilter==='dues' ? d>0 : stuStatusFilter==='advance' ? adv>0 : d===0);
+    return matchText && matchCls && matchSt;
+  });
   if (sort==='name') list.sort((a,b)=>(a.name||'').localeCompare(b.name||''));
   if (sort==='dues_desc') list.sort((a,b)=>getStuDues(b)-getStuDues(a));
   if (sort==='newest') list.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
   document.getElementById('studentsTbody').innerHTML = list.length ? list.map(s => {
-    const d = getStuDues(s);
-    return `<tr><td><div style="display:flex;align-items:center;gap:9px;"><img class="avatar" src="${s.photo||'./logo.jpeg'}" /><strong>${s.name}</strong></div></td>
+    const d = getStuDues(s), adv = getStuAdvance(s);
+    const badge = d > 0 ? `<span class="tag">Due: ₹${d}</span>` : adv > 0 ? `<span class="tag blue">Advance: ₹${adv}</span>` : `<span class="tag green">Paid ✓</span>`;
+    return `<tr><td><div style="display:flex;align-items:center;gap:9px;"><img class="avatar" src="${s.photo||'./logo.png'}" onerror="this.src='./logo.jpeg'" /><strong>${s.name}</strong></div></td>
       <td><span class="tag navy">${s.admNo}</span><br><small>${s.className} (${s.section||'A'}) • Roll ${s.roll||'-'}</small></td>
       <td>${s.father}<br><small>+91 ${s.phone}</small></td>
-      <td><span class="tag ${d>0?'':'green'}">${d>0?'Due: ₹'+d:'Paid ✓'}</span></td>
-      <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><button class="btn btn-light btn-sm" onclick="openProfile360('${s.id}')">360°</button><button class="btn btn-gold btn-sm" onclick="generateMarksheetPDF('${s.id}')">Marksheet</button><button class="btn btn-light btn-sm" onclick="editStudent('${s.id}')">Edit</button><button class="btn btn-red btn-sm" onclick="deleteDoc('students','${s.id}')">Del</button></div></td></tr>`;
+      <td>${badge}<div style="margin-top:4px;display:flex;gap:4px;"><button class="btn btn-light btn-sm" style="padding:2px 6px;font-size:10.5px;" onclick="addExtraDue('${s.id}')">+Due</button><button class="btn btn-light btn-sm" style="padding:2px 6px;font-size:10.5px;" onclick="addAdvancePayment('${s.id}')">+Adv</button></div></td>
+      <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><button class="btn btn-light btn-sm" onclick="openProfile360('${s.id}')">360°</button><button class="btn btn-gold btn-sm" onclick="generateLatestMarksheetPDF('${s.id}')">Marksheet</button><button class="btn btn-light btn-sm" onclick="editStudent('${s.id}')">Edit</button><button class="btn btn-red btn-sm" onclick="deleteDoc('students','${s.id}')">Del</button></div></td></tr>`;
   }).join('') : '<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);">No students found.</td></tr>';
 }
 
 function openProfile360(id) {
   const s = DB.students.find(x=>x.id===id); if (!s) return;
-  const paid = getStuPaid(s.id), dues = getStuDues(s), stuFees = DB.fees.filter(f=>f.studentId===s.id);
+  const paid = getStuPaid(s.id), dues = getStuDues(s), adv = getStuAdvance(s), stuFees = DB.fees.filter(f=>f.studentId===s.id);
   document.getElementById('profileBody').innerHTML = `
-    <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;"><img src="${s.photo||'./logo.jpeg'}" style="width:68px;height:68px;border-radius:12px;object-fit:cover;border:2px solid var(--gold);" /><div><h3>${s.name}</h3><span class="tag navy">${s.admNo}</span> <span class="tag gold">${s.className} (${s.section||'A'}) • Roll ${s.roll||'-'}</span><div style="font-size:12.5px;color:var(--muted);">Father: ${s.father} • +91 ${s.phone}</div></div></div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;"><div class="card" style="padding:9px;text-align:center;"><small>Annual Fee</small><br><strong>₹${s.totalFee}</strong></div><div class="card" style="padding:9px;text-align:center;"><small>Paid</small><br><strong style="color:var(--green);">₹${paid}</strong></div><div class="card" style="padding:9px;text-align:center;"><small>Dues</small><br><strong style="color:var(--red);">₹${dues}</strong></div></div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;"><button class="btn btn-primary btn-sm" onclick="generateMarksheetPDF('${s.id}')">👁️ Preview Marksheet</button><button class="btn btn-gold btn-sm" onclick="generateGuardianFeeDetailsPDF('${s.id}')">👁️ Preview Fee Statement</button></div>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;"><img src="${s.photo||'./logo.png'}" onerror="this.src='./logo.jpeg'" style="width:68px;height:68px;border-radius:12px;object-fit:cover;border:2px solid var(--gold);" /><div><h3>${s.name}</h3><span class="tag navy">${s.admNo}</span> <span class="tag gold">${s.className} (${s.section||'A'}) • Roll ${s.roll||'-'}</span><div style="font-size:12.5px;color:var(--muted);">Father: ${s.father} • +91 ${s.phone}</div></div></div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;">
+      <div class="card" style="padding:9px;text-align:center;"><small>Total Fee</small><br><strong>₹${getStuTotalPayable(s)}</strong></div>
+      <div class="card" style="padding:9px;text-align:center;"><small>Paid</small><br><strong style="color:var(--green);">₹${paid}</strong></div>
+      <div class="card" style="padding:9px;text-align:center;"><small>Dues</small><br><strong style="color:var(--red);">₹${dues}</strong></div>
+      <div class="card" style="padding:9px;text-align:center;"><small>Advance</small><br><strong style="color:var(--blue);">₹${adv}</strong></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+      <button class="btn btn-red btn-sm" onclick="addExtraDue('${s.id}')">+ Add Due</button>
+      <button class="btn btn-blue btn-sm" onclick="addAdvancePayment('${s.id}')">+ Add Advance</button>
+      <button class="btn btn-primary btn-sm" onclick="generateLatestMarksheetPDF('${s.id}')">👁️ Latest Marksheet</button>
+      <button class="btn btn-gold btn-sm" onclick="generateGuardianFeeDetailsPDF('${s.id}')">👁️ Fee Statement</button>
+    </div>
     <strong style="font-size:13px;">Fee Receipts</strong>
     <div style="margin-top:6px;display:flex;flex-direction:column;gap:6px;">${stuFees.length ? stuFees.map(f=>`<div style="display:flex;justify-content:space-between;background:#f8f6f1;padding:8px 10px;border-radius:8px;font-size:12.5px;"><span><strong>${f.receiptNo}</strong> • ${f.head||''} • ${fmtDate(f.date)}</span><span><strong>₹${f.amount}</strong> <button class="btn btn-light btn-sm" onclick="generateFeeReceiptPDF('${f.id}')">Preview PDF</button></span></div>`).join('') : '<small style="color:var(--muted);">No receipts yet.</small>'}</div>`;
   openModal('profileModal');
@@ -1412,7 +1395,7 @@ function populateFeeStudentDropdown() {
 }
 function syncFeeClassFromStudent() {
   const s = DB.students.find(x=>x.id===document.getElementById('feeStuSelect').value);
-  document.getElementById('feeDueHint').textContent = s ? `Class: ${s.className} | Annual Fee: ₹${s.totalFee} | Pending Dues: ₹${getStuDues(s)}` : '';
+  document.getElementById('feeDueHint').textContent = s ? `Class: ${s.className} | Total Fee: ₹${getStuTotalPayable(s)} | Paid: ₹${getStuPaid(s.id)} | Pending Dues: ₹${getStuDues(s)} | Advance: ₹${getStuAdvance(s)}` : '';
 }
 function setFeeToday() { document.getElementById('feeCalDate').value = todayStr(); renderFees(); refreshAllUI(); }
 function shiftFeeDate(d) { const el = document.getElementById('feeCalDate'), dt = new Date((el.value||todayStr())+'T00:00:00'); dt.setDate(dt.getDate()+d); el.value = dt.toISOString().split('T')[0]; renderFees(); refreshAllUI(); }
@@ -1442,7 +1425,7 @@ function exportFeesCSV() {
   downloadFile(rows.map(r=>r.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(',')).join('\n'), `Sunrise_Fees_${todayStr()}.csv`, 'text/csv');
 }
 
-// Attendance & Marks
+// Attendance
 let tempAtt = {}, lastAttKey = '';
 function renderAttendance() {
   const cls = document.getElementById('attClass').value || 'Class 1', dt = document.getElementById('attDate').value || todayStr(), q = (document.getElementById('attSearch').value||'').toLowerCase(), key = `${dt}_${cls}`;
@@ -1461,61 +1444,255 @@ async function saveAttendanceBatch() {
   toast(`Attendance saved for ${cls}!`);
 }
 
-function populateMarksStudentDropdown() {
-  const cls = document.getElementById('marksClassFilter').value, list = DB.students.filter(s => !cls || s.className===cls);
-  document.getElementById('marksStuSelect').innerHTML = list.map(s=>`<option value="${s.id}">${s.name} • ${s.className} (${s.admNo})</option>`).join('') || '<option value="">No students</option>';
-  loadStudentMarks();
-}
+// ==================== NEW MARKSHEET SYSTEM (NO PRACTICAL, BULK ENTRY, YEARLY) ====================
 function calcGrade(p) { if (p>=91) return 'A1'; if (p>=81) return 'A2'; if (p>=71) return 'B1'; if (p>=61) return 'B2'; if (p>=51) return 'C1'; if (p>=41) return 'C2'; if (p>=33) return 'D'; return 'E'; }
-function addMarkSubjectRow(sub = { code:'', name:'', th:'', maxT:80, pr:'', maxP:20 }) {
-  const tr = document.createElement('tr');
-  tr.innerHTML = `<td><input class="mk-code" value="${sub.code||''}" style="width:52px;" /></td><td><input class="mk-name" value="${sub.name||''}" placeholder="Subject" style="width:135px;" /></td><td><input type="number" class="mk-th" value="${sub.th}" placeholder="0" style="width:52px;" /> / <input type="number" class="mk-maxt" value="${sub.maxT||80}" style="width:52px;" /></td><td><input type="number" class="mk-pr" value="${sub.pr}" placeholder="0" style="width:52px;" /> / <input type="number" class="mk-maxp" value="${sub.maxP||20}" style="width:52px;" /></td><td class="mk-tot">—</td><td><button class="btn btn-red btn-sm" onclick="this.closest('tr').remove()">×</button></td>`;
-  document.getElementById('marksRows').appendChild(tr);
-}
-function loadStudentMarks() {
-  const s = DB.students.find(x=>x.id===document.getElementById('marksStuSelect').value), tbody = document.getElementById('marksRows');
-  tbody.innerHTML = ''; if (!s) return;
-  const m = s.marks || {};
-  document.getElementById('mkExam').value = m.exam||''; document.getElementById('mkAtt').value = m.att||'';
-  document.getElementById('mkResult').value = m.result||''; document.getElementById('mkConduct').value = m.conduct||'';
-  if (m.subjects && m.subjects.length) m.subjects.forEach(sub => addMarkSubjectRow(sub));
-  else addMarkSubjectRow({ code:'101', name:'', th:'', maxT:80, pr:'', maxP:20 });
-}
-async function saveStudentMarks() {
-  const id = document.getElementById('marksStuSelect').value; if (!id) return;
-  const subjects = [...document.querySelectorAll('#marksRows tr')].map(tr => ({ code:tr.querySelector('.mk-code').value.trim(), name:tr.querySelector('.mk-name').value.trim(), th:Number(tr.querySelector('.mk-th').value||0), maxT:Number(tr.querySelector('.mk-maxt').value||80), pr:Number(tr.querySelector('.mk-pr').value||0), maxP:Number(tr.querySelector('.mk-maxp').value||20) })).filter(x=>x.name);
-  await db.collection('students').doc(id).set({ marks:{ exam:document.getElementById('mkExam').value.trim(), att:document.getElementById('mkAtt').value.trim(), result:document.getElementById('mkResult').value.trim(), conduct:document.getElementById('mkConduct').value.trim(), subjects } }, { merge:true });
-  toast('Marks saved!');
-}
-function downloadSelectedMarksheet() { const id = document.getElementById('marksStuSelect').value; if (id) generateMarksheetPDF(id); }
 
-// PDFs
-function drawMarksheetOnDoc(doc, s, examTitle) {
-  const cfg = getCfg(), m = s.marks || {}, subs = m.subjects || [];
+function msLoadClassSubjects() {
+  const clsEl = document.getElementById('msSubClass'); if (!clsEl) return;
+  const cls = clsEl.value;
+  const subs = (DB.classSubjects && DB.classSubjects[cls]) || [];
+  document.getElementById('msSubInput').value = subs.join(', ');
+  document.getElementById('msSubSavedList').textContent = subs.length ? `Saved for ${cls}: ${subs.join(' • ')}` : `Abhi ${cls} ke liye koi subject save nahi hai.`;
+}
+async function msSaveClassSubjects() {
+  const cls = document.getElementById('msSubClass').value;
+  const subs = document.getElementById('msSubInput').value.split(',').map(x => x.trim()).filter(Boolean);
+  if (!subs.length) return toast('Kam se kam 1 subject likhein!', 'err');
+  await db.collection('classSubjects').doc(cls).set({ className: cls, subjects: subs, updatedAt: Date.now() });
+  toast(`${cls} ke ${subs.length} subjects save ho gaye!`);
+}
+function msUpdateExamDatalist() {
+  const dl = document.getElementById('msSavedExamDatalist'); if (!dl) return;
+  const exams = [...new Set((DB.marksheets || []).map(m => m.examName).filter(Boolean))];
+  dl.innerHTML = exams.map(ex => `<option value="${ex}">`).join('');
+}
+
+function msLoadBulkGrid() {
+  const session = document.getElementById('msSession').value.trim();
+  const cls = document.getElementById('msEntryClass').value;
+  const exam = document.getElementById('msExamName').value.trim();
+  const fullMarks = Number(document.getElementById('msFullMarks').value) || 100;
+  if (!session || !exam) return toast('Session aur Exam Name zaroor bharein!', 'err');
+
+  const subs = (DB.classSubjects && DB.classSubjects[cls]) || [];
+  if (!subs.length) return toast(`Pehle upar ${cls} ke subjects save karein!`, 'err');
+
+  const stuList = DB.students.filter(s => s.className === cls).sort((a,b) => Number(a.roll||0) - Number(b.roll||0));
+  if (!stuList.length) return toast(`${cls} mein koi student registered nahi hai!`, 'err');
+
+  const existingMap = {};
+  (DB.marksheets || []).filter(m => m.session === session && m.className === cls && m.examName === exam)
+    .forEach(m => { existingMap[m.studentId] = m; });
+
+  document.getElementById('msBulkGridWrap').innerHTML = `<table>
+    <thead><tr><th>Roll</th><th>Student Name</th>${subs.map(s => `<th>${s}<br><small>(/${fullMarks})</small></th>`).join('')}</tr></thead>
+    <tbody>${stuList.map(s => {
+      const old = (existingMap[s.id] && existingMap[s.id].marks) || {};
+      return `<tr data-sid="${s.id}"><td>${s.roll||'-'}</td><td><strong>${s.name}</strong><br><small>${s.admNo}</small></td>${subs.map(sub => `<td><input type="number" min="0" max="${fullMarks}" class="ms-cell" data-sub="${sub}" value="${old[sub] !== undefined ? old[sub] : ''}" placeholder="-" /></td>`).join('')}</tr>`;
+    }).join('')}</tbody></table>`;
+  document.getElementById('msBulkSaveBar').classList.remove('hidden');
+}
+
+async function msSaveBulkMarks() {
+  const session = document.getElementById('msSession').value.trim();
+  const cls = document.getElementById('msEntryClass').value;
+  const exam = document.getElementById('msExamName').value.trim();
+  const fullMarks = Number(document.getElementById('msFullMarks').value) || 100;
+  const rows = document.querySelectorAll('#msBulkGridWrap tbody tr');
+  if (!rows.length) return;
+
+  const btn = document.getElementById('msBulkSaveBtn'); btn.disabled = true;
+  try {
+    const batch = db.batch(); let count = 0;
+    rows.forEach(tr => {
+      const sid = tr.dataset.sid, s = DB.students.find(x => x.id === sid); if (!s) return;
+      const marks = {}; let total = 0, maxTotal = 0, hasAny = false;
+      tr.querySelectorAll('.ms-cell').forEach(inp => {
+        const sub = inp.dataset.sub, val = inp.value.trim();
+        if (val !== '') { hasAny = true; marks[sub] = Number(val); total += Number(val); }
+        else marks[sub] = 0;
+        maxTotal += fullMarks;
+      });
+      if (!hasAny) return;
+      const pct = maxTotal ? Number(((total / maxTotal) * 100).toFixed(2)) : 0;
+      const docId = `${session}_${cls}_${exam}_${sid}`.replace(/[^a-zA-Z0-9_-]/g, '_');
+      batch.set(db.collection('marksheets').doc(docId), {
+        docId, session, className: cls, examName: exam, fullMarks,
+        studentId: s.id, admNo: s.admNo, studentName: s.name, father: s.father||'', mother: s.mother||'',
+        roll: s.roll||'-', section: s.section||'A', dob: s.dob||'', addr: s.addr||'',
+        marks, total, maxTotal, percentage: pct, grade: calcGrade(pct), result: pct >= 33 ? 'PASS' : 'FAIL',
+        updatedAt: Date.now()
+      });
+      count++;
+    });
+    await batch.commit();
+    toast(`✅ ${count} students ke marks (${exam}) save ho gaye!`);
+  } catch (err) { toast(err.message, 'err'); }
+  btn.disabled = false;
+}
+
+// Saved Records, Single/Bulk Delete & Print
+let msCurrentRecs = [];
+function msRefreshExamDropdown() {
+  const session = document.getElementById('msRecSession').value.trim(), cls = document.getElementById('msRecClass').value;
+  const exams = [...new Set((DB.marksheets || []).filter(m => m.session === session && m.className === cls).map(m => m.examName))];
+  const el = document.getElementById('msRecExam');
+  el.innerHTML = exams.length ? exams.map(ex => `<option value="${ex}">${ex}</option>`).join('') : '<option value="">No Saved Exams</option>';
+  msLoadSavedRecords();
+}
+function msLoadSavedRecords() {
+  const session = document.getElementById('msRecSession').value.trim(), cls = document.getElementById('msRecClass').value, exam = document.getElementById('msRecExam').value;
+  msCurrentRecs = (DB.marksheets || []).filter(m => m.session === session && m.className === cls && m.examName === exam)
+    .sort((a,b) => Number(a.roll||0) - Number(b.roll||0));
+  const box = document.getElementById('msRecordsList');
+  if (!msCurrentRecs.length) { box.innerHTML = '<div style="padding:18px;text-align:center;color:var(--muted);">No saved marksheets found for this selection.</div>'; return; }
+  box.innerHTML = `<table>
+    <thead><tr><th><input type="checkbox" onchange="document.querySelectorAll('.ms-chk').forEach(c=>c.checked=this.checked)" /></th><th>Roll</th><th>Student</th><th>Total</th><th>% / Grade</th><th>Result</th><th>Actions</th></tr></thead>
+    <tbody>${msCurrentRecs.map((r,i) => `<tr>
+      <td><input type="checkbox" class="ms-chk" value="${r.id}" /></td>
+      <td>${r.roll||'-'}</td>
+      <td><strong>${r.studentName}</strong><br><small>${r.admNo||''}</small></td>
+      <td>${r.total} / ${r.maxTotal}</td>
+      <td>${r.percentage}% (${r.grade})</td>
+      <td><span class="tag ${r.result==='PASS'?'green':''}">${r.result}</span></td>
+      <td>
+        <button class="btn btn-gold btn-sm" onclick="msPrintSinglePDF(msCurrentRecs[${i}])">👁️ PDF</button>
+        <button class="btn btn-red btn-sm" onclick="msDeleteOne('${r.id}')">Del</button>
+      </td>
+    </tr>`).join('')}</tbody></table>`;
+}
+async function msDeleteOne(id) {
+  if (!confirm('Is student ki marksheet permanently delete karein?')) return;
+  await db.collection('marksheets').doc(id).delete();
+  toast('Marksheet deleted!'); msRefreshExamDropdown();
+}
+async function msBulkDeleteSelected() {
+  const ids = [...document.querySelectorAll('.ms-chk:checked')].map(c => c.value);
+  if (!ids.length) return toast('Pehle delete karne ke liye marksheets tick karein!', 'err');
+  if (!confirm(`⚠️ ${ids.length} marksheets permanently delete ho jayengi. Confirm karein?`)) return;
+  const batch = db.batch(); ids.forEach(id => batch.delete(db.collection('marksheets').doc(id)));
+  await batch.commit();
+  toast(`${ids.length} marksheets deleted!`); msRefreshExamDropdown();
+}
+
+// Yearly Consolidated
+let msYrDocs = [];
+function msFindAvailableExams() {
+  const session = document.getElementById('msYrSession').value.trim(), cls = document.getElementById('msYrClass').value;
+  msYrDocs = (DB.marksheets || []).filter(m => m.session === session && m.className === cls);
+  const exams = [...new Set(msYrDocs.map(m => m.examName))];
+  const box = document.getElementById('msYrExamsBox');
+  if (!exams.length) { box.innerHTML = '<small style="color:var(--red);font-weight:700;">Is Session aur Class mein koi saved exam nahi mila.</small>'; document.getElementById('msYrStudentsList').innerHTML = ''; return; }
+  box.innerHTML = `<div style="background:#f8f5ef;padding:12px;border-radius:10px;border:1px solid var(--border);">
+    <strong style="font-size:13px;">Yearly Marksheet mein jodney ke liye Exams tick karein:</strong>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;margin:10px 0;">${exams.map(ex => `<label style="font-size:13px;font-weight:700;cursor:pointer;"><input type="checkbox" class="ms-yr-ex" value="${ex}" checked /> ${ex}</label>`).join('')}</div>
+    <button class="btn btn-gold btn-sm" onclick="msGenerateYearlyBulkPDF()">👁️ Preview & Download Bulk Yearly Marksheets PDF</button>
+  </div>`;
+  const byStu = {}; msYrDocs.forEach(d => { byStu[d.studentId] = d; });
+  const stuArr = Object.values(byStu).sort((a,b) => Number(a.roll||0) - Number(b.roll||0));
+  document.getElementById('msYrStudentsList').innerHTML = `<table>
+    <thead><tr><th>Roll</th><th>Student</th><th>Action</th></tr></thead>
+    <tbody>${stuArr.map(s => `<tr><td>${s.roll||'-'}</td><td><strong>${s.studentName}</strong> (${s.admNo||''})</td><td><button class="btn btn-primary btn-sm" onclick="msGenerateYearlySinglePDF('${s.studentId}')">👁️ Yearly PDF</button></td></tr>`).join('')}</tbody></table>`;
+}
+
+// PDF Drawing (Single Exam — No Practical)
+function drawSingleExamMarksheet(doc, r) {
+  const cfg = getCfg();
   doc.setFillColor(161,22,38); doc.rect(0,0,210,32,'F'); doc.setFillColor(217,155,38); doc.rect(0,32,210,2,'F');
   if (LOGO_DATA_URL) { doc.setFillColor(255,255,255); doc.circle(23,16,11,'F'); doc.addImage(LOGO_DATA_URL,'PNG',13,6,20,20); }
   doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(17); doc.text(cfg.schoolName.toUpperCase(), 116, 14, {align:'center'});
   doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.text(`${cfg.address} • Ph: ${cfg.phone}`, 116, 21, {align:'center'}); doc.text(cfg.regTag, 116, 26.5, {align:'center'});
   if (WATERMARK_DATA_URL) doc.addImage(WATERMARK_DATA_URL,'PNG',62,112,86,86);
-  doc.setTextColor(161,22,38); doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.text(examTitle || m.exam || `STATEMENT OF MARKS (${cfg.sessionLabel})`, 105, 43, {align:'center'});
-  doc.autoTable({ startY:47, margin:{left:12,right:12}, theme:'grid', styles:{fontSize:9,cellPadding:2.3,textColor:[25,35,50]}, body:[['Student Name:',s.name,'Admission No:',s.admNo],['Class & Sec:',`${s.className} (${s.section||'A'})`,'Roll No:',s.roll||'-'],["Father's Name:",s.father,"Mother's Name:",s.mother||'-'],['DOB:',fmtDate(s.dob)||'-','Address:',s.addr||'Jhajha']], columnStyles:{0:{fontStyle:'bold',fillColor:[250,247,241]},2:{fontStyle:'bold',fillColor:[250,247,241]}} });
-  let gt=0, gm=0;
-  const rows = subs.map(sub => { const t=Number(sub.th)+Number(sub.pr), mx=Number(sub.maxT)+Number(sub.maxP); gt+=t; gm+=mx; return [sub.code,sub.name,`${sub.th}/${sub.maxT}`,`${sub.pr}/${sub.maxP}`,`${t}/${mx}`,calcGrade((t/(mx||1))*100)]; });
-  const pct = gm ? ((gt/gm)*100).toFixed(2) : '0.00'; rows.push(['','GRAND TOTAL & PERCENTAGE','','',`${gt}/${gm} (${pct}%)`,calcGrade(Number(pct))]);
-  doc.autoTable({ startY:doc.lastAutoTable.finalY+5, margin:{left:12,right:12}, theme:'grid', head:[['Code','Subject Name','Theory','Practical/IA','Total','Grade']], headStyles:{fillColor:[161,22,38],textColor:255,fontSize:9}, styles:{fontSize:9,cellPadding:2.5,halign:'center'}, columnStyles:{1:{halign:'left',fontStyle:'bold'}}, body:rows });
-  doc.autoTable({ startY:doc.lastAutoTable.finalY+6, margin:{left:12,right:12}, theme:'grid', head:[['Attendance','Result Status','Conduct']], headStyles:{fillColor:[18,28,45],textColor:255,halign:'center',fontSize:8.5}, body:[[m.att||'-',m.result||'-',m.conduct||'-']], styles:{halign:'center',fontStyle:'bold',fontSize:9} });
-  doc.setFontSize(9); doc.setTextColor(25); doc.setFont('helvetica','bold'); doc.text('Class Teacher',40,274,{align:'center'}); doc.text(`${cfg.principalName} (Principal)`,165,274,{align:'center'});
+  doc.setTextColor(161,22,38); doc.setFont('helvetica','bold'); doc.setFontSize(12.5); doc.text(`${r.examName.toUpperCase()} — STATEMENT OF MARKS (${r.session})`, 105, 43, {align:'center'});
+  doc.autoTable({ startY:48, margin:{left:12,right:12}, theme:'grid', styles:{fontSize:9,cellPadding:2.4,textColor:[25,35,50]}, body:[['Student Name:',r.studentName,'Admission No:',r.admNo||'-'],['Class & Sec:',`${r.className} (${r.section||'A'})`,'Roll No:',r.roll||'-'],["Father's Name:",r.father||'-',"Mother's Name:",r.mother||'-'],['DOB:',fmtDate(r.dob)||'-','Address:',r.addr||'Jhajha']], columnStyles:{0:{fontStyle:'bold',fillColor:[250,247,241]},2:{fontStyle:'bold',fillColor:[250,247,241]}} });
+  const rows = Object.entries(r.marks || {}).map(([sub, val], idx) => [idx+1, sub, r.fullMarks, val, calcGrade((Number(val)/(Number(r.fullMarks)||1))*100)]);
+  rows.push(['', 'GRAND TOTAL & PERCENTAGE', r.maxTotal, `${r.total} (${r.percentage}%)`, `${r.grade} • ${r.result}`]);
+  doc.autoTable({ startY:doc.lastAutoTable.finalY+6, margin:{left:12,right:12}, theme:'grid', head:[['S.No','Subject Name','Full Marks','Marks Obtained','Grade']], headStyles:{fillColor:[161,22,38],textColor:255,fontSize:9.5}, styles:{fontSize:9.5,cellPadding:2.8,halign:'center'}, columnStyles:{1:{halign:'left',fontStyle:'bold'}}, body:rows });
+  doc.setFontSize(9.5); doc.setTextColor(25); doc.setFont('helvetica','bold');
+  doc.text('Class Teacher', 35, 270, {align:'center'}); doc.text('Guardian Signature', 105, 270, {align:'center'}); doc.text(`${cfg.principalName} (Principal)`, 172, 270, {align:'center'});
   doc.setFillColor(161,22,38); doc.rect(0,289,210,8,'F'); doc.setTextColor(255); doc.setFontSize(7.5); doc.setFont('helvetica','normal'); doc.text(`${cfg.schoolName} • ${cfg.address}`,12,294); doc.text(`Issued: ${fmtDate(todayStr())}`,198,294,{align:'right'});
 }
-function generateMarksheetPDF(id) { const s = DB.students.find(x=>x.id===id); if (!s) return; const { jsPDF } = window.jspdf; const doc = new jsPDF('p','mm','a4'); drawMarksheetOnDoc(doc, s, (s.marks&&s.marks.exam)||''); openPdfPreview(doc, `Marksheet_${s.admNo}.pdf`, `Marksheet — ${s.name}`); }
-function renderBulkMarksPreviewList() { const cls = document.getElementById('bmClass').value, q = (document.getElementById('bmSearch').value||'').toLowerCase(), list = DB.students.filter(s=>s.className===cls&&(!q||(s.name||'').toLowerCase().includes(q))); document.getElementById('bmCountInfo').textContent = `Ready to generate ${list.length} Marksheet(s) for ${cls}.`; }
-function generateBulkMarksheetsPDF() { const cls = document.getElementById('bmClass').value, exam = document.getElementById('bmExam').value.trim(), q = (document.getElementById('bmSearch').value||'').toLowerCase(), list = DB.students.filter(s=>s.className===cls&&(!q||(s.name||'').toLowerCase().includes(q))); if (!list.length) return toast('No students match filter','err'); const { jsPDF } = window.jspdf; const doc = new jsPDF('p','mm','a4'); list.forEach((s,i)=>{ if(i>0) doc.addPage(); drawMarksheetOnDoc(doc,s,exam); }); openPdfPreview(doc, `Bulk_Marksheets_${cls.replace(/\s+/g,'_')}.pdf`, `Bulk Marksheets — ${cls}`); }
+function msPrintSinglePDF(r) { const { jsPDF } = window.jspdf, doc = new jsPDF('p','mm','a4'); drawSingleExamMarksheet(doc, r); openPdfPreview(doc, `Marksheet_${r.admNo}_${r.examName}.pdf`, `${r.studentName} — ${r.examName}`); }
+function msBulkPrintExamPDF() {
+  if (!msCurrentRecs.length) return toast('No records loaded!', 'err');
+  const { jsPDF } = window.jspdf, doc = new jsPDF('p','mm','a4');
+  msCurrentRecs.forEach((r, i) => { if (i > 0) doc.addPage(); drawSingleExamMarksheet(doc, r); });
+  openPdfPreview(doc, `Bulk_Marksheets_${msCurrentRecs[0].className}_${msCurrentRecs[0].examName}.pdf`, `Bulk Marksheets (${msCurrentRecs.length})`);
+}
+
+// PDF Drawing (Yearly Consolidated — Multiple Exams)
+function drawYearlyMarksheet(doc, info, examsMap, selectedExams) {
+  const cfg = getCfg();
+  doc.setFillColor(161,22,38); doc.rect(0,0,210,32,'F'); doc.setFillColor(217,155,38); doc.rect(0,32,210,2,'F');
+  if (LOGO_DATA_URL) { doc.setFillColor(255,255,255); doc.circle(23,16,11,'F'); doc.addImage(LOGO_DATA_URL,'PNG',13,6,20,20); }
+  doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(17); doc.text(cfg.schoolName.toUpperCase(), 116, 14, {align:'center'});
+  doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.text(`${cfg.address} • Ph: ${cfg.phone}`, 116, 21, {align:'center'}); doc.text(cfg.regTag, 116, 26.5, {align:'center'});
+  if (WATERMARK_DATA_URL) doc.addImage(WATERMARK_DATA_URL,'PNG',62,112,86,86);
+  doc.setTextColor(161,22,38); doc.setFont('helvetica','bold'); doc.setFontSize(12.5); doc.text(`ANNUAL CONSOLIDATED STATEMENT OF MARKS (${info.session})`, 105, 43, {align:'center'});
+  doc.autoTable({ startY:48, margin:{left:12,right:12}, theme:'grid', styles:{fontSize:9,cellPadding:2.3,textColor:[25,35,50]}, body:[['Student Name:',info.studentName,'Admission No:',info.admNo||'-'],['Class & Sec:',`${info.className} (${info.section||'A'})`,'Roll No:',info.roll||'-'],["Father's Name:",info.father||'-',"Mother's Name:",info.mother||'-'],['DOB:',fmtDate(info.dob)||'-','Address:',info.addr||'Jhajha']], columnStyles:{0:{fontStyle:'bold',fillColor:[250,247,241]},2:{fontStyle:'bold',fillColor:[250,247,241]}} });
+
+  const allSubs = [...new Set(Object.values(examsMap).flatMap(e => Object.keys(e.marks || {})))];
+  let gt = 0, gm = 0;
+  const rows = allSubs.map(sub => {
+    let st = 0, sm = 0;
+    const cols = selectedExams.map(ex => {
+      const rec = examsMap[ex];
+      if (!rec) return '-';
+      const v = Number((rec.marks && rec.marks[sub]) || 0);
+      st += v; sm += Number(rec.fullMarks || 100);
+      return `${v}/${rec.fullMarks}`;
+    });
+    gt += st; gm += sm;
+    const p = sm ? (st / sm) * 100 : 0;
+    return [sub, ...cols, `${st}/${sm}`, calcGrade(p)];
+  });
+  const finalPct = gm ? ((gt / gm) * 100).toFixed(2) : '0.00';
+  const finalRes = Number(finalPct) >= 33 ? 'PASS' : 'FAIL';
+  rows.push(['GRAND TOTAL', ...selectedExams.map(() => ''), `${gt}/${gm} (${finalPct}%)`, `${calcGrade(Number(finalPct))} • ${finalRes}`]);
+
+  doc.autoTable({ startY:doc.lastAutoTable.finalY+6, margin:{left:12,right:12}, theme:'grid', head:[['Subject', ...selectedExams, 'Total', 'Grade']], headStyles:{fillColor:[161,22,38],textColor:255,fontSize:8.5}, styles:{fontSize:8.5,cellPadding:2.4,halign:'center'}, columnStyles:{0:{halign:'left',fontStyle:'bold'}}, body:rows });
+  doc.setFontSize(9.5); doc.setTextColor(25); doc.setFont('helvetica','bold');
+  doc.text('Class Teacher', 35, 270, {align:'center'}); doc.text('Guardian Signature', 105, 270, {align:'center'}); doc.text(`${cfg.principalName} (Principal)`, 172, 270, {align:'center'});
+  doc.setFillColor(161,22,38); doc.rect(0,289,210,8,'F'); doc.setTextColor(255); doc.setFontSize(7.5); doc.setFont('helvetica','normal'); doc.text(`${cfg.schoolName} • ${cfg.address}`,12,294); doc.text(`Issued: ${fmtDate(todayStr())}`,198,294,{align:'right'});
+}
+function msGenerateYearlySinglePDF(stuId) {
+  const selectedExams = [...document.querySelectorAll('.ms-yr-ex:checked')].map(c => c.value);
+  if (!selectedExams.length) return toast('Kam se kam 1 exam tick karein!', 'err');
+  const stuDocs = msYrDocs.filter(d => d.studentId === stuId && selectedExams.includes(d.examName));
+  if (!stuDocs.length) return toast('No marks found!', 'err');
+  const examsMap = {}; stuDocs.forEach(d => examsMap[d.examName] = d);
+  const { jsPDF } = window.jspdf, doc = new jsPDF('p','mm','a4');
+  drawYearlyMarksheet(doc, stuDocs[0], examsMap, selectedExams);
+  openPdfPreview(doc, `Yearly_Marksheet_${stuDocs[0].admNo}.pdf`, `Yearly Marksheet — ${stuDocs[0].studentName}`);
+}
+function msGenerateYearlyBulkPDF() {
+  const selectedExams = [...document.querySelectorAll('.ms-yr-ex:checked')].map(c => c.value);
+  if (!selectedExams.length) return toast('Kam se kam 1 exam tick karein!', 'err');
+  const byStu = {};
+  msYrDocs.filter(d => selectedExams.includes(d.examName)).forEach(d => {
+    if (!byStu[d.studentId]) byStu[d.studentId] = { info: d, exams: {} };
+    byStu[d.studentId].exams[d.examName] = d;
+  });
+  const list = Object.values(byStu).sort((a,b) => Number(a.info.roll||0) - Number(b.info.roll||0));
+  if (!list.length) return toast('No records found!', 'err');
+  const { jsPDF } = window.jspdf, doc = new jsPDF('p','mm','a4');
+  list.forEach((st, i) => { if (i > 0) doc.addPage(); drawYearlyMarksheet(doc, st.info, st.exams, selectedExams); });
+  openPdfPreview(doc, `Bulk_Yearly_Marksheets_${list[0].info.className}.pdf`, `Bulk Yearly Marksheets (${list.length})`);
+}
+function generateLatestMarksheetPDF(stuId) {
+  const list = (DB.marksheets || []).filter(m => m.studentId === stuId).sort((a,b) => (b.updatedAt||0) - (a.updatedAt||0));
+  if (!list.length) return toast('Is student ki abhi koi marksheet save nahi hui hai!', 'err');
+  msPrintSinglePDF(list[0]);
+}
+
+// Fee & Admit Card PDFs
 function generateFeeReceiptPDF(feeId) {
   const f = DB.fees.find(x=>x.id===feeId); if (!f) return; const s = DB.students.find(x=>x.id===f.studentId)||{}, cfg = getCfg(), { jsPDF } = window.jspdf, doc = new jsPDF('p','mm','a5');
   doc.setFillColor(161,22,38); doc.rect(0,0,148,24,'F'); if (LOGO_DATA_URL) { doc.setFillColor(255,255,255); doc.circle(16,12,8,'F'); doc.addImage(LOGO_DATA_URL,'PNG',9,5,14,14); }
   doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(12.5); doc.text(cfg.schoolName.toUpperCase(),84,11,{align:'center'}); doc.setFont('helvetica','normal'); doc.setFontSize(7.5); doc.text(`${cfg.address} • Ph: ${cfg.phone}`,84,17,{align:'center'});
   if (WATERMARK_DATA_URL) doc.addImage(WATERMARK_DATA_URL,'PNG',42,78,64,64);
-  doc.autoTable({ startY:30, margin:{left:9,right:9}, theme:'grid', styles:{fontSize:9,cellPadding:2.5}, body:[['Receipt No:',f.receiptNo],['Date:',fmtDate(f.date)],['Student:',f.studentName],['Class:',`${f.className} (${s.admNo||'-'})`],['Fee Head:',f.head||'Fee'],['Amount:',`Rs. ${f.amount}/-`],['Mode:',f.mode],['Dues Left:',`Rs. ${s.id?getStuDues(s):0}/-`]], columnStyles:{0:{fontStyle:'bold',fillColor:[250,247,241],cellWidth:42}} });
+  const dues = s.id ? getStuDues(s) : 0, adv = s.id ? getStuAdvance(s) : 0;
+  doc.autoTable({ startY:30, margin:{left:9,right:9}, theme:'grid', styles:{fontSize:9,cellPadding:2.5}, body:[['Receipt No:',f.receiptNo],['Date:',fmtDate(f.date)],['Student:',f.studentName],['Class:',`${f.className} (${s.admNo||'-'})`],['Fee Head:',f.head||'Fee'],['Amount Paid:',`Rs. ${f.amount}/-`],['Mode:',f.mode],['Pending Dues:',`Rs. ${dues}/-`],['Advance Balance:',`Rs. ${adv}/-`]], columnStyles:{0:{fontStyle:'bold',fillColor:[250,247,241],cellWidth:42}} });
   doc.setTextColor(30); doc.setFontSize(8.5); doc.text(`${cfg.principalName} / Authorized Signatory`,139,194,{align:'right'});
   openPdfPreview(doc, `Receipt_${f.receiptNo}.pdf`, `Fee Receipt — ${f.receiptNo}`);
 }
@@ -1524,7 +1701,7 @@ function generateGuardianFeeDetailsPDF(stuId) {
   doc.setFillColor(161,22,38); doc.rect(0,0,210,30,'F'); if (LOGO_DATA_URL) { doc.setFillColor(255,255,255); doc.circle(22,15,10,'F'); doc.addImage(LOGO_DATA_URL,'PNG',13,6,18,18); }
   doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(16); doc.text(cfg.schoolName.toUpperCase(),115,14,{align:'center'}); doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.text(`OFFICIAL FEE STRUCTURE & PAYMENT STATEMENT`,115,22,{align:'center'});
   if (WATERMARK_DATA_URL) doc.addImage(WATERMARK_DATA_URL,'PNG',62,110,86,86);
-  doc.autoTable({ startY:36, margin:{left:12,right:12}, theme:'grid', styles:{fontSize:9.5}, body:[['Student:',s.name,'Adm No:',s.admNo],['Class:',`${s.className} (${s.section||'A'})`,'Annual Fee:',`Rs. ${s.totalFee}`],['Paid:',`Rs. ${getStuPaid(s.id)}`,'Pending Dues:',`Rs. ${getStuDues(s)}`]], columnStyles:{0:{fontStyle:'bold',fillColor:[250,247,241]},2:{fontStyle:'bold',fillColor:[250,247,241]}} });
+  doc.autoTable({ startY:36, margin:{left:12,right:12}, theme:'grid', styles:{fontSize:9.5}, body:[['Student:',s.name,'Adm No:',s.admNo],['Class:',`${s.className} (${s.section||'A'})`,'Total Payable:',`Rs. ${getStuTotalPayable(s)}`],['Total Paid:',`Rs. ${getStuPaid(s.id)}`,'Pending Dues:',`Rs. ${getStuDues(s)}`],['Advance Balance:',`Rs. ${getStuAdvance(s)}`,'','']], columnStyles:{0:{fontStyle:'bold',fillColor:[250,247,241]},2:{fontStyle:'bold',fillColor:[250,247,241]}} });
   doc.autoTable({ startY:doc.lastAutoTable.finalY+6, margin:{left:12,right:12}, theme:'grid', head:[['Class Fee Structure ('+s.className+')','Amount']], headStyles:{fillColor:[18,28,45]}, body:[['Monthly Tuition',`Rs. ${fs.tuition||0}`],['Admission',`Rs. ${fs.admission||0}`],['Bus / Transport',`Rs. ${fs.bus||0}`],['Exam',`Rs. ${fs.exam||0}`],['Function / Annual',`Rs. ${fs.func||0}`],['Other',`Rs. ${fs.other||0}`]] });
   doc.autoTable({ startY:doc.lastAutoTable.finalY+6, margin:{left:12,right:12}, theme:'grid', head:[['Receipt','Date','Fee Head','Mode','Amount']], headStyles:{fillColor:[161,22,38]}, body:myFees.length?myFees.map(f=>[f.receiptNo,fmtDate(f.date),f.head||'Fee',f.mode,`Rs. ${f.amount}`]):[['-','-','No payments','-','-']] });
   openPdfPreview(doc, `Fee_Details_${s.admNo}.pdf`, `Fee Statement — ${s.name}`);
@@ -1552,7 +1729,7 @@ function generateBulkAdmitCardsPDF() {
   openPdfPreview(doc, `Admit_Cards_${cls.replace(/\s+/g,'_')}.pdf`, `Bulk Admit Cards — ${cls}`);
 }
 
-// Enquiries, WhatsApp, Notices, Gallery, Approvals & Permissions
+// Enquiries, WhatsApp, Notices, Gallery, Approvals
 async function submitEnquiry(e) {
   e.preventDefault(); const btn = document.getElementById('enqSubmitBtn'); btn.disabled = true;
   await db.collection('enquiries').add({ student:document.getElementById('enqStudent').value.trim(), className:document.getElementById('enqClass').value, parent:document.getElementById('enqParent').value.trim(), phone:document.getElementById('enqPhone').value.trim(), village:document.getElementById('enqVillage').value.trim(), date:todayStr(), createdAt:Date.now() });
@@ -1639,7 +1816,7 @@ function exportFullBackup() { downloadFile(JSON.stringify(DB,null,2), `Sunrise_B
 async function restoreFullBackup(e) {
   const f = e.target.files[0]; if (!f || !confirm('Restore backup?')) return;
   const data = JSON.parse(await f.text());
-  for (const c of ['students','fees','notices','gallery','enquiries','teachers','staff']) {
+  for (const c of ['students','fees','notices','gallery','enquiries','teachers','staff','marksheets']) {
     if (Array.isArray(data[c])) for (const item of data[c]) { const {id,...rest}=item; if(id) await db.collection(c).doc(id).set(rest,{merge:true}); else await db.collection(c).add(rest); }
   }
   if (data.config) await db.collection('config').doc('main').set(data.config,{merge:true});
@@ -1647,15 +1824,21 @@ async function restoreFullBackup(e) {
 }
 
 function renderGuardianPortal(s) {
-  const paid = getStuPaid(s.id), dues = getStuDues(s), myFees = DB.fees.filter(f=>f.studentId===s.id), fs = DB.feeStructure[s.className] || {};
+  const paid = getStuPaid(s.id), dues = getStuDues(s), adv = getStuAdvance(s), myFees = DB.fees.filter(f=>f.studentId===s.id), fs = DB.feeStructure[s.className] || {};
   document.getElementById('guardianContent').innerHTML = `
-    <div style="display:flex;gap:12px;align-items:center;margin-bottom:14px;flex-wrap:wrap;"><img src="${s.photo||'./logo.jpeg'}" style="width:72px;height:72px;border-radius:12px;border:2px solid var(--gold);object-fit:cover;" /><div><h2>${s.name}</h2><span class="tag navy">${s.admNo}</span> <span class="tag gold">${s.className} (${s.section||'A'}) • Roll ${s.roll||'-'}</span><div style="font-size:12.5px;color:var(--muted);">Father: ${s.father} • +91 ${s.phone}</div></div></div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;"><div class="card" style="padding:10px;text-align:center;"><small>Annual Fee</small><br><strong>₹${s.totalFee}</strong></div><div class="card" style="padding:10px;text-align:center;"><small>Paid</small><br><strong style="color:var(--green);">₹${paid}</strong></div><div class="card" style="padding:10px;text-align:center;"><small>Dues</small><br><strong style="color:var(--red);">₹${dues}</strong></div></div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;"><button class="btn btn-primary btn-sm" onclick="generateMarksheetPDF('${s.id}')">👁️ Preview & Download Marksheet</button><button class="btn btn-gold btn-sm" onclick="generateGuardianFeeDetailsPDF('${s.id}')">👁️ Preview & Download Fee Details PDF</button></div>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:14px;flex-wrap:wrap;"><img src="${s.photo||'./logo.png'}" onerror="this.src='./logo.jpeg'" style="width:72px;height:72px;border-radius:12px;border:2px solid var(--gold);object-fit:cover;" /><div><h2>${s.name}</h2><span class="tag navy">${s.admNo}</span> <span class="tag gold">${s.className} (${s.section||'A'}) • Roll ${s.roll||'-'}</span><div style="font-size:12.5px;color:var(--muted);">Father: ${s.father} • +91 ${s.phone}</div></div></div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;">
+      <div class="card" style="padding:10px;text-align:center;"><small>Total Fee</small><br><strong>₹${getStuTotalPayable(s)}</strong></div>
+      <div class="card" style="padding:10px;text-align:center;"><small>Paid</small><br><strong style="color:var(--green);">₹${paid}</strong></div>
+      <div class="card" style="padding:10px;text-align:center;"><small>Dues</small><br><strong style="color:var(--red);">₹${dues}</strong></div>
+      <div class="card" style="padding:10px;text-align:center;"><small>Advance</small><br><strong style="color:var(--blue);">₹${adv}</strong></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;"><button class="btn btn-primary btn-sm" onclick="generateLatestMarksheetPDF('${s.id}')">👁️ Preview & Download Marksheet</button><button class="btn btn-gold btn-sm" onclick="generateGuardianFeeDetailsPDF('${s.id}')">👁️ Preview & Download Fee Details PDF</button></div>
     <div style="background:#f8f5ef;padding:12px;border-radius:10px;margin-bottom:14px;font-size:13px;"><strong>Class Fee Structure (${s.className}):</strong> Tuition: ₹${fs.tuition||0}/mo • Bus: ₹${fs.bus||0}/mo • Admission: ₹${fs.admission||0} • Exam: ₹${fs.exam||0} • Function: ₹${fs.func||0} • Other: ₹${fs.other||0}</div>
     <h3 style="font-size:15px;margin-bottom:8px;">Payment Receipts</h3>
     ${myFees.length ? myFees.map(f=>`<div style="display:flex;justify-content:space-between;background:#f8f6f1;padding:8px 10px;border-radius:8px;margin-bottom:6px;font-size:12.5px;"><span><strong>${f.receiptNo}</strong> • ${f.head||''} • ${fmtDate(f.date)} • ₹${f.amount}</span><button class="btn btn-light btn-sm" onclick="generateFeeReceiptPDF('${f.id}')">Preview PDF</button></div>`).join('') : '<small style="color:var(--muted);">No receipts yet.</small>'}`;
 }
+
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('./OneSignalSDKWorker.js').catch(()=>{});
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; });
 function installPWA() {
@@ -1664,6 +1847,9 @@ function installPWA() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+    document.querySelectorAll('.install-app-btn').forEach(el => el.classList.add('hidden'));
+  }
   initLogos(); applySchoolProfileToUI(); populateClassDropdowns(); populateFeeHeadsDropdown();
   document.getElementById('feeCalDate').value = todayStr();
   document.getElementById('feeEntryDate').value = todayStr();
@@ -1674,349 +1860,6 @@ window.addEventListener('DOMContentLoaded', () => {
   if (currentUser) applyLoggedInUI();
   setTimeout(() => document.getElementById('splash').classList.add('hide'), 450);
 });
-  // ==================== MARKSHEET MODULE JS ====================
-// Note: Yeh aapke existing Firebase 'db' aur 'students' array ko use karta hai.
-// Agar aapke code mein students array ka naam alag hai (e.g. allStudents), toh neeche msGetStudents() mein badal dena.
-
-function msGetStudents(cls) {
-  const list = (typeof students !== 'undefined' ? students : (window.allStudents || []));
-  return list.filter(s => (s.class || s.studentClass || '').trim().toLowerCase() === cls.trim().toLowerCase());
-}
-
-function msSwitchTab(tabId) {
-  document.querySelectorAll('.ms-tab').forEach(el => el.style.display = 'none');
-  document.getElementById(tabId).style.display = 'block';
-  if (tabId === 'msSubjectsTab') msLoadClassSubjects();
-}
-
-// --- 1. CLASS SUBJECTS (ONE-TIME SAVE) ---
-async function msSaveClassSubjects() {
-  const cls = document.getElementById('msSubClass').value;
-  const raw = document.getElementById('msSubInput').value;
-  const subjects = raw.split(',').map(s => s.trim()).filter(Boolean);
-  if (!subjects.length) return alert('Kam se kam 1 subject likhein!');
-
-  localStorage.setItem('ms_sub_' + cls, JSON.stringify(subjects));
-  if (typeof db !== 'undefined') {
-    await db.collection('classSubjects').doc(cls).set({ class: cls, subjects, updatedAt: Date.now() });
-  }
-  msLoadClassSubjects();
-  alert(`✅ ${cls} ke ${subjects.length} subjects save ho gaye!`);
-}
-
-async function msGetClassSubjects(cls) {
-  if (typeof db !== 'undefined') {
-    const doc = await db.collection('classSubjects').doc(cls).get();
-    if (doc.exists && doc.data().subjects) {
-      localStorage.setItem('ms_sub_' + cls, JSON.stringify(doc.data().subjects));
-      return doc.data().subjects;
-    }
-  }
-  return JSON.parse(localStorage.getItem('ms_sub_' + cls) || '[]');
-}
-
-async function msLoadClassSubjects() {
-  const cls = document.getElementById('msSubClass').value;
-  const subs = await msGetClassSubjects(cls);
-  document.getElementById('msSubInput').value = subs.join(', ');
-  document.getElementById('msSubSavedList').innerHTML = subs.length
-    ? `<strong>${cls} Saved Subjects:</strong> ${subs.join(' | ')}`
-    : `<em>${cls} ke liye abhi koi subject save nahi hai. Upar likh kar Save karein.</em>`;
-}
-
-// --- 2. EXCEL-STYLE BULK ENTRY & EDIT ---
-async function msLoadBulkGrid() {
-  const session = document.getElementById('msSession').value.trim();
-  const cls = document.getElementById('msEntryClass').value;
-  const exam = document.getElementById('msExamName').value.trim();
-  const fullMarks = Number(document.getElementById('msFullMarks').value) || 100;
-
-  if (!session || !exam) return alert('Session aur Exam Name zaroor bharein!');
-  const subs = await msGetClassSubjects(cls);
-  if (!subs.length) return alert(`${cls} ke subjects pehle Tab 1 mein save karein!`);
-
-  const stuList = msGetStudents(cls);
-  if (!stuList.length) return alert(`${cls} mein koi student nahi mila!`);
-
-  // Purane saved marks fetch karein (for easy Edit)
-  const existingMap = {};
-  if (typeof db !== 'undefined') {
-    const snap = await db.collection('marksheets')
-      .where('session', '==', session).where('class', '==', cls).where('examName', '==', exam).get();
-    snap.forEach(d => { existingMap[d.data().studentId] = d.data(); });
-  }
-
-  let html = `<table border="1" cellspacing="0" cellpadding="6" style="width:100%; border-collapse:collapse; font-size:13px;">
-    <thead style="background:#0f1b2d; color:#fff;">
-      <tr><th>Roll</th><th>Student Name</th>${subs.map(s => `<th>${s}<br><small>(/${fullMarks})</small></th>`).join('')}</tr>
-    </thead><tbody>`;
-
-  stuList.forEach(st => {
-    const sid = st.id || st.admNo || st.name;
-    const oldMarks = (existingMap[sid] && existingMap[sid].marks) ? existingMap[sid].marks : {};
-    html += `<tr data-sid="${sid}" data-name="${st.name}" data-father="${st.fatherName || ''}" data-roll="${st.rollNo || ''}">
-      <td>${st.rollNo || '-'}</td>
-      <td><strong>${st.name}</strong></td>
-      ${subs.map(sub => `<td><input type="number" min="0" max="${fullMarks}" class="ms-cell" data-sub="${sub}" value="${oldMarks[sub] ?? ''}" style="width:65px; padding:5px; text-align:center;"></td>`).join('')}
-    </tr>`;
-  });
-
-  html += `</tbody></table>`;
-  document.getElementById('msBulkGridWrap').innerHTML = html;
-  document.getElementById('msBulkSaveBar').style.display = 'block';
-}
-
-async function msSaveBulkMarks() {
-  const session = document.getElementById('msSession').value.trim();
-  const cls = document.getElementById('msEntryClass').value;
-  const exam = document.getElementById('msExamName').value.trim();
-  const fullMarks = Number(document.getElementById('msFullMarks').value) || 100;
-  const rows = document.querySelectorAll('#msBulkGridWrap tbody tr');
-  if (!rows.length) return;
-
-  const batch = (typeof db !== 'undefined') ? db.batch() : null;
-  let savedCount = 0;
-
-  rows.forEach(tr => {
-    const sid = tr.dataset.sid;
-    const marks = {};
-    let total = 0, maxTotal = 0, hasAny = false;
-
-    tr.querySelectorAll('.ms-cell').forEach(inp => {
-      const sub = inp.dataset.sub;
-      const val = inp.value.trim();
-      if (val !== '') {
-        hasAny = true;
-        const num = Number(val);
-        marks[sub] = num;
-        total += num;
-      } else {
-        marks[sub] = 0;
-      }
-      maxTotal += fullMarks;
-    });
-
-    if (!hasAny) return;
-    const pct = maxTotal ? ((total / maxTotal) * 100).toFixed(2) : 0;
-    const docId = `${session}_${cls}_${exam}_${sid}`.replace(/[^a-zA-Z0-9_-]/g, '_');
-
-    const record = {
-      docId, session, class: cls, examName: exam, fullMarks,
-      studentId: sid, studentName: tr.dataset.name, fatherName: tr.dataset.father, rollNo: tr.dataset.roll,
-      marks, total, maxTotal, percentage: Number(pct),
-      grade: msCalcGrade(pct), result: Number(pct) >= 33 ? 'PASS' : 'FAIL',
-      updatedAt: Date.now()
-    };
-
-    if (batch) batch.set(db.collection('marksheets').doc(docId), record);
-    savedCount++;
-  });
-
-  if (batch) await batch.commit();
-  alert(`✅ ${savedCount} students ke marks (${exam}) save ho gaye!`);
-}
-
-function msCalcGrade(pct) {
-  pct = Number(pct);
-  if (pct >= 90) return 'A+';
-  if (pct >= 80) return 'A';
-  if (pct >= 70) return 'B+';
-  if (pct >= 60) return 'B';
-  if (pct >= 50) return 'C';
-  if (pct >= 33) return 'D';
-  return 'F';
-}
-
-// --- 3. SAVED RECORDS, SINGLE/BULK DELETE & PRINT ---
-let msCurrentRecords = [];
-
-async function msLoadSavedRecords() {
-  const session = document.getElementById('msRecSession').value.trim();
-  const cls = document.getElementById('msRecClass').value;
-  const exam = document.getElementById('msRecExam').value.trim();
-  if (!session || !exam) return alert('Session aur Exam Name bharein!');
-
-  const snap = await db.collection('marksheets')
-    .where('session', '==', session).where('class', '==', cls).where('examName', '==', exam).get();
-  msCurrentRecords = snap.docs.map(d => d.data());
-
-  if (!msCurrentRecords.length) {
-    document.getElementById('msRecordsList').innerHTML = `<p style="color:#b91c1c;">Koi saved marksheet nahi mili.</p>`;
-    return;
-  }
-
-  let html = `<table border="1" cellspacing="0" cellpadding="6" style="width:100%; border-collapse:collapse; font-size:13px;">
-    <thead style="background:#0f1b2d; color:#fff;">
-      <tr>
-        <th><input type="checkbox" onchange="document.querySelectorAll('.ms-chk').forEach(c=>c.checked=this.checked)"></th>
-        <th>Roll</th><th>Student Name</th><th>Total</th><th>%</th><th>Result</th><th>Actions</th>
-      </tr>
-    </thead><tbody>`;
-
-  msCurrentRecords.forEach((r, idx) => {
-    html += `<tr>
-      <td style="text-align:center;"><input type="checkbox" class="ms-chk" value="${r.docId}"></td>
-      <td>${r.rollNo || '-'}</td>
-      <td><strong>${r.studentName}</strong></td>
-      <td>${r.total} / ${r.maxTotal}</td>
-      <td>${r.percentage}% (${r.grade})</td>
-      <td style="color:${r.result==='PASS'?'green':'red'}; font-weight:700;">${r.result}</td>
-      <td>
-        <button class="btn btn-navy" style="padding:4px 8px; font-size:12px;" onclick="msPrintPages([msRenderSingleHTML(msCurrentRecords[${idx}])])">🖨️ Print</button>
-        <button class="btn btn-primary" style="padding:4px 8px; font-size:12px; background:#b91c1c;" onclick="msDeleteOne('${r.docId}')">🗑️ Delete</button>
-      </td>
-    </tr>`;
-  });
-
-  html += `</tbody></table>`;
-  document.getElementById('msRecordsList').innerHTML = html;
-}
-
-async function msDeleteOne(docId) {
-  if (!confirm('Kya aap sach mein is student ki marksheet delete karna chahte hain?')) return;
-  await db.collection('marksheets').doc(docId).delete();
-  msLoadSavedRecords();
-}
-
-async function msBulkDeleteSelected() {
-  const checked = Array.from(document.querySelectorAll('.ms-chk:checked')).map(c => c.value);
-  if (!checked.length) return alert('Pehle delete karne ke liye marksheets tick karein!');
-  if (!confirm(`⚠️ ${checked.length} marksheets permanently delete ho jayengi. Confirm karein?`)) return;
-
-  const batch = db.batch();
-  checked.forEach(id => batch.delete(db.collection('marksheets').doc(id)));
-  await batch.commit();
-  alert(`🗑️ ${checked.length} marksheets delete ho gayi!`);
-  msLoadSavedRecords();
-}
-
-function msBulkPrintExam() {
-  if (!msCurrentRecords.length) return alert('Pehle Show Records par click karein!');
-  const pages = msCurrentRecords.map(r => msRenderSingleHTML(r));
-  msPrintPages(pages);
-}
-
-// --- 4. YEARLY CONSOLIDATED MARKSHEET ---
-let msYrAllDocs = [];
-
-async function msFindAvailableExams() {
-  const session = document.getElementById('msYrSession').value.trim();
-  const cls = document.getElementById('msYrClass').value;
-  const snap = await db.collection('marksheets').where('session', '==', session).where('class', '==', cls).get();
-  msYrAllDocs = snap.docs.map(d => d.data());
-
-  const exams = [...new Set(msYrAllDocs.map(d => d.examName))];
-  if (!exams.length) {
-    document.getElementById('msYrExamsBox').innerHTML = `<p style="color:#b91c1c;">Is session/class mein koi exam save nahi hai.</p>`;
-    return;
-  }
-
-  document.getElementById('msYrExamsBox').innerHTML = `
-    <div style="background:#f8fafc; padding:12px; border-radius:8px; border:1px solid #cbd5e1;">
-      <strong>Yearly Marksheet mein jodney ke liye Exams tick karein:</strong><br><br>
-      ${exams.map(ex => `<label style="margin-right:14px; font-weight:600;"><input type="checkbox" class="ms-yr-ex" value="${ex}" checked> ${ex}</label>`).join('')}
-      <br><br>
-      <button class="btn btn-gold" onclick="msBulkPrintYearly()">🖨️ Bulk Print All Yearly Marksheets</button>
-    </div>`;
-}
-
-function msBulkPrintYearly() {
-  const selectedExams = Array.from(document.querySelectorAll('.ms-yr-ex:checked')).map(c => c.value);
-  if (!selectedExams.length) return alert('Kam se kam 1 exam select karein!');
-
-  // Group by studentId
-  const byStudent = {};
-  msYrAllDocs.filter(d => selectedExams.includes(d.examName)).forEach(d => {
-    if (!byStudent[d.studentId]) byStudent[d.studentId] = { info: d, exams: {} };
-    byStudent[d.studentId].exams[d.examName] = d;
-  });
-
-  const pages = Object.values(byStudent).map(st => msRenderYearlyHTML(st.info, st.exams, selectedExams));
-  msPrintPages(pages);
-}
-
-// --- A4 PRINT TEMPLATES (SINGLE EXAM & YEARLY) ---
-function msRenderSingleHTML(r) {
-  const rows = Object.entries(r.marks).map(([sub, m]) => `
-    <tr><td>${sub}</td><td>${r.fullMarks}</td><td><strong>${m}</strong></td><td>${msCalcGrade((m/r.fullMarks)*100)}</td></tr>
-  `).join('');
-
-  return `<div class="a4-page">
-    <div class="header">
-      <img src="./logo.png" class="logo">
-      <div><h1>SUNRISE PUBLIC SCHOOL</h1><p>Ekdara, P.O. & P.S. Jhajha, Dist. Jamui, Bihar - 811308</p><h3>${r.examName.toUpperCase()} MARKSHEET (${r.session})</h3></div>
-    </div>
-    <div class="stu-info">
-      <div><strong>Name:</strong> ${r.studentName}</div><div><strong>Father's Name:</strong> ${r.fatherName || '-'}</div>
-      <div><strong>Class:</strong> ${r.class}</div><div><strong>Roll No:</strong> ${r.rollNo || '-'}</div>
-    </div>
-    <table class="m-table">
-      <thead><tr><th>Subject</th><th>Full Marks</th><th>Marks Obtained</th><th>Grade</th></tr></thead>
-      <tbody>${rows}</tbody>
-      <tfoot><tr><th>GRAND TOTAL</th><th>${r.maxTotal}</th><th>${r.total}</th><th>${r.percentage}% (${r.grade}) — ${r.result}</th></tr></tfoot>
-    </table>
-    <div class="sigs"><span>Class Teacher</span><span>Principal</span><span>Guardian</span></div>
-  </div>`;
-}
-
-function msRenderYearlyHTML(info, examsObj, selectedExams) {
-  const allSubs = [...new Set(Object.values(examsObj).flatMap(e => Object.keys(e.marks)))];
-  let grandTotal = 0, grandMax = 0;
-
-  const rows = allSubs.map(sub => {
-    let subTotal = 0, subMax = 0;
-    const cols = selectedExams.map(ex => {
-      const rec = examsObj[ex];
-      const val = rec ? (rec.marks[sub] ?? 0) : '-';
-      if (rec) { subTotal += Number(val); subMax += Number(rec.fullMarks); }
-      return `<td>${val}</td>`;
-    }).join('');
-    grandTotal += subTotal; grandMax += subMax;
-    const pct = subMax ? ((subTotal / subMax) * 100).toFixed(1) : 0;
-    return `<tr><td style="text-align:left;">${sub}</td>${cols}<td><strong>${subTotal}</strong> / ${subMax}</td><td>${msCalcGrade(pct)}</td></tr>`;
-  }).join('');
-
-  const finalPct = grandMax ? ((grandTotal / grandMax) * 100).toFixed(2) : 0;
-  const finalRes = Number(finalPct) >= 33 ? 'PASS' : 'FAIL';
-
-  return `<div class="a4-page">
-    <div class="header">
-      <img src="./logo.png" class="logo">
-      <div><h1>SUNRISE PUBLIC SCHOOL</h1><p>Ekdara, P.O. & P.S. Jhajha, Dist. Jamui, Bihar - 811308</p><h3>ANNUAL CONSOLIDATED MARKSHEET (${info.session})</h3></div>
-    </div>
-    <div class="stu-info">
-      <div><strong>Name:</strong> ${info.studentName}</div><div><strong>Father's Name:</strong> ${info.fatherName || '-'}</div>
-      <div><strong>Class:</strong> ${info.class}</div><div><strong>Roll No:</strong> ${info.rollNo || '-'}</div>
-    </div>
-    <table class="m-table">
-      <thead><tr><th>Subject</th>${selectedExams.map(e => `<th>${e}</th>`).join('')}<th>Total</th><th>Grade</th></tr></thead>
-      <tbody>${rows}</tbody>
-      <tfoot><tr><th>GRAND TOTAL</th><th colspan="${selectedExams.length}">Percentage: ${finalPct}% | Result: ${finalRes}</th><th>${grandTotal} / ${grandMax}</th><th>${msCalcGrade(finalPct)}</th></tr></tfoot>
-    </table>
-    <div class="sigs"><span>Class Teacher</span><span>Principal</span><span>Guardian</span></div>
-  </div>`;
-}
-
-function msPrintPages(pagesArr) {
-  const w = window.open('', '_blank');
-  w.document.write(`<html><head><title>Marksheet Print</title><style>
-    body{font-family:Arial,sans-serif; margin:0; padding:0;}
-    .a4-page{width:210mm; min-height:280mm; padding:14mm; box-sizing:border-box; border:3px double #8b1526; margin:0 auto 10mm; page-break-after:always; position:relative;}
-    .header{display:flex; align-items:center; gap:14px; border-bottom:2px solid #0f1b2d; padding-bottom:10px; margin-bottom:14px;}
-    .logo{width:70px; height:70px; object-fit:contain;}
-    .header h1{margin:0; color:#8b1526; font-size:22px;} .header p{margin:2px 0; font-size:12px;} .header h3{margin:6px 0 0; color:#0f1b2d;}
-    .stu-info{display:grid; grid-template-columns:1fr 1fr; gap:8px; background:#f8fafc; padding:10px; border:1px solid #cbd5e1; margin-bottom:14px; font-size:13px;}
-    .m-table{width:100%; border-collapse:collapse; font-size:13px; text-align:center;}
-    .m-table th, .m-table td{border:1px solid #334155; padding:8px;}
-    .m-table thead{background:#0f1b2d; color:#fff;} .m-table tfoot{background:#f1f5f9; font-weight:700;}
-    .sigs{display:flex; justify-content:space-between; margin-top:60px; padding:0 10px; font-weight:700; font-size:13px;}
-    .sigs span{border-top:1px solid #000; padding-top:4px; min-width:120px; text-align:center;}
-    @media print { .a4-page{margin:0; border:3px double #8b1526;} }
-  </style></head><body>${pagesArr.join('')}</body></html>`);
-  w.document.close();
-  setTimeout(() => w.print(), 400);
-}
-// ==================== MARKSHEET MODULE JS END ====================
 </script>
 </body>
 </html>
