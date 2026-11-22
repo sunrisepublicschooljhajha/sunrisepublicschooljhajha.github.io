@@ -495,32 +495,130 @@
       </section>
 
       <!-- 5. MARKS ENTRY -->
-      <section id="tab-marks" class="tab-pane hidden">
-        <div class="card">
-          <div class="filter-bar" style="border:none;padding:0;margin-bottom:12px;">
-            <select id="marksClassFilter" onchange="populateMarksStudentDropdown()"></select>
-            <select id="marksStuSelect" onchange="loadStudentMarks()" style="flex:1;"></select>
-            <button class="btn btn-gold btn-sm" onclick="downloadSelectedMarksheet()">👁️ Preview & Download Marksheet</button>
-          </div>
-          <div class="form-grid" style="margin-bottom:12px;">
-            <div class="field"><label>Exam Name</label><input id="mkExam" placeholder="e.g. Annual Exam 2026-27" /></div>
-            <div class="field"><label>Attendance</label><input id="mkAtt" placeholder="e.g. 138/142 Days" /></div>
-            <div class="field"><label>Result</label><input id="mkResult" placeholder="e.g. PASSED & PROMOTED" /></div>
-            <div class="field"><label>Conduct</label><input id="mkConduct" placeholder="e.g. GOOD / EXEMPLARY" /></div>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <strong style="font-size:13px;">Subjects & Marks</strong>
-            <button class="btn btn-light btn-sm" onclick="addMarkSubjectRow()">+ Add Subject</button>
-          </div>
-          <div class="table-wrap" style="margin-bottom:12px;">
-            <table>
-              <thead><tr><th>Code</th><th>Subject Name</th><th>Theory Obt / Full</th><th>Prac/IA Obt / Full</th><th>Total</th><th></th></tr></thead>
-              <tbody id="marksRows"></tbody>
-            </table>
-          </div>
-          <button class="btn btn-primary" onclick="saveStudentMarks()">💾 Save Student Marks</button>
-        </div>
-      </section>
+     <!-- ==================== MARKSHEET MODULE START ==================== -->
+<div id="marksheetModule" style="padding:14px; font-family:inherit;">
+  <h2 style="margin:0 0 12px; color:#0f1b2d;">📝 Marksheet Management (No Practical)</h2>
+
+  <!-- Sub-Navigation Tabs -->
+  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
+    <button class="btn btn-navy" onclick="msSwitchTab('msSubjectsTab')">1. Class Subjects Setup</button>
+    <button class="btn btn-primary" onclick="msSwitchTab('msEntryTab')">2. Bulk Marks Entry / Edit</button>
+    <button class="btn btn-navy" onclick="msSwitchTab('msRecordsTab')">3. Saved Marksheets & Delete</button>
+    <button class="btn btn-gold" onclick="msSwitchTab('msYearlyTab')">4. Yearly Consolidated Marksheet</button>
+  </div>
+
+  <!-- TAB 1: ONE-TIME CLASS SUBJECT SETUP -->
+  <div id="msSubjectsTab" class="ms-tab" style="background:#fff; padding:16px; border-radius:10px; border:1px solid #ddd;">
+    <h3 style="margin-top:0;">1. Ek Baar Class Ke Subjects Save Karein</h3>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:end; margin-bottom:12px;">
+      <div>
+        <label style="font-size:12px; font-weight:600;">Class Chunein</label><br>
+        <select id="msSubClass" onchange="msLoadClassSubjects()" style="padding:8px; border-radius:6px; border:1px solid #ccc; min-width:140px;">
+          <option value="Nursery">Nursery</option><option value="LKG">LKG</option><option value="UKG">UKG</option>
+          <option value="Class 1">Class 1</option><option value="Class 2">Class 2</option><option value="Class 3">Class 3</option>
+          <option value="Class 4">Class 4</option><option value="Class 5">Class 5</option><option value="Class 6">Class 6</option>
+          <option value="Class 7">Class 7</option><option value="Class 8">Class 8</option><option value="Class 9">Class 9</option>
+          <option value="Class 10">Class 10</option>
+        </select>
+      </div>
+      <div style="flex:1; min-width:240px;">
+        <label style="font-size:12px; font-weight:600;">Subjects (Comma lagakar likhein — e.g. Hindi, English, Maths, Science, SST)</label><br>
+        <input id="msSubInput" type="text" placeholder="Hindi, English, Maths, Science, SST, Computer" style="width:100%; padding:8px; border-radius:6px; border:1px solid #ccc;">
+      </div>
+      <button class="btn btn-primary" onclick="msSaveClassSubjects()">💾 Save Subjects</button>
+    </div>
+    <div id="msSubSavedList" style="font-size:13px; color:#155724; background:#e8f5e9; padding:10px; border-radius:6px;"></div>
+  </div>
+
+  <!-- TAB 2: EXCEL-STYLE BULK ENTRY & EDIT -->
+  <div id="msEntryTab" class="ms-tab" style="display:none; background:#fff; padding:16px; border-radius:10px; border:1px solid #ddd;">
+    <h3 style="margin-top:0;">2. Bulk Marks Entry / Edit (Excel Style)</h3>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:end; margin-bottom:14px;">
+      <div>
+        <label style="font-size:12px; font-weight:600;">Session</label><br>
+        <input id="msSession" type="text" value="2026-27" style="padding:8px; width:100px; border-radius:6px; border:1px solid #ccc;">
+      </div>
+      <div>
+        <label style="font-size:12px; font-weight:600;">Class</label><br>
+        <select id="msEntryClass" style="padding:8px; border-radius:6px; border:1px solid #ccc; min-width:130px;">
+          <option value="Nursery">Nursery</option><option value="LKG">LKG</option><option value="UKG">UKG</option>
+          <option value="Class 1">Class 1</option><option value="Class 2">Class 2</option><option value="Class 3">Class 3</option>
+          <option value="Class 4">Class 4</option><option value="Class 5">Class 5</option><option value="Class 6">Class 6</option>
+          <option value="Class 7">Class 7</option><option value="Class 8">Class 8</option><option value="Class 9">Class 9</option>
+          <option value="Class 10">Class 10</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:12px; font-weight:600;">Exam Name (Khud Likhein)</label><br>
+        <input id="msExamName" type="text" placeholder="e.g. Quarterly / Semi-Final / Final" style="padding:8px; width:210px; border-radius:6px; border:1px solid #ccc;">
+      </div>
+      <div>
+        <label style="font-size:12px; font-weight:600;">Full Marks / Sub</label><br>
+        <input id="msFullMarks" type="number" value="100" style="padding:8px; width:95px; border-radius:6px; border:1px solid #ccc;">
+      </div>
+      <button class="btn btn-navy" onclick="msLoadBulkGrid()">📋 Load Students</button>
+    </div>
+
+    <div id="msBulkGridWrap" style="overflow-x:auto;"></div>
+    <div id="msBulkSaveBar" style="display:none; margin-top:12px;">
+      <button class="btn btn-primary" onclick="msSaveBulkMarks()">💾 Save All Marks (Bulk Save)</button>
+    </div>
+  </div>
+
+  <!-- TAB 3: SAVED MARKSHEETS, SINGLE/BULK PRINT & DELETE -->
+  <div id="msRecordsTab" class="ms-tab" style="display:none; background:#fff; padding:16px; border-radius:10px; border:1px solid #ddd;">
+    <h3 style="margin-top:0;">3. Saved Marksheets (Print / Edit / Delete)</h3>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:end; margin-bottom:14px;">
+      <div>
+        <label style="font-size:12px; font-weight:600;">Session</label><br>
+        <input id="msRecSession" type="text" value="2026-27" style="padding:8px; width:100px; border-radius:6px; border:1px solid #ccc;">
+      </div>
+      <div>
+        <label style="font-size:12px; font-weight:600;">Class</label><br>
+        <select id="msRecClass" style="padding:8px; border-radius:6px; border:1px solid #ccc;">
+          <option value="Nursery">Nursery</option><option value="LKG">LKG</option><option value="UKG">UKG</option>
+          <option value="Class 1">Class 1</option><option value="Class 2">Class 2</option><option value="Class 3">Class 3</option>
+          <option value="Class 4">Class 4</option><option value="Class 5">Class 5</option><option value="Class 6">Class 6</option>
+          <option value="Class 7">Class 7</option><option value="Class 8">Class 8</option><option value="Class 9">Class 9</option>
+          <option value="Class 10">Class 10</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:12px; font-weight:600;">Exam Name</label><br>
+        <input id="msRecExam" type="text" placeholder="Exact Exam Name" style="padding:8px; width:190px; border-radius:6px; border:1px solid #ccc;">
+      </div>
+      <button class="btn btn-navy" onclick="msLoadSavedRecords()">🔍 Show Records</button>
+      <button class="btn btn-gold" onclick="msBulkPrintExam()">🖨️ Bulk Download / Print All</button>
+      <button class="btn btn-primary" style="background:#b91c1c;" onclick="msBulkDeleteSelected()">🗑️ Bulk Delete Selected</button>
+    </div>
+    <div id="msRecordsList" style="overflow-x:auto;"></div>
+  </div>
+
+  <!-- TAB 4: YEARLY CONSOLIDATED MARKSHEET -->
+  <div id="msYearlyTab" class="ms-tab" style="display:none; background:#fff; padding:16px; border-radius:10px; border:1px solid #ddd;">
+    <h3 style="margin-top:0;">4. Yearly Consolidated Marksheet (Quarter + Semi-Quarter + Semi-Final + Final)</h3>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:end; margin-bottom:12px;">
+      <div>
+        <label style="font-size:12px; font-weight:600;">Session</label><br>
+        <input id="msYrSession" type="text" value="2026-27" style="padding:8px; width:100px; border-radius:6px; border:1px solid #ccc;">
+      </div>
+      <div>
+        <label style="font-size:12px; font-weight:600;">Class</label><br>
+        <select id="msYrClass" style="padding:8px; border-radius:6px; border:1px solid #ccc;">
+          <option value="Nursery">Nursery</option><option value="LKG">LKG</option><option value="UKG">UKG</option>
+          <option value="Class 1">Class 1</option><option value="Class 2">Class 2</option><option value="Class 3">Class 3</option>
+          <option value="Class 4">Class 4</option><option value="Class 5">Class 5</option><option value="Class 6">Class 6</option>
+          <option value="Class 7">Class 7</option><option value="Class 8">Class 8</option><option value="Class 9">Class 9</option>
+          <option value="Class 10">Class 10</option>
+        </select>
+      </div>
+      <button class="btn btn-navy" onclick="msFindAvailableExams()">🔎 Find Saved Exams</button>
+    </div>
+    <div id="msYrExamsBox" style="margin-bottom:14px;"></div>
+    <div id="msYrStudentsList" style="overflow-x:auto;"></div>
+  </div>
+</div>
+<!-- ==================== MARKSHEET MODULE END ==================== -->
 
       <!-- 6. BULK ADMIT CARDS -->
       <section id="tab-admit" class="tab-pane hidden">
@@ -564,7 +662,18 @@
               <select id="waTarget" onchange="renderWaQueue()"><option value="all">All Guardians</option><option value="dues">Pending Dues</option><option value="class">Specific Class</option></select>
             </div>
             <div id="waClassWrap" class="field hidden" style="margin-bottom:8px;"><label>Class</label><select id="waClass" onchange="renderWaQueue()"></select></div>
-            <div class="field" style="margin-bottom:10px;"><label>Message ({name}, {dues})</label><textarea id="waMsg" rows="2">Namaskar {name} ke abhibhavak, Sunrise Public School Jhajha se soochna. Pending fee: Rs. {dues}.</textarea></div>
+            <div class="field" style="margin-bottom:10px;"><label>Message ({name}, {dues})</label><textarea id="waMsg" rows="2">Dear {name}'s Parents,
+
+Greetings from Sunrise Public School, Jhajha!
+
+This is to inform you that the school fee of your ward is currently pending. As per our records, the outstanding fee amount is ₹{dues}.
+
+We kindly request you to clear the pending dues at the earliest to avoid any inconvenience. Your cooperation and timely payment will be highly appreciated.
+
+Thank you for your understanding and support.
+
+Regards,
+Sunrise Public School, Jhajha. Pending fee: Rs. {dues}.</textarea></div>
             <div id="waQueueList" style="max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:7px;"></div>
           </div>
           <div class="card">
@@ -1565,6 +1674,349 @@ window.addEventListener('DOMContentLoaded', () => {
   if (currentUser) applyLoggedInUI();
   setTimeout(() => document.getElementById('splash').classList.add('hide'), 450);
 });
+  // ==================== MARKSHEET MODULE JS ====================
+// Note: Yeh aapke existing Firebase 'db' aur 'students' array ko use karta hai.
+// Agar aapke code mein students array ka naam alag hai (e.g. allStudents), toh neeche msGetStudents() mein badal dena.
+
+function msGetStudents(cls) {
+  const list = (typeof students !== 'undefined' ? students : (window.allStudents || []));
+  return list.filter(s => (s.class || s.studentClass || '').trim().toLowerCase() === cls.trim().toLowerCase());
+}
+
+function msSwitchTab(tabId) {
+  document.querySelectorAll('.ms-tab').forEach(el => el.style.display = 'none');
+  document.getElementById(tabId).style.display = 'block';
+  if (tabId === 'msSubjectsTab') msLoadClassSubjects();
+}
+
+// --- 1. CLASS SUBJECTS (ONE-TIME SAVE) ---
+async function msSaveClassSubjects() {
+  const cls = document.getElementById('msSubClass').value;
+  const raw = document.getElementById('msSubInput').value;
+  const subjects = raw.split(',').map(s => s.trim()).filter(Boolean);
+  if (!subjects.length) return alert('Kam se kam 1 subject likhein!');
+
+  localStorage.setItem('ms_sub_' + cls, JSON.stringify(subjects));
+  if (typeof db !== 'undefined') {
+    await db.collection('classSubjects').doc(cls).set({ class: cls, subjects, updatedAt: Date.now() });
+  }
+  msLoadClassSubjects();
+  alert(`✅ ${cls} ke ${subjects.length} subjects save ho gaye!`);
+}
+
+async function msGetClassSubjects(cls) {
+  if (typeof db !== 'undefined') {
+    const doc = await db.collection('classSubjects').doc(cls).get();
+    if (doc.exists && doc.data().subjects) {
+      localStorage.setItem('ms_sub_' + cls, JSON.stringify(doc.data().subjects));
+      return doc.data().subjects;
+    }
+  }
+  return JSON.parse(localStorage.getItem('ms_sub_' + cls) || '[]');
+}
+
+async function msLoadClassSubjects() {
+  const cls = document.getElementById('msSubClass').value;
+  const subs = await msGetClassSubjects(cls);
+  document.getElementById('msSubInput').value = subs.join(', ');
+  document.getElementById('msSubSavedList').innerHTML = subs.length
+    ? `<strong>${cls} Saved Subjects:</strong> ${subs.join(' | ')}`
+    : `<em>${cls} ke liye abhi koi subject save nahi hai. Upar likh kar Save karein.</em>`;
+}
+
+// --- 2. EXCEL-STYLE BULK ENTRY & EDIT ---
+async function msLoadBulkGrid() {
+  const session = document.getElementById('msSession').value.trim();
+  const cls = document.getElementById('msEntryClass').value;
+  const exam = document.getElementById('msExamName').value.trim();
+  const fullMarks = Number(document.getElementById('msFullMarks').value) || 100;
+
+  if (!session || !exam) return alert('Session aur Exam Name zaroor bharein!');
+  const subs = await msGetClassSubjects(cls);
+  if (!subs.length) return alert(`${cls} ke subjects pehle Tab 1 mein save karein!`);
+
+  const stuList = msGetStudents(cls);
+  if (!stuList.length) return alert(`${cls} mein koi student nahi mila!`);
+
+  // Purane saved marks fetch karein (for easy Edit)
+  const existingMap = {};
+  if (typeof db !== 'undefined') {
+    const snap = await db.collection('marksheets')
+      .where('session', '==', session).where('class', '==', cls).where('examName', '==', exam).get();
+    snap.forEach(d => { existingMap[d.data().studentId] = d.data(); });
+  }
+
+  let html = `<table border="1" cellspacing="0" cellpadding="6" style="width:100%; border-collapse:collapse; font-size:13px;">
+    <thead style="background:#0f1b2d; color:#fff;">
+      <tr><th>Roll</th><th>Student Name</th>${subs.map(s => `<th>${s}<br><small>(/${fullMarks})</small></th>`).join('')}</tr>
+    </thead><tbody>`;
+
+  stuList.forEach(st => {
+    const sid = st.id || st.admNo || st.name;
+    const oldMarks = (existingMap[sid] && existingMap[sid].marks) ? existingMap[sid].marks : {};
+    html += `<tr data-sid="${sid}" data-name="${st.name}" data-father="${st.fatherName || ''}" data-roll="${st.rollNo || ''}">
+      <td>${st.rollNo || '-'}</td>
+      <td><strong>${st.name}</strong></td>
+      ${subs.map(sub => `<td><input type="number" min="0" max="${fullMarks}" class="ms-cell" data-sub="${sub}" value="${oldMarks[sub] ?? ''}" style="width:65px; padding:5px; text-align:center;"></td>`).join('')}
+    </tr>`;
+  });
+
+  html += `</tbody></table>`;
+  document.getElementById('msBulkGridWrap').innerHTML = html;
+  document.getElementById('msBulkSaveBar').style.display = 'block';
+}
+
+async function msSaveBulkMarks() {
+  const session = document.getElementById('msSession').value.trim();
+  const cls = document.getElementById('msEntryClass').value;
+  const exam = document.getElementById('msExamName').value.trim();
+  const fullMarks = Number(document.getElementById('msFullMarks').value) || 100;
+  const rows = document.querySelectorAll('#msBulkGridWrap tbody tr');
+  if (!rows.length) return;
+
+  const batch = (typeof db !== 'undefined') ? db.batch() : null;
+  let savedCount = 0;
+
+  rows.forEach(tr => {
+    const sid = tr.dataset.sid;
+    const marks = {};
+    let total = 0, maxTotal = 0, hasAny = false;
+
+    tr.querySelectorAll('.ms-cell').forEach(inp => {
+      const sub = inp.dataset.sub;
+      const val = inp.value.trim();
+      if (val !== '') {
+        hasAny = true;
+        const num = Number(val);
+        marks[sub] = num;
+        total += num;
+      } else {
+        marks[sub] = 0;
+      }
+      maxTotal += fullMarks;
+    });
+
+    if (!hasAny) return;
+    const pct = maxTotal ? ((total / maxTotal) * 100).toFixed(2) : 0;
+    const docId = `${session}_${cls}_${exam}_${sid}`.replace(/[^a-zA-Z0-9_-]/g, '_');
+
+    const record = {
+      docId, session, class: cls, examName: exam, fullMarks,
+      studentId: sid, studentName: tr.dataset.name, fatherName: tr.dataset.father, rollNo: tr.dataset.roll,
+      marks, total, maxTotal, percentage: Number(pct),
+      grade: msCalcGrade(pct), result: Number(pct) >= 33 ? 'PASS' : 'FAIL',
+      updatedAt: Date.now()
+    };
+
+    if (batch) batch.set(db.collection('marksheets').doc(docId), record);
+    savedCount++;
+  });
+
+  if (batch) await batch.commit();
+  alert(`✅ ${savedCount} students ke marks (${exam}) save ho gaye!`);
+}
+
+function msCalcGrade(pct) {
+  pct = Number(pct);
+  if (pct >= 90) return 'A+';
+  if (pct >= 80) return 'A';
+  if (pct >= 70) return 'B+';
+  if (pct >= 60) return 'B';
+  if (pct >= 50) return 'C';
+  if (pct >= 33) return 'D';
+  return 'F';
+}
+
+// --- 3. SAVED RECORDS, SINGLE/BULK DELETE & PRINT ---
+let msCurrentRecords = [];
+
+async function msLoadSavedRecords() {
+  const session = document.getElementById('msRecSession').value.trim();
+  const cls = document.getElementById('msRecClass').value;
+  const exam = document.getElementById('msRecExam').value.trim();
+  if (!session || !exam) return alert('Session aur Exam Name bharein!');
+
+  const snap = await db.collection('marksheets')
+    .where('session', '==', session).where('class', '==', cls).where('examName', '==', exam).get();
+  msCurrentRecords = snap.docs.map(d => d.data());
+
+  if (!msCurrentRecords.length) {
+    document.getElementById('msRecordsList').innerHTML = `<p style="color:#b91c1c;">Koi saved marksheet nahi mili.</p>`;
+    return;
+  }
+
+  let html = `<table border="1" cellspacing="0" cellpadding="6" style="width:100%; border-collapse:collapse; font-size:13px;">
+    <thead style="background:#0f1b2d; color:#fff;">
+      <tr>
+        <th><input type="checkbox" onchange="document.querySelectorAll('.ms-chk').forEach(c=>c.checked=this.checked)"></th>
+        <th>Roll</th><th>Student Name</th><th>Total</th><th>%</th><th>Result</th><th>Actions</th>
+      </tr>
+    </thead><tbody>`;
+
+  msCurrentRecords.forEach((r, idx) => {
+    html += `<tr>
+      <td style="text-align:center;"><input type="checkbox" class="ms-chk" value="${r.docId}"></td>
+      <td>${r.rollNo || '-'}</td>
+      <td><strong>${r.studentName}</strong></td>
+      <td>${r.total} / ${r.maxTotal}</td>
+      <td>${r.percentage}% (${r.grade})</td>
+      <td style="color:${r.result==='PASS'?'green':'red'}; font-weight:700;">${r.result}</td>
+      <td>
+        <button class="btn btn-navy" style="padding:4px 8px; font-size:12px;" onclick="msPrintPages([msRenderSingleHTML(msCurrentRecords[${idx}])])">🖨️ Print</button>
+        <button class="btn btn-primary" style="padding:4px 8px; font-size:12px; background:#b91c1c;" onclick="msDeleteOne('${r.docId}')">🗑️ Delete</button>
+      </td>
+    </tr>`;
+  });
+
+  html += `</tbody></table>`;
+  document.getElementById('msRecordsList').innerHTML = html;
+}
+
+async function msDeleteOne(docId) {
+  if (!confirm('Kya aap sach mein is student ki marksheet delete karna chahte hain?')) return;
+  await db.collection('marksheets').doc(docId).delete();
+  msLoadSavedRecords();
+}
+
+async function msBulkDeleteSelected() {
+  const checked = Array.from(document.querySelectorAll('.ms-chk:checked')).map(c => c.value);
+  if (!checked.length) return alert('Pehle delete karne ke liye marksheets tick karein!');
+  if (!confirm(`⚠️ ${checked.length} marksheets permanently delete ho jayengi. Confirm karein?`)) return;
+
+  const batch = db.batch();
+  checked.forEach(id => batch.delete(db.collection('marksheets').doc(id)));
+  await batch.commit();
+  alert(`🗑️ ${checked.length} marksheets delete ho gayi!`);
+  msLoadSavedRecords();
+}
+
+function msBulkPrintExam() {
+  if (!msCurrentRecords.length) return alert('Pehle Show Records par click karein!');
+  const pages = msCurrentRecords.map(r => msRenderSingleHTML(r));
+  msPrintPages(pages);
+}
+
+// --- 4. YEARLY CONSOLIDATED MARKSHEET ---
+let msYrAllDocs = [];
+
+async function msFindAvailableExams() {
+  const session = document.getElementById('msYrSession').value.trim();
+  const cls = document.getElementById('msYrClass').value;
+  const snap = await db.collection('marksheets').where('session', '==', session).where('class', '==', cls).get();
+  msYrAllDocs = snap.docs.map(d => d.data());
+
+  const exams = [...new Set(msYrAllDocs.map(d => d.examName))];
+  if (!exams.length) {
+    document.getElementById('msYrExamsBox').innerHTML = `<p style="color:#b91c1c;">Is session/class mein koi exam save nahi hai.</p>`;
+    return;
+  }
+
+  document.getElementById('msYrExamsBox').innerHTML = `
+    <div style="background:#f8fafc; padding:12px; border-radius:8px; border:1px solid #cbd5e1;">
+      <strong>Yearly Marksheet mein jodney ke liye Exams tick karein:</strong><br><br>
+      ${exams.map(ex => `<label style="margin-right:14px; font-weight:600;"><input type="checkbox" class="ms-yr-ex" value="${ex}" checked> ${ex}</label>`).join('')}
+      <br><br>
+      <button class="btn btn-gold" onclick="msBulkPrintYearly()">🖨️ Bulk Print All Yearly Marksheets</button>
+    </div>`;
+}
+
+function msBulkPrintYearly() {
+  const selectedExams = Array.from(document.querySelectorAll('.ms-yr-ex:checked')).map(c => c.value);
+  if (!selectedExams.length) return alert('Kam se kam 1 exam select karein!');
+
+  // Group by studentId
+  const byStudent = {};
+  msYrAllDocs.filter(d => selectedExams.includes(d.examName)).forEach(d => {
+    if (!byStudent[d.studentId]) byStudent[d.studentId] = { info: d, exams: {} };
+    byStudent[d.studentId].exams[d.examName] = d;
+  });
+
+  const pages = Object.values(byStudent).map(st => msRenderYearlyHTML(st.info, st.exams, selectedExams));
+  msPrintPages(pages);
+}
+
+// --- A4 PRINT TEMPLATES (SINGLE EXAM & YEARLY) ---
+function msRenderSingleHTML(r) {
+  const rows = Object.entries(r.marks).map(([sub, m]) => `
+    <tr><td>${sub}</td><td>${r.fullMarks}</td><td><strong>${m}</strong></td><td>${msCalcGrade((m/r.fullMarks)*100)}</td></tr>
+  `).join('');
+
+  return `<div class="a4-page">
+    <div class="header">
+      <img src="./logo.png" class="logo">
+      <div><h1>SUNRISE PUBLIC SCHOOL</h1><p>Ekdara, P.O. & P.S. Jhajha, Dist. Jamui, Bihar - 811308</p><h3>${r.examName.toUpperCase()} MARKSHEET (${r.session})</h3></div>
+    </div>
+    <div class="stu-info">
+      <div><strong>Name:</strong> ${r.studentName}</div><div><strong>Father's Name:</strong> ${r.fatherName || '-'}</div>
+      <div><strong>Class:</strong> ${r.class}</div><div><strong>Roll No:</strong> ${r.rollNo || '-'}</div>
+    </div>
+    <table class="m-table">
+      <thead><tr><th>Subject</th><th>Full Marks</th><th>Marks Obtained</th><th>Grade</th></tr></thead>
+      <tbody>${rows}</tbody>
+      <tfoot><tr><th>GRAND TOTAL</th><th>${r.maxTotal}</th><th>${r.total}</th><th>${r.percentage}% (${r.grade}) — ${r.result}</th></tr></tfoot>
+    </table>
+    <div class="sigs"><span>Class Teacher</span><span>Principal</span><span>Guardian</span></div>
+  </div>`;
+}
+
+function msRenderYearlyHTML(info, examsObj, selectedExams) {
+  const allSubs = [...new Set(Object.values(examsObj).flatMap(e => Object.keys(e.marks)))];
+  let grandTotal = 0, grandMax = 0;
+
+  const rows = allSubs.map(sub => {
+    let subTotal = 0, subMax = 0;
+    const cols = selectedExams.map(ex => {
+      const rec = examsObj[ex];
+      const val = rec ? (rec.marks[sub] ?? 0) : '-';
+      if (rec) { subTotal += Number(val); subMax += Number(rec.fullMarks); }
+      return `<td>${val}</td>`;
+    }).join('');
+    grandTotal += subTotal; grandMax += subMax;
+    const pct = subMax ? ((subTotal / subMax) * 100).toFixed(1) : 0;
+    return `<tr><td style="text-align:left;">${sub}</td>${cols}<td><strong>${subTotal}</strong> / ${subMax}</td><td>${msCalcGrade(pct)}</td></tr>`;
+  }).join('');
+
+  const finalPct = grandMax ? ((grandTotal / grandMax) * 100).toFixed(2) : 0;
+  const finalRes = Number(finalPct) >= 33 ? 'PASS' : 'FAIL';
+
+  return `<div class="a4-page">
+    <div class="header">
+      <img src="./logo.png" class="logo">
+      <div><h1>SUNRISE PUBLIC SCHOOL</h1><p>Ekdara, P.O. & P.S. Jhajha, Dist. Jamui, Bihar - 811308</p><h3>ANNUAL CONSOLIDATED MARKSHEET (${info.session})</h3></div>
+    </div>
+    <div class="stu-info">
+      <div><strong>Name:</strong> ${info.studentName}</div><div><strong>Father's Name:</strong> ${info.fatherName || '-'}</div>
+      <div><strong>Class:</strong> ${info.class}</div><div><strong>Roll No:</strong> ${info.rollNo || '-'}</div>
+    </div>
+    <table class="m-table">
+      <thead><tr><th>Subject</th>${selectedExams.map(e => `<th>${e}</th>`).join('')}<th>Total</th><th>Grade</th></tr></thead>
+      <tbody>${rows}</tbody>
+      <tfoot><tr><th>GRAND TOTAL</th><th colspan="${selectedExams.length}">Percentage: ${finalPct}% | Result: ${finalRes}</th><th>${grandTotal} / ${grandMax}</th><th>${msCalcGrade(finalPct)}</th></tr></tfoot>
+    </table>
+    <div class="sigs"><span>Class Teacher</span><span>Principal</span><span>Guardian</span></div>
+  </div>`;
+}
+
+function msPrintPages(pagesArr) {
+  const w = window.open('', '_blank');
+  w.document.write(`<html><head><title>Marksheet Print</title><style>
+    body{font-family:Arial,sans-serif; margin:0; padding:0;}
+    .a4-page{width:210mm; min-height:280mm; padding:14mm; box-sizing:border-box; border:3px double #8b1526; margin:0 auto 10mm; page-break-after:always; position:relative;}
+    .header{display:flex; align-items:center; gap:14px; border-bottom:2px solid #0f1b2d; padding-bottom:10px; margin-bottom:14px;}
+    .logo{width:70px; height:70px; object-fit:contain;}
+    .header h1{margin:0; color:#8b1526; font-size:22px;} .header p{margin:2px 0; font-size:12px;} .header h3{margin:6px 0 0; color:#0f1b2d;}
+    .stu-info{display:grid; grid-template-columns:1fr 1fr; gap:8px; background:#f8fafc; padding:10px; border:1px solid #cbd5e1; margin-bottom:14px; font-size:13px;}
+    .m-table{width:100%; border-collapse:collapse; font-size:13px; text-align:center;}
+    .m-table th, .m-table td{border:1px solid #334155; padding:8px;}
+    .m-table thead{background:#0f1b2d; color:#fff;} .m-table tfoot{background:#f1f5f9; font-weight:700;}
+    .sigs{display:flex; justify-content:space-between; margin-top:60px; padding:0 10px; font-weight:700; font-size:13px;}
+    .sigs span{border-top:1px solid #000; padding-top:4px; min-width:120px; text-align:center;}
+    @media print { .a4-page{margin:0; border:3px double #8b1526;} }
+  </style></head><body>${pagesArr.join('')}</body></html>`);
+  w.document.close();
+  setTimeout(() => w.print(), 400);
+}
+// ==================== MARKSHEET MODULE JS END ====================
 </script>
 </body>
 </html>
