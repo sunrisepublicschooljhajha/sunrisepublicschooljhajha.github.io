@@ -32,61 +32,59 @@
       --crimson: #a11626;
       --crimson-dark: #7a0f1c;
       --gold: #d99b26;
-      --navy: #121c2d;
+      --navy: #0f1b2d;
       --navy-2: #1c2940;
-      --bg: #f8f5ef;
+      --bg: #f6f4ef;
       --card: #ffffff;
       --text: #1c2434;
       --muted: #5c687a;
-      --border: #e6e0d5;
+      --border: #e5dfd3;
       --green: #15803d;
       --blue: #1d4ed8;
       --red: #dc2626;
-      --radius: 14px;
-      --shadow: 0 8px 24px rgba(15, 27, 45, 0.06);
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(15, 27, 45, 0.06);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; overflow-x: hidden; }
-    button, input, select, textarea { font-family: inherit; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; overflow-x: hidden; -webkit-user-select: none; user-select: none; }
+    input, textarea, select, code { -webkit-user-select: text; user-select: text; font-family: inherit; }
+    button { font-family: inherit; }
 
     #topProgress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--gold), var(--crimson)); z-index: 9999; transition: width .25s ease, opacity .3s; }
     #toastBox { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
-    .toast { background: var(--navy); color: #fff; padding: 11px 16px; border-radius: 11px; font-size: 13px; font-weight: 600; box-shadow: 0 10px 24px rgba(0,0,0,.22); border-left: 4px solid var(--gold); }
+    .toast { background: var(--navy); color: #fff; padding: 12px 18px; border-radius: 12px; font-size: 13px; font-weight: 600; box-shadow: 0 12px 28px rgba(0,0,0,.24); border-left: 4px solid var(--gold); }
     .toast.ok { border-left-color: #22c55e; }
     .toast.err { border-left-color: #ef4444; }
 
-    #splash { position: fixed; inset: 0; background: var(--navy); z-index: 9990; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; transition: opacity .35s ease; }
+    #splash { position: fixed; inset: 0; background: linear-gradient(145deg, #0b1320, #16233a); z-index: 9990; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; transition: opacity .35s ease; }
     #splash.hide { opacity: 0; pointer-events: none; }
     .pulse-logo { width: 96px; height: 96px; border-radius: 50%; animation: pulse 1.2s infinite; object-fit: cover; background: #fff; border: 3px solid var(--gold); }
     @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.07); } }
 
-    /* Bigger & Clearer Header */
-    .topbar { position: sticky; top: 0; z-index: 200; background: #ffffff; color: var(--navy); padding: 11px 16px; border-bottom: 2px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 3px 14px rgba(0,0,0,.06); }
+    .topbar { position: sticky; top: 0; z-index: 200; background: rgba(255,255,255,.96); backdrop-filter: blur(10px); color: var(--navy); padding: 10px 16px; border-bottom: 2px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 4px 18px rgba(15,27,45,.06); }
     .brand { display: flex; align-items: center; gap: 12px; cursor: pointer; min-width: 0; flex: 1; }
-    .brand img { width: 58px; height: 58px; flex-shrink: 0; border-radius: 50%; border: 2.5px solid var(--crimson); background: #fff; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+    .brand img { width: 58px; height: 58px; flex-shrink: 0; border-radius: 50%; border: 2.5px solid var(--crimson); background: #fff; object-fit: cover; box-shadow: 0 3px 10px rgba(161,22,38,.15); }
     .brand-text { min-width: 0; }
     .brand-title { font-size: clamp(18px, 4.6vw, 25px); font-weight: 800; color: var(--navy); letter-spacing: 0.3px; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .brand-sub-row { display: flex; align-items: center; gap: 7px; margin-top: 3px; flex-wrap: nowrap; overflow: hidden; }
     .estd-pill { flex-shrink: 0; background: #fef3c7; color: #92400e; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 99px; }
     .brand small { font-size: 12.5px; color: var(--crimson); font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .hdr-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-    .menu-btn { background: var(--crimson); color: #fff; border: none; width: 42px; height: 42px; border-radius: 10px; font-size: 21px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+    .menu-btn { background: var(--crimson); color: #fff; border: none; width: 42px; height: 42px; border-radius: 11px; font-size: 21px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(161,22,38,.25); }
 
-    /* Slide Drawer */
-    .drawer-bg { position: fixed; inset: 0; background: rgba(15,27,45,.55); z-index: 400; display: none; }
+    .drawer-bg { position: fixed; inset: 0; background: rgba(15,27,45,.55); backdrop-filter: blur(2px); z-index: 400; display: none; }
     .drawer-bg.open { display: block; }
-    .drawer { position: fixed; top: 0; right: -310px; width: 290px; max-width: 85vw; height: 100%; background: #fff; z-index: 450; box-shadow: -8px 0 30px rgba(0,0,0,.18); transition: right .25s ease; display: flex; flex-direction: column; padding: 18px; overflow-y: auto; }
+    .drawer { position: fixed; top: 0; right: -310px; width: 295px; max-width: 85vw; height: 100%; background: #fff; z-index: 450; box-shadow: -8px 0 30px rgba(0,0,0,.18); transition: right .25s ease; display: flex; flex-direction: column; padding: 18px; overflow-y: auto; }
     .drawer.open { right: 0; }
-    .drawer-item { width: 100%; text-align: left; padding: 11px 13px; border-radius: 10px; border: none; background: #f8f5ef; color: var(--navy); font-size: 13.5px; font-weight: 700; cursor: pointer; margin-bottom: 7px; display: flex; align-items: center; gap: 9px; }
+    .drawer-item { width: 100%; text-align: left; padding: 11px 13px; border-radius: 11px; border: none; background: #f8f5ef; color: var(--navy); font-size: 13.5px; font-weight: 700; cursor: pointer; margin-bottom: 7px; display: flex; align-items: center; gap: 9px; transition: .15s; }
     .drawer-item:hover { background: #efe9dc; }
     .drawer-item.primary { background: var(--crimson); color: #fff; }
     .drawer-item.navy { background: var(--navy); color: #fff; }
 
-    /* Buttons */
-    .btn { border: none; padding: 9px 14px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; transition: .16s; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
+    .btn { border: none; padding: 9px 15px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; transition: .16s; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
     .btn:active { transform: scale(.98); }
     .btn:disabled { opacity: .6; cursor: not-allowed; }
-    .btn-primary { background: var(--crimson); color: #fff; }
+    .btn-primary { background: var(--crimson); color: #fff; box-shadow: 0 4px 12px rgba(161,22,38,.2); }
     .btn-primary:hover { background: var(--crimson-dark); }
     .btn-navy { background: var(--navy-2); color: #fff; border: 1px solid rgba(255,255,255,.15); }
     .btn-gold { background: var(--gold); color: var(--navy); }
@@ -96,16 +94,15 @@
     .btn-red { background: var(--red); color: #fff; }
     .btn-sm { padding: 6px 10px; font-size: 12px; border-radius: 8px; }
 
-    /* Public Home */
-    .hero { background: linear-gradient(160deg, #101929 0%, #172338 100%); color: #fff; padding: 46px 20px 44px; }
+    .hero { background: radial-gradient(circle at 85% 15%, rgba(161,22,38,.35), transparent 45%), linear-gradient(155deg, #0c1424 0%, #16243d 100%); color: #fff; padding: 50px 20px 48px; }
     .hero-inner { max-width: 1100px; margin: 0 auto; }
-    .hero-pill { display: inline-block; background: rgba(217,155,38,.12); color: #f4c96b; border: 1px solid rgba(217,155,38,.45); padding: 6px 14px; border-radius: 99px; font-size: 12px; font-weight: 700; margin-bottom: 16px; }
-    .hero h1 { font-size: clamp(28px, 4.8vw, 44px); line-height: 1.15; margin-bottom: 14px; font-weight: 800; }
-    .hero p { max-width: 680px; color: #cbd5e1; font-size: 15px; margin-bottom: 22px; }
-    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 26px; }
+    .hero-pill { display: inline-block; background: rgba(217,155,38,.14); color: #f7d27a; border: 1px solid rgba(217,155,38,.45); padding: 6px 14px; border-radius: 99px; font-size: 12px; font-weight: 700; margin-bottom: 16px; }
+    .hero h1 { font-size: clamp(28px, 4.8vw, 45px); line-height: 1.15; margin-bottom: 14px; font-weight: 800; }
+    .hero p { max-width: 680px; color: #cbd5e1; font-size: 15px; margin-bottom: 24px; }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
     .hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; max-width: 680px; }
-    .h-stat { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 14px; }
-    .h-stat strong { display: block; color: #f4c96b; font-size: 17px; }
+    .h-stat { background: rgba(255,255,255,.07); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,.14); border-radius: 14px; padding: 14px; }
+    .h-stat strong { display: block; color: #f7d27a; font-size: 17px; }
     .h-stat small { color: #cbd5e1; font-size: 12px; }
 
     .container { max-width: 1220px; margin: 0 auto; padding: 28px 16px; }
@@ -115,8 +112,8 @@
 
     .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(275px, 1fr)); gap: 16px; }
     .card { background: var(--card); border-radius: var(--radius); padding: 18px; border: 1px solid var(--border); box-shadow: var(--shadow); }
-    .val-card { background: #f3eee4; border: 1px solid #e4dccd; border-radius: 16px; padding: 18px; }
-    .val-ico { width: 42px; height: 42px; border-radius: 11px; display: inline-flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 10px; color: #fff; }
+    .val-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
+    .val-ico { width: 44px; height: 44px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 10px; color: #fff; }
     .tag { display: inline-block; padding: 3px 9px; border-radius: 99px; font-size: 11px; font-weight: 800; background: #fee2e2; color: var(--crimson); }
     .tag.green { background: #dcfce7; color: var(--green); }
     .tag.blue { background: #dbeafe; color: var(--blue); }
@@ -124,16 +121,27 @@
     .tag.navy { background: #e2e8f0; color: var(--navy); }
     .gallery-img { width: 100%; height: 185px; object-fit: cover; border-radius: 11px; margin-bottom: 10px; background: #eee; }
 
-    /* Forms */
     .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 12px; }
     .field label { display: block; font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
-    .field input, .field select, .field textarea { width: 100%; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 13px; background: #fcfbf8; }
-    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--crimson); background: #fff; }
+    .field input, .field select, .field textarea { width: 100%; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 13.5px; background: #fcfbf8; transition: .15s; }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--crimson); background: #fff; box-shadow: 0 0 0 3px rgba(161,22,38,.08); }
     .phone-wrap { display: flex; align-items: center; border: 1.5px solid var(--border); border-radius: 10px; background: #fcfbf8; overflow: hidden; }
-    .phone-wrap span { padding: 9px 10px; background: #efeae0; font-weight: 800; font-size: 13px; color: var(--navy); border-right: 1px solid var(--border); }
-    .phone-wrap input { border: none !important; background: transparent !important; }
+    .phone-wrap span { padding: 10px 10px; background: #efeae0; font-weight: 800; font-size: 13px; color: var(--navy); border-right: 1px solid var(--border); }
+    .phone-wrap input { border: none !important; background: transparent !important; box-shadow: none !important; }
+    .pw-wrap { position: relative; display: flex; align-items: center; }
+    .pw-wrap input { padding-right: 40px; }
+    .pw-eye { position: absolute; right: 10px; background: none; border: none; cursor: pointer; font-size: 16px; color: var(--muted); }
 
-    /* ERP Sidebar */
+    .login-card { max-width: 460px !important; padding: 26px !important; border-radius: 22px !important; box-shadow: 0 24px 60px rgba(10,18,32,.35) !important; position: relative; }
+    .login-hdr { text-align: center; margin-bottom: 18px; }
+    .login-hdr img { width: 68px; height: 68px; border-radius: 50%; border: 2.5px solid var(--crimson); object-fit: cover; margin-bottom: 8px; background: #fff; }
+    .login-hdr h3 { font-size: 19px; color: var(--navy); font-weight: 800; }
+    .login-hdr small { color: var(--muted); font-size: 12.5px; font-weight: 600; }
+    .role-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px; background: #f4f1ea; padding: 6px; border-radius: 14px; }
+    .role-tab { border: none; background: transparent; padding: 10px 6px; border-radius: 10px; font-size: 12px; font-weight: 800; color: var(--navy); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; transition: .18s; }
+    .role-tab span { font-size: 18px; }
+    .role-tab.active { background: var(--crimson); color: #fff; box-shadow: 0 4px 12px rgba(161,22,38,.28); }
+
     .erp-layout { display: grid; grid-template-columns: 245px 1fr; gap: 18px; align-items: start; }
     .side-nav { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 10px; box-shadow: var(--shadow); position: sticky; top: 88px; display: flex; flex-direction: column; gap: 4px; }
     .side-btn { width: 100%; text-align: left; padding: 10px 12px; border-radius: 10px; border: none; background: transparent; color: var(--navy); font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; }
@@ -142,8 +150,8 @@
     .erp-main { min-width: 0; }
 
     .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 11px; margin-bottom: 16px; }
-    .kpi-card { background: #fff; border: 1.5px solid var(--border); border-radius: 13px; padding: 13px; cursor: pointer; }
-    .kpi-card:hover { border-color: var(--crimson); }
+    .kpi-card { background: #fff; border: 1.5px solid var(--border); border-radius: 14px; padding: 14px; cursor: pointer; transition: .15s; }
+    .kpi-card:hover { border-color: var(--crimson); transform: translateY(-1px); }
     .kpi-card .k-lbl { font-size: 11.5px; color: var(--muted); font-weight: 700; }
     .kpi-card .k-val { font-size: 21px; font-weight: 800; color: var(--navy); margin-top: 3px; }
     .kpi-card .k-sub { font-size: 11px; color: var(--crimson); font-weight: 700; margin-top: 3px; }
@@ -159,13 +167,13 @@
     td { padding: 9px 12px; border-top: 1px solid #eeeae1; vertical-align: middle; }
     .avatar { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--gold); background: #eee; }
 
-    .cal-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; background: var(--navy); color: #fff; padding: 14px 16px; border-radius: 13px; margin-bottom: 14px; }
+    .cal-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; background: var(--navy); color: #fff; padding: 14px 16px; border-radius: 14px; margin-bottom: 14px; }
     .cal-nav { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
     .cal-nav input[type=date] { padding: 6px 9px; border-radius: 8px; border: none; font-weight: 700; font-size: 12.5px; }
 
-    .modal-bg { position: fixed; inset: 0; background: rgba(15,27,45,.68); z-index: 500; display: none; align-items: center; justify-content: center; padding: 14px; }
+    .modal-bg { position: fixed; inset: 0; background: rgba(10,18,32,.72); backdrop-filter: blur(4px); z-index: 500; display: none; align-items: center; justify-content: center; padding: 14px; }
     .modal-bg.open { display: flex; }
-    .modal { background: #fff; width: 100%; max-width: 580px; max-height: 92vh; overflow-y: auto; border-radius: 16px; padding: 20px; }
+    .modal { background: #fff; width: 100%; max-width: 580px; max-height: 92vh; overflow-y: auto; border-radius: 18px; padding: 20px; }
     .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
     .close-x { background: #f1f5f9; border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 18px; cursor: pointer; font-weight: 700; }
 
@@ -175,6 +183,10 @@
     .hidden { display: none !important; }
     .ms-cell { width: 68px; padding: 6px; border: 1.5px solid var(--border); border-radius: 7px; text-align: center; font-weight: 700; }
     .ms-cell:focus { outline: none; border-color: var(--crimson); background: #fffbeb; }
+
+    .g-hero { background: linear-gradient(135deg, #0f1b2d, #1f3252); color: #fff; padding: 20px; border-radius: 16px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+    .g-stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 16px; }
+    .g-stat { background: #f8f6f1; border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center; }
 
     footer { background: var(--navy); color: #cbd5e1; padding: 36px 18px 22px; margin-top: 40px; border-top: 3px solid var(--gold); }
     .foot-grid { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 24px; }
@@ -199,7 +211,7 @@
 <div id="splash">
   <img id="splashLogo" class="pulse-logo" src="./logo.png" onerror="this.src='./logo.jpeg'" alt="Sunrise Logo" />
   <div id="splashSchoolName" style="margin-top:12px;font-size:22px;font-weight:800;color:#f6cf77;">SUNRISE PUBLIC SCHOOL</div>
-  <small style="color:#cbd5e1;">Ekdara, Jhajha • Estd. 2012</small>
+  <small style="color:#cbd5e1;">Ekdara, Jhajha • Reg. No. 330894 • Estd. 2012</small>
 </div>
 
 <header class="topbar">
@@ -223,12 +235,12 @@
 <div id="drawerBg" class="drawer-bg" onclick="toggleDrawer(false)"></div>
 <aside id="slideDrawer" class="drawer">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);">
-    <strong style="color:var(--navy);font-size:15px;">Portal & Navigation</strong>
+    <strong style="color:var(--navy);font-size:15px;">Official Portal Menu</strong>
     <button class="close-x" onclick="toggleDrawer(false)">×</button>
   </div>
-  <small style="color:var(--muted);font-weight:800;margin-bottom:6px;">SEPARATE PORTAL LOGINS</small>
-  <button class="drawer-item primary" onclick="toggleDrawer(false);openSeparateLogin('guardian')">🎓 Guardian Login / Register</button>
-  <button class="drawer-item navy" onclick="toggleDrawer(false);openSeparateLogin('teacher')">👩‍🏫 Teacher Login / Register</button>
+  <small style="color:var(--muted);font-weight:800;margin-bottom:6px;">PORTAL LOGINS</small>
+  <button class="drawer-item primary" onclick="toggleDrawer(false);openSeparateLogin('guardian')">🎓 Guardian / Student Login</button>
+  <button class="drawer-item navy" onclick="toggleDrawer(false);openSeparateLogin('teacher')">👩‍🏫 Teacher Portal</button>
   <button class="drawer-item" style="border:1.5px solid var(--crimson);" onclick="toggleDrawer(false);openSeparateLogin('admin')">🛡️ Administration Login</button>
   <hr style="border:none;border-top:1px solid var(--border);margin:12px 0;" />
   <small style="color:var(--muted);font-weight:800;margin-bottom:6px;">QUICK SECTIONS</small>
@@ -247,19 +259,19 @@
 <main id="publicView">
   <section class="hero">
     <div class="hero-inner">
-      <span class="hero-pill" id="heroBadge">Admissions Open 2026–27 • Nursery to Class X (CBSE Pattern)</span>
+      <span class="hero-pill" id="heroBadge">CBSE Pattern English Medium • Nursery to Class X • Reg. No: 330894</span>
       <h1>Illuminating Young Minds with Knowledge & Moral Values</h1>
       <p id="heroDesc">Trusted by families across Ekdara, Jhajha (811308) since 2012. Delivering disciplined English-medium CBSE-pattern education, smart classrooms, and holistic character building.</p>
       <div class="hero-btns">
         <button class="btn btn-primary" onclick="goPublicSection('enquirySec')">Apply for Admission →</button>
         <button class="btn btn-navy" onclick="goPublicSection('noticeSec')">📢 Notice Board</button>
         <button class="btn btn-gold install-app-btn" onclick="installPWA()">📲 Install School App</button>
-        <button class="btn btn-navy" onclick="openSeparateLogin('guardian')">🎓 Guardian / Student Login</button>
+        <button class="btn btn-navy" style="border-color:var(--gold);" onclick="openSeparateLogin('guardian')">🎓 Guardian / Student Login</button>
       </div>
       <div class="hero-stats">
         <div class="h-stat"><strong>Nursery – X</strong><small>CBSE Pattern</small></div>
-        <div class="h-stat"><strong>Estd. 2012</strong><small>14+ Years Legacy</small></div>
-        <div class="h-stat"><strong>Digital ERP</strong><small>Instant PDFs & Alerts</small></div>
+        <div class="h-stat"><strong>Estd. 2012</strong><small>Reg. No: 330894</small></div>
+        <div class="h-stat"><strong>Official ERP</strong><small>Verified Receipts & Results</small></div>
       </div>
     </div>
   </section>
@@ -323,9 +335,9 @@
       <div>
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
           <img id="footLogo" src="./logo.png" onerror="this.src='./logo.jpeg'" style="width:48px;height:48px;border-radius:50%;background:#fff;object-fit:cover;" />
-          <div><strong id="footName" style="color:#fff;font-size:16px;">SUNRISE PUBLIC SCHOOL</strong><br><small style="color:var(--gold);">Ekdara, Jhajha • Estd. 2012</small></div>
+          <div><strong id="footName" style="color:#fff;font-size:16px;">SUNRISE PUBLIC SCHOOL</strong><br><small style="color:var(--gold);">Ekdara, Jhajha • Reg. No. 330894</small></div>
         </div>
-        <p style="font-size:13px;">Co-educational English Medium School following the CBSE Curriculum from Nursery to Class X in Jamui District, Bihar.</p>
+        <p style="font-size:13px;">Official Portal of Sunrise Public School, Ekdara, Jhajha (Jamui, Bihar). Co-educational English Medium CBSE Curriculum (Nursery to Class X).</p>
       </div>
       <div>
         <div class="foot-h">QUICK LINKS & LEGAL</div>
@@ -350,20 +362,23 @@
         <iframe title="Campus Map" style="width:100%;height:135px;border:0;border-radius:10px;" loading="lazy" src="https://maps.google.com/maps?q=Ekdara,Jhajha,Jamui,Bihar&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
       </div>
     </div>
-    <div class="foot-bot">© 2026 <span id="footCopy">Sunrise Public School, Ekdara, Jhajha</span>. All Rights Reserved.</div>
+    <div class="foot-bot">
+      © 2026 <span id="footCopy">Sunrise Public School, Ekdara, Jhajha</span> (Reg. No. 330894). All Rights Reserved.<br>
+      <small style="color:#94a3b8;">Unauthorized copying, cloning, or reproduction of this official portal UI, code, or brand assets is strictly prohibited.</small>
+    </div>
   </footer>
 </main>
 
-<!-- ==================== ADMINISTRATION / TEACHER ERP ==================== -->
+<!-- ==================== ADMINISTRATION / MASTER ERP ==================== -->
 <main id="adminView" class="container hidden">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
     <div>
       <h2 id="dashTitle" style="font-size:22px;color:var(--navy);">Administration Command Center</h2>
-      <small style="color:var(--muted);">Real-Time Firestore Sync • Session Active Until Sign Out</small>
+      <small id="dashSubTitle" style="color:var(--muted);">Real-Time Firestore Sync • Session Active Until Sign Out</small>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
       <button class="btn btn-gold btn-sm admin-only" onclick="openAddStudentModal()">+ New Student Registration</button>
-      <button class="btn btn-light btn-sm admin-only" onclick="exportFullBackup()">💾 Backup (.json)</button>
+      <button class="btn btn-light btn-sm super-only" onclick="exportFullBackup()">💾 Backup (.json)</button>
     </div>
   </div>
 
@@ -386,12 +401,11 @@
       <button class="side-btn admin-only" data-tab="bulkmarks" onclick="openTab('bulkmarks')">📚 Marksheets & Yearly</button>
       <button class="side-btn admin-only" data-tab="whatsapp" onclick="openTab('whatsapp')">💬 WhatsApp & Enquiries</button>
       <button class="side-btn admin-only" data-tab="notices" onclick="openTab('notices')">📢 Notices & Gallery</button>
-      <button class="side-btn admin-only" data-tab="school" onclick="openTab('school')">🏫 School, Principal & Staff</button>
-      <button class="side-btn admin-only" data-tab="settings" onclick="openTab('settings')">⚙️ Approvals, Logins & Backup</button>
+      <button class="side-btn super-only" data-tab="school" onclick="openTab('school')">🏫 School, Principal & Staff</button>
+      <button class="side-btn admin-only" data-tab="settings" onclick="openTab('settings')">⚙️ Approvals & Security</button>
     </aside>
 
     <div class="erp-main">
-      <!-- 1. STUDENT 360 -->
       <section id="tab-students" class="tab-pane">
         <div class="filter-bar">
           <input id="stuSearch" placeholder="🔍 Search Name, Adm No, Mobile..." oninput="renderStudents()" style="flex:1;min-width:180px;" />
@@ -414,7 +428,6 @@
         </div>
       </section>
 
-      <!-- 2. DAILY FEE CALENDAR -->
       <section id="tab-fees" class="tab-pane hidden">
         <div class="cal-bar">
           <div>
@@ -464,7 +477,6 @@
         </div>
       </section>
 
-      <!-- 3. FEE STRUCTURE -->
       <section id="tab-feestruct" class="tab-pane hidden">
         <div class="card">
           <h3 style="margin-bottom:6px;">📑 Class-Wise Fee Structure</h3>
@@ -488,7 +500,6 @@
         </div>
       </section>
 
-      <!-- 4. ATTENDANCE -->
       <section id="tab-attendance" class="tab-pane hidden">
         <div class="filter-bar">
           <select id="attClass" onchange="renderAttendance()"></select>
@@ -505,9 +516,7 @@
         </div>
       </section>
 
-      <!-- 5. MARKS ENTRY (1-TIME SUBJECTS + EXCEL-STYLE BULK ENTRY, NO PRACTICAL) -->
       <section id="tab-marks" class="tab-pane hidden">
-        <!-- 1-Time Class Subject Setup -->
         <div class="card" style="margin-bottom:14px;">
           <h3 style="font-size:16px;margin-bottom:6px;">1️⃣ Ek Baar Class Ke Subjects Save Karein (No Practical)</h3>
           <p style="font-size:12px;color:var(--muted);margin-bottom:10px;">Ek class ke subjects comma (,) lagakar ek baar save kar lein — phir har exam mein apne aap aa jayenge.</p>
@@ -519,7 +528,6 @@
           <div id="msSubSavedList" style="margin-top:8px;font-size:12.5px;color:var(--green);font-weight:700;"></div>
         </div>
 
-        <!-- Excel-Style Bulk Entry / Instant Edit -->
         <div class="card">
           <h3 style="font-size:16px;margin-bottom:6px;">2️⃣ Excel-Style Bulk Marks Entry / Edit</h3>
           <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">Naya Exam naam likhein (jaise Quarterly, Semi-Quarterly, Semi-Final, Final). Purana Exam naam likhne par purane marks Edit ke liye bhar kar aa jayenge.</p>
@@ -538,7 +546,6 @@
         </div>
       </section>
 
-      <!-- 6. BULK ADMIT CARDS -->
       <section id="tab-admit" class="tab-pane hidden">
         <div class="card">
           <h3 style="margin-bottom:6px;">🪪 Bulk Admit Cards Generator</h3>
@@ -556,9 +563,7 @@
         </div>
       </section>
 
-      <!-- 7. SAVED MARKSHEETS, SINGLE/BULK DELETE & YEARLY CONSOLIDATED -->
       <section id="tab-bulkmarks" class="tab-pane hidden">
-        <!-- Part A: Exam-Wise Saved Marksheets -->
         <div class="card" style="margin-bottom:16px;">
           <h3 style="font-size:16px;margin-bottom:8px;">📚 Saved Exam Marksheets (Single / Bulk Print & Delete)</h3>
           <div class="form-grid" style="align-items:end;margin-bottom:12px;">
@@ -569,12 +574,11 @@
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
             <button class="btn btn-gold btn-sm" onclick="msBulkPrintExamPDF()">👁️ Bulk Preview & Download PDF</button>
-            <button class="btn btn-red btn-sm" onclick="msBulkDeleteSelected()">🗑️ Bulk Delete Selected</button>
+            <button class="btn btn-red btn-sm super-only" onclick="msBulkDeleteSelected()">🗑️ Bulk Delete Selected</button>
           </div>
           <div id="msRecordsList" class="table-wrap"></div>
         </div>
 
-        <!-- Part B: Yearly Consolidated Marksheet -->
         <div class="card">
           <h3 style="font-size:16px;margin-bottom:6px;">🏆 Yearly Consolidated Marksheet (Quarter + Semi-Quarter + Semi-Final + Final)</h3>
           <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">Session aur Class chunein → jin exams ko saal bhar ki marksheet mein jodna hai unhe tick karein → Single ya Bulk Yearly PDF nikal lein.</p>
@@ -588,7 +592,6 @@
         </div>
       </section>
 
-      <!-- 8. WHATSAPP & ENQUIRIES -->
       <section id="tab-whatsapp" class="tab-pane hidden">
         <div class="grid-3" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
           <div class="card">
@@ -608,7 +611,6 @@
         </div>
       </section>
 
-      <!-- 9. NOTICES & GALLERY -->
       <section id="tab-notices" class="tab-pane hidden">
         <div class="grid-3" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
           <div class="card">
@@ -633,10 +635,9 @@
         </div>
       </section>
 
-      <!-- 10. SCHOOL, PRINCIPAL & STAFF -->
       <section id="tab-school" class="tab-pane hidden">
         <div class="card" style="margin-bottom:14px;">
-          <h3 style="margin-bottom:10px;font-size:16px;">🏫 School & Principal Details</h3>
+          <h3 style="margin-bottom:10px;font-size:16px;">🏫 School & Principal Details (Master Control)</h3>
           <form onsubmit="saveSchoolProfile(event)" class="form-grid">
             <div class="field"><label>School Name</label><input id="spName" required /></div>
             <div class="field"><label>Principal Name</label><input id="spPrincipal" required /></div>
@@ -663,9 +664,22 @@
         </div>
       </section>
 
-      <!-- 11. APPROVALS, PERMISSIONS, LOGINS & BACKUP -->
       <section id="tab-settings" class="tab-pane hidden">
         <div class="grid-3" style="grid-template-columns:repeat(auto-fit,minmax(310px,1fr));">
+          <div class="card super-only">
+            <h3 style="margin-bottom:8px;font-size:16px;">🛡️ Staff Administration Accounts</h3>
+            <p style="font-size:11.5px;color:var(--muted);margin-bottom:8px;">Staff ko alag ID dein — yeh Delete, Password Change ya School Profile edit nahi kar sakte. 1 click mein Block karein.</p>
+            <form onsubmit="addStaffAdmin(event)" style="margin-bottom:10px;">
+              <div class="form-grid">
+                <div class="field"><label>Staff Name</label><input id="saName" required placeholder="e.g. Office Clerk" /></div>
+                <div class="field"><label>User ID</label><input id="saUser" required /></div>
+                <div class="field"><label>Password</label><input id="saPass" required /></div>
+              </div>
+              <button class="btn btn-primary btn-sm" style="margin-top:8px;">+ Create Staff Admin</button>
+            </form>
+            <div id="staffAdminsList" style="display:flex;flex-direction:column;gap:7px;max-height:220px;overflow-y:auto;"></div>
+          </div>
+
           <div class="card">
             <h3 style="margin-bottom:8px;font-size:16px;">👩‍🏫 Teacher Approvals & Permissions</h3>
             <form onsubmit="addTeacher(event)" style="margin-bottom:10px;">
@@ -689,14 +703,14 @@
             <div id="guardianAccessList" style="max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:7px;"></div>
           </div>
 
-          <div class="card">
-            <h3 style="margin-bottom:8px;font-size:16px;">🛡️ Backup & Admin Credentials</h3>
+          <div class="card super-only">
+            <h3 style="margin-bottom:8px;font-size:16px;">🔐 Master Security & Backup</h3>
             <button class="btn btn-green btn-sm" style="width:100%;justify-content:center;margin-bottom:8px;" onclick="exportFullBackup()">⬇️ Download Full Backup (.json)</button>
             <div class="field" style="margin-bottom:12px;"><label>Restore Backup (.json)</label><input type="file" accept=".json" onchange="restoreFullBackup(event)" /></div>
-            <form onsubmit="saveAdminSettings(event)">
-              <div class="field" style="margin-bottom:6px;"><label>Admin Username</label><input id="cfgUser" required /></div>
-              <div class="field" style="margin-bottom:8px;"><label>New Admin Password</label><input id="cfgPass" type="password" placeholder="Leave blank to keep" /></div>
-              <button class="btn btn-primary btn-sm">Update Admin Pass</button>
+            <form onsubmit="saveMasterSettings(event)">
+              <div class="field" style="margin-bottom:6px;"><label>Master Username</label><input id="cfgSuperUser" required /></div>
+              <div class="field" style="margin-bottom:8px;"><label>New Master Password</label><input id="cfgSuperPass" type="password" placeholder="Leave blank to keep" /></div>
+              <button class="btn btn-primary btn-sm">Update Master Credentials</button>
             </form>
           </div>
         </div>
@@ -707,65 +721,79 @@
 
 <!-- ==================== GUARDIAN PORTAL ==================== -->
 <main id="guardianView" class="container hidden">
-  <div id="guardianContent" class="card" style="max-width:860px;margin:0 auto;"></div>
+  <div id="guardianContent" class="card" style="max-width:880px;margin:0 auto;"></div>
 </main>
 
-<!-- ==================== MODALS ==================== -->
-<div id="adminLoginModal" class="modal-bg">
-  <div class="modal" style="max-width:400px;">
-    <div class="modal-head"><h3>🛡️ Administration Login</h3><button class="close-x" onclick="closeModal('adminLoginModal')">×</button></div>
-    <form onsubmit="handleAdminLogin(event)">
-      <div class="field" style="margin-bottom:10px;"><label>Username</label><input id="admUserIn" required /></div>
-      <div class="field" style="margin-bottom:14px;"><label>Password</label><input id="admPassIn" type="password" required /></div>
-      <button class="btn btn-primary" style="width:100%;justify-content:center;">Sign In to Administration</button>
-    </form>
-  </div>
-</div>
-
-<div id="teacherLoginModal" class="modal-bg">
-  <div class="modal" style="max-width:420px;">
-    <div class="modal-head"><h3>👩‍🏫 Teacher Portal</h3><button class="close-x" onclick="closeModal('teacherLoginModal')">×</button></div>
-    <div style="display:flex;gap:6px;margin-bottom:12px;">
-      <button class="pill active" id="tModeLogin" onclick="switchTMode('login')">Sign In</button>
-      <button class="pill" id="tModeReg" onclick="switchTMode('reg')">Request Teacher Account</button>
+<!-- ==================== MODERN UNIFIED LOGIN MODAL ==================== -->
+<div id="unifiedLoginModal" class="modal-bg">
+  <div class="modal login-card">
+    <button class="close-x" style="position:absolute;top:14px;right:14px;" onclick="closeModal('unifiedLoginModal')">×</button>
+    <div class="login-hdr">
+      <img src="./logo.png" onerror="this.src='./logo.jpeg'" alt="Logo" />
+      <h3>SUNRISE PUBLIC SCHOOL</h3>
+      <small>Official ERP Portal • Reg. No. 330894</small>
     </div>
-    <form id="tLoginForm" onsubmit="handleTeacherLogin(event)">
-      <div class="field" style="margin-bottom:10px;"><label>Teacher User ID</label><input id="tchUserIn" required /></div>
-      <div class="field" style="margin-bottom:14px;"><label>Password</label><input id="tchPassIn" type="password" required /></div>
-      <button class="btn btn-navy" style="width:100%;justify-content:center;">Sign In</button>
-    </form>
-    <form id="tRegForm" class="hidden" onsubmit="handleTeacherRegister(event)">
-      <p style="font-size:12px;color:var(--crimson);margin-bottom:8px;font-weight:600;">Note: Registration ke baad Administration approval & permission milne par hi login hoga.</p>
-      <div class="field" style="margin-bottom:8px;"><label>Full Name *</label><input id="tchRegName" required /></div>
-      <div class="field" style="margin-bottom:8px;"><label>Choose User ID *</label><input id="tchRegUser" required /></div>
-      <div class="field" style="margin-bottom:12px;"><label>Create Password *</label><input id="tchRegPass" required /></div>
-      <button class="btn btn-primary" style="width:100%;justify-content:center;">Submit Request for Admin Approval</button>
-    </form>
-  </div>
-</div>
 
-<div id="guardianLoginModal" class="modal-bg">
-  <div class="modal" style="max-width:420px;">
-    <div class="modal-head"><h3>🎓 Guardian Portal</h3><button class="close-x" onclick="closeModal('guardianLoginModal')">×</button></div>
-    <div style="display:flex;gap:6px;margin-bottom:12px;">
-      <button class="pill active" id="gModeLogin" onclick="switchGMode('login')">Sign In</button>
-      <button class="pill" id="gModeReg" onclick="switchGMode('reg')">Request Guardian Access</button>
+    <div class="role-tabs">
+      <button type="button" class="role-tab active" id="rt-guardian" onclick="switchLoginRole('guardian')"><span>🎓</span>Guardian</button>
+      <button type="button" class="role-tab" id="rt-teacher" onclick="switchLoginRole('teacher')"><span>👩‍🏫</span>Teacher</button>
+      <button type="button" class="role-tab" id="rt-admin" onclick="switchLoginRole('admin')"><span>🛡️</span>Administration</button>
     </div>
-    <form id="gLoginForm" onsubmit="handleGuardianLogin(event)">
-      <div class="field" style="margin-bottom:10px;"><label>Admission No (e.g. SPS102)</label><input id="grdUserIn" required /></div>
-      <div class="field" style="margin-bottom:14px;"><label>Password</label><input id="grdPassIn" required /></div>
-      <button class="btn btn-primary" style="width:100%;justify-content:center;">Sign In</button>
-    </form>
-    <form id="gRegForm" class="hidden" onsubmit="handleGuardianRegister(event)">
-      <p style="font-size:12px;color:var(--crimson);margin-bottom:8px;font-weight:600;">Note: Student details verify hone aur Administration acceptance ke baad login chalu hoga.</p>
-      <div class="field" style="margin-bottom:8px;"><label>Student Admission No *</label><input id="grdRegAdm" required placeholder="e.g. SPS102" /></div>
-      <div class="field" style="margin-bottom:8px;"><label>Student Full Name *</label><input id="grdRegName" required placeholder="Exact student name" /></div>
-      <div class="field" style="margin-bottom:8px;"><label>Registered Mobile (10 Digits) *</label>
-        <div class="phone-wrap"><span>+91</span><input id="grdRegPhone" required maxlength="10" oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)" /></div>
+
+    <div id="lp-guardian">
+      <div style="display:flex;gap:6px;margin-bottom:12px;justify-content:center;">
+        <button type="button" class="pill active" id="gModeLogin" onclick="switchGMode('login')">Sign In</button>
+        <button type="button" class="pill" id="gModeReg" onclick="switchGMode('reg')">Request Access</button>
       </div>
-      <div class="field" style="margin-bottom:12px;"><label>Set Your Password *</label><input id="grdRegPass" required /></div>
-      <button class="btn btn-green" style="width:100%;justify-content:center;">Submit for Admin Verification</button>
-    </form>
+      <form id="gLoginForm" onsubmit="handleGuardianLogin(event)">
+        <div class="field" style="margin-bottom:10px;"><label>Student Admission No</label><input id="grdUserIn" required placeholder="e.g. SPS102" /></div>
+        <div class="field" style="margin-bottom:14px;"><label>Password</label>
+          <div class="pw-wrap"><input id="grdPassIn" type="password" required placeholder="Enter Password" /><button type="button" class="pw-eye" onclick="togglePw('grdPassIn')">👁️</button></div>
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px;">Sign In as Guardian</button>
+      </form>
+      <form id="gRegForm" class="hidden" onsubmit="handleGuardianRegister(event)">
+        <p style="font-size:12px;color:var(--crimson);margin-bottom:8px;font-weight:600;">Student details verify hone aur school approval ke baad login chalu hoga.</p>
+        <div class="field" style="margin-bottom:8px;"><label>Admission No *</label><input id="grdRegAdm" required placeholder="e.g. SPS102" /></div>
+        <div class="field" style="margin-bottom:8px;"><label>Student Full Name *</label><input id="grdRegName" required placeholder="Exact student name" /></div>
+        <div class="field" style="margin-bottom:8px;"><label>Registered Mobile (10 Digits) *</label>
+          <div class="phone-wrap"><span>+91</span><input id="grdRegPhone" required maxlength="10" oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)" /></div>
+        </div>
+        <div class="field" style="margin-bottom:12px;"><label>Set Password *</label><input id="grdRegPass" required /></div>
+        <button class="btn btn-green" style="width:100%;justify-content:center;padding:11px;">Submit for Verification</button>
+      </form>
+    </div>
+
+    <div id="lp-teacher" class="hidden">
+      <div style="display:flex;gap:6px;margin-bottom:12px;justify-content:center;">
+        <button type="button" class="pill active" id="tModeLogin" onclick="switchTMode('login')">Sign In</button>
+        <button type="button" class="pill" id="tModeReg" onclick="switchTMode('reg')">Request Account</button>
+      </div>
+      <form id="tLoginForm" onsubmit="handleTeacherLogin(event)">
+        <div class="field" style="margin-bottom:10px;"><label>Teacher User ID</label><input id="tchUserIn" required placeholder="Enter User ID" /></div>
+        <div class="field" style="margin-bottom:14px;"><label>Password</label>
+          <div class="pw-wrap"><input id="tchPassIn" type="password" required placeholder="Enter Password" /><button type="button" class="pw-eye" onclick="togglePw('tchPassIn')">👁️</button></div>
+        </div>
+        <button class="btn btn-navy" style="width:100%;justify-content:center;padding:11px;">Sign In as Teacher</button>
+      </form>
+      <form id="tRegForm" class="hidden" onsubmit="handleTeacherRegister(event)">
+        <p style="font-size:12px;color:var(--crimson);margin-bottom:8px;font-weight:600;">Administration approval & permission milne par hi login hoga.</p>
+        <div class="field" style="margin-bottom:8px;"><label>Full Name *</label><input id="tchRegName" required /></div>
+        <div class="field" style="margin-bottom:8px;"><label>Choose User ID *</label><input id="tchRegUser" required /></div>
+        <div class="field" style="margin-bottom:12px;"><label>Create Password *</label><input id="tchRegPass" required /></div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px;">Submit Request</button>
+      </form>
+    </div>
+
+    <div id="lp-admin" class="hidden">
+      <form onsubmit="handleAdminLogin(event)">
+        <div class="field" style="margin-bottom:10px;"><label>Official User ID</label><input id="admUserIn" required placeholder="Enter Administration ID" /></div>
+        <div class="field" style="margin-bottom:14px;"><label>Password</label>
+          <div class="pw-wrap"><input id="admPassIn" type="password" required placeholder="Enter Password" /><button type="button" class="pw-eye" onclick="togglePw('admPassIn')">👁️</button></div>
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;padding:11px;">Sign In to Administration</button>
+      </form>
+    </div>
   </div>
 </div>
 
@@ -835,7 +863,6 @@
     <div style="background:#fef3c7;color:#92400e;padding:9px 12px;border-radius:9px;font-size:12.5px;font-weight:700;margin-bottom:10px;">
       Note: Agar aapke phone mein Sps Jhajha app pehle se install hai, toh Home Screen se direct open karein.
     </div>
-    <p style="font-size:13.5px;color:var(--muted);margin-bottom:10px;">Naye phone par install karne ke liye:</p>
     <ol style="font-size:13px;padding-left:18px;line-height:1.8;margin-bottom:14px;">
       <li>Browser ke upar right mein <strong>3-dots (⋮)</strong> ya <strong>Share</strong> icon par click karein.</li>
       <li><strong>"Install app"</strong> ya <strong>"Add to Home screen"</strong> select karein.</li>
@@ -846,6 +873,13 @@
 </div>
 
 <script>
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) || (e.ctrlKey && e.key.toUpperCase() === 'U')) {
+    e.preventDefault();
+  }
+});
+
 const firebaseConfig = {
   apiKey: "AIzaSyBOTd9jPX7wseqAXHhG34FY8h5fYGo_L18",
   authDomain: "sunrise-public-school-b7005.firebaseapp.com",
@@ -872,16 +906,18 @@ const DEFAULT_SCHOOL = {
   email: 'office@sunrisepublicschooljhajha.edu.in',
   timings: 'Mon – Sat: 8:00 AM – 2:15 PM',
   address: 'Ekdara, Jhajha - 811308, Dist. Jamui, Bihar',
-  regTag: 'Admissions Open 2026–27 • Nursery to Class X (CBSE Pattern)',
+  regTag: 'CBSE Pattern English Medium • Nursery to Class X • Reg. No: 330894',
   sessionLabel: 'SESSION 2026–27',
+  superUser: 'Spsjhajha',
+  superPass: 'Sps2026',
   adminUser: 'admin',
   adminPass: 'Sunrise@2026',
   defaultFee: 6000,
   customFeeHeads: []
 };
 
-let DB = JSON.parse(localStorage.getItem('sunrise_cache_v9') || 'null') || {
-  students: [], fees: [], attendance: {}, notices: [], gallery: [], enquiries: [], teachers: [], staff: [], feeStructure: {},
+let DB = JSON.parse(localStorage.getItem('sunrise_cache_v11') || 'null') || {
+  students: [], fees: [], attendance: {}, notices: [], gallery: [], enquiries: [], teachers: [], staff: [], staffAdmins: [], feeStructure: {},
   classSubjects: {}, marksheets: [],
   config: { ...DEFAULT_SCHOOL }
 };
@@ -890,8 +926,9 @@ let stuStatusFilter = 'all', feeScope = 'day', deferredPrompt = null;
 let LOGO_DATA_URL = '', WATERMARK_DATA_URL = '';
 let lastPdfDoc = null, lastPdfName = 'Document.pdf';
 
+function isSuperAdmin() { return currentUser && currentUser.role === 'superadmin'; }
 function getCfg() { return { ...DEFAULT_SCHOOL, ...(DB.config || {}) }; }
-function saveLocalCache() { localStorage.setItem('sunrise_cache_v9', JSON.stringify(DB)); }
+function saveLocalCache() { localStorage.setItem('sunrise_cache_v11', JSON.stringify(DB)); }
 function setSession(u) { currentUser = u; sessionStorage.setItem('sunrise_session', JSON.stringify(u)); }
 function todayStr() { return new Date().toISOString().split('T')[0]; }
 function fmtDate(d) {
@@ -908,6 +945,7 @@ function setProgress(pct) {
   b.style.opacity = pct > 0 ? '1' : '0'; b.style.width = pct + '%';
   if (pct >= 100) setTimeout(() => { b.style.opacity = '0'; b.style.width = '0%'; }, 300);
 }
+function togglePw(id) { const el = document.getElementById(id); el.type = el.type === 'password' ? 'text' : 'password'; }
 
 function triggerPushPrompt() {
   window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -921,11 +959,11 @@ function openLegalModal(type) {
   const cfg = getCfg();
   document.getElementById('legalTitle').textContent = type === 'terms' ? '📜 Terms & Conditions' : '🔒 Privacy Policy';
   document.getElementById('legalBody').innerHTML = type === 'terms'
-    ? `<p><strong>1. Official School Portal:</strong> Operated by ${cfg.schoolName}, ${cfg.address}.</p>
-       <p style="margin-top:8px;"><strong>2. Account Approval:</strong> Teacher & Guardian accounts require Administration approval.</p>
-       <p style="margin-top:8px;"><strong>3. Fees & Documents:</strong> Digital receipts, marksheets, and admit cards are subject to school ledger verification.</p>`
-    : `<p><strong>1. Data Collection:</strong> ${cfg.schoolName} collects student records strictly for school administration.</p>
-       <p style="margin-top:8px;"><strong>2. Security:</strong> Stored securely on Google Firebase Cloud Firestore. Never shared with third parties.</p>
+    ? `<p><strong>1. Official Portal:</strong> Operated exclusively by ${cfg.schoolName}, ${cfg.address} (Reg. No. 330894).</p>
+       <p style="margin-top:8px;"><strong>2. Copyright:</strong> All UI, branding, and digital records are proprietary. Unauthorized cloning is strictly prohibited.</p>
+       <p style="margin-top:8px;"><strong>3. Accounts:</strong> Teacher & Guardian accounts require Administration approval.</p>`
+    : `<p><strong>1. Data Privacy:</strong> ${cfg.schoolName} collects student records strictly for academic & fee administration.</p>
+       <p style="margin-top:8px;"><strong>2. Security:</strong> Hosted on Google Firebase Cloud Firestore. Never shared with third parties.</p>
        <p style="margin-top:8px;"><strong>3. Contact:</strong> ${cfg.phone}.</p>`;
   openModal('legalModal');
 }
@@ -971,21 +1009,19 @@ function compressImage(file, maxW = 600, q = 0.72) {
   });
 }
 
-function toggleDrawer(open) {
-  document.getElementById('drawerBg').classList.toggle('open', open);
-  document.getElementById('slideDrawer').classList.toggle('open', open);
-}
-function goPublicSection(id) {
-  toggleDrawer(false); showView('public');
-  setTimeout(() => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth' }); }, 80);
-}
+function toggleDrawer(open) { document.getElementById('drawerBg').classList.toggle('open', open); document.getElementById('slideDrawer').classList.toggle('open', open); }
+function goPublicSection(id) { toggleDrawer(false); showView('public'); setTimeout(() => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth' }); }, 80); }
 function openModal(id) { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
-function openSeparateLogin(role) {
-  if (role === 'admin') openModal('adminLoginModal');
-  else if (role === 'teacher') { switchTMode('login'); openModal('teacherLoginModal'); }
-  else { switchGMode('login'); openModal('guardianLoginModal'); }
+function openSeparateLogin(role = 'guardian') { switchLoginRole(role); openModal('unifiedLoginModal'); }
+function switchLoginRole(role) {
+  ['guardian','teacher','admin'].forEach(r => {
+    document.getElementById('rt-' + r).classList.toggle('active', r === role);
+    document.getElementById('lp-' + r).classList.toggle('hidden', r !== role);
+  });
+  if (role === 'guardian') switchGMode('login');
+  if (role === 'teacher') switchTMode('login');
 }
 function switchTMode(m) {
   document.getElementById('tModeLogin').classList.toggle('active', m==='login');
@@ -1001,12 +1037,31 @@ function switchGMode(m) {
 }
 
 function handleAdminLogin(e) {
-  e.preventDefault(); const cfg = getCfg();
-  if (document.getElementById('admUserIn').value.trim() === cfg.adminUser && document.getElementById('admPassIn').value.trim() === cfg.adminPass) {
-    setSession({ role: 'admin', name: 'Administration' });
-    closeModal('adminLoginModal'); applyLoggedInUI(); toast('Welcome, Administration!');
-  } else toast('Invalid Administration credentials', 'err');
+  e.preventDefault();
+  const cfg = getCfg();
+  const u = document.getElementById('admUserIn').value.trim();
+  const p = document.getElementById('admPassIn').value.trim();
+
+  if (u === cfg.superUser && p === cfg.superPass) {
+    setSession({ role: 'superadmin', name: 'Master Administration' });
+    closeModal('unifiedLoginModal'); applyLoggedInUI(); toast('Welcome, Master Administration!');
+    return;
+  }
+  const sa = (DB.staffAdmins || []).find(x => x.user === u && x.pass === p);
+  if (sa) {
+    if (sa.active === false) return toast('Your account has been blocked by Management!', 'err');
+    setSession({ role: 'admin', id: sa.id, name: sa.name });
+    closeModal('unifiedLoginModal'); applyLoggedInUI(); toast('Welcome, ' + sa.name);
+    return;
+  }
+  if (u === cfg.adminUser && p === cfg.adminPass) {
+    setSession({ role: 'admin', id: 'legacy', name: 'Office Administration' });
+    closeModal('unifiedLoginModal'); applyLoggedInUI(); toast('Welcome, Office Administration!');
+    return;
+  }
+  toast('Invalid Administration credentials', 'err');
 }
+
 function handleTeacherLogin(e) {
   e.preventDefault();
   const u = document.getElementById('tchUserIn').value.trim(), p = document.getElementById('tchPassIn').value.trim();
@@ -1014,9 +1069,9 @@ function handleTeacherLogin(e) {
   if (!t) return toast('Invalid Teacher credentials', 'err');
   if (t.approved !== true) return toast('Account Pending! Administration approval zaroori hai.', 'err');
   const perms = t.perms || { attendance: false, marks: false };
-  if (!perms.attendance && !perms.marks) return toast('No edit permissions assigned by Administration yet.', 'err');
+  if (!perms.attendance && !perms.marks) return toast('No edit permissions assigned yet.', 'err');
   setSession({ role: 'teacher', id: t.id, name: t.name, perms });
-  closeModal('teacherLoginModal'); applyLoggedInUI(); toast('Welcome ' + t.name);
+  closeModal('unifiedLoginModal'); applyLoggedInUI(); toast('Welcome ' + t.name);
 }
 async function handleTeacherRegister(e) {
   e.preventDefault();
@@ -1033,7 +1088,7 @@ function handleGuardianLogin(e) {
   if (!s) return toast('Invalid Admission No or Password', 'err');
   if (s.guardianApproved === false) return toast('Guardian account pending Administration verification!', 'err');
   setSession({ role: 'guardian', studentId: s.id });
-  closeModal('guardianLoginModal'); applyLoggedInUI(); toast('Welcome Guardian');
+  closeModal('unifiedLoginModal'); applyLoggedInUI(); toast('Welcome Guardian');
 }
 async function handleGuardianRegister(e) {
   e.preventDefault();
@@ -1057,25 +1112,34 @@ function applyLoggedInUI() {
     const s = DB.students.find(x => x.id === currentUser.studentId);
     showView('guardian'); if (s) renderGuardianPortal(s); return;
   }
-  const isAdmin = currentUser.role === 'admin';
-  document.querySelectorAll('.admin-only').forEach(el => el.classList.toggle('hidden', !isAdmin));
-  if (!isAdmin) {
+  const isMaster = currentUser.role === 'superadmin';
+  const isStaffOrMaster = isMaster || currentUser.role === 'admin';
+  document.querySelectorAll('.admin-only').forEach(el => el.classList.toggle('hidden', !isStaffOrMaster));
+  document.querySelectorAll('.super-only').forEach(el => el.classList.toggle('hidden', !isMaster));
+
+  if (!isStaffOrMaster) {
     const perms = currentUser.perms || { attendance: false, marks: false };
     document.getElementById('sideAttBtn').classList.toggle('hidden', !perms.attendance);
     document.getElementById('sideMarksBtn').classList.toggle('hidden', !perms.marks);
     document.getElementById('dashTitle').textContent = 'Teacher Portal — ' + currentUser.name;
+    document.getElementById('dashSubTitle').textContent = 'Authorized Faculty Access';
     showView('admin'); openTab(perms.attendance ? 'attendance' : 'marks');
   } else {
     document.getElementById('sideAttBtn').classList.remove('hidden');
     document.getElementById('sideMarksBtn').classList.remove('hidden');
-    document.getElementById('dashTitle').textContent = 'Administration Command Center';
+    document.getElementById('dashTitle').textContent = isMaster ? '👑 Master Administration Center' : '🛡️ Office Administration — ' + currentUser.name;
+    document.getElementById('dashSubTitle').textContent = isMaster ? 'Full Master Control • Security & Delete Unlocked' : 'Staff Mode • Confidential Settings & Delete Protected';
     showView('admin'); openTab('students');
   }
   refreshAllUI();
 }
-function logout() { if (!confirm('Sign out of portal?')) return; currentUser = null; sessionStorage.removeItem('sunrise_session'); showView('public'); }
+function logout(force = false) {
+  if (!force && !confirm('Sign out of portal?')) return;
+  currentUser = null; sessionStorage.removeItem('sunrise_session'); showView('public');
+}
 
 function openTab(name, preset) {
+  if (name === 'school' && !isSuperAdmin()) return toast('Access restricted to Master Administration', 'err');
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.add('hidden'));
   document.querySelectorAll('.side-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
   document.getElementById('tab-' + name).classList.remove('hidden');
@@ -1089,13 +1153,17 @@ function openTab(name, preset) {
   if (name === 'whatsapp') renderWaQueue();
 }
 
-// Firestore Real-Time Sync
 function startRealtimeSync() {
   setProgress(30);
-  ['students','fees','notices','gallery','enquiries','teachers','staff','marksheets'].forEach(col => {
+  ['students','fees','notices','gallery','enquiries','teachers','staff','staffAdmins','marksheets'].forEach(col => {
     db.collection(col).onSnapshot(snap => {
       DB[col] = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      saveLocalCache(); refreshAllUI(); setProgress(100);
+      saveLocalCache();
+      if (col === 'staffAdmins' && currentUser && currentUser.role === 'admin' && currentUser.id !== 'legacy') {
+        const me = DB.staffAdmins.find(x => x.id === currentUser.id);
+        if (!me || me.active === false) { toast('Session ended by Management!', 'err'); logout(true); return; }
+      }
+      refreshAllUI(); setProgress(100);
     });
   });
   db.collection('attendance').onSnapshot(snap => {
@@ -1116,7 +1184,6 @@ function startRealtimeSync() {
   });
 }
 
-// Fee Calculations (Annual + Extra Due vs Paid + Opening Advance)
 function getStuTotalPayable(s) { return Number(s.totalFee || 0) + Number(s.extraDue || 0); }
 function getStuPaid(id) {
   const s = DB.students.find(x => x.id === id) || {};
@@ -1130,8 +1197,7 @@ async function addExtraDue(stuId) {
   const s = DB.students.find(x => x.id === stuId); if (!s) return;
   const amt = Number(prompt(`Enter Extra / Previous Due amount (₹) to ADD for ${s.name}:`));
   if (!amt || amt <= 0) return;
-  const newDue = Number(s.extraDue || 0) + amt;
-  await db.collection('students').doc(s.id).set({ extraDue: newDue }, { merge: true });
+  await db.collection('students').doc(s.id).set({ extraDue: Number(s.extraDue || 0) + amt }, { merge: true });
   toast(`₹${amt} Extra Due added for ${s.name}!`);
 }
 async function addAdvancePayment(stuId) {
@@ -1189,12 +1255,13 @@ function applySchoolProfileToUI() {
     document.getElementById('spReg').value = cfg.regTag;
     document.getElementById('spAddress').value = cfg.address;
     document.getElementById('spMsg').value = cfg.principalMsg;
-    document.getElementById('cfgUser').value = cfg.adminUser;
   }
+  if (document.getElementById('cfgSuperUser')) document.getElementById('cfgSuperUser').value = cfg.superUser;
 }
 
 async function saveSchoolProfile(e) {
-  e.preventDefault(); const btn = document.getElementById('spSaveBtn'); btn.disabled = true;
+  e.preventDefault(); if (!isSuperAdmin()) return;
+  const btn = document.getElementById('spSaveBtn'); btn.disabled = true;
   try {
     const upd = {
       schoolName: document.getElementById('spName').value.trim(), principalName: document.getElementById('spPrincipal').value.trim(),
@@ -1205,14 +1272,14 @@ async function saveSchoolProfile(e) {
     const f = document.getElementById('spPhoto').files[0];
     if (f) upd.principalPhoto = await compressImage(f, 320, 0.75);
     await db.collection('config').doc('main').set(upd, { merge: true });
-    DB.config = { ...DB.config, ...upd }; saveLocalCache(); applySchoolProfileToUI();
     toast('School & Principal details updated!');
   } catch (err) { toast(err.message, 'err'); }
   btn.disabled = false;
 }
 
 async function addPublicStaff(e) {
-  e.preventDefault(); const btn = document.getElementById('stfSaveBtn'); btn.disabled = true;
+  e.preventDefault(); if (!isSuperAdmin()) return;
+  const btn = document.getElementById('stfSaveBtn'); btn.disabled = true;
   try {
     let photo = ''; const f = document.getElementById('stfPhoto').files[0];
     if (f) photo = await compressImage(f, 320, 0.72);
@@ -1239,7 +1306,7 @@ function refreshAllUI() {
   document.getElementById('kpiTotalFee').textContent = '₹' + DB.fees.reduce((s,f)=>s+Number(f.amount||0),0).toLocaleString('en-IN');
   document.getElementById('kpiDues').textContent = '₹' + DB.students.reduce((s,x)=>s+getStuDues(x),0).toLocaleString('en-IN');
   document.getElementById('kpiPending').textContent = pendT + pendG;
-  renderStudents(); renderFees(); renderAdminNoticesGallery(); renderEnquiries(); renderTeachers(); renderGuardianAccess(); renderWaQueue(); renderAdminStaff();
+  renderStudents(); renderFees(); renderAdminNoticesGallery(); renderEnquiries(); renderTeachers(); renderGuardianAccess(); renderWaQueue(); renderAdminStaff(); renderStaffAdmins();
   msUpdateExamDatalist();
 }
 
@@ -1254,7 +1321,25 @@ function renderAdminStaff() {
   document.getElementById('adminStaffList').innerHTML = DB.staff.map(st=>`<div class="card" style="padding:12px;display:flex;justify-content:space-between;align-items:center;"><div><strong>${st.name}</strong><br><small>${st.role}</small></div><button class="btn btn-red btn-sm" onclick="deleteDoc('staff','${st.id}')">Del</button></div>`).join('');
 }
 
-// Student Registration
+async function addStaffAdmin(e) {
+  e.preventDefault(); if (!isSuperAdmin()) return;
+  const user = document.getElementById('saUser').value.trim();
+  if ((DB.staffAdmins||[]).some(x => x.user.toLowerCase() === user.toLowerCase())) return toast('User ID already exists!', 'err');
+  await db.collection('staffAdmins').add({ name: document.getElementById('saName').value.trim(), user, pass: document.getElementById('saPass').value.trim(), active: true, createdAt: Date.now() });
+  e.target.reset(); toast('Staff Admin account created!');
+}
+async function toggleStaffAdmin(id, val) { if (!isSuperAdmin()) return; await db.collection('staffAdmins').doc(id).set({ active: val }, { merge: true }); toast(val ? 'Staff Admin Unblocked' : 'Staff Admin Blocked!'); }
+function renderStaffAdmins() {
+  const el = document.getElementById('staffAdminsList'); if (!el) return;
+  el.innerHTML = (DB.staffAdmins||[]).map(a => `<div style="display:flex;justify-content:space-between;align-items:center;background:#f8f6f1;padding:8px 10px;border-radius:9px;font-size:12px;border-left:3px solid ${a.active!==false?'#15803d':'#dc2626'};">
+    <span><strong>${a.name}</strong> (${a.user})<br>Pass: <code>${a.pass}</code></span>
+    <div style="display:flex;gap:4px;">
+      <button class="btn ${a.active!==false?'btn-light':'btn-green'} btn-sm" onclick="toggleStaffAdmin('${a.id}',${a.active===false})">${a.active!==false?'Block':'Unblock'}</button>
+      <button class="btn btn-red btn-sm" onclick="deleteDoc('staffAdmins','${a.id}')">×</button>
+    </div>
+  </div>`).join('') || '<small style="color:var(--muted);">No staff admin accounts yet.</small>';
+}
+
 function getNextSpsAdmNo() {
   let max = 100; DB.students.forEach(s => { const m = String(s.admNo||'').match(/SPS(\d+)/i); if (m) max = Math.max(max, Number(m[1])); });
   return 'SPS' + (max + 1);
@@ -1339,6 +1424,7 @@ function renderStudents() {
   if (sort==='name') list.sort((a,b)=>(a.name||'').localeCompare(b.name||''));
   if (sort==='dues_desc') list.sort((a,b)=>getStuDues(b)-getStuDues(a));
   if (sort==='newest') list.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  const canDel = isSuperAdmin();
   document.getElementById('studentsTbody').innerHTML = list.length ? list.map(s => {
     const d = getStuDues(s), adv = getStuAdvance(s);
     const badge = d > 0 ? `<span class="tag">Due: ₹${d}</span>` : adv > 0 ? `<span class="tag blue">Advance: ₹${adv}</span>` : `<span class="tag green">Paid ✓</span>`;
@@ -1346,7 +1432,7 @@ function renderStudents() {
       <td><span class="tag navy">${s.admNo}</span><br><small>${s.className} (${s.section||'A'}) • Roll ${s.roll||'-'}</small></td>
       <td>${s.father}<br><small>+91 ${s.phone}</small></td>
       <td>${badge}<div style="margin-top:4px;display:flex;gap:4px;"><button class="btn btn-light btn-sm" style="padding:2px 6px;font-size:10.5px;" onclick="addExtraDue('${s.id}')">+Due</button><button class="btn btn-light btn-sm" style="padding:2px 6px;font-size:10.5px;" onclick="addAdvancePayment('${s.id}')">+Adv</button></div></td>
-      <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><button class="btn btn-light btn-sm" onclick="openProfile360('${s.id}')">360°</button><button class="btn btn-gold btn-sm" onclick="generateLatestMarksheetPDF('${s.id}')">Marksheet</button><button class="btn btn-light btn-sm" onclick="editStudent('${s.id}')">Edit</button><button class="btn btn-red btn-sm" onclick="deleteDoc('students','${s.id}')">Del</button></div></td></tr>`;
+      <td><div style="display:flex;gap:4px;flex-wrap:wrap;"><button class="btn btn-light btn-sm" onclick="openProfile360('${s.id}')">360°</button><button class="btn btn-gold btn-sm" onclick="generateLatestMarksheetPDF('${s.id}')">Marksheet</button><button class="btn btn-light btn-sm" onclick="editStudent('${s.id}')">Edit</button>${canDel?`<button class="btn btn-red btn-sm" onclick="deleteDoc('students','${s.id}')">Del</button>`:''}</div></td></tr>`;
   }).join('') : '<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);">No students found.</td></tr>';
 }
 
@@ -1372,7 +1458,6 @@ function openProfile360(id) {
   openModal('profileModal');
 }
 
-// Fee Structure & Daily Fee Calendar
 function loadFeeStructForm() {
   const cls = document.getElementById('fsClass').value, fs = DB.feeStructure[cls] || { tuition:500, admission:1500, bus:400, exam:300, func:500, other:0 };
   document.getElementById('fsTuition').value = fs.tuition||0; document.getElementById('fsAdmission').value = fs.admission||0;
@@ -1418,14 +1503,14 @@ function renderFees() {
   document.getElementById('calSummaryText').textContent = `₹${tot.toLocaleString('en-IN')} (${dayList.length} Receipts) on ${fmtDate(selDate)}`;
   document.getElementById('calBreakdown').textContent = `Cash: ₹${cash.toLocaleString('en-IN')} • UPI/Bank: ₹${(tot-cash).toLocaleString('en-IN')}`;
   const list = (feeScope==='day'?dayList:[...DB.fees]).filter(f=>!modeF||f.mode===modeF).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-  document.getElementById('feesTbody').innerHTML = list.length ? list.map(f=>`<tr><td><strong>${f.receiptNo}</strong></td><td>${fmtDate(f.date)}</td><td><strong>${f.studentName}</strong><br><small>${f.className}</small></td><td>${f.head||'Fee'}${f.note?' • '+f.note:''}</td><td><strong style="color:var(--green);">₹${f.amount}</strong><br><small>${f.mode}</small></td><td><button class="btn btn-gold btn-sm" onclick="generateFeeReceiptPDF('${f.id}')">Preview PDF</button> <button class="btn btn-red btn-sm" onclick="deleteDoc('fees','${f.id}')">Del</button></td></tr>`).join('') : '<tr><td colspan="6" style="text-align:center;padding:18px;color:var(--muted);">No fee records.</td></tr>';
+  const canDel = isSuperAdmin();
+  document.getElementById('feesTbody').innerHTML = list.length ? list.map(f=>`<tr><td><strong>${f.receiptNo}</strong></td><td>${fmtDate(f.date)}</td><td><strong>${f.studentName}</strong><br><small>${f.className}</small></td><td>${f.head||'Fee'}${f.note?' • '+f.note:''}</td><td><strong style="color:var(--green);">₹${f.amount}</strong><br><small>${f.mode}</small></td><td><button class="btn btn-gold btn-sm" onclick="generateFeeReceiptPDF('${f.id}')">Preview PDF</button>${canDel?` <button class="btn btn-red btn-sm" onclick="deleteDoc('fees','${f.id}')">Del</button>`:''}</td></tr>`).join('') : '<tr><td colspan="6" style="text-align:center;padding:18px;color:var(--muted);">No fee records.</td></tr>';
 }
 function exportFeesCSV() {
   const rows = [['Receipt','Date','Student','Class','Head','Amount','Mode','Note'], ...DB.fees.map(f=>[f.receiptNo,f.date,f.studentName,f.className,f.head||'',f.amount,f.mode,f.note||''])];
   downloadFile(rows.map(r=>r.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(',')).join('\n'), `Sunrise_Fees_${todayStr()}.csv`, 'text/csv');
 }
 
-// Attendance
 let tempAtt = {}, lastAttKey = '';
 function renderAttendance() {
   const cls = document.getElementById('attClass').value || 'Class 1', dt = document.getElementById('attDate').value || todayStr(), q = (document.getElementById('attSearch').value||'').toLowerCase(), key = `${dt}_${cls}`;
@@ -1444,13 +1529,10 @@ async function saveAttendanceBatch() {
   toast(`Attendance saved for ${cls}!`);
 }
 
-// ==================== NEW MARKSHEET SYSTEM (NO PRACTICAL, BULK ENTRY, YEARLY) ====================
 function calcGrade(p) { if (p>=91) return 'A1'; if (p>=81) return 'A2'; if (p>=71) return 'B1'; if (p>=61) return 'B2'; if (p>=51) return 'C1'; if (p>=41) return 'C2'; if (p>=33) return 'D'; return 'E'; }
-
 function msLoadClassSubjects() {
   const clsEl = document.getElementById('msSubClass'); if (!clsEl) return;
-  const cls = clsEl.value;
-  const subs = (DB.classSubjects && DB.classSubjects[cls]) || [];
+  const cls = clsEl.value, subs = (DB.classSubjects && DB.classSubjects[cls]) || [];
   document.getElementById('msSubInput').value = subs.join(', ');
   document.getElementById('msSubSavedList').textContent = subs.length ? `Saved for ${cls}: ${subs.join(' • ')}` : `Abhi ${cls} ke liye koi subject save nahi hai.`;
 }
@@ -1466,24 +1548,16 @@ function msUpdateExamDatalist() {
   const exams = [...new Set((DB.marksheets || []).map(m => m.examName).filter(Boolean))];
   dl.innerHTML = exams.map(ex => `<option value="${ex}">`).join('');
 }
-
 function msLoadBulkGrid() {
-  const session = document.getElementById('msSession').value.trim();
-  const cls = document.getElementById('msEntryClass').value;
-  const exam = document.getElementById('msExamName').value.trim();
-  const fullMarks = Number(document.getElementById('msFullMarks').value) || 100;
+  const session = document.getElementById('msSession').value.trim(), cls = document.getElementById('msEntryClass').value;
+  const exam = document.getElementById('msExamName').value.trim(), fullMarks = Number(document.getElementById('msFullMarks').value) || 100;
   if (!session || !exam) return toast('Session aur Exam Name zaroor bharein!', 'err');
-
   const subs = (DB.classSubjects && DB.classSubjects[cls]) || [];
   if (!subs.length) return toast(`Pehle upar ${cls} ke subjects save karein!`, 'err');
-
   const stuList = DB.students.filter(s => s.className === cls).sort((a,b) => Number(a.roll||0) - Number(b.roll||0));
   if (!stuList.length) return toast(`${cls} mein koi student registered nahi hai!`, 'err');
-
   const existingMap = {};
-  (DB.marksheets || []).filter(m => m.session === session && m.className === cls && m.examName === exam)
-    .forEach(m => { existingMap[m.studentId] = m; });
-
+  (DB.marksheets || []).filter(m => m.session === session && m.className === cls && m.examName === exam).forEach(m => { existingMap[m.studentId] = m; });
   document.getElementById('msBulkGridWrap').innerHTML = `<table>
     <thead><tr><th>Roll</th><th>Student Name</th>${subs.map(s => `<th>${s}<br><small>(/${fullMarks})</small></th>`).join('')}</tr></thead>
     <tbody>${stuList.map(s => {
@@ -1492,15 +1566,10 @@ function msLoadBulkGrid() {
     }).join('')}</tbody></table>`;
   document.getElementById('msBulkSaveBar').classList.remove('hidden');
 }
-
 async function msSaveBulkMarks() {
-  const session = document.getElementById('msSession').value.trim();
-  const cls = document.getElementById('msEntryClass').value;
-  const exam = document.getElementById('msExamName').value.trim();
-  const fullMarks = Number(document.getElementById('msFullMarks').value) || 100;
-  const rows = document.querySelectorAll('#msBulkGridWrap tbody tr');
-  if (!rows.length) return;
-
+  const session = document.getElementById('msSession').value.trim(), cls = document.getElementById('msEntryClass').value;
+  const exam = document.getElementById('msExamName').value.trim(), fullMarks = Number(document.getElementById('msFullMarks').value) || 100;
+  const rows = document.querySelectorAll('#msBulkGridWrap tbody tr'); if (!rows.length) return;
   const btn = document.getElementById('msBulkSaveBtn'); btn.disabled = true;
   try {
     const batch = db.batch(); let count = 0;
@@ -1509,8 +1578,7 @@ async function msSaveBulkMarks() {
       const marks = {}; let total = 0, maxTotal = 0, hasAny = false;
       tr.querySelectorAll('.ms-cell').forEach(inp => {
         const sub = inp.dataset.sub, val = inp.value.trim();
-        if (val !== '') { hasAny = true; marks[sub] = Number(val); total += Number(val); }
-        else marks[sub] = 0;
+        if (val !== '') { hasAny = true; marks[sub] = Number(val); total += Number(val); } else marks[sub] = 0;
         maxTotal += fullMarks;
       });
       if (!hasAny) return;
@@ -1520,8 +1588,7 @@ async function msSaveBulkMarks() {
         docId, session, className: cls, examName: exam, fullMarks,
         studentId: s.id, admNo: s.admNo, studentName: s.name, father: s.father||'', mother: s.mother||'',
         roll: s.roll||'-', section: s.section||'A', dob: s.dob||'', addr: s.addr||'',
-        marks, total, maxTotal, percentage: pct, grade: calcGrade(pct), result: pct >= 33 ? 'PASS' : 'FAIL',
-        updatedAt: Date.now()
+        marks, total, maxTotal, percentage: pct, grade: calcGrade(pct), result: pct >= 33 ? 'PASS' : 'FAIL', updatedAt: Date.now()
       });
       count++;
     });
@@ -1531,7 +1598,6 @@ async function msSaveBulkMarks() {
   btn.disabled = false;
 }
 
-// Saved Records, Single/Bulk Delete & Print
 let msCurrentRecs = [];
 function msRefreshExamDropdown() {
   const session = document.getElementById('msRecSession').value.trim(), cls = document.getElementById('msRecClass').value;
@@ -1542,46 +1608,37 @@ function msRefreshExamDropdown() {
 }
 function msLoadSavedRecords() {
   const session = document.getElementById('msRecSession').value.trim(), cls = document.getElementById('msRecClass').value, exam = document.getElementById('msRecExam').value;
-  msCurrentRecs = (DB.marksheets || []).filter(m => m.session === session && m.className === cls && m.examName === exam)
-    .sort((a,b) => Number(a.roll||0) - Number(b.roll||0));
-  const box = document.getElementById('msRecordsList');
-  if (!msCurrentRecs.length) { box.innerHTML = '<div style="padding:18px;text-align:center;color:var(--muted);">No saved marksheets found for this selection.</div>'; return; }
+  msCurrentRecs = (DB.marksheets || []).filter(m => m.session === session && m.className === cls && m.examName === exam).sort((a,b) => Number(a.roll||0) - Number(b.roll||0));
+  const box = document.getElementById('msRecordsList'), canDel = isSuperAdmin();
+  if (!msCurrentRecs.length) { box.innerHTML = '<div style="padding:18px;text-align:center;color:var(--muted);">No saved marksheets found.</div>'; return; }
   box.innerHTML = `<table>
-    <thead><tr><th><input type="checkbox" onchange="document.querySelectorAll('.ms-chk').forEach(c=>c.checked=this.checked)" /></th><th>Roll</th><th>Student</th><th>Total</th><th>% / Grade</th><th>Result</th><th>Actions</th></tr></thead>
+    <thead><tr>${canDel?'<th><input type="checkbox" onchange="document.querySelectorAll(\'.ms-chk\').forEach(c=>c.checked=this.checked)" /></th>':''}<th>Roll</th><th>Student</th><th>Total</th><th>% / Grade</th><th>Result</th><th>Actions</th></tr></thead>
     <tbody>${msCurrentRecs.map((r,i) => `<tr>
-      <td><input type="checkbox" class="ms-chk" value="${r.id}" /></td>
-      <td>${r.roll||'-'}</td>
-      <td><strong>${r.studentName}</strong><br><small>${r.admNo||''}</small></td>
-      <td>${r.total} / ${r.maxTotal}</td>
-      <td>${r.percentage}% (${r.grade})</td>
+      ${canDel?`<td><input type="checkbox" class="ms-chk" value="${r.id}" /></td>`:''}
+      <td>${r.roll||'-'}</td><td><strong>${r.studentName}</strong><br><small>${r.admNo||''}</small></td>
+      <td>${r.total} / ${r.maxTotal}</td><td>${r.percentage}% (${r.grade})</td>
       <td><span class="tag ${r.result==='PASS'?'green':''}">${r.result}</span></td>
-      <td>
-        <button class="btn btn-gold btn-sm" onclick="msPrintSinglePDF(msCurrentRecs[${i}])">👁️ PDF</button>
-        <button class="btn btn-red btn-sm" onclick="msDeleteOne('${r.id}')">Del</button>
-      </td>
+      <td><button class="btn btn-gold btn-sm" onclick="msPrintSinglePDF(msCurrentRecs[${i}])">👁️ PDF</button>${canDel?` <button class="btn btn-red btn-sm" onclick="msDeleteOne('${r.id}')">Del</button>`:''}</td>
     </tr>`).join('')}</tbody></table>`;
 }
 async function msDeleteOne(id) {
-  if (!confirm('Is student ki marksheet permanently delete karein?')) return;
-  await db.collection('marksheets').doc(id).delete();
-  toast('Marksheet deleted!'); msRefreshExamDropdown();
+  if (!isSuperAdmin() || !confirm('Marksheet permanently delete karein?')) return;
+  await db.collection('marksheets').doc(id).delete(); toast('Marksheet deleted!'); msRefreshExamDropdown();
 }
 async function msBulkDeleteSelected() {
+  if (!isSuperAdmin()) return;
   const ids = [...document.querySelectorAll('.ms-chk:checked')].map(c => c.value);
-  if (!ids.length) return toast('Pehle delete karne ke liye marksheets tick karein!', 'err');
-  if (!confirm(`⚠️ ${ids.length} marksheets permanently delete ho jayengi. Confirm karein?`)) return;
+  if (!ids.length) return toast('Pehle marksheets tick karein!', 'err');
+  if (!confirm(`⚠️ ${ids.length} marksheets permanently delete ho jayengi. Confirm?`)) return;
   const batch = db.batch(); ids.forEach(id => batch.delete(db.collection('marksheets').doc(id)));
-  await batch.commit();
-  toast(`${ids.length} marksheets deleted!`); msRefreshExamDropdown();
+  await batch.commit(); toast(`${ids.length} marksheets deleted!`); msRefreshExamDropdown();
 }
 
-// Yearly Consolidated
 let msYrDocs = [];
 function msFindAvailableExams() {
   const session = document.getElementById('msYrSession').value.trim(), cls = document.getElementById('msYrClass').value;
   msYrDocs = (DB.marksheets || []).filter(m => m.session === session && m.className === cls);
-  const exams = [...new Set(msYrDocs.map(m => m.examName))];
-  const box = document.getElementById('msYrExamsBox');
+  const exams = [...new Set(msYrDocs.map(m => m.examName))], box = document.getElementById('msYrExamsBox');
   if (!exams.length) { box.innerHTML = '<small style="color:var(--red);font-weight:700;">Is Session aur Class mein koi saved exam nahi mila.</small>'; document.getElementById('msYrStudentsList').innerHTML = ''; return; }
   box.innerHTML = `<div style="background:#f8f5ef;padding:12px;border-radius:10px;border:1px solid var(--border);">
     <strong style="font-size:13px;">Yearly Marksheet mein jodney ke liye Exams tick karein:</strong>
@@ -1595,7 +1652,6 @@ function msFindAvailableExams() {
     <tbody>${stuArr.map(s => `<tr><td>${s.roll||'-'}</td><td><strong>${s.studentName}</strong> (${s.admNo||''})</td><td><button class="btn btn-primary btn-sm" onclick="msGenerateYearlySinglePDF('${s.studentId}')">👁️ Yearly PDF</button></td></tr>`).join('')}</tbody></table>`;
 }
 
-// PDF Drawing (Single Exam — No Practical)
 function drawSingleExamMarksheet(doc, r) {
   const cfg = getCfg();
   doc.setFillColor(161,22,38); doc.rect(0,0,210,32,'F'); doc.setFillColor(217,155,38); doc.rect(0,32,210,2,'F');
@@ -1620,7 +1676,6 @@ function msBulkPrintExamPDF() {
   openPdfPreview(doc, `Bulk_Marksheets_${msCurrentRecs[0].className}_${msCurrentRecs[0].examName}.pdf`, `Bulk Marksheets (${msCurrentRecs.length})`);
 }
 
-// PDF Drawing (Yearly Consolidated — Multiple Exams)
 function drawYearlyMarksheet(doc, info, examsMap, selectedExams) {
   const cfg = getCfg();
   doc.setFillColor(161,22,38); doc.rect(0,0,210,32,'F'); doc.setFillColor(217,155,38); doc.rect(0,32,210,2,'F');
@@ -1636,18 +1691,14 @@ function drawYearlyMarksheet(doc, info, examsMap, selectedExams) {
   const rows = allSubs.map(sub => {
     let st = 0, sm = 0;
     const cols = selectedExams.map(ex => {
-      const rec = examsMap[ex];
-      if (!rec) return '-';
-      const v = Number((rec.marks && rec.marks[sub]) || 0);
-      st += v; sm += Number(rec.fullMarks || 100);
+      const rec = examsMap[ex]; if (!rec) return '-';
+      const v = Number((rec.marks && rec.marks[sub]) || 0); st += v; sm += Number(rec.fullMarks || 100);
       return `${v}/${rec.fullMarks}`;
     });
-    gt += st; gm += sm;
-    const p = sm ? (st / sm) * 100 : 0;
+    gt += st; gm += sm; const p = sm ? (st / sm) * 100 : 0;
     return [sub, ...cols, `${st}/${sm}`, calcGrade(p)];
   });
-  const finalPct = gm ? ((gt / gm) * 100).toFixed(2) : '0.00';
-  const finalRes = Number(finalPct) >= 33 ? 'PASS' : 'FAIL';
+  const finalPct = gm ? ((gt / gm) * 100).toFixed(2) : '0.00', finalRes = Number(finalPct) >= 33 ? 'PASS' : 'FAIL';
   rows.push(['GRAND TOTAL', ...selectedExams.map(() => ''), `${gt}/${gm} (${finalPct}%)`, `${calcGrade(Number(finalPct))} • ${finalRes}`]);
 
   doc.autoTable({ startY:doc.lastAutoTable.finalY+6, margin:{left:12,right:12}, theme:'grid', head:[['Subject', ...selectedExams, 'Total', 'Grade']], headStyles:{fillColor:[161,22,38],textColor:255,fontSize:8.5}, styles:{fontSize:8.5,cellPadding:2.4,halign:'center'}, columnStyles:{0:{halign:'left',fontStyle:'bold'}}, body:rows });
@@ -1685,7 +1736,6 @@ function generateLatestMarksheetPDF(stuId) {
   msPrintSinglePDF(list[0]);
 }
 
-// Fee & Admit Card PDFs
 function generateFeeReceiptPDF(feeId) {
   const f = DB.fees.find(x=>x.id===feeId); if (!f) return; const s = DB.students.find(x=>x.id===f.studentId)||{}, cfg = getCfg(), { jsPDF } = window.jspdf, doc = new jsPDF('p','mm','a5');
   doc.setFillColor(161,22,38); doc.rect(0,0,148,24,'F'); if (LOGO_DATA_URL) { doc.setFillColor(255,255,255); doc.circle(16,12,8,'F'); doc.addImage(LOGO_DATA_URL,'PNG',9,5,14,14); }
@@ -1729,7 +1779,6 @@ function generateBulkAdmitCardsPDF() {
   openPdfPreview(doc, `Admit_Cards_${cls.replace(/\s+/g,'_')}.pdf`, `Bulk Admit Cards — ${cls}`);
 }
 
-// Enquiries, WhatsApp, Notices, Gallery, Approvals
 async function submitEnquiry(e) {
   e.preventDefault(); const btn = document.getElementById('enqSubmitBtn'); btn.disabled = true;
   await db.collection('enquiries').add({ student:document.getElementById('enqStudent').value.trim(), className:document.getElementById('enqClass').value, parent:document.getElementById('enqParent').value.trim(), phone:document.getElementById('enqPhone').value.trim(), village:document.getElementById('enqVillage').value.trim(), date:todayStr(), createdAt:Date.now() });
@@ -1737,7 +1786,7 @@ async function submitEnquiry(e) {
 }
 function renderEnquiries() {
   const list = [...DB.enquiries].sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-  document.getElementById('enquiriesList').innerHTML = list.length ? list.map(q=>`<div style="background:#f8f6f1;padding:9px 11px;border-radius:9px;font-size:12.5px;"><div style="display:flex;justify-content:space-between;"><strong>${q.student} (${q.className})</strong><small>${fmtDate(q.date)}</small></div><div>${q.parent} • +91 ${q.phone} ${q.village?'• '+q.village:''}</div><div style="margin-top:5px;display:flex;gap:6px;"><a class="btn btn-green btn-sm" target="_blank" href="https://wa.me/91${(q.phone||'').replace(/\D/g,'')}?text=${encodeURIComponent('Hello '+q.parent+', '+getCfg().schoolName+' enquiry received for '+q.student)}">WhatsApp</a><button class="btn btn-red btn-sm" onclick="deleteDoc('enquiries','${q.id}')">Delete</button></div></div>`).join('') : '<small style="color:var(--muted);">No enquiries yet.</small>';
+  document.getElementById('enquiriesList').innerHTML = list.length ? list.map(q=>`<div style="background:#f8f6f1;padding:9px 11px;border-radius:9px;font-size:12.5px;"><div style="display:flex;justify-content:space-between;"><strong>${q.student} (${q.className})</strong><small>${fmtDate(q.date)}</small></div><div>${q.parent} • +91 ${q.phone} ${q.village?'• '+q.village:''}</div><div style="margin-top:5px;display:flex;gap:6px;"><a class="btn btn-green btn-sm" target="_blank" href="https://wa.me/91${(q.phone||'').replace(/\D/g,'')}?text=${encodeURIComponent('Hello '+q.parent+', '+getCfg().schoolName+' enquiry received for '+q.student)}">WhatsApp</a>${isSuperAdmin()?`<button class="btn btn-red btn-sm" onclick="deleteDoc('enquiries','${q.id}')">Delete</button>`:''}</div></div>`).join('') : '<small style="color:var(--muted);">No enquiries yet.</small>';
 }
 function renderWaQueue() {
   const t = document.getElementById('waTarget').value; document.getElementById('waClassWrap').classList.toggle('hidden', t!=='class');
@@ -1782,7 +1831,7 @@ function renderTeachers() {
         <span><strong>${t.name}</strong> (${t.user}) <span class="tag ${t.approved?'green':''}">${t.approved?'Approved':'Pending'}</span></span>
         <div style="display:flex;gap:4px;">
           <button class="btn ${t.approved?'btn-light':'btn-green'} btn-sm" onclick="toggleTeacherApproval('${t.id}',${!t.approved})">${t.approved?'Block':'Approve ✓'}</button>
-          <button class="btn btn-red btn-sm" onclick="deleteDoc('teachers','${t.id}')">×</button>
+          ${isSuperAdmin()?`<button class="btn btn-red btn-sm" onclick="deleteDoc('teachers','${t.id}')">×</button>`:''}
         </div>
       </div>
       <div style="margin-top:6px;display:flex;gap:12px;">
@@ -1809,14 +1858,25 @@ function renderGuardianAccess() {
   }).join('');
 }
 async function resetGuardianPass(id) { const np = prompt('Enter new Guardian Password:'); if (!np) return; await db.collection('students').doc(id).set({ guardianPass: np.trim(), guardianApproved: true }, { merge: true }); toast('Password updated!'); }
-async function saveAdminSettings(e) { e.preventDefault(); const upd = { adminUser:document.getElementById('cfgUser').value.trim() }; const np = document.getElementById('cfgPass').value.trim(); if (np) upd.adminPass = np; await db.collection('config').doc('main').set(upd, { merge:true }); document.getElementById('cfgPass').value = ''; toast('Admin credentials updated!'); }
-async function deleteDoc(col, id) { if (!confirm('Delete permanently?')) return; await db.collection(col).doc(id).delete(); toast('Deleted'); }
+async function saveMasterSettings(e) {
+  e.preventDefault(); if (!isSuperAdmin()) return;
+  const upd = { superUser: document.getElementById('cfgSuperUser').value.trim() };
+  const np = document.getElementById('cfgSuperPass').value.trim(); if (np) upd.superPass = np;
+  await db.collection('config').doc('main').set(upd, { merge:true });
+  document.getElementById('cfgSuperPass').value = ''; toast('Master credentials updated!');
+}
+async function deleteDoc(col, id) {
+  if (['students','fees','marksheets','staffAdmins','teachers'].includes(col) && !isSuperAdmin()) return toast('Delete restricted to Master Administration!', 'err');
+  if (!confirm('Delete permanently?')) return;
+  await db.collection(col).doc(id).delete(); toast('Deleted');
+}
 function downloadFile(content, fn, type) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([content],{type})); a.download = fn; a.click(); }
-function exportFullBackup() { downloadFile(JSON.stringify(DB,null,2), `Sunrise_Backup_${todayStr()}.json`, 'application/json'); toast('Backup downloaded!'); }
+function exportFullBackup() { if (!isSuperAdmin()) return; downloadFile(JSON.stringify(DB,null,2), `Sunrise_Backup_${todayStr()}.json`, 'application/json'); toast('Backup downloaded!'); }
 async function restoreFullBackup(e) {
+  if (!isSuperAdmin()) return;
   const f = e.target.files[0]; if (!f || !confirm('Restore backup?')) return;
   const data = JSON.parse(await f.text());
-  for (const c of ['students','fees','notices','gallery','enquiries','teachers','staff','marksheets']) {
+  for (const c of ['students','fees','notices','gallery','enquiries','teachers','staff','staffAdmins','marksheets']) {
     if (Array.isArray(data[c])) for (const item of data[c]) { const {id,...rest}=item; if(id) await db.collection(c).doc(id).set(rest,{merge:true}); else await db.collection(c).add(rest); }
   }
   if (data.config) await db.collection('config').doc('main').set(data.config,{merge:true});
@@ -1826,17 +1886,31 @@ async function restoreFullBackup(e) {
 function renderGuardianPortal(s) {
   const paid = getStuPaid(s.id), dues = getStuDues(s), adv = getStuAdvance(s), myFees = DB.fees.filter(f=>f.studentId===s.id), fs = DB.feeStructure[s.className] || {};
   document.getElementById('guardianContent').innerHTML = `
-    <div style="display:flex;gap:12px;align-items:center;margin-bottom:14px;flex-wrap:wrap;"><img src="${s.photo||'./logo.png'}" onerror="this.src='./logo.jpeg'" style="width:72px;height:72px;border-radius:12px;border:2px solid var(--gold);object-fit:cover;" /><div><h2>${s.name}</h2><span class="tag navy">${s.admNo}</span> <span class="tag gold">${s.className} (${s.section||'A'}) • Roll ${s.roll||'-'}</span><div style="font-size:12.5px;color:var(--muted);">Father: ${s.father} • +91 ${s.phone}</div></div></div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;">
-      <div class="card" style="padding:10px;text-align:center;"><small>Total Fee</small><br><strong>₹${getStuTotalPayable(s)}</strong></div>
-      <div class="card" style="padding:10px;text-align:center;"><small>Paid</small><br><strong style="color:var(--green);">₹${paid}</strong></div>
-      <div class="card" style="padding:10px;text-align:center;"><small>Dues</small><br><strong style="color:var(--red);">₹${dues}</strong></div>
-      <div class="card" style="padding:10px;text-align:center;"><small>Advance</small><br><strong style="color:var(--blue);">₹${adv}</strong></div>
+    <div class="g-hero">
+      <img src="${s.photo||'./logo.png'}" onerror="this.src='./logo.jpeg'" style="width:76px;height:76px;border-radius:16px;border:2.5px solid var(--gold);object-fit:cover;background:#fff;" />
+      <div style="flex:1;min-width:200px;">
+        <span class="tag gold">OFFICIAL GUARDIAN PORTAL</span>
+        <h2 style="margin:4px 0 2px;font-size:21px;">${s.name}</h2>
+        <div style="font-size:13px;color:#cbd5e1;">Adm No: <strong>${s.admNo}</strong> • ${s.className} (${s.section||'A'}) • Roll ${s.roll||'-'}</div>
+        <div style="font-size:12px;color:#94a3b8;">Father: ${s.father} • +91 ${s.phone}</div>
+      </div>
     </div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;"><button class="btn btn-primary btn-sm" onclick="generateLatestMarksheetPDF('${s.id}')">👁️ Preview & Download Marksheet</button><button class="btn btn-gold btn-sm" onclick="generateGuardianFeeDetailsPDF('${s.id}')">👁️ Preview & Download Fee Details PDF</button></div>
-    <div style="background:#f8f5ef;padding:12px;border-radius:10px;margin-bottom:14px;font-size:13px;"><strong>Class Fee Structure (${s.className}):</strong> Tuition: ₹${fs.tuition||0}/mo • Bus: ₹${fs.bus||0}/mo • Admission: ₹${fs.admission||0} • Exam: ₹${fs.exam||0} • Function: ₹${fs.func||0} • Other: ₹${fs.other||0}</div>
-    <h3 style="font-size:15px;margin-bottom:8px;">Payment Receipts</h3>
-    ${myFees.length ? myFees.map(f=>`<div style="display:flex;justify-content:space-between;background:#f8f6f1;padding:8px 10px;border-radius:8px;margin-bottom:6px;font-size:12.5px;"><span><strong>${f.receiptNo}</strong> • ${f.head||''} • ${fmtDate(f.date)} • ₹${f.amount}</span><button class="btn btn-light btn-sm" onclick="generateFeeReceiptPDF('${f.id}')">Preview PDF</button></div>`).join('') : '<small style="color:var(--muted);">No receipts yet.</small>'}`;
+    <div class="g-stat-grid">
+      <div class="g-stat"><small style="color:var(--muted);font-weight:700;">Total Payable</small><div style="font-size:19px;font-weight:800;color:var(--navy);">₹${getStuTotalPayable(s)}</div></div>
+      <div class="g-stat"><small style="color:var(--muted);font-weight:700;">Total Paid</small><div style="font-size:19px;font-weight:800;color:var(--green);">₹${paid}</div></div>
+      <div class="g-stat"><small style="color:var(--muted);font-weight:700;">Pending Dues</small><div style="font-size:19px;font-weight:800;color:var(--red);">₹${dues}</div></div>
+      <div class="g-stat"><small style="color:var(--muted);font-weight:700;">Advance Balance</small><div style="font-size:19px;font-weight:800;color:var(--blue);">₹${adv}</div></div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;">
+      <button class="btn btn-primary" onclick="generateLatestMarksheetPDF('${s.id}')">📄 Download Latest Marksheet</button>
+      <button class="btn btn-gold" onclick="generateGuardianFeeDetailsPDF('${s.id}')">🧾 Download Fee Statement PDF</button>
+    </div>
+    <div style="background:#f8f5ef;padding:13px;border-radius:12px;border:1px solid var(--border);margin-bottom:16px;font-size:13px;">
+      <strong>📑 Class Fee Structure (${s.className}):</strong><br>
+      Tuition: ₹${fs.tuition||0}/mo • Bus: ₹${fs.bus||0}/mo • Admission: ₹${fs.admission||0} • Exam: ₹${fs.exam||0} • Function: ₹${fs.func||0} • Other: ₹${fs.other||0}
+    </div>
+    <h3 style="font-size:15px;margin-bottom:8px;color:var(--navy);">🧾 Payment Receipts History</h3>
+    ${myFees.length ? myFees.map(f=>`<div style="display:flex;justify-content:space-between;align-items:center;background:#f8f6f1;padding:10px 12px;border-radius:10px;margin-bottom:7px;font-size:13px;border:1px solid var(--border);"><span><strong>${f.receiptNo}</strong> • ${f.head||''}<br><small style="color:var(--muted);">${fmtDate(f.date)} • ${f.mode}</small></span><span><strong style="color:var(--green);margin-right:8px;">₹${f.amount}</strong><button class="btn btn-light btn-sm" onclick="generateFeeReceiptPDF('${f.id}')">Receipt PDF</button></span></div>`).join('') : '<small style="color:var(--muted);">No payment receipts recorded yet.</small>'}`;
 }
 
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('./OneSignalSDKWorker.js').catch(()=>{});
